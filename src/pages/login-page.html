@@ -1,0 +1,21 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<link rel="import" href="/src/components/forms/login-form/login-form.html">
+
+<dom-module id="login-page">
+  <template>
+    <style include="styles">
+      :host {
+        display: block;
+      }
+    </style>
+    <div>
+      <login-form></login-form>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'login-page',
+    });
+  </script>
+</dom-module>

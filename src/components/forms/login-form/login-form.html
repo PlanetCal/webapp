@@ -1,0 +1,90 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="/bower_components/iron-icons/communication-icons.html">
+<link rel="import" href="/bower_components/iron-icons/social-icons.html">
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/iron-localstorage/iron-localstorage.html">
+
+<link rel="import" href="/src/components/forms/form-styles.html">
+<dom-module id="login-form">
+  <template>
+  	<style include="form-styles">
+      :host {
+        display: block;
+        background-color: white;
+        padding: 5px;
+        width: 360px;				
+      }
+
+    </style>
+    <div>
+      <form id="form" method="post" >
+    		<div id="title">[[titleText]]</div>
+    		<div id="msg">[[messageText]]</div>
+
+		    <fieldset>
+					<div id="nameFieldDiv">
+						<paper-input label="Name" value="{{name}}" char-counter maxlength="50">
+							<iron-icon icon="social:person" prefix></iron-icon>
+						</paper-input>
+					</div>
+
+					<paper-input label="Email address" value="{{email}}" on-input="emailOnkeyup" char-counter maxlength="50">
+						<iron-icon icon="communication:email" prefix></iron-icon>
+					</paper-input>
+		      <div class="status" id="email_status">
+						<iron-icon icon="[[emailStatusIcon]]" prefix></iron-icon>
+					</div>
+
+					<div id="passwordInputDiv">
+						<paper-input type="password" label="Password" value="{{password}}" on-input="passwordOnkeyup" char-counter maxlength="50">
+							<iron-icon icon="communication:vpn-key" prefix></iron-icon>
+						</paper-input>
+		      <div class="status" id="password_status">
+						<iron-icon icon="[[passwordStatusIcon]]" prefix></iron-icon>
+					</div>
+					</div>
+		    
+				</fieldset>
+		    <fieldset>
+					<div id="submitButtonDiv">
+						<span class="pull-left">
+						<paper-button id="submitButton" class="button" raised on-tap="submitOnclick">
+							<iron-icon icon="icons:send"></iron-icon>
+							[[sumbitButtonText]]
+						</paper-button>
+						</span>
+						<span class="pull-right">
+						<paper-button id="cancelButton" class="button" raised on-tap="cancelOnclick">
+							Cancel
+						</paper-button>
+						</span>
+					</div>
+					</fieldset>
+					<HR></HR>
+					<div id="loginLinkDiv">
+						<a class='link' id="login" on-tap="linkClickHandler" tabindex="1">Login</a>
+					</div>
+					<div id="createAccountLinkDiv">
+						<a class='link' id="createAccount" on-tap="linkClickHandler" tabindex="2">Register</a>
+					</div>
+					<div id="forgotAccountLinkDiv">
+						<a class='link' id="findPassword" on-tap="linkClickHandler" tabindex="3">Forgot password</a>
+					</div>
+		  </form>
+
+			<iron-localstorage name="planetCal-storage" value="{{localStorage}}" ></iron-localstorage>
+			
+			<iron-ajax id='ajax'
+				handle-as='json'
+				url="[[ajaxUrl]]" 
+				body='[[ajaxBody]]'
+				content-type='application/json'
+				on-error='handleErrorResponse'
+				on-response='handleAjaxResponse'></iron-ajax>		
+    </div>
+  </template>
+ <script type="text/javascript" src="login-form.js"></script>
+</dom-module>

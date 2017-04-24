@@ -1,0 +1,711 @@
+[
+  {
+    "id": "7903EDA3-D77C-4537-BF12-70AE2251A5C8",
+    "Name": "LEAP Days",
+    "Description": "LEAP Days",
+    "Type": "Holiday",
+    "StartDateTime": "2016-08-29T24:00Z",
+    "EndDateTime": "2016-09-02T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+        "Name": "Lake Washington School District",
+        "WebSite": "http://www.lwsd.org"
+      }
+    ]
+  },
+  {
+    "id": "57C61D01-2A7D-4866-868E-CF877017DCBB",
+    "Name": "No School - Labor Day",
+    "Description": "No School - Labor Day",
+    "Type": "Holiday",
+    "StartDateTime": "2016-09-05T24:00Z",
+    "EndDateTime": "2016-09-09T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+        "Name": "Lake Washington School District",
+        "WebSite": "http://www.lwsd.org"
+      }
+    ]
+  },
+  {
+    "id": "3C97FD04-8AEE-4A00-8CC2-EEDAEF83B4B5",
+    "Name": "First Day of School (grades 1-12)",
+    "Description": "First Day of School (grades 1-12)",
+    "Type": "Notification",
+    "StartDateTime": "2016-09-06T24:00Z",
+    "EndDateTime": "2016-09-06T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+        "Name": "Lake Washington School District",
+        "WebSite": "http://www.lwsd.org"
+      }
+    ]
+  },
+  {
+    "id": "11CD2CC4-BC17-4E01-AA8F-A29EF2545DDD",
+    "Name": "First Day of School",
+    "Description": "First Day of School",
+    "Type": "Notification",
+    "StartDateTime": "2016-09-06T24:00Z",
+    "EndDateTime": "2016-09-06T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 3330,
+      "StreetName": "Monte Villa Parkway",
+      "City": "Bothell",
+      "State": "WA",
+      "PostalCode": "98021"
+    },
+    "Groups": [
+      {
+        "id": "014E3830-C373-4890-9C84-8362B8F5996B",
+        "Name": "Northshore School District",
+        "WebSite": "http://www.nsd.org"
+      }
+    ]
+  },
+  {
+    "id": "51440EAC-1327-45AD-96DA-D1FB7F7E95C3",
+    "Name": "First Day of School for Kindergarten",
+    "Description": "First Day of School for Kindergarten",
+    "Type": "Notification",
+    "StartDateTime": "2016-09-09T24:00Z",
+    "EndtDateTime": "2016-09-09T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+        "Name": "Lake Washington School District",
+        "WebSite": "http://www.lwsd.org"
+      }
+    ]
+  },
+  {
+    "id": "15686448-80FE-4BAC-B9C1-53C8C5B7622D",
+    "Name": "1.5 hrs. early release schedule begins",
+    "Description": "1.5 hrs. early release schedule begins",
+    "Type": "Notification",
+    "StartDateTime": "2016-09-14T24:00Z",
+    "EndDateTime": "2016-09-14T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+        "Name": "Lake Washington School District",
+        "WebSite": "http://www.lwsd.org"
+      }
+    ]
+  },
+  {
+    "id": "52069888-215C-48B8-831E-9B5E84B47AB8",
+    "Name": "Half-Day Elementary Conferences",
+    "Description": "Half-Day Elementary Conferences",
+    "Type": "Notification",
+    "StartDateTime": "2016-10-17T24:00Z",
+    "EndDateTime": "2016-10-19T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+        "Name": "Lake Washington School District",
+        "WebSite": "http://www.lwsd.org"
+      }
+    ]
+  },
+  {
+    "id": "98BB3ED2-BEB7-48FF-90E9-66B7C4FB0C73",
+    "Name": "No School - LEAP Day",
+    "Description": "No School - LEAP Day",
+    "Type": "Holiday",
+    "StartDateTime": "2016-10-21T24:00Z",
+    "EndDateTime": "2016-10-21T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+        "Name": "Lake Washington School District",
+        "WebSite": "http://www.lwsd.org"
+      }
+    ]
+  },
+  {
+    "id": "D6949C09-57AE-416B-AF02-A7073881BA05",
+    "Name": "Last Day 1st Quarter (Secondary)",
+    "Description": "Last Day 1st Quarter (Secondary)",
+    "Type": "Notification",
+    "StartDateTime": "2016-11-08T24:00Z",
+    "EndDateTime": "2016-11-08T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+        "Name": "Lake Washington School District",
+        "WebSite": "http://www.lwsd.org"
+      }
+    ]
+  },
+  {
+    "id": "E4A12C19-E02F-4EFB-8A7B-1BE1F0CE7E7B",
+    "Name": "No School - Veterans Day",
+    "Description": "No School - Veterans Day",
+    "Type": "Holiday",
+    "StartDateTime": "2016-11-11T24:00Z",
+    "EndDateTime": "2016-11-11T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+        "Name": "Lake Washington School District",
+        "WebSite": "http://www.lwsd.org"
+      }
+    ]
+  },
+  {
+    "id": "74CEDC46-12AC-49F0-9E81-B8885EA4A8C2",
+    "Name": "Secondary Grades Due",
+    "Description": "Secondary Grades Due",
+    "Type": "Notification",
+    "StartDateTime": "2016-11-15T24:00Z",
+    "EndDateTime": "2016-11-15T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+        "Name": "Lake Washington School District",
+        "WebSite": "http://www.lwsd.org"
+      }
+    ]
+  },
+  {
+    "id": "B4D1BBA2-F136-417E-8085-6401D5EC17CE",
+    "Name": "Veterans Day (Observed)",
+    "Description": "Veterans Day (Observed)",
+    "Type": "Holiday",
+    "StartDateTime": "2016-11-11T24:00Z",
+    "EndDateTime": "2016-11-11T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 3330,
+      "StreetName": "Monte Villa Parkway",
+      "City": "Bothell",
+      "State": "WA",
+      "PostalCode": "98021"
+    },
+    "Groups": [
+      {
+        "id": "014E3830-C373-4890-9C84-8362B8F5996B",
+        "Name": "Northshore School District",
+        "WebSite": "http://www.nsd.org"
+      }
+    ]
+  },
+  {
+    "id": "5DED024E-2046-49F4-8538-527ED089F1FB",
+    "Name": "Elementary Early Dismissal",
+    "Description": "Elementary Early Dismissal",
+    "Type": "Notification",
+    "StartDateTime": "2016-11-11T24:00Z",
+    "EndDateTime": "2016-11-17T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 3330,
+      "StreetName": "Monte Villa Parkway",
+      "City": "Bothell",
+      "State": "WA",
+      "PostalCode": "98021"
+    },
+    "Groups": [
+      {
+        "id": "014E3830-C373-4890-9C84-8362B8F5996B",
+        "Name": "Northshore School District",
+        "WebSite": "http://www.nsd.org"
+      }
+    ]
+  },
+  {
+    "id": "A367CDAE-50FF-41B4-8196-439B7826553F",
+    "Name": "Elementary Early Dismissal",
+    "Description": "Elementary Early Dismissal",
+    "Type": "Notification",
+    "StartDateTime": "2016-11-18T24:00Z",
+    "EndDateTime": "2016-11-18T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 3330,
+      "StreetName": "Monte Villa Parkway",
+      "City": "Bothell",
+      "State": "WA",
+      "PostalCode": "98021"
+    },
+    "Groups": [
+      {
+        "id": "014E3830-C373-4890-9C84-8362B8F5996B",
+        "Name": "Northshore School District",
+        "WebSite": "http://www.nsd.org"
+      }
+    ]
+  },
+  {
+    "id": "FE8D34E5-F423-4816-87BB-54F3A55CFC4C",
+    "Name": "Elementary Early Dismissal",
+    "Description": "Elementary Early Dismissal",
+    "Type": "Notification",
+    "StartDateTime": "2016-11-21T24:00Z",
+    "EndDateTime": "2016-11-21T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 3330,
+      "StreetName": "Monte Villa Parkway",
+      "City": "Bothell",
+      "State": "WA",
+      "PostalCode": "98021"
+    },
+    "Groups": [
+      {
+        "id": "014E3830-C373-4890-9C84-8362B8F5996B",
+        "Name": "Northshore School District",
+        "WebSite": "http://www.nsd.org"
+      }
+    ]
+  },
+  {
+    "id": "3690565F-B0F2-4E3D-992A-BFA8AE41F64A",
+    "Name": "Elementary Early Dismissal",
+    "Description": "Elementary Early Dismissal",
+    "Type": "Notification",
+    "StartDateTime": "2016-11-22T24:00Z",
+    "EndDateTime": "2016-11-22T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 3330,
+      "StreetName": "Monte Villa Parkway",
+      "City": "Bothell",
+      "State": "WA",
+      "PostalCode": "98021"
+    },
+    "Groups": [
+      {
+        "id": "014E3830-C373-4890-9C84-8362B8F5996B",
+        "Name": "Northshore School District",
+        "WebSite": "http://www.nsd.org"
+      }
+    ]
+  },
+  {
+    "id": "26209C45-FE26-4EDA-BCE0-ED104F6D8A14",
+    "Name": "Elementary Early Dismissal",
+    "Description": "Elementary Early Dismissal",
+    "Type": "Holiday",
+    "StartDateTime": "2016-11-23T24:00Z",
+    "EndDateTime": "2016-11-23T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 3330,
+      "StreetName": "Monte Villa Parkway",
+      "City": "Bothell",
+      "State": "WA",
+      "PostalCode": "98021"
+    },
+    "Groups": [
+      {
+        "id": "014E3830-C373-4890-9C84-8362B8F5996B",
+        "Name": "Northshore School District",
+        "WebSite": "http://www.nsd.org"
+      }
+    ]
+  },
+  {
+    "id": "2A8DFBE0-CBEC-447F-9D63-2A4623D84256",
+    "Name": "Half-Day",
+    "Description": "Half-Day",
+    "Type": "Notification",
+    "StartDateTime": "2016-11-23T24:00Z",
+    "EndDateTime": "2016-11-23T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+        "Name": "Lake Washington School District",
+        "WebSite": "http://www.lwsd.org"
+      }
+    ]
+  },
+  {
+    "id": "247DF22F-D0AE-4014-B953-A291F5BB22C2",
+    "Name": "Thanksgiving Break",
+    "Description": "Thanksgiving Break",
+    "Type": "Holiday",
+    "StartDateTime": "2016-11-23T24:00Z",
+    "EndDateTime": "2016-11-24T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 3330,
+      "StreetName": "Monte Villa Parkway",
+      "City": "Bothell",
+      "State": "WA",
+      "PostalCode": "98021"
+    },
+    "Groups": [
+      {
+        "id": "014E3830-C373-4890-9C84-8362B8F5996B",
+        "Name": "Northshore School District",
+        "WebSite": "http://www.nsd.org"
+      }
+    ]
+  },
+  {
+    "id": "FFDC7839-18CD-4107-B585-A63205B6218D",
+    "Name": "No School - Thanksgiving Vacation",
+    "Description": "No School - Thanksgiving Vacation",
+    "StartDateTime": "2016-11-24T24:00Z",
+    "EndDateTime": "2016-11-25T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+        "Name": "Lake Washington School District",
+        "WebSite": "http://www.lwsd.org"
+      }
+    ]
+  },
+  {
+    "id": "94A5D655-8ADE-4AC8-A0B3-4C45E254365C",
+    "Name": "No School (Winter Break)",
+    "Description": "No School (Winter Break)",
+    "Type": "Holiday",
+    "StartDateTime": "2017-12-16T24:00Z",
+    "EndDateTime": "2018-01-02T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 14600,
+      "StreetName": "NE 24th St",
+      "City": "Bellevue",
+      "State": "WA",
+      "PostalCode": "98007"
+    },
+    "Groups": [
+      {
+        "id": "9BCE12F5-0D43-47CD-AB31-E8D0D531A93F",
+        "Name": "Bellevue Childrens Academy",
+        "WebSite": "http://www.bcacademy.com"
+      }
+    ]
+  },
+  {
+    "id": "CF6138CE-A2F5-45E8-87B0-CC508E28F56C",
+    "Name": "No School - Winter Break",
+    "Description": "No School - Winter Break",
+    "Type": "Holiday",
+    "StartDateTime": "2016-12-16T24:00Z",
+    "EndDateTime": "2017-01-02T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+        "Name": "Lake Washington School District",
+        "WebSite": "http://www.lwsd.org"
+      }
+    ]
+  },
+  {
+    "id": "81C1F091-980E-48B0-9A9E-B75884F12F09",
+    "Name": "Winter Break",
+    "Description": "Winter Break",
+    "Type": "Holiday",
+    "StartDateTime": "2016-12-19T24:00Z",
+    "EndDateTime": "2017-01-02T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 3330,
+      "StreetName": "Monte Villa Parkway",
+      "City": "Bothell",
+      "State": "WA",
+      "PostalCode": "98021"
+    },
+    "Groups": [
+      {
+        "id": "014E3830-C373-4890-9C84-8362B8F5996B",
+        "Name": "Northshore School District",
+        "WebSite": "http://www.nsd.org"
+      }
+    ]
+  },
+  {
+    "id": "070EC086-8DBB-4184-8C87-46D5F7B7D529",
+    "Name": "First Winter Break",
+    "Description": "No school for students or staff",
+    "Type": "Holiday",
+    "StartDateTime": "2016-12-21T24:00Z",
+    "EndDateTime": "2017-01-02T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 565,
+      "StreetName": "NW Holly Street",
+      "City": "Issaquah",
+      "State": "WA",
+      "PostalCode": "98027"
+    },
+    "Groups": [
+      {
+        "id": "4FEBD44D-4637-4545-84AD-D12C819C8773",
+        "Name": "Issaquah School District",
+        "WebSite": "http://www.issaquah.wednet.edu"
+      }
+    ]
+  },
+  {
+    "id": "32331752-333F-423C-9C47-D5E63E08FA8D",
+    "Name": "New Year's Day",
+    "Description": "New Year's Day, also called simply New Year's or New Year, is observed on January 1, the first day of the year on the modern Gregorian calendar as well as the Julian calendar.",
+    "Type": "Holiday",
+    "StartDateTime": "2017-01-02T24:00Z",
+    "EndDateTime": "2017-01-02T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetName": "One Microsoft Way",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "FCC4B6F4-56AF-429C-9812-38284B4DA429",
+        "Name": "Microsoft",
+        "WebSite": "http://www.microsoft.com"
+      }
+    ]
+  },
+  {
+    "id": "8DA4DDF8-0C6F-4736-B500-57802604C3A7",
+    "Name": "Martin Luther King Day",
+    "Description": "The day is celebrated as the birthday of Martin Luther King Jr.",
+    "Type": "Holiday",
+    "StartDateTime": "2017-01-16T24:00Z",
+    "EndDateTime": "2017-01-16T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetName": "One Microsoft Way",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "FCC4B6F4-56AF-429C-9812-38284B4DA429",
+        "Name": "Microsoft",
+        "WebSite": "http://www.microsoft.com"
+      }
+    ]
+  },
+  {
+    "id": "B90B185C-364E-491F-AB40-0C1A7104BABB",
+    "Name": "No School - MLK Jr. Day",
+    "Description": "No School - MLK Jr. Day",
+    "Type": "Holiday",
+    "StartDateTime": "2017-01-16T24:00Z",
+    "EndDateTime": "2017-01-16T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+        "Name": "Lake Washington School District",
+        "WebSite": "http://www.lwsd.org"
+      }
+    ]
+  },
+  {
+    "id": "FA9A1DC3-7DA1-4DA7-BA90-281ED94E22CA",
+    "Name": "Martin Luther King Day",
+    "Description": "Martin Luther King Day",
+    "Type": "Holiday",
+    "StartDateTime": "2017-01-16T24:00Z",
+    "EndDateTime": "2017-01-16T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "014E3830-C373-4890-9C84-8362B8F5996B",
+        "Name": "Northshore School District",
+        "WebSite": "http://www.nsd.org"
+      }
+    ]
+  },
+  {
+    "id": "54A17A49-84E4-40B8-8636-21443BC3420A",
+    "Name": "Martin Luther King Jr. Day",
+    "Description": "No school for students or staff",
+    "Type": "Holiday",
+    "StartDateTime": "2017-01-16T24:00Z",
+    "EndDateTime": "2017-01-16T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 565,
+      "StreetName": "NW Holly Street",
+      "City": "Issaquah",
+      "State": "WA",
+      "PostalCode": "98027"
+    },
+    "Groups": [
+      {
+        "id": "4FEBD44D-4637-4545-84AD-D12C819C8773",
+        "Name": "Issaquah School District",
+        "WebSite": "http://www.issaquah.wednet.edu"
+      }
+    ]
+  },
+  {
+    "id": "D2A5F158-3293-436E-8B70-AC8941131B3A",
+    "Name": "No School (MLK Jr. Day)",
+    "Description": "No School (MLK Jr. Day)",
+    "Type": "Holiday",
+    "StartDateTime": "2017-01-16T24:00Z",
+    "EndDateTime": "2017-01-16T24:00Z",
+    "Address": {
+      "StreetNumber": 14600,
+      "StreetName": "NE 24th St",
+      "City": "Bellevue",
+      "State": "WA",
+      "PostalCode": "98007"
+    },
+    "Groups": [
+      {
+        "id": "9BCE12F5-0D43-47CD-AB31-E8D0D531A93F",
+        "Name": "Bellevue Childrens Academy",
+        "WebSite": "http://www.bcacademy.com"
+      }
+    ]
+  },
+  {
+    "id": "E01C9D32-5A39-471F-8AD0-1A7C8C038CE3",
+    "Name": "Elementary Grades Due",
+    "Description": "Elementary Grades Due",
+    "Type": "Notification",
+    "StartDateTime": "2017-01-18T24:00Z",
+    "EndDateTime": "2017-01-18T24:00Z",
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Groups": [
+      {
+        "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+        "Name": "Lake Washington School District",
+        "WebSite": "http://www.lwsd.org"
+      }
+    ]
+  }
+]

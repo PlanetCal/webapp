@@ -1,0 +1,108 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/src/components/events/event-styles.html">
+      
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="event-item-detail">
+  <template>
+    <style include="event-styles">
+      </style>
+      <iron-ajax url="/src/components/events.json" last-response="{{eventItems}}" auto></iron-ajax>
+        <app-location route="{{route}}" query-params="{{queryParams}}"></app-location>
+
+      <div class="card" style="width:500px">
+          <div class="root" onmouseover="document.getElementById('divIcon_1').style.display = 'block';" onmouseout="document.getElementById('divIcon_1').style.display = 'none';">
+              <div>
+                  <div>
+                      <div class="clearfix">
+                          <div class="_ohe lfloat">
+                              <div class="_5lrw" style="width: 476px;">
+                                  <div class="_5f0d" style="width: 476px; height: 172px;">
+                                      <img class="_5i4g img" style="left: 0px; top: 0px; width: 477px; height: 172px;" alt="" src="/images/banner1.png">
+                                  </div>
+                              </div>
+                              </a>
+                          </div>
+                          <div class="_ohf rfloat"></div>
+                      </div>
+                  </div>
+                  <div id="divContent" >
+                      <div class="_3j4o clearfix" direction="left">
+                          <div style="float:left;margin-top:15px" >
+                              <span style="display:inline-block;width:40px">
+                                  <span style="color:red">FEB</span>
+                                  <span style="color:black">22</span>
+                              </span>
+                          </div>
+                          <div style="float:left;margin-left:20px;margin-top:15px">
+                              <span style="display:inline-block;width:300px">
+                                  <a class="_7ty" href="">[[eventItems.0.title]]</a><br />
+                                  <span>Today 6 PM · Malt and Vine · Redmond</span>
+                              </span>
+                          </div>
+                          <div>
+                              <div class="_42ef _8u clearfix" direction="right">
+                                  <div class="_ohf rfloat">
+                                      <div class="_3j4s">
+                                          <div class="_2ib4">
+                                              <button class="_4jy0 _4jy3 _517h _51sy _42ft" type="submit" value="1">
+                                                  <i class="_3-8_ img sp_nsEdOlPPKB8_3x sx_7ec707" alt="">
+                                                  </i><em class="_4qba" data-intl-translation="Interested" data-intl-trid="">
+                                                      <!-- react-text: 403 -->Interested<!-- /react-text -->
+                                                  </em>
+                                              </button>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div>
+                                      <div class="_3j4q">
+                                          <div>
+                                              <a class="_7ty" href="">Pilsner Night</a>
+                                          </div>
+                                          <div>
+                                              <div class="_3j4r">
+                                                  <span role="presentation" aria-hidden="true">
+                                                      ·
+                                                  </span>
+                                                  <!-- react-text: 412 -->Malt and Vine&nbsp;·&nbsp;Redmond
+                                                  <!-- /react-text -->
+                                              </div>
+                                              <div class="_7u2">Food ⋅ Drink</div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="_7tw">
+                          <p >
+                              <span style="height:50px">
+                                  Columbia Distributing will be hosting a wide range of European and American style pilsners all night long! Pilsner Urquell, Crux Fermentation Project, Trumer Privatbrauerei and Full Sail Brewing Company! Swag and good times to be had!
+
+                                  Join us Wednesday the 22nd!
+
+                                  Cheers!. From this point this is a very junl text and i am going to pcopfy fpaste the code  a very junl text and i am going to pcopfy fpaste a very junl text and i am going to pcopfy fpaste a very junl text and i am going to pcopfy fpaste
+                              </span>
+
+                              <a title="See More" href="#">See More</a>
+                          </p>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      </div>  </template>
+
+
+  <script>
+    Polymer({
+      is: 'event-item-detail',
+ properties: {
+				eventItems: {
+          type: Array,
+          reflectToAttribute: true,
+        },
+       },
+    });
+  </script>
+</dom-module>

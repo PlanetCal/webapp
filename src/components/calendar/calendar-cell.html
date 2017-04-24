@@ -1,0 +1,89 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="/src/components/calendar/calendar-styles.html">
+
+<dom-module id="calendar-cell">
+	<style>
+		.calendar-cell-a {
+			text-decoration: none;
+      color: var(--cal-cell-color);
+		}
+
+		.calendar-cell-div {
+			border: var(--cal-cell-border);
+      padding-top: 5px;
+      padding-bottom: 5px;
+      border-radius: 50%;
+      background-color: var(--cal-cell-background-color);
+		}
+
+	</style>
+  <template>
+    <div class="calendar-cell-div" on-tap="tapHandler">
+			<a  class="calendar-cell-a" href="">[[day]]</a>
+    </div>
+  </template>
+	  <script>
+    Polymer({
+      is: 'calendar-cell',
+
+      properties: {
+        day: {
+          type: Number,
+          reflectToAttribute: true,
+        },
+				month: {
+          type: Number,
+          reflectToAttribute: true,
+        },
+				year: {
+          type: Number,
+          reflectToAttribute: true,
+        },
+				inactive: {
+          type: Boolean,
+          reflectToAttribute: true,
+ 					observer: '_styleChanged'
+        },
+ 				selected: {
+          type: Boolean,
+          reflectToAttribute: true,
+ 					observer: '_styleChanged'
+        },
+ 				today: {
+          type: Boolean,
+          reflectToAttribute: true,
+ 					observer: '_styleChanged'
+        },
+			},
+
+      _styleChanged: function () {
+        if (this.inactive) {
+          this.customStyle['--cal-cell-color'] = '#ccc';
+        } else{
+          this.customStyle['--cal-cell-color'] = 'default';
+        }
+
+        if(this.selected) {
+          this.customStyle['--cal-cell-border'] = '1px solid coral';
+        } else{
+          this.customStyle['--cal-cell-border'] = 'default';
+        }
+
+        if(this.today) {
+          this.customStyle['--cal-cell-background-color'] = 'yellow';
+        } else{
+          this.customStyle['--cal-cell-background-color'] = 'default';
+        }
+
+        this.updateStyles();
+			},
+
+      tapHandler: function () {
+        this.fire('on-cell-selected', {day: this.day, month: this.month, year: this.year});
+			},
+
+    });
+  </script>
+</dom-module>

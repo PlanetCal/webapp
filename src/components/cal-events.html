@@ -1,0 +1,48 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/bower_components/iron-list/iron-list.html">
+<link rel="import" href="/src/components/cal-event.html">
+
+<link rel="import" href="/src/shared-styles.html">
+
+<dom-module id="cal-events">
+  <template>
+    <div>Calendar is selecting day: [[selectedDay]]</div>
+    <div>Calendar is selecting month: {{selectedMonth}}</div>
+    <div>Calendar is selecting year: {{selectedYear}}</div>
+
+  <iron-ajax url="src/Data/Data.json" last-response="{{data}}" auto></iron-ajax>
+  <iron-list items="[[data]]" as="item">
+    <template>
+      <div>
+        <cal-event event-title="[[item.name]]" event-details="[[item.value]]">
+        </cal-event>
+      </div>
+    </template>
+  </iron-list>
+</template>
+  <script>
+    Polymer({
+      is: 'cal-events',
+
+      properties: {
+				selectedDay: {
+          type: Number,
+          reflectToAttribute: true,
+					// observer: '_dateChanged'
+        },
+				selectedMonth: {
+          type: Number,
+          reflectToAttribute: true,
+					// observer: '_dateChanged'
+        },
+				selectedYear: {
+          type: Number,
+          reflectToAttribute: true,
+					// observer: '_dateChanged'
+        },
+      },
+    });
+  </script>
+</dom-module>

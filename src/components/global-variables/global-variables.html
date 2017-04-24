@@ -1,0 +1,28 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<dom-module id="global-variables">
+  <template>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'global-variables',
+      
+      ready: function() {
+
+        var todaysDateTime = new Date();
+				var todayDay = todaysDateTime.getDate();
+				var todayYear = todaysDateTime.getFullYear();
+				var todayMonth = todaysDateTime.getMonth();
+
+        var selectedDate = {
+          day: this.todayDay,
+          month: this.todayMonth + 1,
+          year: this.todayYear
+        }
+
+        Polymer.globalsManager.set('selectedDate', selectedDate);
+      }
+    });
+  </script>
+</dom-module>

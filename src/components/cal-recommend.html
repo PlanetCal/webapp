@@ -1,0 +1,41 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<link rel="import" href="/bower_components/paper-card/paper-card.html">
+<link rel="import" href="/bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="/bower_components/iron-icons/places-icons.html">
+<link rel="import" href="/bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="/src/shared-styles.html">
+
+<dom-module id="cal-recommend">
+  <template>
+    <style>
+      .recommend {
+        margin: 5px;
+        padding: 16px;
+        color: #757575;
+        border-radius: 5px;
+        background-color: #fff;
+        width: 96%
+      }
+    </style>
+    <paper-card class="recommend">
+      <div class="card-content">
+        <p>Recommendations:</p>
+
+        <paper-icon-button icon="maps:directions-bus"></paper-icon-button>
+        <span>bus stand</span>
+        <paper-icon-button style="color:blue" icon="places:child-care"></paper-icon-button>
+        <span>child care</span>
+      </div>
+    </paper-card>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'cal-recommend',
+    });
+  </script>
+</dom-module>

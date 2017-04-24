@@ -1,0 +1,107 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<dom-module id="form-styles">
+  <template>
+    <style>
+      :host {
+        display: block;
+        position: relative;
+        background-color: white;  
+        padding: 5px;
+      }
+
+      form {
+        /*width: 16%;*/
+        border: solid thin rgb(134, 178, 203);
+        padding: 5px;
+        border-radius: 5px;
+      }
+
+      form fieldset {
+        border: none;
+      }
+      form div#title {
+        color: white;
+        background-color: gray;
+        border-radius: 4px;
+        font-family: sans-serif;
+        font-size: 2.0em;
+        font-weight: 300;
+        text-align: center;
+      }
+
+      form div#msg {
+        color: white;
+        background-color: rgba(255, 74, 0, 0.85);
+        border-radius: 4px;
+        font-family: sans-serif;
+        font-size: 0.9em;
+        font-weight: 300;
+        display: none;
+        margin-top: 1.0em;
+        padding-left: 1.0em;
+        padding-right: 1.0em;
+      }
+
+      form fieldset div.status {
+        display: none;
+        width: 20px;
+        height: 20px;
+      }
+
+      paper-input {
+        /* Label and underline color when the input is focused */
+        --paper-input-container-focus-color: blue;
+        --paper-input-container-input: {
+          font-size: 16px;
+        };
+      }
+
+      paper-input:hover {
+        background-color: #f3f3f3;
+      }
+
+      iron-icon {
+        margin-right: 0.5em;
+      }
+
+      paper-button {
+        font-family: 'Roboto', 'Noto', sans-serif;
+        font-weight: normal;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      paper-button.button {
+				height: 2em;
+        background-color: darkgray;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+        color: #fff;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+			}
+
+      paper-button.button:hover {
+        background-color: grey;
+			}
+
+      .link {
+        color:red;
+        font-size: 12px;
+        text-decoration:underline;
+        cursor: pointer;
+      }
+
+      .pull-left {
+				float: left !important;
+      }
+			.pull-right {
+				float: right !important;
+      }
+
+    </style>
+  </template>
+</dom-module>

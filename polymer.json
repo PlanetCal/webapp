@@ -1,0 +1,18 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/planetCal-app.html",
+  "fragments": [
+    "src/pages/events-page.html",
+    "src/pages/login-page.html",
+    "src/view404-page.html"
+  ],
+  "sourceGlobs": [
+    "src/**/*",
+    "images/**/*",
+    "bower.json"
+  ],
+  "includeDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+  ]
+}

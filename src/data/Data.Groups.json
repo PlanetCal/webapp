@@ -1,0 +1,139 @@
+[
+  {
+    "id": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A",
+    "Name": "Lake Washington School District",
+    "Discription": "Lake Washington School District is a high-performing public school district serving Kirkland, Redmond, and Sammamish, Washington. It is the fourth largest district in the state of Washington, with over 27,800 students in 52 schools. The district's vision is Every Student Future Ready: Prepared for College, Prepared for the Global Workplace, Prepared for Personal Success.",
+    "Icon": "",
+    "Privacy": "Open",
+    "Owner": "",
+    "Administrators": [],
+    "Members": [],
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 16250,
+      "StreetName": "NE 74th Street",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Contact": {
+      "Phone": "4259361200",
+      "Email": "tpierce@lwsd.org"
+    },
+    "WebSite": "http://www.lwsd.org"
+  },
+  {
+    "id": "014E3830-C373-4890-9C84-8362B8F5996B",
+    "Name": "Northshore School District",
+    "Discription": "Northshore School District is committed to strengthening our community through excellence in education. Our students are recognized nationally for academic & extra-curricular achievement. We serve students in Bothell, Kenmore and Woodinville, WA.",
+    "Icon": "",
+    "Privacy": "Open",
+    "Owner": "",
+    "Administrators": [],
+    "Members": [],
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 3330,
+      "StreetName": "Monte Villa Parkway",
+      "City": "Bothell",
+      "State": "WA",
+      "PostalCode": "98021"
+    },
+    "Contact": {
+      "Phone": "4254086000",
+      "Email": "info@nsd.org"
+    },
+    "WebSite": "http://www.nsd.org"
+  },
+  {
+    "id": "9BCE12F5-0D43-47CD-AB31-E8D0D531A93F",
+    "Name": "Bellevue Childrens Academy",
+    "Discription": "Bellevue Children’s Academy provides an educational framework that fosters the development of the whole child. We are attentive to students’ social, emotional and physical welfare, guiding them to excel both academically and developmentally. BCA students are motivated to become global citizens who demonstrate innovation, creativity and dignity.",
+    "Icon": "",
+    "Privacy": "Open",
+    "Owner": "",
+    "Administrators": [],
+    "Members": [],
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 14600,
+      "StreetName": "NE 24th St",
+      "City": "Bellevue",
+      "State": "WA",
+      "PostalCode": "98007"
+    },
+    "Contact": {
+      "Phone": "4256490791",
+      "Email": "bca1@bcacademy.com"
+    },
+    "WebSite": "http://www.bcacademy.com"
+  },
+  {
+    "id": "4FEBD44D-4637-4545-84AD-D12C819C8773",
+    "Name": "Issaquah School District",
+    "Discription": "The Issaquah School District educates 19,000 students in 25 schools in the foothills of the Cascade Mountains in WA.",
+    "Icon": "",
+    "Privacy": "Open",
+    "Owner": "",
+    "Administrators": [],
+    "Members": [],
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 565,
+      "StreetName": "NW Holly Street",
+      "City": "Issaquah",
+      "State": "WA",
+      "PostalCode": "98027"
+    },
+    "Contact": {
+      "Phone": "4258377000",
+      "Email": "michellel@issaquah.wednet.edu"
+    },
+    "WebSite": "http://www.issaquah.wednet.edu"
+  },
+  {
+    "id": "FCC4B6F4-56AF-429C-9812-38284B4DA429",
+    "Name": "Microsoft Corporation",
+    "Discription": "",
+    "Icon": "",
+    "Privacy": "Open",
+    "Owner": "",
+    "Administrators": [],
+    "Members": [],
+    "Location": "USA",
+    "Address": {
+      "StreetName": "One Microsoft Way",
+      "City": "Redmond",
+      "State": "WA",
+      "PostalCode": "98052"
+    },
+    "Contact": {
+      "Phone": "4258828080",
+      "Email": "support@microsoft.com"
+    },
+    "WebSite": "http://www.microsoft.com"
+  },
+  {
+    "id": "AE58F224-B5D1-4545-A49C-408D373ECC68",
+    "Name": "Amazon LLC",
+    "Discription": "Online shopping from the earth's biggest selection of books, magazines, music, DVDs, videos, electronics, computers, software, apparel & accessories, shoes, jewelry, tools & hardware, housewares, furniture, sporting goods, beauty & personal care, gourmet food & just about anything else.",
+    "Icon": "",
+    "Privacy": "Open",
+    "Owner": "",
+    "Administrators": [],
+    "Members": [],
+    "Location": "USA",
+    "Address": {
+      "StreetNumber": 410,
+      "StreetName": "Terry Ave N",
+      "City": "Seattle",
+      "State": "WA",
+      "PostalCode": "98109"
+    },
+    "Contact": {
+      "Phone": "2062661000",
+      "Email": "support@amazon.com"
+    },
+    "WebSite": "http://www.amazon.com"
+  }
+]

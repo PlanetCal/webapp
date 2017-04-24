@@ -1,0 +1,45 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/src/components/cal-events.html">
+<link rel="import" href="/src/shared-styles.html">
+<link rel="import" href="/src/components/events/event-main.html">
+<link rel="import" href="/src/components/search/search-bar.html">
+
+<dom-module id="events-page">
+  <template>
+    <event-main name="events-main" selected-day="[[selectedDay]]" selected-month="[[selectedMonth]]" selected-year="[[selectedYear]]"/>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'events-page',
+
+      properties: {
+        searchText: {
+            type: String,
+            reflectToAttribute: true,
+        },
+        toggleView: {
+            type: Boolean,
+            reflectToAttribute: true,
+           	observer: '_dateChanged'
+        }
+      },
+      
+      ready: function() {
+        this._dateChanged();
+      },
+
+      _dateChanged: function() {
+
+        var selectedDate = Polymer.globalsManager.globals.selectedDate;
+        if (selectedDate)
+        {
+          this.selectedDay = selectedDate.day;
+          this.selectedMonth = selectedDate.month;
+          this.selectedYear = selectedDate.year;
+        }
+    },
+  });
+    
+  </script>
+</dom-module>
