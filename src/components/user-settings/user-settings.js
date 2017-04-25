@@ -37,14 +37,6 @@ Polymer({
     this._initialize();
   },
 
-  _onLocalStorageLoad: function(){
-    this._initialize();
-  },
-
-  _settingsClickHandler: function(page) {
-      alert('clicked settings');
-  },
-
   _loginOrLogoutHandler: function(page) {
     if (this.userId) {
         //this.set('localStorage.loggedUser', null); 

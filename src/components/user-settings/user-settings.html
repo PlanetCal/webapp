@@ -1,12 +1,5 @@
 <link rel='import' href='/bower_components/polymer/polymer.html'>
-
 <link rel='import' href='/bower_components/iron-icons/iron-icons.html'>
-<link rel='import' href='/bower_components/paper-button/paper-button.html'>
-<link rel='import' href='/bower_components/paper-menu-button/paper-menu-button.html'>
-<link rel='import' href='/bower_components/paper-item/paper-item.html'>
-<link rel='import' href='/bower_components/paper-menu/paper-menu.html'>
-<link rel='import' href='/bower_components/iron-localstorage/iron-localstorage.html'>
-
 <link rel='import' href='/src/components/user-settings/user-settings-styles.html'>
 <dom-module id='user-settings'>
   <template>
@@ -18,17 +11,7 @@
 			
 			<div class='horizontal'>[[userName]]</div>
 			<div class='horizontal'>
-				<paper-menu-button horizontal-align='right' vertical-align='top' vertical-offset='50'>
-					<paper-icon-button noink icon='icons:account-circle' class='dropdown-trigger'></paper-icon-button>
-					<paper-menu class='dropdown-content'>
-							<a class='link' on-tap='_settingsClickHandler' tabindex='2'>
-						  	<paper-item>
-									<iron-icon icon='icons:settings'></iron-icon>
-									Settings
-								</paper-item>
-							</a>
-					</paper-menu>
-				</paper-menu-button>
+  			<iron-icon noink icon='icons:account-circle' class='dropdown-trigger'></iron-icon>
 			</div>
 			<div class='horizontal'>
 				<a class='link' on-tap='_loginOrLogoutHandler' tabindex='1'>[[loginOrLogout]]</a>
