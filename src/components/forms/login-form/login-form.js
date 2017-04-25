@@ -45,7 +45,7 @@ Polymer({
 
     switch (this.mode){
       case 'login' :
-        this.titleText = 'Login to your account';
+        this.titleText = 'Login';
         this.$.nameFieldDiv.style.display = 'none';
         this.$.loginLinkDiv.style.display = 'none';
         this.sumbitButtonText = 'Login';
