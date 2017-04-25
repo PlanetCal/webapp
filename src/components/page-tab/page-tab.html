@@ -1,0 +1,34 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<link rel="import" href="/bower_components/paper-card/paper-card.html">
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="tab-styles.html">
+
+<dom-module id="page-tab">
+  <template>
+ 	  <style include="tab-styles" is=""></style>
+    <a name="[[name]]" href="[[href]]">
+      <div class="tab">
+        <h1>[[text]]</h1>
+      </div>
+    </a>
+  </template>
+  <script>
+    Polymer({
+      is: 'page-tab',
+
+      properties: {
+        name: {
+          type: String
+        },
+        href: {
+          type: String
+        },
+        text: {
+          type: String
+        },
+      }
+    });
+  </script>
+</dom-module>

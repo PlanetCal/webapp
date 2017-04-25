@@ -24,6 +24,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="/src/components/global-variables/global-variables.html">
 <link rel="import" href="/src/components/user-settings/user-settings.html">
 <link rel="import" href="/src/components/calendar/cal-calendar.html">
+<link rel="import" href="/src/components/page-tab/page-tab.html">
 
 <dom-module id="planetCal-app">
   <template>
@@ -79,6 +80,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <app-toolbar>Menu</app-toolbar>
           <iron-selector selected='{{page}}' attr-for-selected='name' class='drawer-list' role='navigation'>
             <cal-calendar drawer-toggle></cal-calendar>
+            <page-tab name='about-us' href='/about-us' text='About us'></page-tab>
           </iron-selector>
         </div>
       </app-drawer>
@@ -101,6 +103,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             role='main'>
           <events-page toggle-view=[[toggleEventsView]] name='events'></events-page>
           <login-page name='login'></login-page>
+          <about-us-page name='about-us'></about-us-page>
           <view404-page name='view404'></view404-page>
         </iron-pages>
       </app-header-layout>
