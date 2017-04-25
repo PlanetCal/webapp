@@ -1,6 +1,7 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
 
-<link rel="import" href="/bower_components/paper-card/paper-card.html">
+<link rel='import' href='/bower_components/iron-icons/iron-icons.html'>
+<link rel='import' href='/bower_components/paper-item/paper-item.html'>
 <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
 
 <link rel="import" href="tab-styles.html">
@@ -10,9 +11,11 @@
  	  <style include="tab-styles" is=""></style>
     <a name="[[name]]" href="[[href]]">
       <div class="tab">
-        <h1>[[text]]</h1>
+        <iron-icon icon='[[icon]]'></iron-icon>
+        [[text]]
       </div>
     </a>
+
   </template>
   <script>
     Polymer({
@@ -26,6 +29,9 @@
           type: String
         },
         text: {
+          type: String
+        },
+        icon: {
           type: String
         },
       }
