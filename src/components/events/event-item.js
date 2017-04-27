@@ -1,46 +1,36 @@
-
-    Polymer({
-      is: 'event-item',
-      properties: {
-		id: {
-          type: String,
-          reflectToAttribute: true,
-        },
-        name: {
-          type: String,
-          reflectToAttribute: true,
-        },
-        description: {
-          type: String,
-          reflectToAttribute: true,
-        },
-        image: {
-          type: String,
-          reflectToAttribute: true,
-        },
-		type: {
-          type: String,
-          reflectToAttribute: true,
-        },
-		venue: {
-          type: String,
-          reflectToAttribute: true,
-        },        
-		location: {
-          type: String,
-          reflectToAttribute: true,
-        },
-		time: {
-          type: String,
-          reflectToAttribute: true,
-        },
-       duration: {
-          type: String,
-          reflectToAttribute: true,
-        },
-		attendees: {
-          type: String,
-          reflectToAttribute: true,
-        },
-      },   
-  });
+Polymer({
+  is: 'event-item',
+  
+  properties: {
+    id: {
+      type: String,
+    },
+    name: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
+    image: {
+      type: String,
+    },
+    type: {
+      type: String,
+    },
+    venue: {
+      type: String,
+    },        
+    location: {
+      type: String,
+    },
+    time: {
+      type: String,
+    },
+    duration: {
+      type: String,
+    },
+    attendees: {
+      type: String,
+    },
+  },   
+});
