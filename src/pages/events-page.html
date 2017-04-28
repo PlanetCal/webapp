@@ -1,5 +1,5 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
-<link rel="import" href="/src/components/cal-events.html">
+<link rel="import" href="/src/components/cal-events/cal-events.html">
 <link rel="import" href="/src/shared-styles.html">
 <link rel="import" href="/src/components/events/event-main.html">
 <link rel="import" href="/src/components/search/search-bar.html">
@@ -7,7 +7,10 @@
 <dom-module id="events-page">
   <template>
     <style include="shared-styles"></style>
-    <event-main name="events-main" selected-day="[[selectedDay]]" selected-month="[[selectedMonth]]" selected-year="[[selectedYear]]"/>
+      <div class="card">
+        <event-main name="events-main" selected-day="[[selectedDay]]" selected-month="[[selectedMonth]]" selected-year="[[selectedYear]]"/>
+        <!--<cal-events name="cal-events" selected-day="[[selectedDay]]" selected-month="[[selectedMonth]]" selected-year="[[selectedYear]]"/>-->
+      </div>
   </template>
 
   <script>

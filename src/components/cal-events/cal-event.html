@@ -1,15 +1,10 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
 
-<link rel="import" href="/src/shared-styles.html">
+<link rel="import" href="event-styles.html">
 
 <dom-module id="cal-event">
   <template>
-    <style include="styles">
-      :host {
-        display: block;
-        padding: 5px;
-      }
-    </style>
+    <style include="event-styles"></style>
     <div class="card">
       <div class="rectangle">[[eventTitle]]</div>
       <p>[[eventDetails]]</p>
