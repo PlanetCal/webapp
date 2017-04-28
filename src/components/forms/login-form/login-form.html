@@ -5,7 +5,6 @@
 <link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="/bower_components/paper-input/paper-input.html">
 <link rel="import" href="/bower_components/paper-button/paper-button.html">
-<link rel="import" href="/bower_components/iron-localstorage/iron-localstorage.html">
 
 <link rel="import" href="/src/components/forms/form-styles.html">
 <dom-module id="login-form">
@@ -66,9 +65,7 @@
 						<a class='link' id="findPassword" on-tap="linkClickHandler" tabindex="3">Forgot password</a>
 					</div>
 		  </form>
-
-			<iron-localstorage name="planetCal-storage" value="{{localStorage}}" ></iron-localstorage>
-			
+		
 			<iron-ajax id='ajax'
 				handle-as='json'
 				url="[[ajaxUrl]]" 
