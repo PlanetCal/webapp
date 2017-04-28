@@ -6,41 +6,27 @@
 <dom-module id='event-main'>
   <template>
     <style include='event-styles'></style>
-
+    <search-bar searchInput='{searchText}' show='true'></search-bar>
     <iron-ajax url='/src/Data/Data.Events.json' last-response='{{eventItems}}' auto></iron-ajax>
-    <table style='width:100%'>
-      <tr>
-        <td style='width:89%;vertical-align:top'>
-          <div style='float:right;margin-right:10px;background-color:white'>
-            <div style='padding:5px'>
-              <search-bar searchInput='{searchText}' show='true'></search-bar>
-            </div>
-          </div>
-          <br/>
-          <br />
-          <div class='card' >
-            <div class='_bq2'>[[selectedMonth]]/[[selectedDay]]/[[selectedYear]]</div>
-            <div class='loadingIndicator' hidden$='[[getEvents(eventItems, selectedMonth, selectedDay)]]'>
-              <div class='no-selection'>There is no events for the selection</div>
-            </div>                      
-            <iron-list items='[[getEvents(eventItems, selectedMonth, selectedDay)]]' hidden$='[[getEvents(eventItems, selectedMonth, selectedDay)]]'>
-              <template>
-                <event-item 
-                  name='[[item.Name]]' 
-                  description='[[item.Description]]' 
-                  image='/src/images/about-us.jpg' 
-                  time='[[getDate(item.StartDateTime)]]' 
-                  location='[[item.Address.City]],[[item.Address.State]]' 
-                  type='[[item.Type]]' 
-                  venue='[[getVenue(item.Groups)]]'
-                  duration='[[getDuration(item.StartDateTime, item.EndDateTime)]]'>
-                </event-item>
-              </template>
-            </iron-list>
-          </div>
-        </td>
-      </tr>
-    </table>
+    <div class='_bq2'>[[selectedMonth]]/[[selectedDay]]/[[selectedYear]]</div>
+    <div class='loadingIndicator' hidden$='[[getEvents(eventItems, selectedMonth, selectedDay)]]'>
+      <div class='no-selection'>There is no events for the selection</div>
+    </div>                      
+    <iron-list items='[[getEvents(eventItems, selectedMonth, selectedDay)]]' 
+    hidden$='[[getEvents(eventItems, selectedMonth, selectedDay)]]'>
+      <template>
+        <event-item 
+          name='[[item.Name]]' 
+          description='[[item.Description]]' 
+          image='/src/images/about-us.jpg' 
+          time='[[getDate(item.StartDateTime)]]' 
+          location='[[item.Address.City]],[[item.Address.State]]' 
+          type='[[item.Type]]' 
+          venue='[[getVenue(item.Groups)]]'
+          duration='[[getDuration(item.StartDateTime, item.EndDateTime)]]'>
+        </event-item>
+      </template>
+    </iron-list>
   </template>
   <script type='text/javascript' src='/src/components/events/event-main.js'></script>
 </dom-module>
