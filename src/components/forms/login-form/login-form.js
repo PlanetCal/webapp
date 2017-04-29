@@ -102,9 +102,11 @@ Polymer({
 
   makeAjaxCall: function() {
     var ajax = this.$.ajax;
+    var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
+
     switch (this.mode){
       case 'login':
-        this.ajaxUrl= 'http://localhost:1337/login';
+        this.ajaxUrl= serviceBaseUrl + '/login';
         this.ajaxBody = JSON.stringify({ email : this.email, password : this.password });
         ajax.method = 'POST'; 
         ajax.headers['Version'] = '1.0';
@@ -112,7 +114,7 @@ Polymer({
       case 'findPassword' :
         break;
       case 'createAccount' :
-        this.ajaxUrl= 'http://localhost:1337/userauth';
+        this.ajaxUrl= serviceBaseUrl + '/userauth';
         this.ajaxBody = JSON.stringify({ email : this.email, password : this.password, name : this.name });
         ajax.method = 'POST'; 
         ajax.headers['Version'] = '1.0';

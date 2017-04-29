@@ -36,6 +36,7 @@ Polymer({
     }
  
     this.set('route.path', '/events');
+    this.toggleEventsView = !this.toggleEventsView;
   },
 
   _routePageChanged: function(page) {

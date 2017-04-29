@@ -8,8 +8,8 @@
   <template>
     <style include="shared-styles"></style>
       <div class="card">
-        <event-main name="events-main" selected-day="[[selectedDay]]" selected-month="[[selectedMonth]]" selected-year="[[selectedYear]]"/>
-        <!--<cal-events name="cal-events" selected-day="[[selectedDay]]" selected-month="[[selectedMonth]]" selected-year="[[selectedYear]]"/>-->
+        <!--<event-main name="events-main" selected-day="[[selectedDay]]" selected-month="[[selectedMonth]]" selected-year="[[selectedYear]]"/>-->
+        <cal-events toggle-view=[[toggleView]] />
      </div>
   </template>
 
@@ -22,25 +22,9 @@
             type: String,
         },
         toggleView: {
-            type: Boolean,
-           	observer: '_dateChanged'
+            type: Boolean
         }
       },
-      
-      ready: function() {
-        this._dateChanged();
-      },
-
-      _dateChanged: function() {
-
-        var selectedDate = Polymer.globalsManager.globals.selectedDate;
-        if (selectedDate)
-        {
-          this.selectedDay = selectedDate.day;
-          this.selectedMonth = selectedDate.month;
-          this.selectedYear = selectedDate.year;
-        }
-    },
   });
     
   </script>
