@@ -8,8 +8,11 @@
 <dom-module id="cal-events">
   <template>
     <style include="cal-event-styles"></style>
-    <search-bar searchInput='{searchText}' show='true'></search-bar>
-    <div class='_bq2'>[[selectedMonth]]/[[selectedDay]]/[[selectedYear]]</div>
+    <div id="msg">[[messageText]]</div>
+    <div class='searchBarStyle'>
+      <search-bar searchInput='{searchText}' show='true'></search-bar>
+    </div>
+    <div class='dateDisplay'>[[selectedMonth]]/[[selectedDay]]/[[selectedYear]]</div>
     <iron-ajax url="..\Data.json" last-response="{{data}}" auto></iron-ajax>
 
     <iron-ajax id='ajax'

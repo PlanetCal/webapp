@@ -65,8 +65,10 @@ Polymer({
 
     var req = e.detail.request;
     var jsonResponse = e.detail.request.xhr.response;
-    var message = 'Login failed. Check your email or password. If you are a new user, please register first.';
+    var message = 'Events fetch failed.';
     message = message + ' Here are the Details: Error Status: ' + req.status + ' Error StatusText: ' + req.statusText
+    
+    this.$.msg.style.display = 'block';
     this.messageText = message;
   },
 
@@ -74,16 +76,6 @@ Polymer({
     console.log('cal-events got success from ajax!');
 
     var jsonResponse = e.detail.response;
-    this.name = jsonResponse.name;
-
-    var loggedInUser = {
-      name: this.name,
-      email: this.email,
-      id: jsonResponse.id,
-      token: jsonResponse.token
-    }
-
-    Polymer.globalsManager.set('loggedInUser', loggedInUser);
-    //this.fire('on-login-successul');
+    //this.name = jsonResponse.name;
   },
 });
