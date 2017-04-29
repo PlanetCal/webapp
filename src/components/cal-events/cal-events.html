@@ -9,7 +9,15 @@
     <iron-ajax url="..\Data.json" last-response="{{data}}" auto></iron-ajax>
     <iron-list items="[[data]]" as="item">
       <template>
-        <cal-event event-title="[[item.name]]" event-details="[[item.value]]"></cal-event>
+        <cal-event 
+          name="[[item.name]]" 
+          description="[[item.value]]. this is the descrption for this event. It is a kid friendly event, and everyone is cordially invited."
+          image='/src/images/about-us.jpg'
+          venue="microsoft cafetaria building 44"
+          location="1 Microsoft way Redmond WA 98052"
+          time="Mon Aug 29 2016"
+          Duration='4 Days'>
+        </cal-event>
       </template>
     </iron-list>
   </template>

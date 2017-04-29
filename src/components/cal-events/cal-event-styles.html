@@ -1,29 +1,40 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="/bower_components/polymer/polymer.html">
 
 <!-- shared styles for all views -->
-<dom-module id="event-styles">
+<dom-module id="cal-event-styles">
   <template>
     <style>
-    .dc1 {
-        float: left;
+      .eventcard {
+        border: solid thin rgb(134, 178, 203);
+        padding: 5px;
+        color: #757575;
+        border-radius: 5px;
+        background-color: #f5f5f5;
+      }
+
+      h1 {
+        margin: 16px 0;
+        color: #212121;
+        font-size: 22px;
+      }
+
+      img {
+        border: 0;
         width: 60px;
+        height: 60px;
+        alt: '';
+      }
+      .dc1 {
+        width: 60px;
+        float: left;
         vertical-align: top;
         text-align: left;
-        overflow: hidden;
         margin-top: 10px;
         margin-right: 10px;
         margin-bottom: 9px;
+        overflow: hidden;
     }
+    
     .dc2 {
         width: 350px;
         float: left;
@@ -34,16 +45,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding-bottom: 6px;
     }
 
-    .dc3 {
-        float: left;
-        text-align: left;
+    /*.dc3 {
         width: 130px;
+        float: left;
         vertical-align: top;
+        text-align: left;
         margin-top: 6px;
-        line-height: 1.38em;
         margin-right: 25px;
+        line-height: 1.38em;
         padding-bottom: 6px;
-    }
+    }*/
+
+    /*
     .dlast {
         float: left;
         text-align: left;
@@ -55,22 +68,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         overflow: hidden;
         word-break: break-word;
     }
-    .bg_color {
-        background-color: #f5f5f5;
-        padding-left: 10px;
-    }
-    .bg_norm {
-        padding-left: 10px;
-    }
+    */
+    
     .wrapwords {
         word-wrap: break-word;
     }
+
     .listtitle {
         font-size: medium;
         color: #04c;
         line-height: 1.19em;
-        padding-bottom: 1px;
     }
-  </style>
+    </style>
   </template>
 </dom-module>
