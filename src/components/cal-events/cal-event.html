@@ -2,29 +2,28 @@
 <link rel="import" href="/src/components/cal-events/cal-event-styles.html">
 <dom-module id="cal-event">
   <template>
-    <style include="cal-event-styles" is=""></style>
-    <div class="eventcard">
-      <div class="dc1">
-        <img class="floatleft rms_img" src="[[image]]" >
+    <style include="cal-event-styles"></style>
+    <fieldset class="eventcard">
+      <div class="horizontal imageColumn">
+        <img src="[[image]]" >
       </div>
-      <div class="dc2">
-        <div class="listtitle wrapwords">
-          <a href="#">[[name]]</a><br/>
-          <span style="color:gray">[[description]] </span>
-        </div>
+      <div class="horizontal eventNameColumn listtitle">
+        <a href="#">[[name]]</a><br/>
+        <span style="color:gray">[[description]] </span>
       </div>
-      <div class="dc3">
-        <a class="seclink wrapwords" href="#" >[[venue]]</a>
-        <br>
-        <span class="wrapwords">[[location]]</span>
-        <br>
-        <a class="seclink" href="#"></a>
+
+      <div class="horizontal locationColumn">
+        <a href="#">[[venue]]</a><br/>
+        <span style="color:gray">[[location]] </span>
       </div>
-      <div class="dlast">[[time]]
-        <br>
-        <span class="seclink" >[[duration]]</a>
+
+      <div class="horizontal timeColumn">
+        [[time]]
+        <br/>
+        <span style="color:gray">[[duration]] </span>
       </div>
-    </div>
+       
+    </fieldset>
   </template>
   <script>
     Polymer({
