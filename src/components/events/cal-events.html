@@ -2,12 +2,12 @@
 
 <link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="/bower_components/iron-list/iron-list.html">
-<link rel="import" href="/src/components/cal-events/cal-event.html">
-<link rel="import" href="/src/components/cal-events/cal-event-styles.html">
+<link rel="import" href="/src/components/events/cal-event.html">
+<link rel="import" href="/src/components/events/event-styles.html">
 
 <dom-module id="cal-events">
   <template>
-    <style include="cal-event-styles"></style>
+    <style include="event-styles"></style>
     <div id="msg">[[messageText]]</div>
     <div class='searchBarStyle'>
       <search-bar searchInput='{searchText}' show='true'></search-bar>

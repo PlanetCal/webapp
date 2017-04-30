@@ -1,76 +1,76 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="/bower_components/polymer/polymer.html">
-
-<!-- shared styles for all views -->
 <dom-module id="event-styles">
   <template>
     <style>
-    .dc1 {
-        float: left;
-        width: 60px;
-        vertical-align: top;
-        text-align: left;
-        overflow: hidden;
-        margin-top: 10px;
-        margin-right: 10px;
-        margin-bottom: 9px;
-    }
-    .dc2 {
-        width: 350px;
-        float: left;
-        vertical-align: top;
-        text-align: left;
-        margin-top: 6px;
-        margin-right: 25px;
-        padding-bottom: 6px;
-    }
+      .eventcard {
+        border: solid thin rgb(134, 178, 203);
+        padding: 5px;
+        color: #757575;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
 
-    .dc3 {
+      a {
+        color: #212121;
+        font-size: 20px;
+      }
+
+      img {
+        border: 0;
+        width: 60px;
+        height: 60px;
+        alt: '';
+      }
+      
+      .horizontal {
         float: left;
-        text-align: left;
-        width: 130px;
         vertical-align: top;
-        margin-top: 6px;
-        line-height: 1.38em;
-        margin-right: 25px;
-        padding-bottom: 6px;
-    }
-    .dlast {
-        float: left;
         text-align: left;
-        width: 200px;
-        vertical-align: top;
-        margin-top: 6px;
-        line-height: 1.38em;
-        padding-bottom: 6px;
-        overflow: hidden;
-        word-break: break-word;
-    }
-    .bg_color {
-        background-color: #f5f5f5;
-        padding-left: 10px;
-    }
-    .bg_norm {
-        padding-left: 10px;
-    }
-    .wrapwords {
+        padding: 10px;
         word-wrap: break-word;
-    }
-    .listtitle {
-        font-size: medium;
-        color: #04c;
-        line-height: 1.19em;
-        padding-bottom: 1px;
-    }
-  </style>
+        color: gray;
+      }
+
+      .imageColumn {
+        width: 60px;
+      }
+      
+      .eventNameColumn {
+        width: 300px;
+      }
+
+      .locationColumn {
+        width: 300px;
+      }
+      
+      .timeColumn {
+        width: 150px;
+      }
+      
+      div#msg {
+        color: white;
+        background-color: rgba(255, 74, 0, 0.85);
+        border-radius: 4px;
+        font-family: sans-serif;
+        font-size: 0.9em;
+        font-weight: 300;
+        display: none;
+        margin-left: 2px;
+        margin-bottom: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+
+      .searchBarStyle {
+        height: 45px;
+        margin-left: 2px;
+      }
+
+      .dateDisplay {
+        margin-left: 5px;
+        color: rgb(134, 178, 203)
+      }
+
+    </style>
   </template>
 </dom-module>

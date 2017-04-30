@@ -1,14 +1,12 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
-<link rel="import" href="/src/components/cal-events/cal-events.html">
+<link rel="import" href="/src/components/events/cal-events.html">
 <link rel="import" href="/src/shared-styles.html">
-<link rel="import" href="/src/components/events/event-main.html">
 <link rel="import" href="/src/components/search/search-bar.html">
 
 <dom-module id="events-page">
   <template>
     <style include="shared-styles"></style>
       <div class="card">
-        <!--<event-main name="events-main" selected-day="[[selectedDay]]" selected-month="[[selectedMonth]]" selected-year="[[selectedYear]]"/>-->
         <cal-events toggle-view=[[toggleView]] />
      </div>
   </template>
