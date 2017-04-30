@@ -39,6 +39,7 @@ Polymer({
         this._currentLoggedInUser = loggedInUser;
 
         if (dateChanged || loggedinUserChanged) {
+          this.messageText = '';
           this.makeAjaxCall();
         }
     },
@@ -55,7 +56,7 @@ Polymer({
       ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
     }
 
-    console.log('cal-events fetching data through ajax call!');
+    this.messageText = 'Loading events from server ...';
     ajax.generateRequest();
     
   },
@@ -74,8 +75,32 @@ Polymer({
 
   handleAjaxResponse: function (e) {
     console.log('cal-events got success from ajax!');
+    this.messageText = '';
 
-    var jsonResponse = e.detail.response;
-    //this.name = jsonResponse.name;
+    this.data = e.detail.response;
   },
+
+  getDate: function (date) {
+     var dateTime = new Date(date);
+     return dateTime.toDateString();
+  },
+
+  getVenue: function (item) {
+     return item[0].Name;
+  },
+
+  getVenueLink: function (item) {
+     return item[0].WebSite;
+  },
+
+  getDuration: function (dateStart, dateEnd) {
+    var startdateTime = new Date(dateStart);
+    var endDateTime = new Date(dateEnd);
+    var timeDiff = Math.abs(endDateTime.getTime() - startdateTime.getTime());
+    
+    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+    return diffDays + " Days";
+  },  
+  
+  
 });

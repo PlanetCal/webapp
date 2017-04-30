@@ -1,25 +1,25 @@
-<link rel="import" href="/bower_components/polymer/polymer.html">
-<link rel="import" href="/src/components/cal-events/cal-event-styles.html">
-<dom-module id="cal-event">
+<link rel='import' href='/bower_components/polymer/polymer.html'>
+<link rel='import' href='/src/components/cal-events/cal-event-styles.html'>
+<dom-module id='cal-event'>
   <template>
-    <style include="cal-event-styles"></style>
-    <fieldset class="eventcard">
-      <div class="horizontal imageColumn">
-        <img src="[[image]]" >
+    <style include='cal-event-styles'></style>
+    <fieldset class='eventcard'>
+      <div class='horizontal imageColumn'>
+        <img src='[[image]]' >
       </div>
-      <div class="horizontal eventNameColumn">
-        <a href="#">[[name]]</a>
+      <div class='horizontal eventNameColumn'>
+        <a href='#'>[[name]] ([[type]])</a>
         <br/>
-        <span>[[description]] </span>
+        <span>[[description]]</span>
       </div>
 
-      <div class="horizontal locationColumn">
-        <a href="#">[[venue]]</a>
+      <div class='horizontal locationColumn'>
+        <a href='[[venueLink]]' target='_blank'>[[venue]]</a>
         <br/>
-        <span>[[location]] </span>
+        <span>[[location]]</span>
       </div>
 
-      <div class="horizontal timeColumn">
+      <div class='horizontal timeColumn'>
         [[time]]
         <br/>
         <span>[[duration]] </span>
@@ -47,6 +47,9 @@
           type: String,
         },
         venue: {
+          type: String,
+        },
+        venueLink: {
           type: String,
         },        
         location: {

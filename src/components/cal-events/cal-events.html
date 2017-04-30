@@ -13,8 +13,7 @@
       <search-bar searchInput='{searchText}' show='true'></search-bar>
     </div>
     <div class='dateDisplay'>[[selectedMonth]]/[[selectedDay]]/[[selectedYear]]</div>
-    <iron-ajax url="..\Data.json" last-response="{{data}}" auto></iron-ajax>
-
+   
     <iron-ajax id='ajax'
 				handle-as='json'
 				url="[[ajaxUrl]]"
@@ -24,14 +23,17 @@
 
     <iron-list items="[[data]]" as="item">
       <template>
-        <cal-event 
-          name="[[item.name]]" 
-          description="[[item.value]]. this is the descrption for this event. It is a kid friendly event, and everyone is cordially invited."
+        <cal-event
+          id='[[item.id]]'
+          name="[[item.Name]]" 
+          description="[[item.Description]]"
           image='/src/images/about-us.jpg'
-          venue="microsoft cafetaria building 44"
-          location="1 Microsoft way Redmond WA 98052"
-          time="Mon Aug 29 2016"
-          Duration='4 Days'>
+          venue='[[getVenue(item.Groups)]]'
+          venue-link='[[getVenueLink(item.Groups)]]'
+          location="[[item.Location]]"
+          type='[[item.Type]]' 
+          time="[[getDate(item.StartDateTime)]]"
+          Duration='[[getDuration(item.StartDateTime, item.EndDateTime)]]'>
         </cal-event>
       </template>
     </iron-list>
