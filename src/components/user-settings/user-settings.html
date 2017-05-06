@@ -1,5 +1,9 @@
 <link rel='import' href='/bower_components/polymer/polymer.html'>
 <link rel='import' href='/bower_components/iron-icons/iron-icons.html'>
+<link rel='import' href='/bower_components/paper-menu/paper-menu.html'>
+<link rel='import' href='/bower_components/paper-item/paper-item.html'>
+<link rel='import' href='/bower_components/paper-icon-button/paper-icon-button.html'>
+<link rel='import' href='/bower_components/paper-menu-button/paper-menu-button.html'>
 <link rel='import' href='/src/components/user-settings/user-settings-styles.html'>
 <dom-module id='user-settings'>
   <template>
@@ -10,12 +14,20 @@
 			on-iron-localstorage-load='_onLocalStorageLoad'></iron-localstorage>-->
 			
 			<div class='horizontal'>[[userName]]</div>
-			<div class='horizontal'>
-  			<iron-icon noink icon='icons:account-circle' class='dropdown-trigger'></iron-icon>
+			<div class='horizontal'>	            
+				
+					<paper-menu-button>
+						<paper-icon-button icon="menu" class="dropdown-trigger"></paper-icon-button>
+						<paper-menu class="dropdown-content">
+							<paper-item><a class='link' on-tap='_loginOrLogoutHandler' tabindex='1'>[[loginOrLogout]]</a></paper-item>
+							<paper-item>About</paper-item>
+							<paper-item>Contact</paper-item>
+						</paper-menu>
+						</paper-menu-button>
 			</div>
-			<div class='horizontal'>
+			<!--div class='horizontal'>
 				<a class='link' on-tap='_loginOrLogoutHandler' tabindex='1'>[[loginOrLogout]]</a>
-			</div>
+			</div-->
 		</div>
   </template>
  <script type='text/javascript' src='user-settings.js'></script>
