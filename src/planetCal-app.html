@@ -83,6 +83,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <page-tab name='recommendations' href='/recommendations' text='Recommendations' icon='icons:redeem'></page-tab>
             <page-tab name='user-profile' href='/user-profile' text='User Profile' icon='icons:settings'></page-tab>
             <page-tab name='about-us' href='/about-us' text='About us' icon='social:people'></page-tab>
+             <page-tab name='contact-us' href='/contact-us' text='Contact us' icon='icons:contact'></page-tab>
           </iron-selector>
         </div>
       </app-drawer>
@@ -92,9 +93,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <app-header condenses reveals effects='waterfall'>
           <app-toolbar>
-            <paper-icon-button icon='icons:menu' drawer-toggle></paper-icon-button>
+ 
+ 
             <div main-title>Planet Calander</div>
             <user-settings user-id={{userId}}></user-settings>
+                     
+
           </app-toolbar>
         </app-header>
 
@@ -108,6 +112,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <recommendations-page name='recommendations'></recommendations-page>
           <user-profile-page name='user-profile'></user-profile-page>
           <about-us-page name='about-us'></about-us-page>
+          <contact-us-page name='contact-us'></contact-us->
           <view404-page name='view404'></view404-page>
         </iron-pages>
       </app-header-layout>
