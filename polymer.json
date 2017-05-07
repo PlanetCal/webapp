@@ -4,7 +4,7 @@
   "fragments": [
     "src/pages/events-page.html",
     "src/pages/login-page.html",
-    "src/view404-page.html"
+    "src/pages/view404-page.html"
   ],
   "sourceGlobs": [
     "src/**/*",
