@@ -6,12 +6,12 @@
     "src/pages/login-page.html",
     "src/view404-page.html"
   ],
-  "sources": [
+  "sourceGlobs": [
     "src/**/*",
     "images/**/*",
     "bower.json"
   ],
-  "extraDependencies": [
+  "includeDependencies": [
     "manifest.json",
     "bower_components/webcomponentsjs/webcomponents-lite.min.js"
   ]
