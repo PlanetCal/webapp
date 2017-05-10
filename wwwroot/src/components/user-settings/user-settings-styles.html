@@ -3,21 +3,44 @@
 <dom-module id="user-settings-styles">
   <template>
     <style>
-
       paper-icon-button.dropdown-trigger {
         transform: scale(2);
+        width:30px;        
       }
 
       iron-icon {
         margin-right: 0.5em;
       }
 
-      .link {
-        font-size: 16px;
-        text-decoration:underline;
-        cursor: pointer;
-      }
+      :host{
+        
+        --primary-background-color :  #0e0e0e;        
+        color:#FFFFFF;
 
+       --paper-menu-button-content: {
+            color:#FFFFFF;
+            top:45px;         
+            width:140px;
+
+         .dropdown-content.selectable-content{
+           paper-item{
+             color:#FFF;
+           }          
+         }       
+         
+         .link{
+           color:#FFF;
+           text-decoration:none;
+         }
+         .login{
+          cursor: pointer;
+         }
+       }     
+     };
+     
+      :host([vertical-align="top"]) .dropdown-content{
+            color:#FFF;
+      } 
       .horizontal {
 				width: auto;
 				display: table-cell;
