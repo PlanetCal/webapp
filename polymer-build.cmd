@@ -1,2 +1,0 @@
-cd wwwroot
-polymer build
