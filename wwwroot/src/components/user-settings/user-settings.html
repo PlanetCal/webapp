@@ -13,17 +13,24 @@
 			<!--<iron-localstorage name='planetCal-storage' value='{{localStorage}}' 
 			on-iron-localstorage-load='_onLocalStorageLoad'></iron-localstorage>-->
 			
-			<div class='horizontal'>[[userName]]</div>
-			<div class='horizontal'>	            
-				
-					<paper-menu-button>
-						<paper-icon-button icon="menu" class="dropdown-trigger"></paper-icon-button>
-						<paper-menu class="dropdown-content">
-							<paper-item><a class='link' on-tap='_loginOrLogoutHandler' tabindex='1'>[[loginOrLogout]]</a></paper-item>
-							<paper-item>About</paper-item>
-							<paper-item>Contact</paper-item>
+			<div class='horizontal'><div class='horizontal'>[[userName]]</div>
+			<div class='horizontal'>&nbsp;&nbsp;&nbsp;</div>
+			<div class='horizontal'>
+				<a class='login' on-tap='_loginOrLogoutHandler' tabindex='1'>
+					[[loginOrLogout]]
+				</a>
+			</div>
+
+			<div  class='horizontal'>	            				
+					<paper-menu-button id='planet-dropdown' horizontal-align="right">
+						<paper-icon-button icon="menu" class="dropdown-trigger"  alt="bottom align"></paper-icon-button>
+						<paper-menu class="dropdown-content" >							
+							<paper-item><a class='link' href='/' tabindex='1'>Home</a></paper-item>
+							<paper-item><a class='link' href='/about-us' text='About us' tabindex='2'>About</a></paper-item>
+							<paper-item><a class='link' href='/contact-us' text='Contact us' tabindex='3'>Contact</paper-item>
 						</paper-menu>
 						</paper-menu-button>
+			</div>
 			</div>
 			<!--div class='horizontal'>
 				<a class='link' on-tap='_loginOrLogoutHandler' tabindex='1'>[[loginOrLogout]]</a>
