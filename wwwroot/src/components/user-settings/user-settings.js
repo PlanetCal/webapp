@@ -2,7 +2,6 @@ Polymer({
   is: 'user-settings',
 
  properties: {
-
   userId: {
     type: String,
     reflectToAttribute: true,
@@ -28,8 +27,8 @@ Polymer({
       this.loginOrLogout = 'Logout';
     } else {
 			//console.log('user-settings ready called with userId not existing !:');
-      this.userName = 'Guest';
-      this.loginOrLogout = 'Login';
+      this.userName = '';
+      this.loginOrLogout = 'Sign In';
     }
   },
 
@@ -43,8 +42,8 @@ Polymer({
         Polymer.globalsManager.set('loggedInUser', {});
         this.email = null;
         this.userId = null;
-        this.userName = 'Guest';
-        this.loginOrLogout = 'Login';
+        this.userName = '';
+        this.loginOrLogout = 'Sign In';
         this.fire('on-logout-requested');
     } else {
       this.fire('on-login-requested');
