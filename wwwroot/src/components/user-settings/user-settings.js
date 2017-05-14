@@ -24,11 +24,11 @@ Polymer({
   
     if (this.userId){
 			//console.log('user-settings ready called with userId existing !:');
-      this.loginOrLogout = 'Logout';
+      this.loginOrLogout = 'Sign out';
     } else {
 			//console.log('user-settings ready called with userId not existing !:');
       this.userName = '';
-      this.loginOrLogout = 'Sign In';
+      this.loginOrLogout = 'Sign in';
     }
   },
 
@@ -43,7 +43,7 @@ Polymer({
         this.email = null;
         this.userId = null;
         this.userName = '';
-        this.loginOrLogout = 'Sign In';
+        this.loginOrLogout = 'Sign in';
         this.fire('on-logout-requested');
     } else {
       this.fire('on-login-requested');

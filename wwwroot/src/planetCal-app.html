@@ -80,10 +80,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <!--<app-toolbar>Menu</app-toolbar>-->
           <iron-selector selected='{{page}}' attr-for-selected='name' class='drawer-list' role='navigation'>
             <cal-calendar drawer-toggle></cal-calendar>
-            <page-tab align='left' name='recommendations' href='/recommendations' text='Recommendations' icon='icons:redeem'></page-tab>
-            <page-tab align='left' name='user-profile' href='/user-profile' text='Settings' icon='icons:settings'></page-tab>
-            <page-tab align='left' name='about-us' href='/about-us' text='About' icon='social:people'></page-tab>
-            <page-tab  align='left' name='contact-us' href='/contact-us' text='Contact' icon='icons:contact'></page-tab>
+            <page-tab name='recommendations' href='/recommendations' text='Recommendations' icon='icons:redeem'></page-tab>
           </iron-selector>
         </div>
       </app-drawer>
@@ -93,6 +90,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <app-header condenses reveals effects='waterfall'>
           <app-toolbar>
+            <paper-icon-button icon='icons:menu' drawer-toggle></paper-icon-button>
             <div main-title>Planet Calander</div>
             <user-settings user-id={{userId}}></user-settings>
           </app-toolbar>
