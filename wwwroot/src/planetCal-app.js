@@ -54,6 +54,10 @@ Polymer({
   },
 
   _calDateSelectHandler: function (e) {
+    if (!this.$.drawer.persistent) {
+      this.$.drawer.close();
+    }
+    
     this.toggleEventsView = !this.toggleEventsView;
   },
 
