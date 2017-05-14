@@ -7,13 +7,13 @@
   <script>
     Polymer({
       is: 'global-variables',
-      
-      ready: function() {
+
+      ready: function () {
 
         var todaysDateTime = new Date();
-				var todayDay = todaysDateTime.getDate();
-				var todayYear = todaysDateTime.getFullYear();
-				var todayMonth = todaysDateTime.getMonth();
+        var todayDay = todaysDateTime.getDate();
+        var todayYear = todaysDateTime.getFullYear();
+        var todayMonth = todaysDateTime.getMonth();
 
         var selectedDate = {
           day: this.todayDay,

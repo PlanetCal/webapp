@@ -22,29 +22,29 @@ Polymer({
   isPasswordValid: function (pwd) {
     return pwd.length >= parseInt(this.password_min_length)
   },
-  
+
   //validating email
   emailOnkeyup: function () {
     this.$.email_status.style.display = 'block';
     this.emailStatusIcon = this.isEmailValid(this.email) ? 'icons:done' : 'icons:error-outline';
   },
-   
+
   //validating password
   passwordOnkeyup: function () {
     this.$.password_status.style.display = 'block';
     this.passwordStatusIcon = this.isPasswordValid(this.password) ? 'icons:done' : 'icons:error-outline';
   },
 
-  linkClickHandler: function(e){
+  linkClickHandler: function (e) {
     this.setViewsAsPerMode(e.currentTarget.id);
   },
 
-  setViewsAsPerMode: function(mode){
+  setViewsAsPerMode: function (mode) {
     this.mode = mode;
     this.$.msg.style.display = 'none';
 
-    switch (this.mode){
-      case 'login' :
+    switch (this.mode) {
+      case 'login':
         this.titleText = 'Login';
         this.$.nameFieldDiv.style.display = 'none';
         this.$.loginLinkDiv.style.display = 'none';
@@ -53,7 +53,7 @@ Polymer({
         this.$.forgotAccountLinkDiv.style.display = 'block';
         this.$.createAccountLinkDiv.style.display = 'block';
         break;
-      case 'findPassword' :
+      case 'findPassword':
         this.$.nameFieldDiv.style.display = 'none';
         this.$.loginLinkDiv.style.display = 'block';
         this.$.forgotAccountLinkDiv.style.display = 'none';
@@ -62,7 +62,7 @@ Polymer({
         this.sumbitButtonText = 'Email me';
         this.titleText = 'Find password';
         break;
-      case 'createAccount' :
+      case 'createAccount':
         this.$.nameFieldDiv.style.display = 'block';
         this.$.loginLinkDiv.style.display = 'block';
         this.$.forgotAccountLinkDiv.style.display = 'none';
@@ -70,7 +70,7 @@ Polymer({
         this.sumbitButtonText = 'Signup';
         this.titleText = 'Create Account';
         break;
-      default :
+      default:
         alert('It should not be possible');
     }
   },
@@ -78,7 +78,7 @@ Polymer({
   cancelOnclick: function () {
     this.fire('on-login-successul');
   },
-  
+
   submitOnclick: function () {
     this.$.msg.style.display = 'block';
     this.messageText = '';
@@ -100,23 +100,23 @@ Polymer({
     this.makeAjaxCall();
   },
 
-  makeAjaxCall: function() {
+  makeAjaxCall: function () {
     var ajax = this.$.ajax;
     var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
 
-    switch (this.mode){
+    switch (this.mode) {
       case 'login':
-        this.ajaxUrl= serviceBaseUrl + '/login';
-        this.ajaxBody = JSON.stringify({ email : this.email, password : this.password });
-        ajax.method = 'POST'; 
+        this.ajaxUrl = serviceBaseUrl + '/login';
+        this.ajaxBody = JSON.stringify({ email: this.email, password: this.password });
+        ajax.method = 'POST';
         ajax.headers['Version'] = '1.0';
         break;
-      case 'findPassword' :
+      case 'findPassword':
         break;
-      case 'createAccount' :
-        this.ajaxUrl= serviceBaseUrl + '/userauth';
-        this.ajaxBody = JSON.stringify({ email : this.email, password : this.password, name : this.name });
-        ajax.method = 'POST'; 
+      case 'createAccount':
+        this.ajaxUrl = serviceBaseUrl + '/userauth';
+        this.ajaxBody = JSON.stringify({ email: this.email, password: this.password, name: this.name });
+        ajax.method = 'POST';
         ajax.headers['Version'] = '1.0';
         break;
     }
@@ -127,16 +127,16 @@ Polymer({
   handleErrorResponse: function (e) {
     var req = e.detail.request;
     var jsonResponse = e.detail.request.xhr.response;
-    switch (this.mode){
-      case 'login' :
+    switch (this.mode) {
+      case 'login':
         var message = 'Login failed. Check your email or password. If you are a new user, please register first.';
         message = message + ' Here are the Details: Error Status: ' + req.status + ' Error StatusText: ' + req.statusText
         this.messageText = message;
         break;
-      case 'findPassword' :
+      case 'findPassword':
         this.messageText = 'Not yet implemented';
         break;
-      case 'createAccount' :
+      case 'createAccount':
         var message = 'Registration failed for some reason.';
         message = message + ' Here are the Details: Error Status: ' + req.status + ' Error StatusText: ' + req.statusText
         this.messageText = message;
@@ -146,8 +146,8 @@ Polymer({
 
   handleAjaxResponse: function (e) {
     var jsonResponse = e.detail.response;
-    switch (this.mode){
-      case 'login' :
+    switch (this.mode) {
+      case 'login':
         this.name = jsonResponse.name;
 
         var loggedInUser = {
@@ -162,10 +162,10 @@ Polymer({
         this.fire('on-login-successul');
 
         break;
-      case 'findPassword' :
+      case 'findPassword':
         this.messageText = 'Check your email for the password';
         break;
-      case 'createAccount' :
+      case 'createAccount':
         this.messageText = 'Registration successful. Please login now.';
         break;
     }

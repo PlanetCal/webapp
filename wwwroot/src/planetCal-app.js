@@ -19,27 +19,26 @@ Polymer({
     'on-login-successul': '_loginSuccessHandler',
   },
 
-  _loginRequestHandler: function() {
+  _loginRequestHandler: function () {
     //console.log('_loginRequestHandler');
     this.set('route.path', '/login')
   },
- 
- _logoutRequestHandler: function() {
+
+  _logoutRequestHandler: function () {
     this.userId = '';
   },
 
-  _loginSuccessHandler: function() {
+  _loginSuccessHandler: function () {
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-    if (loggedInUser)
-    {
+    if (loggedInUser) {
       this.userId = loggedInUser.id;
     }
- 
+
     this.set('route.path', '/events');
     this.toggleEventsView = !this.toggleEventsView;
   },
 
-  _routePageChanged: function(page) {
+  _routePageChanged: function (page) {
     this.page = page || 'events';
 
     if (!this.$.drawer.persistent) {
@@ -47,9 +46,9 @@ Polymer({
     }
   },
 
-  _pageChanged: function(page) {
+  _pageChanged: function (page) {
     // Load page import on demand. Show 404 page if fails
-    this.set('route.path', '/'+ page)
+    this.set('route.path', '/' + page)
     var resolvedPageUrl = this.resolveUrl('pages/' + page + '-page.html');
     this.importHref(resolvedPageUrl, null, this._showPage404, true);
   },
@@ -58,7 +57,7 @@ Polymer({
     this.toggleEventsView = !this.toggleEventsView;
   },
 
-  _showPage404: function() {
+  _showPage404: function () {
     this.page = 'view404';
   },
 });

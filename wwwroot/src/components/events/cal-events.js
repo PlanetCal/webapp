@@ -2,63 +2,61 @@ Polymer({
   is: 'cal-events',
 
   properties: {
-				toggleView: {
-            type: Boolean,
-           	observer: '_dateChanged'
-        }
-      },
+    toggleView: {
+      type: Boolean,
+      observer: '_dateChanged'
+    }
+  },
 
-       ready: function() {
-        this._dateChanged();
-      },
+  ready: function () {
+    this._dateChanged();
+  },
 
-      _dateChanged: function() {
+  _dateChanged: function () {
 
-        var dateChanged = false;
+    var dateChanged = false;
 
-        var selectedDate = Polymer.globalsManager.globals.selectedDate;
-        if (selectedDate) {
-          this.selectedDay = selectedDate.day;
-          this.selectedMonth = selectedDate.month;
-          this.selectedYear = selectedDate.year;
-          
-          if (selectedDate !== this._currentSelectedDate) {
-            dateChanged = true;
-          }
-        }
-        this._currentSelectedDate = selectedDate;
+    var selectedDate = Polymer.globalsManager.globals.selectedDate;
+    if (selectedDate) {
+      this.selectedDay = selectedDate.day;
+      this.selectedMonth = selectedDate.month;
+      this.selectedYear = selectedDate.year;
 
-        var loggedinUserChanged = false;
-        var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-        if (loggedInUser)
-        {
-          if (loggedInUser !== this._currentLoggedInUser) {
-            loggedinUserChanged = true;
-          }
-        }
-        this._currentLoggedInUser = loggedInUser;
+      if (selectedDate !== this._currentSelectedDate) {
+        dateChanged = true;
+      }
+    }
+    this._currentSelectedDate = selectedDate;
 
-        if (dateChanged || loggedinUserChanged) {
-          this.messageText = '';
-          this.makeAjaxCall();
-        }
-    },
+    var loggedinUserChanged = false;
+    var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+    if (loggedInUser) {
+      if (loggedInUser !== this._currentLoggedInUser) {
+        loggedinUserChanged = true;
+      }
+    }
+    this._currentLoggedInUser = loggedInUser;
 
-    makeAjaxCall: function() {
+    if (dateChanged || loggedinUserChanged) {
+      this.messageText = '';
+      this.makeAjaxCall();
+    }
+  },
+
+  makeAjaxCall: function () {
     var ajax = this.$.ajax;
     var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
-    this.ajaxUrl= serviceBaseUrl + '/events';
-    ajax.method = 'GET'; 
+    this.ajaxUrl = serviceBaseUrl + '/events';
+    ajax.method = 'GET';
     ajax.headers['Version'] = '1.0';
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-    if (loggedInUser)
-    {
+    if (loggedInUser) {
       ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
     }
 
     this.messageText = 'Loading events from server ...';
     ajax.generateRequest();
-    
+
   },
 
   handleErrorResponse: function (e) {
@@ -68,7 +66,7 @@ Polymer({
     var jsonResponse = e.detail.request.xhr.response;
     var message = 'Events fetch failed.';
     message = message + ' Here are the Details: Error Status: ' + req.status + ' Error StatusText: ' + req.statusText
-    
+
     this.$.msg.style.display = 'block';
     this.messageText = message;
   },
@@ -81,26 +79,24 @@ Polymer({
   },
 
   getDate: function (date) {
-     var dateTime = new Date(date);
-     return dateTime.toDateString();
+    var dateTime = new Date(date);
+    return dateTime.toDateString();
   },
 
   getVenue: function (item) {
-     return item[0].Name;
+    return item[0].Name;
   },
 
   getVenueLink: function (item) {
-     return item[0].WebSite;
+    return item[0].WebSite;
   },
 
   getDuration: function (dateStart, dateEnd) {
     var startdateTime = new Date(dateStart);
     var endDateTime = new Date(dateEnd);
     var timeDiff = Math.abs(endDateTime.getTime() - startdateTime.getTime());
-    
-    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+
+    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
     return diffDays + " Days";
-  },  
-  
-  
+  },
 });

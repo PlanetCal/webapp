@@ -8,14 +8,14 @@
 
 <link rel="import" href="/src/components/forms/form-styles.html">
 <dom-module id="login-form">
-  <template>
-  	<style include="form-styles"></style>
-    <div>
-      <form id="form" method="post" >
-    		<div id="title">[[titleText]]</div>
-    		<div id="msg">[[messageText]]</div>
+	<template>
+		<style include="form-styles"></style>
+		<div>
+			<form id="form" method="post">
+				<div id="title">[[titleText]]</div>
+				<div id="msg">[[messageText]]</div>
 
-		    <fieldset>
+				<fieldset>
 					<div id="nameFieldDiv">
 						<paper-input label="Name" value="{{name}}" char-counter maxlength="50">
 							<iron-icon icon="social:person" prefix></iron-icon>
@@ -25,7 +25,7 @@
 					<paper-input label="Email address" value="{{email}}" on-input="emailOnkeyup" char-counter maxlength="50">
 						<iron-icon icon="communication:email" prefix></iron-icon>
 					</paper-input>
-		      <div class="status" id="email_status">
+					<div class="status" id="email_status">
 						<iron-icon icon="[[emailStatusIcon]]" prefix></iron-icon>
 					</div>
 
@@ -33,13 +33,13 @@
 						<paper-input type="password" label="Password" value="{{password}}" on-input="passwordOnkeyup" char-counter maxlength="50">
 							<iron-icon icon="communication:vpn-key" prefix></iron-icon>
 						</paper-input>
-		      <div class="status" id="password_status">
-						<iron-icon icon="[[passwordStatusIcon]]" prefix></iron-icon>
+						<div class="status" id="password_status">
+							<iron-icon icon="[[passwordStatusIcon]]" prefix></iron-icon>
+						</div>
 					</div>
-					</div>
-		    
+
 				</fieldset>
-		    <fieldset>
+				<fieldset>
 					<div id="submitButtonDiv">
 						<span class="pull-left">
 						<paper-button id="submitButton" class="button" raised on-tap="submitOnclick">
@@ -53,27 +53,22 @@
 						</paper-button>
 						</span>
 					</div>
-					</fieldset>
-					<HR></HR>
-					<div id="loginLinkDiv">
-						<a class='link' id="login" on-tap="linkClickHandler" tabindex="1">Login</a>
-					</div>
-					<div id="createAccountLinkDiv">
-						<a class='link' id="createAccount" on-tap="linkClickHandler" tabindex="2">Register</a>
-					</div>
-					<div id="forgotAccountLinkDiv">
-						<a class='link' id="findPassword" on-tap="linkClickHandler" tabindex="3">Forgot password</a>
-					</div>
-		  </form>
-		
-			<iron-ajax id='ajax'
-				handle-as='json'
-				url="[[ajaxUrl]]" 
-				body='[[ajaxBody]]'
-				content-type='application/json'
-				on-error='handleErrorResponse'
-				on-response='handleAjaxResponse'></iron-ajax>		
-    </div>
-  </template>
- <script type="text/javascript" src="login-form.js"></script>
+				</fieldset>
+				<HR></HR>
+				<div id="loginLinkDiv">
+					<a class='link' id="login" on-tap="linkClickHandler" tabindex="1">Login</a>
+				</div>
+				<div id="createAccountLinkDiv">
+					<a class='link' id="createAccount" on-tap="linkClickHandler" tabindex="2">Register</a>
+				</div>
+				<div id="forgotAccountLinkDiv">
+					<a class='link' id="findPassword" on-tap="linkClickHandler" tabindex="3">Forgot password</a>
+				</div>
+			</form>
+
+			<iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" body='[[ajaxBody]]' content-type='application/json' on-error='handleErrorResponse'
+			 on-response='handleAjaxResponse'></iron-ajax>
+		</div>
+	</template>
+	<script type="text/javascript" src="login-form.js"></script>
 </dom-module>

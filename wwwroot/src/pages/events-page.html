@@ -6,9 +6,9 @@
 <dom-module id="events-page">
   <template>
     <style include="shared-styles"></style>
-      <div class="card">
-        <cal-events toggle-view=[[toggleView]] />
-     </div>
+    <div class="card">
+      <cal-events toggle-view=[[toggleView]] />
+    </div>
   </template>
 
   <script>
@@ -17,13 +17,12 @@
 
       properties: {
         searchText: {
-            type: String,
+          type: String,
         },
         toggleView: {
-            type: Boolean
+          type: Boolean
         }
       },
-  });
-    
+    });
   </script>
 </dom-module>

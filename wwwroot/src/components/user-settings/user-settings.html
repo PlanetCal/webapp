@@ -6,37 +6,31 @@
 <link rel='import' href='/bower_components/paper-menu-button/paper-menu-button.html'>
 <link rel='import' href='/src/components/user-settings/user-settings-styles.html'>
 <dom-module id='user-settings'>
-  <template>
-  	<style include='user-settings-styles'>
-		</style>
+	<template>
+		<style include='user-settings-styles'></style>
 		<div>
 			<!--<iron-localstorage name='planetCal-storage' value='{{localStorage}}' 
 			on-iron-localstorage-load='_onLocalStorageLoad'></iron-localstorage>-->
-			
-			<div class='horizontal'><div class='horizontal'>[[userName]]</div>
-			<div class='horizontal'>&nbsp;&nbsp;&nbsp;</div>
-			<div class='horizontal'>
-				<a class='login' on-tap='_loginOrLogoutHandler' tabindex='1'>
-					[[loginOrLogout]]
-				</a>
-			</div>
 
-			<div  class='horizontal'>	            				
+			<div class='horizontal'>
+				<div class='horizontal'>[[userName]]</div>
+				<div class='horizontal'>&nbsp;&nbsp;&nbsp;</div>
+				<div class='horizontal'>
+					<a class='login' on-tap='_loginOrLogoutHandler' tabindex='1'>[[loginOrLogout]]</a>
+				</div>
+				<div class='horizontal'>
 					<paper-menu-button id='planet-dropdown' horizontal-align="right">
-						<paper-icon-button icon="more-horiz" class="dropdown-trigger"  alt="bottom align"></paper-icon-button>
-						<paper-menu class="dropdown-content" >							
+						<paper-icon-button icon="more-horiz" class="dropdown-trigger" alt="bottom align"></paper-icon-button>
+						<paper-menu class="dropdown-content">
 							<paper-item><a class='link' href='/' tabindex='1'>Home</a></paper-item>
 							<paper-item><a class='link' href='/user-profile' text='Settings' tabindex='2'>User settings</a></paper-item>
 							<paper-item><a class='link' href='/about-us' text='About us' tabindex='3'>About us</a></paper-item>
 							<paper-item><a class='link' href='/contact-us' text='Contact us' tabindex='4'>Contact us</paper-item>
-						</paper-menu>
-						</paper-menu-button>
+					  </paper-menu>
+				  </paper-menu-button>
+				</div>
 			</div>
-			</div>
-			<!--div class='horizontal'>
-				<a class='link' on-tap='_loginOrLogoutHandler' tabindex='1'>[[loginOrLogout]]</a>
-			</div-->
 		</div>
-  </template>
- <script type='text/javascript' src='user-settings.js'></script>
+	</template>
+	<script type='text/javascript' src='user-settings.js'></script>
 </dom-module>

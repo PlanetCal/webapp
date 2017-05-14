@@ -40,13 +40,8 @@
 
 				<template is="dom-repeat" items="{{dayList}}">
 					<div>
-						<calendar-row 
-							start-day="[[item.day]]" 
-							start-month="[[_month]]" 
-							start-year="[[_year]]" 
-							selected-day="[[_selectedDay]]"
-							selected-month="[[_selectedMonth]]"
-							selected-year="[[_selectedYear]]" />
+						<calendar-row start-day="[[item.day]]" start-month="[[_month]]" start-year="[[_year]]" selected-day="[[_selectedDay]]" selected-month="[[_selectedMonth]]"
+						 selected-year="[[_selectedYear]]" />
 					</div>
 				</template>
 			</div>
@@ -60,7 +55,7 @@
 	<script>
 		Polymer({
 			is: 'cal-calendar',
-	
+
 			properties: {
 				month: {
 					type: Number,
@@ -79,23 +74,23 @@
 			},
 
 			listeners: {
-      	'on-date-selected': 'dateSelectHandler'
-      },
+				'on-date-selected': 'dateSelectHandler'
+			},
 
 			ready: function () { //triggered when the component is loaded.
-				this.displayCalendar(false);			
+				this.displayCalendar(false);
 			},
 
 			displayCalendar: function (dateChanged) {
 				var monthLocal, yearLocal;
 
-				if ((this.month >=0 && !(this.year > 0)) || 
-					(!(this.month >=0) && this.year > 0)) {
+				if ((this.month >= 0 && !(this.year > 0)) ||
+					(!(this.month >= 0) && this.year > 0)) {
 					return;
 				}
-				
-				if (this.month >=0 && this.year > 0) {
-					if (!dateChanged){
+
+				if (this.month >= 0 && this.year > 0) {
+					if (!dateChanged) {
 						return;
 					}
 					monthLocal = this.month;
@@ -103,7 +98,7 @@
 				} else {
 					var today = new Date();
 					monthLocal = today.getMonth(); //January is 0!
-					yearLocal = today.getFullYear();					
+					yearLocal = today.getFullYear();
 				}
 
 				this._month = monthLocal;
@@ -113,7 +108,7 @@
 				if (!this.selectedDate) {
 					this.selectDateAndDrawCalendar();
 				} else {
-				this.drawCalendar();
+					this.drawCalendar();
 				}
 			},
 
@@ -141,7 +136,7 @@
 			todayhandler: function () {
 				var today = new Date();
 				this._month = today.getMonth(); //January is 0!
-				this._year = today.getFullYear();					
+				this._year = today.getFullYear();
 
 				this.selectDateAndDrawCalendar(today.getFullYear(), today.getMonth(), today.getDate());
 			},
@@ -149,11 +144,11 @@
 			tomorrowhandler: function () {
 				var today = new Date();
 				this._month = today.getMonth(); //January is 0!
-				this._year = today.getFullYear();					
+				this._year = today.getFullYear();
 
 				this.selectDateAndDrawCalendar(today.getFullYear(), today.getMonth(), today.getDate() + 1);
 			},
-			
+
 			backhandler: function () {
 				if (this._month === 0) {
 					this._month = 11;
@@ -173,20 +168,19 @@
 				}
 				this.drawCalendar();
 			},
-			
+
 			dateSelectHandler: function (e) {
 				this.selectDateAndDrawCalendar(e.detail.year, e.detail.month, e.detail.day);
 			},
 
-			selectDateAndDrawCalendar : function(year, month, day){
+			selectDateAndDrawCalendar: function (year, month, day) {
 				var todaysDateTime = new Date();
 				var todayDay = todaysDateTime.getDate();
 				var todayYear = todaysDateTime.getFullYear();
 				var todayMonth = todaysDateTime.getMonth();
-				
+
 				var isItToday = false;
-				if (!day)
-				{
+				if (!day) {
 					year = todayYear;
 					month = todayMonth;
 					day = todayDay;
@@ -201,7 +195,7 @@
 				var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 				var dayIndex = new Date(year, month, day).getDay();
-				
+
 				this._selectedDay = day;
 				this._selectedMonth = month;
 				this._selectedYear = year;
@@ -211,16 +205,16 @@
 				this._selectedDate = daysNames[dayIndex] + ", " + monthNames[month] + " " + day;
 
 				if (isItToday) {
-					this._selectedDate = "Today, " + this._selectedDate;	
+					this._selectedDate = "Today, " + this._selectedDate;
 				}
 
-        var selectedDate = {
-          day: this._selectedDay,
-          month: this._selectedMonth + 1,
-          year: this._selectedYear
-        }
+				var selectedDate = {
+					day: this._selectedDay,
+					month: this._selectedMonth + 1,
+					year: this._selectedYear
+				}
 
-        Polymer.globalsManager.set('selectedDate', selectedDate);
+				Polymer.globalsManager.set('selectedDate', selectedDate);
 
 				this.fire('on-cal-date-selected');
 			}

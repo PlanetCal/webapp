@@ -3,22 +3,23 @@
 <dom-module id="form-styles">
   <template>
     <style>
-      :host {
+       :host {
         display: block;
         position: relative;
-        background-color: white;  
+        background-color: white;
       }
-
+      
       form {
         border: solid thin rgb(134, 178, 203);
         padding: 5px;
         border-radius: 5px;
         background-color: #f9f9f9;
       }
-
+      
       form fieldset {
         border: none;
       }
+      
       form div#title {
         color: white;
         background-color: gray;
@@ -28,7 +29,7 @@
         font-weight: 300;
         text-align: center;
       }
-
+      
       form div#msg {
         color: white;
         background-color: rgba(255, 74, 0, 0.85);
@@ -41,37 +42,38 @@
         padding-left: 1.0em;
         padding-right: 1.0em;
       }
-
+      
       form fieldset div.status {
         display: none;
         width: 20px;
         height: 20px;
       }
-
+      
       paper-input {
         /* Label and underline color when the input is focused */
         --paper-input-container-focus-color: blue;
         --paper-input-container-input: {
           font-size: 16px;
-        };
+        }
+        ;
       }
-
+      
       paper-input:hover {
         background-color: #f3f3f3;
       }
-
+      
       iron-icon {
         margin-right: 0.5em;
       }
-
+      
       paper-button {
         font-family: 'Roboto', 'Noto', sans-serif;
         font-weight: normal;
         -webkit-font-smoothing: antialiased;
       }
-
+      
       paper-button.button {
-				height: 2em;
+        height: 2em;
         background-color: darkgray;
         padding: 10px;
         text-align: center;
@@ -81,26 +83,26 @@
         border: none;
         cursor: pointer;
         font-size: 16px;
-			}
-
+      }
+      
       paper-button.button:hover {
         background-color: grey;
-			}
-
+      }
+      
       .link {
-        color:red;
+        color: red;
         font-size: 12px;
-        text-decoration:underline;
+        text-decoration: underline;
         cursor: pointer;
       }
-
+      
       .pull-left {
-				float: left !important;
+        float: left !important;
       }
-			.pull-right {
-				float: right !important;
+      
+      .pull-right {
+        float: right !important;
       }
-
     </style>
   </template>
 </dom-module>

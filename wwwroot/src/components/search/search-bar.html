@@ -30,27 +30,27 @@
                 box-sizing: border-box;
                 background-color: inherit
             }
-
-                #search[show] {
-                    width: 100%;
-                    height: 100%;
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    padding: 0 16px;
-                    margin-left: 0
-                }
-
-                    #search[show] input {
-                        padding: 10px;
-                        visibility: visible
-                    }
-
+            
+            #search[show] {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                padding: 0 16px;
+                margin-left: 0
+            }
+            
+            #search[show] input {
+                padding: 10px;
+                visibility: visible
+            }
+            
             input {
                 background-color: inherit;
                 border: 1px;
                 font-size: 20px;
-                outline:solid 1px;
+                outline: solid 1px;
                 padding: 10px;
                 color: inherit;
                 -webkit-box-flex: 1;
@@ -63,7 +63,7 @@
                 -webkit-appearance: none
             }
         </style>
-        <div  on-click="toggleSearch">
+        <div on-click="toggleSearch">
             <input class="textInput" is="iron-input" bind-value="{{searchInput}}" type="search" id="input" on-keyup="onKeyPress" autocomplete="off">
             <paper-icon-button icon="search"></paper-icon-button>
         </div>
