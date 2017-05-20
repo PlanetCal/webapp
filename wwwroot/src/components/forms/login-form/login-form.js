@@ -129,17 +129,11 @@ Polymer({
     var jsonResponse = e.detail.request.xhr.response;
     switch (this.mode) {
       case 'login':
-        var message = 'Login failed. Check your email or password. If you are a new user, please register first.';
-        message = message + ' Here are the Details: Error Status: ' + req.status + ' Error StatusText: ' + req.statusText
-        this.messageText = message;
+      case 'createAccount':
+        this.displayErrorMessage(jsonResponse);
         break;
       case 'findPassword':
         this.messageText = 'Not yet implemented';
-        break;
-      case 'createAccount':
-        var message = 'Registration failed for some reason.';
-        message = message + ' Here are the Details: Error Status: ' + req.status + ' Error StatusText: ' + req.statusText
-        this.messageText = message;
         break;
     }
   },
@@ -170,4 +164,20 @@ Polymer({
         break;
     }
   },
+
+  displayErrorMessage: function (errorResponse) {
+    var message = 'Oh! ohh! Looks like there is some internal issue. Please try again after some time.';
+    if (errorResponse !== null) {
+      switch (errorResponse.errorcode) {
+        case 'LoginFailed':
+          message = 'Login failed. Check your email or password. If you are a new user, please register.';
+          break;
+        case 'GenericHttpRequestException':
+        default:
+          break;
+      }
+    }
+
+    this.messageText = message;
+  }
 });

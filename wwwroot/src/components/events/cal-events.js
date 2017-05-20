@@ -63,9 +63,21 @@ Polymer({
     console.log('cal-events got error from ajax!');
 
     var req = e.detail.request;
-    var jsonResponse = e.detail.request.xhr.response;
-    var message = 'Events fetch failed.';
-    message = message + ' Here are the Details: Error Status: ' + req.status + ' Error StatusText: ' + req.statusText
+    var errorResponse = e.detail.request.xhr.response;
+    message = 'Error in fetching events. Check if you are logged in.';
+    if (errorResponse !== null) {
+
+      switch (errorResponse.errorcode) {
+        case 'LoginFailed':
+          message = 'Login failed. Check your email or password. If you are a new user, please register.';
+          break;
+
+        case 'GenericHttpRequestException':
+        default:
+          message = 'Oh! ohh! Looks like there is some internal issue. Please try again after some time.';
+          break;
+      }
+    }
 
     this.$.msg.style.display = 'block';
     this.messageText = message;
