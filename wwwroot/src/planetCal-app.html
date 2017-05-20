@@ -29,17 +29,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="planetCal-app">
   <template>
     <style>
-      :host {
+       :host {
         --app-primary-color: #555555;
         --app-secondary-color: black;
 
         display: block;
-
       }
+
       app-header {
         color: #fff;
         background-color: var(--app-primary-color);
       }
+
       app-header paper-icon-button {
         --paper-icon-button-ink-color: white;
       }
@@ -47,7 +48,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .drawer-list {
         margin: 0 0px;
       }
-      
+
       app-drawer {
         --app-drawer-width: 340px;
       }
@@ -67,11 +68,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
     <global-variables></global-variables>
     <app-location route='{{route}}'></app-location>
-    <app-route
-        route='{{route}}'
-        pattern='/:page'
-        data='{{routeData}}'
-        tail='{{subroute}}'></app-route>
+    <app-route route='{{route}}' pattern='/:page' data='{{routeData}}' tail='{{subroute}}'></app-route>
 
     <app-drawer-layout fullbleed>
       <!-- Drawer content -->
@@ -96,11 +93,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </app-toolbar>
         </app-header>
 
-        <iron-pages
-            selected='{{page}}'
-            attr-for-selected='name'
-            fallback-selection='events'
-            role='main'>
+        <iron-pages selected='{{page}}' attr-for-selected='name' fallback-selection='events' role='main'>
           <events-page toggle-view=[[toggleEventsView]] name='events'></events-page>
           <login-page name='login'></login-page>
           <recommendations-page name='recommendations'></recommendations-page>
@@ -113,5 +106,5 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </app-drawer-layout>
   </template>
   <script src='/bower_components/polymer-global-variables/dist/polymer-global-variables.js' charset='utf-8'></script>
-  <script type='text/javascript' src='PlanetCal-app.js'></script>
+  <script type='text/javascript' src='planetCal-app.js'></script>
 </dom-module>
