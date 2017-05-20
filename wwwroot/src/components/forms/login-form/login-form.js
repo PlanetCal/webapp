@@ -166,14 +166,17 @@ Polymer({
   },
 
   displayErrorMessage: function (errorResponse) {
-    var message = 'Oh! ohh! Looks like there is some internal issue. Please try again after some time.';
+    var message = '';
     if (errorResponse !== null) {
       switch (errorResponse.errorcode) {
         case 'LoginFailed':
           message = 'Login failed. Check your email or password. If you are a new user, please register.';
           break;
         case 'GenericHttpRequestException':
+          message = 'Oh! ohh! Looks like there is some internal issue. Please try again after some time.';
+          break;
         default:
+          message = errorResponse.errorcode + ' has not been handled yet.';
           break;
       }
     }
