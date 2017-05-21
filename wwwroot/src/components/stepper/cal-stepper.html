@@ -1,4 +1,5 @@
 <link rel='import' href='/bower_components/polymer/polymer.html'>
+<link rel="import" href="/src/components/stepper/cal-step.html">
 <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="/bower_components/iron-icons/hardware-icons.html">
 <link rel="import" href="/bower_components/iron-icon/iron-icon.html">
@@ -6,11 +7,19 @@
 <dom-module id='cal-stepper'>
 	<template>
 		<style include='stepper-styles'></style>
-		<td>
-			<template is="dom-repeat" id="step" items="{{stepItems}}">
-				<div id='[[item.color]]' class='bullet'></div>
-			</template>
-		</td>
+		<template is="dom-if" if="[[leftArrowVisible]]">
+			<span class="nav-icon pull-left">
+				<paper-icon-button class='nav-link' icon="hardware:keyboard-arrow-left" on-tap="previousHandler" noink></paper-icon-button>
+			</span>
+		</template>
+		<template is="dom-if" if="[[rightArrowVisible]]">
+			<span class="nav-icon pull-right">
+				<paper-icon-button class='nav-link' icon="hardware:keyboard-arrow-right" on-tap="forwardHandler" noink></paper-icon-button>
+			</span>
+		</template>
+		<template is="dom-repeat" id="step" items="{{stepItems}}">
+			<cal-step index='[[item.index]]' selected-index='[[selectedIndex]]'></cal-step>
+		</template>
 	</template>
 	<script type='text/javascript' src='cal-stepper.js'></script>
 </dom-module>

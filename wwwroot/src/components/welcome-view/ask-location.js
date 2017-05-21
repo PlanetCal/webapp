@@ -1,7 +1,8 @@
 Polymer({
-  is: 'welcome-view',
+  is: 'ask-location',
   listeners: {
-    '--cal-stepper-next-page-requested': 'forwardhandler'
+    '--cal-stepper-next-page-requested': 'forwardhandler',
+    '--cal-stepper-previous-page-requested': 'previoushandler'
   },
 
   ready: function () {
@@ -15,7 +16,11 @@ Polymer({
     }
   },
 
+  previoushandler: function () {
+    this.fire('page-load-requested', { page: '/welcome' });
+  },
+
   forwardhandler: function () {
-    this.fire('page-load-requested', { page: '/ask-location' });
+    this.fire('page-load-requested', { page: '/about' });
   },
 });

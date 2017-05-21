@@ -4,18 +4,18 @@
 <link rel="import" href="/bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="/src/components/stepper/cal-stepper.html">
 <link rel='import' href='welcome-styles.html'>
-<dom-module id='welcome-view'>
+<dom-module id='ask-location'>
 	<template>
 		<style include='welcome-styles'></style>
 		<div class='header'>
-			<iron-icon src='/src/images/logo.png' alt="HTML5 Icon" class='iconstyle'></iron-icon>
+			<iron-icon src='/src/images/Time-Zones.png' alt="HTML5 Icon" class='iconstyle'></iron-icon>
 		</div>
 		<div class='center-align'>
-			<h1>Hello [[name]]</h1>
+			<h1>To help organize, we need some information</h1>
 			<p>Welcome to [[product]].</p>
 			<p>Inroducing social calandering to help organize your daily activites.</p>
-			<cal-stepper step-count=3 selected-index=0></cal-stepper>
+			<cal-stepper step-count=3 selected-index=1></cal-stepper>
 		</div>
 	</template>
-	<script type='text/javascript' src='welcome-view.js'></script>
+	<script type='text/javascript' src='ask-location.js'></script>
 </dom-module>

@@ -3,27 +3,42 @@
 <dom-module id="stepper-styles">
   <template>
     <style>
+      .nav-icon {
+        display: inline-block;
+        vertical-align: bottom;
+      }
+
+      .pull-right {
+        float: right !important;
+      }
+
+      .pull-left {
+        float: left !important;
+      }
+
+      .nav-link {
+        transform: scale(1.5);
+      }
+
+      .center-align {
+        overflow: hidden;
+        text-align: center;
+      }
+
       #blue {
-        background: #0177D7;
-        width: 15px;
-        height: 15px;
+        color: #0177D7;
+        cursor: default;
+        transform: scale(1.5);
       }
 
-      #grey {
-        background: #ddd;
-        width: 10px;
-        height: 10px;
-        margin-top: 2px;
+      #activegrey {
+        color: #aff;
+        cursor: pointer;
       }
 
-      .bullet {
-        -webkit-border-radius: 25px;
-        -moz-border-radius: 25px;
-        border-radius: 25px;
-        margin-left: 10px;
-        margin-right: 10px;
-        float: left;
-        vertical-align: center;
+      #passivegrey {
+        color: #ddd;
+        cursor: default;
       }
     </style>
   </template>
