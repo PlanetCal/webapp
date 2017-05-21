@@ -14,6 +14,11 @@ Polymer({
     'cal-step-tapped': '_stepTapHandler'
   },
   ready: function () {
+    //console.log('cal-stepper ready method called!:');
+
+    this.leftArrowVisible = this.selectedIndex !== 0;
+    this.rightArrowVisible = this.selectedIndex !== (this.stepCount - 1);
+
     var steps = [this.stepCount];
     for (var i = 0; i < this.stepCount; i++) {
       steps[i] = { index: i };
@@ -24,9 +29,17 @@ Polymer({
   _stepTapHandler: function (e) {
     var index = e.detail.index;
     if (index === this.selectedIndex - 1) {
-      this.fire('--cal-stepper-previous-page-requested');
+      this.previousHandler();
     } else if (index === this.selectedIndex + 1) {
-      this.fire('--cal-stepper-next-page-requested');
+      this.forwardHandler();
     }
   },
+
+  previousHandler: function () {
+    this.fire('--cal-stepper-previous-page-requested');
+  },
+
+  forwardHandler: function () {
+    this.fire('--cal-stepper-next-page-requested');
+  }
 });
