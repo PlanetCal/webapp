@@ -13,26 +13,13 @@
       <search-bar searchInput='{searchText}' show='true'></search-bar>
     </div>
     <div class='dateDisplay'>[[selectedMonth]]/[[selectedDay]]/[[selectedYear]]</div>
-   
-    <iron-ajax id='ajax'
-				handle-as='json'
-				url="[[ajaxUrl]]"
-				content-type='application/json'
-				on-error='handleErrorResponse'
-				on-response='handleAjaxResponse'></iron-ajax>		
+
+    <iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" content-type='application/json' on-error='handleErrorResponse' on-response='handleAjaxResponse'></iron-ajax>
 
     <iron-list items="[[data]]" as="item">
       <template>
-        <cal-event
-          id='[[item.id]]'
-          name="[[item.Name]]" 
-          description="[[item.Description]]"
-          image='/src/images/about-us.jpg'
-          venue='[[getVenue(item.Groups)]]'
-          venue-link='[[getVenueLink(item.Groups)]]'
-          location="[[item.Location]]"
-          type='[[item.Type]]' 
-          time="[[getDate(item.StartDateTime)]]"
+        <cal-event id='[[item.id]]' name="[[item.Name]]" description="[[item.Description]]" image='/src/images/about.jpg' venue='[[getVenue(item.Groups)]]'
+          venue-link='[[getVenueLink(item.Groups)]]' location="[[item.Location]]" type='[[item.Type]]' time="[[getDate(item.StartDateTime)]]"
           Duration='[[getDuration(item.StartDateTime, item.EndDateTime)]]'>
         </cal-event>
       </template>
