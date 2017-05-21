@@ -2,14 +2,13 @@
 <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="/bower_components/iron-icons/av-icons.html">
 <link rel="import" href="/bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="/src/components/stepper/cal-step.html">
 <link rel='import' href='stepper-styles.html'>
-<dom-module id='cal-stepper'>
+<dom-module id='cal-step'>
 	<template>
 		<style include='stepper-styles'></style>
-		<template is="dom-repeat" id="step" items="{{stepItems}}">
-			<cal-step index='[[item.index]]' selected-index='[[selectedIndex]]'></cal-step>
-		</template>
+		<!--<a id='[[item.linktype]]' tabindex="-1">-->
+		<paper-icon-button id='[[color]]' icon="av:fiber-manual-record" on-tap='onTapHandler'></paper-icon-button>
+		<!--</a>-->
 	</template>
-	<script type='text/javascript' src='cal-stepper.js'></script>
+	<script type='text/javascript' src='cal-step.js'></script>
 </dom-module>

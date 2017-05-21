@@ -1,5 +1,8 @@
 Polymer({
   is: 'welcome-view',
+  listeners: {
+    '--cal-stepper-next-page-requested': 'forwardhandler'
+  },
 
   ready: function () {
     this.product = Polymer.globalsManager.globals.product.displayName;

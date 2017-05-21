@@ -8,32 +8,25 @@ Polymer({
     selectedIndex: {
       type: Number,
     },
-    nextPage: {
-      type: String,
-      observer: '_dateChanged'
-    },
-    previousPage: {
-      type: String,
-      observer: '_dateChanged'
-    },
   },
 
+  listeners: {
+    'cal-step-tapped': '_stepTapHandler'
+  },
   ready: function () {
     var steps = [this.stepCount];
     for (var i = 0; i < this.stepCount; i++) {
-      var color = (i === this.selectedIndex) ? 'blue' : 'grey';
-      var link = '';
-      var linktype = 'passiveLink';
-
-      if (i === this.selectedIndex - 1) {
-        link = this.previousPage;
-        linktype = 'activeLink';
-      } else if (i === this.selectedIndex + 1) {
-        link = this.nextPage;
-        linktype = 'activeLink';
-      }
-      steps[i] = { color: color, link: link, linktype: linktype };
+      steps[i] = { index: i };
     }
     this.stepItems = steps;
+  },
+
+  _stepTapHandler: function (e) {
+    var index = e.detail.index;
+    if (index === this.selectedIndex - 1) {
+      this.fire('--cal-stepper-previous-page-requested');
+    } else if (index === this.selectedIndex + 1) {
+      this.fire('--cal-stepper-next-page-requested');
+    }
   },
 });
