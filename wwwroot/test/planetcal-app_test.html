@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>planetcal-app</title>
+
+  <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../bower_components/web-component-tester/browser.js"></script>
+
+  <link rel="import" href="../src/planetCal-app.html">
+</head>
+
+<body>
+  <test-fixture id="basic">
+    <template>
+      <planetcal-app></planetcal-app>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('planetcal-app', function () {
+      test('instantiating the element works', function () {
+        var element = fixture('basic');
+        assert.equal(element.is, 'planetcal-app');
+      });
+    });
+  </script>
+</body>
+
+</html>
