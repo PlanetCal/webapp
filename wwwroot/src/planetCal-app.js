@@ -17,11 +17,17 @@ Polymer({
     'on-login-requested': '_loginRequestHandler',
     'on-logout-requested': '_logoutRequestHandler',
     'on-login-successul': '_loginSuccessHandler',
+    'localeInfo-requested': '_localeInfoHandler'
   },
 
   _loginRequestHandler: function () {
     //console.log('_loginRequestHandler');
     this.set('route.path', '/login')
+  },
+
+  _localeInfoHandler: function () {
+    //console.log('_loginRequestHandler');
+    this.set('route.path', '/about-us')
   },
 
   _logoutRequestHandler: function () {

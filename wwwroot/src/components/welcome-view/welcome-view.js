@@ -13,6 +13,6 @@ Polymer({
   },
 
   forwardhandler: function () {
-    window.location.href = '/about-us';
+    this.fire('localeInfo-requested');
   },
 });
