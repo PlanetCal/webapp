@@ -27,7 +27,7 @@ Polymer({
 
   _localeInfoHandler: function () {
     //console.log('_loginRequestHandler');
-    this.set('route.path', '/about-us')
+    this.set('route.path', '/about')
   },
 
   _logoutRequestHandler: function () {
