@@ -6,11 +6,11 @@
 <dom-module id='cal-stepper'>
 	<template>
 		<style include='stepper-styles'></style>
-		<div class='center-align'>
-			<div class='bullet bluebackground'></div>
-			<div class='bullet greybackground'></div>
-			<div class='bullet greybackground'></div>
-		</div>
+		<td>
+			<template is="dom-repeat" id="step" items="{{stepItems}}">
+				<div id='[[item.color]]' class='bullet'></div>
+			</template>
+		</td>
 	</template>
 	<script type='text/javascript' src='cal-stepper.js'></script>
 </dom-module>

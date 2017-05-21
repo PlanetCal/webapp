@@ -11,4 +11,8 @@ Polymer({
       this.name = 'guest';
     }
   },
+
+  forwardhandler: function () {
+    window.location.href = '/about-us';
+  },
 });
