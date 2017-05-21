@@ -1,0 +1,17 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/src/components/welcome-view/welcome-view.html">
+<link rel="import" href="/src/shared-styles.html">
+
+<dom-module id="welcome-page">
+  <template>
+    <style include="shared-styles"></style>
+    <div class="card">
+      <welcome-view></welcome-view>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'welcome-page',
+    });
+  </script>
+</dom-module>

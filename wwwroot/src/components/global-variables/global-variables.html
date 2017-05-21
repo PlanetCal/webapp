@@ -20,8 +20,13 @@
           month: this.todayMonth + 1,
           year: this.todayYear
         }
-
         Polymer.globalsManager.set('selectedDate', selectedDate);
+
+        var product = {
+          name: 'PlanetCal',
+          displayName: 'PlanetCal',
+        }
+        Polymer.globalsManager.set('product', product);
 
         Polymer.globalsManager.set('serviceBaseUrl', 'http://localhost:1337');
       }

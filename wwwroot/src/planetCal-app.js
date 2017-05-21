@@ -29,13 +29,19 @@ Polymer({
   },
 
   _loginSuccessHandler: function () {
+    var firstTimeLogon = false;
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
     if (loggedInUser) {
       this.userId = loggedInUser.id;
+      firstTimeLogon = loggedInUser.firstTimeLogon;
     }
 
-    this.set('route.path', '/events');
-    this.toggleEventsView = !this.toggleEventsView;
+    if (firstTimeLogon) {
+      this.set('route.path', '/welcome');
+    } else {
+      this.set('route.path', '/events');
+      this.toggleEventsView = !this.toggleEventsView;
+    }
   },
 
   _routePageChanged: function (page) {
@@ -57,7 +63,7 @@ Polymer({
     if (!this.$.drawer.persistent) {
       this.$.drawer.close();
     }
-    
+
     this.toggleEventsView = !this.toggleEventsView;
   },
 

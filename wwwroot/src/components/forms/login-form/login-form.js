@@ -148,7 +148,8 @@ Polymer({
           name: this.name,
           email: this.email,
           id: jsonResponse.id,
-          token: jsonResponse.token
+          token: jsonResponse.token,
+          firstTimeLogon: jsonResponse.firstTimeLogon,
         }
 
         Polymer.globalsManager.set('loggedInUser', loggedInUser);
