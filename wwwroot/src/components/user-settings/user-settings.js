@@ -45,7 +45,7 @@ Polymer({
       this.loginOrLogout = 'Sign in';
       this.fire('on-logout-requested');
     } else {
-      this.fire('on-login-requested');
+      this.fire('page-load-requested', { page: '/login' });
     }
   }
 });

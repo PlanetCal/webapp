@@ -14,20 +14,14 @@ Polymer({
 
   listeners: {
     'on-cal-date-selected': '_calDateSelectHandler',
-    'on-login-requested': '_loginRequestHandler',
+    'page-load-requested': '_pageLoadRequestHandler',
     'on-logout-requested': '_logoutRequestHandler',
     'on-login-successul': '_loginSuccessHandler',
-    'localeInfo-requested': '_localeInfoHandler'
   },
 
-  _loginRequestHandler: function () {
+  _pageLoadRequestHandler: function (e) {
     //console.log('_loginRequestHandler');
-    this.set('route.path', '/login')
-  },
-
-  _localeInfoHandler: function () {
-    //console.log('_loginRequestHandler');
-    this.set('route.path', '/about')
+    this.set('route.path', e.detail.page)
   },
 
   _logoutRequestHandler: function () {

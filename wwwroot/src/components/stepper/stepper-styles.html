@@ -4,26 +4,23 @@
   <template>
     <style>
       #blue {
-        background: #0177D7;
-        width: 15px;
-        height: 15px;
+        color: #0177D7;
+        cursor: inherit;
       }
 
       #grey {
-        background: #ddd;
-        width: 10px;
-        height: 10px;
-        margin-top: 2px;
+        color: #ddd;
+        cursor: inherit;
       }
 
-      .bullet {
-        -webkit-border-radius: 25px;
-        -moz-border-radius: 25px;
-        border-radius: 25px;
-        margin-left: 10px;
-        margin-right: 10px;
-        float: left;
-        vertical-align: center;
+      #activeLink {
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      #passiveLink {
+        text-decoration: none;
+        cursor: default;
       }
     </style>
   </template>
