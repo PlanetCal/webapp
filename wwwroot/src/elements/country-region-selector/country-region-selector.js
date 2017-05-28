@@ -45,11 +45,17 @@ Polymer({
 
   countrySelectionChanged: function () {
     this.populateRegionField();
+    this.countrValue = this.$.country.value;
     this.fire('--on-country-changed', { countryValue: this.$.country.value });
   },
 
   regionSelectionChanged: function () {
+    this.regionValue = this.$.region.value;
     this.fire('--on-region-changed', { regionValue: this.$.region.value });
+  },
+
+  cityChanged: function () {
+    this.fire('--on-city-changed', { cityValue: this.cityValue });
   },
 
   populateCountryField: function () {
