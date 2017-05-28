@@ -29,7 +29,7 @@ Polymer({
   },
 
   forwardhandler: function () {
-    this.fire('page-load-requested', { page: '/about' });
+    this.fire('page-load-requested', { page: '/ask-groups' });
   },
 
   countryChangedHandler: function (e) {

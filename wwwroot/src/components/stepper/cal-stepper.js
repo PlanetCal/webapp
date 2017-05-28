@@ -17,7 +17,8 @@ Polymer({
     //console.log('cal-stepper ready method called!:');
 
     this.leftArrowVisible = this.selectedIndex !== 0;
-    this.rightArrowVisible = this.selectedIndex !== (this.stepCount - 1);
+    //this.rightArrowVisible = this.selectedIndex !== (this.stepCount - 1);
+    this.rightArrowVisible = true;
 
     var steps = [this.stepCount];
     for (var i = 0; i < this.stepCount; i++) {
