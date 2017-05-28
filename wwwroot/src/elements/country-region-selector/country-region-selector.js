@@ -10,6 +10,10 @@ Polymer({
       type: String,
       observer: '_inputChanged'
     },
+    cityValue: {
+      type: String,
+      observer: '_inputChanged'
+    },
   },
 
   countryEmptyLabel: "Select Country",
