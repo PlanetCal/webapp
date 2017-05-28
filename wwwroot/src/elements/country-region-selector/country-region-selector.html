@@ -1,0 +1,18 @@
+<link rel='import' href='/bower_components/polymer/polymer.html'>
+<link rel="import" href="/bower_components/iron-selector/iron-selector.html">
+<link rel='import' href='selector-styles.html'>
+
+<script src="country-region-data.js"></script>
+
+<dom-module id='country-region-selector'>
+	<template>
+		<style include='selector-styles'></style>
+		<div>
+			<p>Country</p>
+			<select id="country" name="{{countryDropdownName}}" on-change='countrySelectionChanged'></select>
+			<p>Region</p>
+			<select id="region" name="{{regionDropdownName}}" on-change='regionSelectionChanged'></select>
+		</div>
+	</template>
+	<script type='text/javascript' src='country-region-selector.js'></script>
+</dom-module>
