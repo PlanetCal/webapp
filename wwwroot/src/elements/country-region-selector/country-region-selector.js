@@ -4,10 +4,11 @@ Polymer({
   properties: {
     countryValue: {
       type: String,
-      observer: '_countryChanged'
+      observer: '_inputChanged'
     },
     regionValue: {
       type: String,
+      observer: '_inputChanged'
     },
   },
 
@@ -20,10 +21,10 @@ Polymer({
   regionDropdownName: "region",
 
   ready: function () {
-    this._countryChanged();
+    this._inputChanged();
   },
 
-  _countryChanged: function () {
+  _inputChanged: function () {
     this.populateCountryField();
 
     // if the user's targeting their own <select> for the regions, hide the default one
@@ -40,13 +41,13 @@ Polymer({
 
   countrySelectionChanged: function () {
     this.populateRegionField();
-    this.fire('--on-country-changed', { countryValue: this.$.country.value});
-    }, 
-    
-    regionSelectionChanged: function () {
-      this.fire('--on-region-changed', { regionValue: this.$.region.value });
-      }, 
-  
+    this.fire('--on-country-changed', { countryValue: this.$.country.value });
+  },
+
+  regionSelectionChanged: function () {
+    this.fire('--on-region-changed', { regionValue: this.$.region.value });
+  },
+
   populateCountryField: function () {
     var html = '<option value="">' + this.countryEmptyLabel + '</option>';
     for (var i = 0; i < _data.length; i++) {

@@ -9,6 +9,7 @@ Polymer({
 
   ready: function () {
     this.countryValue = "US";
+    this.regionValue = "Washington";
     this.product = Polymer.globalsManager.globals.product.displayName;
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
     if (loggedInUser) {
