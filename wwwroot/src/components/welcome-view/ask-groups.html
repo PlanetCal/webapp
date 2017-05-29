@@ -1,0 +1,18 @@
+<link rel='import' href='/bower_components/polymer/polymer.html'>
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/bower_components/iron-icons/hardware-icons.html">
+<link rel="import" href="/bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="/src/components/stepper/cal-stepper.html">
+
+<link rel='import' href='welcome-styles.html'>
+<dom-module id='ask-groups'>
+	<template>
+		<style include='welcome-styles'></style>
+		<div class='center-align'>
+			<h1>Select interesting social calendar groups to subscribe events.</h1>
+			<p>Based on your location, [[product]] found these groups. Please select the groups of your interest.</p>
+			<cal-stepper step-count=3 selected-index=2></cal-stepper>
+		</div>
+	</template>
+	<script type='text/javascript' src='ask-groups.js'></script>
+</dom-module>

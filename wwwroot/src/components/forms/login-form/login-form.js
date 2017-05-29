@@ -76,7 +76,7 @@ Polymer({
   },
 
   cancelOnclick: function () {
-    this.fire('on-login-successul');
+    this.fire('on-login-successful');
   },
 
   submitOnclick: function () {
@@ -154,7 +154,7 @@ Polymer({
 
         Polymer.globalsManager.set('loggedInUser', loggedInUser);
         //this.set('localStorage.loggedUser', loggedInUser);  
-        this.fire('on-login-successul');
+        this.fire('on-login-successful');
 
         break;
       case 'findPassword':

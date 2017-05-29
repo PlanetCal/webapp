@@ -1,0 +1,41 @@
+<link rel='import' href='/bower_components/polymer/polymer.html'>
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="/bower_components/iron-selector/iron-selector.html">
+<link rel='import' href='selector-styles.html'>
+
+<script src="country-region-data.js"></script>
+
+<dom-module id='country-region-selector'>
+	<template>
+		<style include='selector-styles'></style>
+
+		<table>
+			<tr>
+				<td class='firstColumn'>
+					<p>Country:</p>
+				</td>
+				<td class='secondColumn'>
+					<select id="country" name="{{countryDropdownName}}" on-change='countrySelectionChanged'></select>
+				</td>
+			</tr>
+			<tr>
+				<td class='firstColumn'>
+					<p>Region:</p>
+				</td>
+				<td class='secondColumn'>
+					<select id="region" name="{{regionDropdownName}}" on-change='regionSelectionChanged'></select>
+				</td>
+			</tr>
+			<tr>
+				<td class='firstColumn'>
+					<p>City/Place:</p>
+				</td>
+				<td class='secondColumn'>
+					<paper-input value="{{cityValue}}" on-value-changed='cityChanged' char-counter maxlength="35">
+					</paper-input>
+				</td>
+			</tr>
+		</table>
+	</template>
+	<script type='text/javascript' src='country-region-selector.js'></script>
+</dom-module>
