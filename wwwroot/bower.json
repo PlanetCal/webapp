@@ -28,7 +28,9 @@
     "paper-menu": "PolymerElements/paper-menu#^1.0.0",
     "paper-menu-button": "PolymerElements/paper-menu-button#^1.0.0",
     "polymer-global-variables": "ivanrod/polymer-global-variables#^1.1.0",
-    "polymer": "Polymer/polymer#^1.8.1"
+    "polymer": "Polymer/polymer#^1.8.1",
+    "vaadin-grid": "^2.0.2",
+    "paper-dialog": "^2.0.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

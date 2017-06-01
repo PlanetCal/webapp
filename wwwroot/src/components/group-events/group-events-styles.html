@@ -1,0 +1,148 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<dom-module id="group-events-styles">
+    <template>
+        <style>
+             :host {
+                display: block;
+            }
+            /* Vaadin Grid styles -- Start*/
+            
+            vaadin-grid {
+                color: #fff;
+                height: 100%;
+                --divider-color: rgb(223, 232, 239);
+                --vaadin-grid-cell: {
+                    padding: 0 13px;
+                    background-color: #576075;
+                    background-image: linear-gradient(rgba(108, 160, 218, 0), rgba(108, 160, 218, 0.15));
+                }
+                ;
+                --vaadin-grid-body-cell: {
+                    height: 65px;
+                }
+                ;
+                --vaadin-grid-header-cell: {
+                    background: #373B46;
+                    border-bottom: 1px solid rgba(208, 217, 225, 0.9);
+                    border-top: 1px solid rgba(248, 250, 252, 0.9);
+                    min-height: 35px;
+                    background-image: linear-gradient(rgba(108, 160, 218, 0), rgba(108, 160, 218, 0.15));
+                    background-size: 1px 100%;
+                    background-position: 100% 0%;
+                    background-repeat: no-repeat;
+                    text-transform: uppercase;
+                }
+                ;
+                --vaadin-grid-body-row-selected-cell: {
+                    background-color: #4B5363;
+                    color: #8EB2BA;
+                    border-bottom-color: rgb(108, 160, 218);
+                }
+                ;
+                --vaadin-grid-header-row-selected-cell: {
+                    background-color: #4B5363;
+                    color: #8EB2BA;
+                    border-bottom-color: rgb(108, 160, 218);
+                }
+                ;
+                --vaadin-grid-body-row-odd-cell: {
+                    background-color: #545C72;
+                }
+                ;
+                --vaadin-grid-body-row-hover-cell: {
+                    background-color: #6F778C;
+                }
+                ;
+                --vaadin-grid-body-row-details-cell: {
+                    text-align: center;
+                }
+                ;
+                --vaadin-grid-column-resize-handle: {
+                    opacity: 0;
+                }
+                ;
+            }
+            
+            vaadin-grid input[type=checkbox] {
+                height: 16px;
+                width: 16px;
+            }
+            
+            vaadin-grid .image {
+                height: 40px;
+                width: 40px;
+                display: inline-block;
+                border-radius: 50%;
+                vertical-align: middle;
+                margin-right: 15px;
+            }
+            
+            vaadin-grid .header-content {
+                display: flex;
+                padding: 16px;
+                justify-content: space-between;
+            }
+            
+            vaadin-grid .details-cell {
+                background: #fff;
+                width: 100%;
+            }
+            /* Paper button styles -- Start*/
+            
+            paper-button {
+                font-family: 'Roboto', 'Noto', sans-serif;
+                font-weight: normal;
+                font-size: 14px;
+                -webkit-font-smoothing: antialiased;
+            }
+            
+            paper-button.blue {
+                color: var(--paper-blue-a200);
+                width: 150px;
+                --paper-button-ink-color: var(--paper-blue-a200);
+            }
+            
+            paper-button.blue:hover {
+                background-color: var(--paper-blue-100);
+            }
+            
+            paper-button.indigo {
+                background-color: var(--paper-indigo-500);
+                color: white;
+                width: 200px;
+                --paper-button-raised-keyboard-focus: {
+                    background-color: var(--paper-blue-a200) !important;
+                    color: white !important;
+                }
+                ;
+            }
+            
+            paper-button.indigo:hover {
+                background-color: var(--paper-indigo-400);
+            }
+            
+            paper-dialog.size-position {
+                position: fixed;
+                top: 16px;
+                right: 16px;
+                width: 900px;
+                height: 600px;
+                overflow: auto;
+            }
+            
+            iron-icon.delete {
+                margin-left: 12px;
+                cursor: pointer;
+            }
+            
+            iron-icon.delete:hover {
+                color: var(--paper-indigo-400);
+            }
+            
+            iron-icon.delete:active {
+                color: red;
+            }
+        </style>
+    </template>
+</dom-module>

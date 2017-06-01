@@ -1,0 +1,189 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<link rel="import" href="/bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="/bower_components/vaadin-grid/vaadin-grid-selection-column.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+<script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/bower_components/paper-dialog/paper-dialog.html">
+
+<link rel="import" href="./group-events-styles.html">
+
+<dom-module id="group-events">
+  <template>
+    <paper-dialog id="addEvent" class="size-position">
+      <h2>Add Event</h2>
+      <paper-dialog-scrollable>
+        <div class="dialog-textbox" style="width: 500px;">
+          <fieldset>
+            <div id="nameFieldDiv">
+              <paper-input label="Name" value="{{name}}" char-counter maxlength="50">
+              </paper-input>
+            </div>
+            <div>
+              <paper-input label="Description" value="{{description}}" aria-multiline="5" char-counter maxlength="500">
+              </paper-input>
+            </div>
+            <div>
+              <paper-input label="DateTime" value="{{dateTime}}" char-counter maxlength="50">
+              </paper-input>
+            </div>
+            <div>
+              <paper-input label="Duration" value="{{duration}}" char-counter maxlength="3">
+              </paper-input>
+            </div>
+          </fieldset>
+        </div>
+      </paper-dialog-scrollable>
+      <div class="buttons">
+        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button id="saveevent" on-tap="saveEvent">Save</paper-button>
+      </div>
+    </paper-dialog>
+    <style include="group-events-styles"></style>
+    <div id="msg">[[messageText]]</div>
+    <div>
+      <iron-icon icon="delete-sweep" class="delete" title="Delete selected" on-tap="deleteEvents"></iron-icon>
+      <paper-button>Upcomming</paper-button>
+      <paper-button class="blue">past</paper-button>
+      <paper-button raised class="indigo" on-tap="showDialog">Add Event</paper-button>
+      <paper-button raised class="indigo">Publish</paper-button>
+    </div>
+
+
+
+    <!--iron-ajax auto url="../../data/Data.json" handle-as="json" on-response="_handleResponse">
+    </iron-ajax-->
+    <iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" content-type='application/json' on-error='handleErrorResponse' on-response='handleAjaxResponse'></iron-ajax>
+
+    <vaadin-grid id="grid" inverted$="[[inverted]]">
+      <vaadin-grid-column width="40px" flex-grow="0">
+        <template class="header">
+          <input aria-label="Select All" type="checkbox" on-click="_invert" checked="[[_isChecked(inverted, indeterminate)]]" indeterminate="[[indeterminate]]">
+        </template>
+        <template>
+          <input aria-label="Select Row" type="checkbox" on-change="_selectItem" checked="[[_isSelected(inverted, selected)]]">
+        </template>
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header">Name</template>
+        <template>
+          [[item.Name]]
+        </template>
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header">Description</template>
+        <template>
+          [[item.Description]]
+        </template>
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header">DateTime</template>
+        <template>
+          [[item.DateTime]]
+        </template>
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header">Duration</template>
+        <template>
+          [[item.Duration]]
+        </template>
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header">Action</template>
+        <template>
+          <div>
+            <iron-icon icon="create" class="delete" title="Edit" on-tap="editEvent"></iron-icon>
+            <iron-icon icon="delete" class="delete" title="Delete" on-tap="deleteEvent"></iron-icon>
+          </div>
+        </template>
+      </vaadin-grid-column>
+    </vaadin-grid>
+  </template>
+  <script type="text/javascript" src="/src/components/group-events/group-events.js"></script>
+  <!--vaadin-grid-column>
+          <template class="header">Name</template>
+          <template>
+            [[eventsList.Name]]
+          </template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column>
+          <template class="header">Description</template>
+          <template>
+            [[eventsList.Description]]
+          </template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column width="200px">
+          <template class="header">Email</template>
+          <template>
+            [[eventsList.Description]]
+          </template>
+        </vaadin-grid-column>
+
+      </vaadin-grid>
+
+    </template>
+    <script>
+      document.addEventListener('WebComponentsReady', function() {
+        Polymer({
+          is: 'events-list',
+          properties: {
+            items: Array,
+            page: Number,
+            pages: Array
+          },
+          ready: function() {
+            this.page = 0;
+          },
+          observers: ['_itemsChanged(items, page)'],
+          _isSelected: function(page, item) {
+            return page === item - 1;
+          },
+          _select: function(e) {
+            this.page = e.model.item - 1;
+          },
+          _next: function() {
+            this.page = Math.min(this.pages.length - 1, this.page + 1);
+          },
+          _prev: function() {
+            this.page = Math.max(0, this.page - 1);
+          },
+          _itemsChanged: function(items, page) {
+            if (!this.pages) {
+              this.pages = Array.apply( null, {length: Math.ceil(items.length / this.$.grid.pageSize)} ).map(function(item, index) {
+                return index + 1;
+              });
+            }
+            var start = page * this.$.grid.pageSize;
+            var end = (page + 1) * this.$.grid.pageSize;
+            this.$.grid.items = items.slice(start, end);
+          }
+        });
+      });
+    </script>
+  <script>
+    var grid = document.querySelector('vaadin-grid');
+    Polymer({
+      is: 'group-events',
+      properties: {
+        page: {
+          type: Number,
+          notify: true,
+          value: 0,
+          observer: '_handlePageChanged',
+        },
+      },
+      _handleResponse: function (event) {
+        var grid = this.$.grid;
+        this._response = event.detail.response;
+        grid.size = this._response.length;
+        grid.items = this._response;
+      },
+    });
+  </script-->
+</dom-module>

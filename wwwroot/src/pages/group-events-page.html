@@ -1,0 +1,18 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/src/shared-styles.html">
+<link rel="import" href="/src/components/group-events/group-events.html">
+<dom-module id="group-events-page">
+  <template>
+    <style include="shared-styles"></style>
+    <div class="card">
+      <!--<event-main name="events-main" selected-day="[[selectedDay]]" selected-month="[[selectedMonth]]" selected-year="[[selectedYear]]"/>-->
+      <group-events></group-events>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'group-events-page',
+    });
+  </script>
+</dom-module>
