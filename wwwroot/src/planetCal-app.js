@@ -16,7 +16,7 @@ Polymer({
     'on-cal-date-selected': '_calDateSelectHandler',
     'page-load-requested': '_pageLoadRequestHandler',
     'on-logout-requested': '_logoutRequestHandler',
-    'on-login-successul': '_loginSuccessHandler',
+    'on-login-successful': '_loginSuccessHandler',
   },
 
   _pageLoadRequestHandler: function (e) {

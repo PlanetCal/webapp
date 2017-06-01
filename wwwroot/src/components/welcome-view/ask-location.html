@@ -3,6 +3,8 @@
 <link rel="import" href="/bower_components/iron-icons/hardware-icons.html">
 <link rel="import" href="/bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="/src/components/stepper/cal-stepper.html">
+<link rel="import" href="/src/elements/country-region-selector/country-region-selector.html">
+
 <link rel='import' href='welcome-styles.html'>
 <dom-module id='ask-location'>
 	<template>
@@ -14,6 +16,7 @@
 			<h1>To help organize, we need some information</h1>
 			<p>Welcome to [[product]].</p>
 			<p>Inroducing social calandering to help organize your daily activites.</p>
+			<country-region-selector country-value="{{countryValue}}" region-value="{{regionValue}}" city-value='{{city}}'></country-region-selector>
 			<cal-stepper step-count=3 selected-index=1></cal-stepper>
 		</div>
 	</template>
