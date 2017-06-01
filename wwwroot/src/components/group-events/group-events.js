@@ -72,6 +72,7 @@ Polymer({
     makeAjaxCall: function (type, eventsList = null) {
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
+        // TODO: Consider removing this.ajaxUrl, use local variable as much as possible
         this.ajaxUrl = serviceBaseUrl + '/events';
         switch (type) {
             case 'getEvents':
@@ -85,22 +86,21 @@ Polymer({
             case 'publishEvents':
                 break;
             case 'postEvents':
-                this.ajaxBody = JSON.stringify({ Name: this.name });
+                ajax.body = JSON.stringify({ Name: this.name });
                 ajax.method = 'POST';
                 ajax.headers['Version'] = '1.0';
                 if (loggedInUser) {
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
                 }
-                //ajax.headers['Access-Control-Allow-Origin'] = '*';
                 break;
             case 'deleteEvents':
-                this.ajaxBody = JSON.stringify(eventsList);
+                // TODO: Check if this.id has defined, convert this.ajaxUrl to local variable
+                this.ajaxUrl += '/' + this.id;
                 ajax.method = 'DELETE';
                 ajax.headers['Version'] = '1.0';
                 if (loggedInUser) {
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
                 }
-                //ajax.headers['Access-Control-Allow-Origin'] = '*';
                 break;
         }
 
