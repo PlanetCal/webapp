@@ -8,29 +8,28 @@
 <dom-module id='country-region-selector'>
 	<template>
 		<style include='selector-styles'></style>
-
 		<table>
 			<tr>
-				<td class='firstColumn'>
+				<td>
 					<p>Country:</p>
 				</td>
-				<td class='secondColumn'>
+				<td>
 					<select id="country" name="{{countryDropdownName}}" on-change='countrySelectionChanged'></select>
 				</td>
 			</tr>
 			<tr>
-				<td class='firstColumn'>
+				<td>
 					<p>Region:</p>
 				</td>
-				<td class='secondColumn'>
+				<td>
 					<select id="region" name="{{regionDropdownName}}" on-change='regionSelectionChanged'></select>
 				</td>
 			</tr>
 			<tr>
-				<td class='firstColumn'>
+				<td>
 					<p>City/Place:</p>
 				</td>
-				<td class='secondColumn'>
+				<td>
 					<paper-input value="{{cityValue}}" on-value-changed='cityChanged' char-counter maxlength="35">
 					</paper-input>
 				</td>

@@ -1,0 +1,84 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<link rel='import' href='/bower_components/iron-icons/iron-icons.html'>
+<link rel='import' href='/bower_components/iron-icons/social-icons.html'>
+<link rel='import' href='/bower_components/paper-item/paper-item.html'>
+<link rel='import' href='/bower_components/paper-checkbox/paper-checkbox.html'>
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/bower_components/iron-icons/hardware-icons.html">
+<link rel="import" href="/bower_components/iron-icons/communication-icons.html">
+<link rel="import" href="/bower_components/iron-icons/social-icons.html">
+
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="group-styles.html">
+
+<dom-module id="cal-group">
+  <template>
+    <style include="group-styles" is=""></style>
+    <div class='card' on-tap="tapHandler">
+      <template is="dom-if" if="[[checkboxVisible]]">
+        <div class="horizontal">
+          <paper-checkbox checked='[[checked]]' disabled=[[disabled]]>
+          </paper-checkbox>
+        </div>
+      </template>
+      <iron-icon icon='[[icon]]'></iron-icon>
+      [[name]]
+      <template is="dom-if" if="[[expanderVisible]]">
+        <paper-icon-button icon="hardware:keyboard-arrow-right" on-tap="expandHandler"></paper-icon-button>
+      </template>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'cal-group',
+
+      properties: {
+        id: { type: String, observer: '_dataChanged' },
+        name: { type: String },
+        icon: { type: String, observer: '_dataChanged' },
+        showExpander: { type: Number, observer: '_dataChanged' },
+        checkState: { type: Number, value: 4, observer: '_dataChanged' },
+        parentId: { type: String, observer: '_dataChanged' },
+      },
+
+      ready: function () {
+        this._dataChanged();
+      },
+
+      _dataChanged: function () {
+        this.expanderVisible = this.showExpander === 1;
+        this.checkboxVisible = true;
+        switch (this.checkState) {
+          case (1):
+            this.checked = false;
+            this.disabled = false;
+            break;
+          case (2):
+            this.checked = true;
+            this.disabled = false;
+            break;
+          case (3):
+            this.checked = true;
+            this.disabled = true;
+            break;
+          case (4):
+            this.checked = false;
+            this.disabled = true;
+            this.checkboxVisible = false;
+            break;
+        }
+      },
+
+      expandHandler: function () {
+        console.log('expand group requested for: ' + this.name)
+        this.fire('--cal-group-expand-requested', { id: this.id, name: this.name });
+      },
+      tapHandler: function () {
+        //console.log('tap clicked for: ' + this.name);
+        //this.fire('--cal-group-tapped', { id: this.id, name: this.name });
+      }
+    });
+  </script>
+</dom-module>

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "Local",
+    "name": "Local",
+    "icon": "communication:location-on",
+    "chidren": "10"
+  },
+  {
+    "id": "School",
+    "name": "School",
+    "icon": "social:school",
+    "chidren": "5"
+  },
+  {
+    "id": "Work",
+    "name": "Work",
+    "icon": "icons:work",
+    "chidren": "5"
+  },
+  {
+    "id": "Sports",
+    "name": "Sports",
+    "icon": "av:games",
+    "chidren": "5"
+  }
+]
