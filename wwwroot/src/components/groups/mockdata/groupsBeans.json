@@ -1,0 +1,26 @@
+[
+  {
+    "id": "Bean1",
+    "name": "Bean1",
+    "icon": "communication:location-on",
+    "chidren": "10"
+  },
+  {
+    "id": "Bean2",
+    "name": "Bean2",
+    "icon": "communication:location-on",
+    "chidren": "10"
+  },
+  {
+    "id": "Bean3",
+    "name": "Bean3",
+    "icon": "communication:location-on",
+    "chidren": "10"
+  },
+  {
+    "id": "Bean4",
+    "name": "Bean4",
+    "icon": "communication:location-on",
+    "chidren": "10"
+  }
+]

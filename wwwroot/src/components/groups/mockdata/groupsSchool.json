@@ -1,0 +1,20 @@
+[
+  {
+    "id": "BCA1",
+    "name": "BCA1",
+    "icon": "communication:location-on",
+    "chidren": "10"
+  },
+  {
+    "id": "BCA3",
+    "name": "BCA3",
+    "icon": "communication:location-on",
+    "chidren": "10"
+  },
+  {
+    "id": "BCA2",
+    "name": "BCA2",
+    "icon": "communication:location-on",
+    "chidren": "10"
+  }
+]

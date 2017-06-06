@@ -1,0 +1,73 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="/bower_components/paper-tabs/paper-tab.html">
+<link rel="import" href="/bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="/src/components/groups/cal-group.html">
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/src/components/groups/cal-group.html">
+<link rel="import" href="group-styles.html">
+
+<dom-module id="cal-groups">
+  <template>
+    <style include="group-styles" is=""></style>
+
+    <iron-ajax url="[[url]]" last-response="{{data}}" auto on-response="handleResponse"></iron-ajax>
+
+    <template is="dom-if" if="[[rootRow]]">
+      <paper-tabs class='paper-tabs' selected="{{selectedTab}}">
+        <template is="dom-repeat" items="[[data]]">
+          <paper-tab>
+            <cal-group id="[[item.id]]" name="[[item.name]]" icon="[[item.icon]]"></cal-group>
+          </paper-tab>
+        </template>
+      </paper-tabs>
+    </template>
+
+    <template is="dom-if" if="[[!rootRow]]">
+      <iron-selector selected="{{selectedTab}}" role='navigation'>
+        <template is="dom-repeat" items="[[data]]">
+          <div>
+            <cal-group id="[[item.id]]" name="[[item.name]]" icon="[[item.icon]]" check-state=4 show-expander=0></cal-group>
+          </div>
+        </template>
+      </iron-selector>
+    </template>
+  </template>
+  <script>
+    Polymer({
+      is: 'cal-groups',
+
+      properties: {
+        id: { type: String },
+        selectedTab: { type: Number, observer: '_selectionChanged' },
+        parentGroupId: { type: String, observer: '_dataChanged' },
+        rootRow: { type: Boolean, value: false }
+      },
+
+      ready: function () {
+        this.selectedTab = 0;
+        this._dataChanged();
+      },
+
+      _dataChanged: function () {
+        if (this.rootRow === true) {
+          this.url = "/src/components/groups/mockdata/groups.json";
+        } else if (this.parentGroupId !== null && this.parentGroupId !== '' && this.parentGroupId !== undefined) {
+          this.url = "/src/components/groups/mockdata/groups" + this.parentGroupId + ".json";
+        }
+      },
+
+      _selectionChanged: function () {
+        if (this.data != null) {
+          this.selectedGroupId = this.data[this.selectedTab].id;
+          //console.log("id:" + this.id + ", selectedTab:" + this.selectedTab + ",selectedGroupId:" + this.selectedGroupId)
+          this.fire('on-group-selected', { groupsId: this.id, selectedGroupId: this.selectedGroupId })
+        }
+      },
+
+      handleResponse: function (e) {
+        this._selectionChanged();
+      },
+    });
+  </script>
+</dom-module>

@@ -1,0 +1,64 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/src/components/groups/cal-groups.html">
+<link rel="import" href="group-styles.html">
+
+<dom-module id="groups-tree">
+  <template>
+    <style include="group-styles" is=""></style>
+
+    <cal-groups id='rootRow' root-row></cal-groups>
+<hr>
+    <table>
+      <td>
+        <cal-groups id='firstRow' parent-group-id=[[firstRowParentGroupId]]></cal-groups>
+      </td>
+      <td>
+        <cal-groups id='secondRow' parent-group-id='[[secondRowParentGroupId]]'></cal-groups>
+      </td>
+      <td>
+        <cal-groups id='thirdRow' parent-group-id='[[thirdRowParentGroupId]]'></cal-groups>
+      </td>
+    </table>
+  </template>
+  <script>
+    Polymer({
+      is: 'groups-tree',
+
+      properties: {
+        selectedTab: { type: Number, observer: '_dataChanged' },
+      },
+      listeners: {
+        'on-group-selected': 'groupSelectHandler'
+      },
+      ready: function () {
+        this.selectedTab = 0;
+      },
+
+      handleResponse: function (e) {
+        this._dataChanged();
+      },
+
+      _dataChanged: function () {
+        if (this.data != null) {
+          this.firstRowParentGroupId = this.data[this.selectedTab].id;
+          //console.log('firstRowParentGroupId: ' + this.firstRowParentGroupId);
+        }
+      },
+
+      groupSelectHandler: function (e) {
+        switch (e.detail.groupsId) {
+          case ('rootRow'):
+            this.firstRowParentGroupId = e.detail.selectedGroupId;
+            break;
+          case ('firstRow'):
+            this.secondRowParentGroupId = e.detail.selectedGroupId;
+            break;
+          case ('secondRow'):
+            this.thirdRowParentGroupId = e.detail.selectedGroupId;
+            break;
+
+        }
+      }
+    });
+  </script>
+</dom-module>
