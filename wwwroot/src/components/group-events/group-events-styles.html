@@ -55,7 +55,10 @@
                 }
                 ;
                 --vaadin-grid-body-row-details-cell: {
-                    text-align: center;
+                    background-color: #6F778C;
+                    color: black;
+                    display: flex;
+                    vertical-align: top;
                 }
                 ;
                 --vaadin-grid-column-resize-handle: {
@@ -71,11 +74,10 @@
             
             vaadin-grid .image {
                 height: 40px;
-                width: 40px;
                 display: inline-block;
                 border-radius: 50%;
                 vertical-align: middle;
-                margin-right: 15px;
+                margin-right: 5px;
             }
             
             vaadin-grid .header-content {
@@ -87,6 +89,15 @@
             vaadin-grid .details-cell {
                 background: #fff;
                 width: 100%;
+            }
+            
+            .details {
+                background-color: white;
+                color: black;
+                padding: 10px;
+                margin: 10px;
+                display: flex;
+                vertical-align: top;
             }
             /* Paper button styles -- Start*/
             

@@ -10,39 +10,64 @@
 <link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="/bower_components/paper-dialog/paper-dialog.html">
 
+<script src="/bower_components/moment/moment.js"></script>
+
 <link rel="import" href="./group-events-styles.html">
 
 <dom-module id="group-events">
   <template>
-    <paper-dialog id="addEvent" class="size-position">
+    <!-- Dialog or popup start -->
+    <paper-dialog modal id="addEvent" class="size-position">
       <h2>Add Event</h2>
       <paper-dialog-scrollable>
-        <div class="dialog-textbox" style="width: 500px;">
+        <div class="dialog-textbox" style="width: 600px;">
           <fieldset>
             <div id="nameFieldDiv">
-              <paper-input label="Name" value="{{name}}" char-counter maxlength="50">
+              <paper-input label="Name" value="{{name}}" char-counter maxlength="50" style="width: 560px;">
               </paper-input>
             </div>
             <div>
-              <paper-input label="Description" value="{{description}}" aria-multiline="5" char-counter maxlength="500">
+              <paper-input label="Description" value="{{description}}" aria-multiline="5" char-counter maxlength="500" style="width: 560px;">
+              </paper-input>
+            </div>
+            <div style="display: flex; width: 570px;">
+              <paper-input label="StartDateTime" value="{{startDateTime}}" char-counter maxlength="50" style="width: 250px;">
+              </paper-input>
+              <span style="width: 60px;"></span>
+              <paper-input label="EndDateTime" value="{{endDateTime}}" char-counter maxlength="50" style="width: 250px;">
+              </paper-input>
+            </div>
+            <div style="display: flex; width: 570px;">
+              <paper-input label="StreetNumber" value="{{streetNumber}}" char-counter maxlength="15" style="width: 150px;">
+              </paper-input>
+              <span style="width: 30px;"></span>
+              <paper-input label="StreetName" value="{{streetName}}" char-counter maxlength="25" style="width: 390px;">
+              </paper-input>
+            </div>
+            <div style="display: flex; width: 570px;">
+              <paper-input label="City" value="{{city}}" char-counter maxlength="20" style="width: 180px;">
+              </paper-input>
+              <span style="width: 30px;"></span>
+              <paper-input label="State" value="{{state}}" char-counter maxlength="20" style="width: 180px;">
+              </paper-input>
+              <span style="width: 30px;"></span>
+              <paper-input label="PostalCode" value="{{postalCode}}" char-counter maxlength="10" style="width: 150px;">
               </paper-input>
             </div>
             <div>
-              <paper-input label="DateTime" value="{{dateTime}}" char-counter maxlength="50">
-              </paper-input>
-            </div>
-            <div>
-              <paper-input label="Duration" value="{{duration}}" char-counter maxlength="3">
+              <paper-input label="Location" value="{{location}}" char-counter maxlength="10">
               </paper-input>
             </div>
           </fieldset>
         </div>
       </paper-dialog-scrollable>
       <div class="buttons">
-        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button id="cancelevent" on-tap="cancelEvent">Cancel</paper-button>
         <paper-button id="saveevent" on-tap="saveEvent">Save</paper-button>
       </div>
     </paper-dialog>
+    <!-- Dialog or popup End -->
+    <!-- List of Buttons start -->
     <style include="group-events-styles"></style>
     <div id="msg">[[messageText]]</div>
     <div>
@@ -52,47 +77,52 @@
       <paper-button raised class="indigo" on-tap="showDialog">Add Event</paper-button>
       <paper-button raised class="indigo">Publish</paper-button>
     </div>
+    <!-- List of Buttons End -->
 
-
-
-    <!--iron-ajax auto url="../../data/Data.json" handle-as="json" on-response="_handleResponse">
+    <!--iron-ajax auto url="../../data/Data.json" handle-as="json" on-response="handleResponse">
     </iron-ajax-->
     <iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" content-type='application/json' on-error='handleErrorResponse' on-response='handleAjaxResponse'></iron-ajax>
-
-    <vaadin-grid id="grid" inverted$="[[inverted]]">
-      <vaadin-grid-column width="40px" flex-grow="0">
+    <!-- Grid start -->
+    <vaadin-grid id="grid" inverted$="[[inverted]]" on-active-item-changed="onActiveItemChanged">
+      <template class="row-details">
+        <div style="margin-left: 20px;">
+          <p><b>Description: </b> [[item.Description]]</p>
+          <p><b>Groups:</b><br/>[[formatGroups(item.Groups)]]</p>
+        </div>
+      </template>
+      <vaadin-grid-column width="5%" flex-grow="0">
         <template class="header">
-          <input aria-label="Select All" type="checkbox" on-click="_invert" checked="[[_isChecked(inverted, indeterminate)]]" indeterminate="[[indeterminate]]">
+          <input aria-label="Select All" type="checkbox" on-click="invert" checked="[[isChecked(inverted, indeterminate)]]" indeterminate="[[indeterminate]]">
         </template>
         <template>
-          <input aria-label="Select Row" type="checkbox" on-change="_selectItem" checked="[[_isSelected(inverted, selected)]]">
+          <input aria-label="Select Row" type="checkbox" on-change="selectItem" checked="[[isSelected(inverted, selected)]]">
         </template>
       </vaadin-grid-column>
-      <vaadin-grid-column>
+      <vaadin-grid-column width="30%">
         <template class="header">Name</template>
         <template>
           [[item.Name]]
         </template>
       </vaadin-grid-column>
-      <vaadin-grid-column>
-        <template class="header">Description</template>
+      <vaadin-grid-column width="15%">
+        <template class="header">Start Date</template>
         <template>
-          [[item.Description]]
+          [[formatDate(item.StartDateTime)]]
         </template>
       </vaadin-grid-column>
-      <vaadin-grid-column>
-        <template class="header">DateTime</template>
+      <vaadin-grid-column width="15%">
+        <template class="header">End Date</template>
         <template>
-          [[item.DateTime]]
+          [[formatDate(item.EndDateTime)]]
         </template>
       </vaadin-grid-column>
-      <vaadin-grid-column>
-        <template class="header">Duration</template>
+      <vaadin-grid-column width="25%">
+        <template class="header">Address</template>
         <template>
-          [[item.Duration]]
+          [[item.Address.StreetNumber]] [[item.Address.StreetName]], [[item.Address.City]], [[item.Address.State]], [[item.Address.PostalCode]]
         </template>
       </vaadin-grid-column>
-      <vaadin-grid-column>
+      <vaadin-grid-column width="7%">
         <template class="header">Action</template>
         <template>
           <div>
@@ -102,88 +132,7 @@
         </template>
       </vaadin-grid-column>
     </vaadin-grid>
+    <!-- Grid End -->
   </template>
   <script type="text/javascript" src="/src/components/group-events/group-events.js"></script>
-  <!--vaadin-grid-column>
-          <template class="header">Name</template>
-          <template>
-            [[eventsList.Name]]
-          </template>
-        </vaadin-grid-column>
-
-        <vaadin-grid-column>
-          <template class="header">Description</template>
-          <template>
-            [[eventsList.Description]]
-          </template>
-        </vaadin-grid-column>
-
-        <vaadin-grid-column width="200px">
-          <template class="header">Email</template>
-          <template>
-            [[eventsList.Description]]
-          </template>
-        </vaadin-grid-column>
-
-      </vaadin-grid>
-
-    </template>
-    <script>
-      document.addEventListener('WebComponentsReady', function() {
-        Polymer({
-          is: 'events-list',
-          properties: {
-            items: Array,
-            page: Number,
-            pages: Array
-          },
-          ready: function() {
-            this.page = 0;
-          },
-          observers: ['_itemsChanged(items, page)'],
-          _isSelected: function(page, item) {
-            return page === item - 1;
-          },
-          _select: function(e) {
-            this.page = e.model.item - 1;
-          },
-          _next: function() {
-            this.page = Math.min(this.pages.length - 1, this.page + 1);
-          },
-          _prev: function() {
-            this.page = Math.max(0, this.page - 1);
-          },
-          _itemsChanged: function(items, page) {
-            if (!this.pages) {
-              this.pages = Array.apply( null, {length: Math.ceil(items.length / this.$.grid.pageSize)} ).map(function(item, index) {
-                return index + 1;
-              });
-            }
-            var start = page * this.$.grid.pageSize;
-            var end = (page + 1) * this.$.grid.pageSize;
-            this.$.grid.items = items.slice(start, end);
-          }
-        });
-      });
-    </script>
-  <script>
-    var grid = document.querySelector('vaadin-grid');
-    Polymer({
-      is: 'group-events',
-      properties: {
-        page: {
-          type: Number,
-          notify: true,
-          value: 0,
-          observer: '_handlePageChanged',
-        },
-      },
-      _handleResponse: function (event) {
-        var grid = this.$.grid;
-        this._response = event.detail.response;
-        grid.size = this._response.length;
-        grid.items = this._response;
-      },
-    });
-  </script-->
 </dom-module>

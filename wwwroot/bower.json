@@ -30,7 +30,8 @@
     "polymer-global-variables": "ivanrod/polymer-global-variables#^1.1.0",
     "polymer": "Polymer/polymer#^1.8.1",
     "vaadin-grid": "^2.0.2",
-    "paper-dialog": "^2.0.0"
+    "paper-dialog": "^2.0.0",
+    "moment": "^2.18.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
