@@ -68,6 +68,9 @@
 
 			<iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" body='[[ajaxBody]]' content-type='application/json' on-error='handleErrorResponse'
 			 on-response='handleAjaxResponse'></iron-ajax>
+
+			<iron-ajax id='userDetailsAjax' handle-as='json' url="[[userDetailsAjaxUrl]]" content-type='application/json' on-error='handleUserDetailsErrorResponse'
+			 on-response='handleUserDetailsAjaxResponse'></iron-ajax>
 		</div>
 	</template>
 	<script type="text/javascript" src="login-form.js"></script>

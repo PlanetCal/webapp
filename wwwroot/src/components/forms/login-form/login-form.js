@@ -97,10 +97,10 @@ Polymer({
       return;
     }
 
-    this.makeAjaxCall();
+    this.makeLoginAjaxCall();
   },
 
-  makeAjaxCall: function () {
+  makeLoginAjaxCall: function () {
     var ajax = this.$.ajax;
     var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
 
@@ -125,7 +125,6 @@ Polymer({
   },
 
   handleErrorResponse: function (e) {
-    var req = e.detail.request;
     var jsonResponse = e.detail.request.xhr.response;
     switch (this.mode) {
       case 'login':
@@ -153,9 +152,9 @@ Polymer({
         }
 
         Polymer.globalsManager.set('loggedInUser', loggedInUser);
-        //this.set('localStorage.loggedUser', loggedInUser);  
-        this.fire('on-login-successful');
 
+        this.getUserDetailsAjaxCall();
+        //this.set('localStorage.loggedUser', loggedInUser);  
         break;
       case 'findPassword':
         this.messageText = 'Check your email for the password';
@@ -180,8 +179,36 @@ Polymer({
           message = errorResponse.errorcode + ' has not been handled yet.';
           break;
       }
+    } else {
+      message = 'Something went wrong. Check if there is any CORS error.'
     }
 
     this.messageText = message;
+  },
+
+  getUserDetailsAjaxCall: function () {
+    var ajax = this.$.userDetailsAjax;
+    var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
+    ajax.method = 'GET';
+    ajax.headers['Version'] = '1.0';
+    var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+    if (loggedInUser) {
+      ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+      this.userDetailsAjaxUrl = serviceBaseUrl + '/userdetails/' + loggedInUser.id;
+      ajax.generateRequest();
+    }
+  },
+
+  handleUserDetailsErrorResponse: function (e) {
+    console.log("user details call failed");
+    var userDetailsJsonResponse = e.detail.request.xhr.response;
+    this.displayErrorMessage(userDetailsJsonResponse);
+    this.fire('on-login-successful');
+  },
+
+  handleUserDetailsAjaxResponse: function (e) {
+    console.log("user details call succeeded");
+    var userDetailsJsonResponse = e.detail.response;
+    this.fire('on-login-successful');
   }
 });
