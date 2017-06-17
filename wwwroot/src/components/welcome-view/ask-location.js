@@ -47,10 +47,21 @@ Polymer({
   },
 
   makeAjaxCall: function () {
+    var userDetails = Polymer.globalsManager.globals.userDetails;
+    var firstTimeLogon = true;
+    if (userDetails && userDetails.country) {
+      firstTimeLogon = false;
+    }
+    if (firstTimeLogon == false) {
+      var way = 'PUT'
+    }
+    else {
+      var way = 'POST'
+    }
     var ajax = this.$.ajax;
     var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
     this.ajaxUrl = serviceBaseUrl + '/userdetails';
-    ajax.method = 'POST';
+    ajax.method = way;
     ajax.headers['Version'] = '1.0';
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
     if (loggedInUser) {

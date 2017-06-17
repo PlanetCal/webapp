@@ -18,6 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="/bower_components/app-route/app-location.html">
 <link rel="import" href="/bower_components/app-route/app-route.html">
 <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="/bower_components/iron-icons/iron-icon.html">
 <link rel="import" href="/bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="/bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
@@ -25,47 +26,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="/src/components/user-settings/user-settings.html">
 <link rel="import" href="/src/components/calendar/cal-calendar.html">
 <link rel="import" href="/src/components/page-tab/page-tab.html">
-
+<link rel="import" href="/src/planetCal-app-styles.html">
 <dom-module id="planetCal-app">
   <template>
-    <style>
-       :host {
-        --app-primary-color: #555555;
-        --app-secondary-color: black;
-
-        display: block;
-      }
-
-      app-header {
-        color: #fff;
-        background-color: var(--app-primary-color);
-      }
-
-      app-header paper-icon-button {
-        --paper-icon-button-ink-color: white;
-      }
-
-      .drawer-list {
-        margin: 0 0px;
-      }
-
-      app-drawer {
-        --app-drawer-width: 340px;
-      }
-
-      .drawer-list a {
-        display: block;
-        padding: 0 26px;
-        text-decoration: none;
-        color: var(--app-secondary-color);
-        line-height: 40px;
-      }
-
-      .drawer-list a.iron-selected {
-        color: black;
-        font-weight: bold;
-      }
-    </style>
+    <style include='planetCal-app-styles'></style>
     <global-variables></global-variables>
     <app-location route='{{route}}'></app-location>
     <app-route route='{{route}}' pattern='/:page' data='{{routeData}}' tail='{{subroute}}'></app-route>
@@ -91,6 +55,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div main-title>Planet Calander</div>
             <user-settings user-id={{userId}}></user-settings>
           </app-toolbar>
+          <div id="msg">
+            <iron-icon class="left" id="severityIcon" icon="[[iconName]]"></iron-icon>
+            [[messageText]]
+            <iron-icon class="right" icon="icons:close">
+            </iron-icon>
+          </div>
         </app-header>
 
         <iron-pages selected='{{page}}' attr-for-selected='name' fallback-selection='events' role='main'>

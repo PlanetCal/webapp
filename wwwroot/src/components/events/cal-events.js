@@ -38,7 +38,7 @@ Polymer({
     this._currentLoggedInUser = loggedInUser;
 
     if (dateChanged || loggedinUserChanged) {
-      this.messageText = '';
+      this.fire("status-message-update");
       this.makeAjaxCall();
     }
   },
@@ -53,8 +53,7 @@ Polymer({
     if (loggedInUser) {
       ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
     }
-
-    this.messageText = 'Loading events from server ...';
+    this.fire("status-message-update", { severity: 'info', message: 'Loading events from server ...' });
     ajax.generateRequest();
 
   },
@@ -77,13 +76,12 @@ Polymer({
       }
     }
 
-    this.$.msg.style.display = 'block';
-    this.messageText = message;
+    this.fire("status-message-update", { severity: 'error', message: message });
   },
 
   handleAjaxResponse: function (e) {
     console.log('cal-events got success from ajax!');
-    this.messageText = '';
+    this.fire("status-message-update");
 
     this.data = e.detail.response;
   },
