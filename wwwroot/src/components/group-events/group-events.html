@@ -4,6 +4,7 @@
 <link rel="import" href="/bower_components/vaadin-grid/vaadin-grid-selection-column.html">
 <link rel="import" href="/bower_components/paper-input/paper-input.html">
 <link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/paper-progress/paper-progress.html">
 <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
 <script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 
@@ -63,7 +64,7 @@
       </paper-dialog-scrollable>
       <div class="buttons">
         <paper-button id="cancelevent" on-tap="cancelEvent">Cancel</paper-button>
-        <paper-button id="saveevent" on-tap="saveEvent">Save</paper-button>
+        <paper-button id="saveevent" on-tap="saveEvent">Add to Grid</paper-button>
       </div>
     </paper-dialog>
     <!-- Dialog or popup End -->
@@ -72,22 +73,24 @@
     <div id="msg">[[messageText]]</div>
     <div>
       <iron-icon icon="delete-sweep" class="delete" title="Delete selected" on-tap="deleteEvents"></iron-icon>
-      <paper-button>Upcomming</paper-button>
-      <paper-button class="blue">past</paper-button>
+      <paper-button id="btnUpcoming" class="blue" on-tap="loadEvents">Upcoming</paper-button>
+      <paper-button id="btnPast" class="blue" on-tap="pastEvents">past</paper-button>
       <paper-button raised class="indigo" on-tap="showDialog">Add Event</paper-button>
-      <paper-button raised class="indigo">Publish</paper-button>
+      <paper-button raised class="indigo" on-tap="publishEvents">Publish</paper-button>
     </div>
     <!-- List of Buttons End -->
-
+    <template is="dom-if" if="{{isLoading}}">
+      <paper-progress indeterminate></paper-progress>
+    </template>
     <!--iron-ajax auto url="../../data/Data.json" handle-as="json" on-response="handleResponse">
     </iron-ajax-->
-    <iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" content-type='application/json' on-error='handleErrorResponse' on-response='handleAjaxResponse'></iron-ajax>
+    <iron-ajax id='ajax' handle-as='json' loading={{isLoading}} url="[[ajaxUrl]]" content-type='application/json' on-error='handleErrorResponse'
+      on-response='handleAjaxResponse'></iron-ajax>
     <!-- Grid start -->
     <vaadin-grid id="grid" inverted$="[[inverted]]" on-active-item-changed="onActiveItemChanged">
       <template class="row-details">
         <div style="margin-left: 20px;">
           <p><b>Description: </b> [[item.Description]]</p>
-          <p><b>Groups:</b><br/>[[formatGroups(item.Groups)]]</p>
         </div>
       </template>
       <vaadin-grid-column width="5%" flex-grow="0">
@@ -119,7 +122,8 @@
       <vaadin-grid-column width="25%">
         <template class="header">Address</template>
         <template>
-          [[item.Address.StreetNumber]] [[item.Address.StreetName]], [[item.Address.City]], [[item.Address.State]], [[item.Address.PostalCode]]
+          [[item.Address.StreetNumber]] [[item.Address.StreetName]], [[item.Address.City]], <br> [[item.Address.State]],
+          [[item.Address.PostalCode]]
         </template>
       </vaadin-grid-column>
       <vaadin-grid-column width="7%">
@@ -128,6 +132,9 @@
           <div>
             <iron-icon icon="create" class="delete" title="Edit" on-tap="editEvent"></iron-icon>
             <iron-icon icon="delete" class="delete" title="Delete" on-tap="deleteEvent"></iron-icon>
+
+            <iron-icon icon="done" style="color: green; cursor: none; display: none;" title="Success;"></iron-icon>
+            <iron-icon icon="close" style="color: red;  cursor: none; display: none" title="Success;"></iron-icon>
           </div>
         </template>
       </vaadin-grid-column>

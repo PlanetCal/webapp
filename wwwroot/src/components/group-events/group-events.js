@@ -5,7 +5,7 @@ Polymer({
             type: Number,
             notify: true,
             value: 0,
-            observer: '_handlePageChanged',
+            // observer: '_handlePageChanged',
         },
         inverted: {
             type: Boolean,
@@ -23,14 +23,31 @@ Polymer({
             type: String,
             value: '',
         },
+        isLoading: {
+            type: Boolean,
+            value: false,
+            notify: true,
+        }
     },
     ready: function () {
         var items = [];
         this.loadEvents();
     },
+    pastEvents: function (e) {
+        //this.emptyGrid();
+        this.eventType = 'pastEvents';
+        this.$.grid.style.display = 'none';
+        this.$.btnPast.disabled = true;
+        this.$.btnUpcoming.disabled = false;
+        this.makeAjaxCall();
+    },
     loadEvents: function () {
+        //this.emptyGrid();
         this.eventType = 'getEvents';
-        this.makeAjaxCall()
+        this.$.grid.style.display = 'none';
+        this.$.btnPast.disabled = false;
+        this.$.btnUpcoming.disabled = true;
+        this.makeAjaxCall();
     },
     showDialog: function (event) {
         this.$.saveevent.textContent = "Save";
@@ -38,21 +55,32 @@ Polymer({
         Polymer.dom(body).appendChild(this.$.addEvent);
         this.$.addEvent.open();
     },
-    saveEvent: function (e) {
+    addEventToGrid: function () {
         this.eventObject = this.constructEventObject();
-        this.eventType = this.eventObject.id ? 'putEvents' : 'postEvents';
-        this.makeAjaxCall(this.eventObject);
+        if (this.eventObject.id) { // Update Event
+            var index = this.items.findIndex(e => e.id === this.eventObject.id);
+            this.items[index] = this.eventObject;
+        } else {
+            this.items.push(this.eventObject);
+        }
+        this.populateGrid();
         var dialog = this.$.addEvent;
         if (dialog) {
             dialog.close();
         }
     },
+    publishEvents: function () {
+        var saveEventCompleted = true;
+
+    },
+    saveEvent: function (e) {
+        this.eventObject = this.constructEventObject();
+        this.eventType = this.eventObject.id ? 'putEvents' : 'postEvents';
+        this.makeAjaxCall(this.eventObject);
+
+    },
     cancelEvent: function (e) {
         this.emptyEventFields();
-        var dialog = this.$.addEvent;
-        if (dialog) {
-            dialog.close();
-        }
     },
     deleteEvents: function () {
         var grid = this.$.grid;
@@ -60,8 +88,8 @@ Polymer({
     },
     deleteEvent: function (e) {
         this.eventType = 'deleteEvents';
-        var deletedItem = e.model.item;
-        this.makeAjaxCall(deletedItem);
+        this.eventObject = e.model.item;
+        this.makeAjaxCall(e.model.item);
     },
     editEvent: function (e) {
         var editedItem = e.model.item;
@@ -94,6 +122,10 @@ Polymer({
         this.location = null;
         this.groups = null;
         this.eventObject = {};
+        var dialog = this.$.addEvent;
+        if (dialog) {
+            dialog.close();
+        }
     },
     constructEventObject: function () {
         var obj = {};
@@ -116,15 +148,18 @@ Polymer({
         return obj;
     },
     makeAjaxCall: function (event = null) {
+        //this.isLoading = true;
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
+        var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
         // TODO: Consider removing this.ajaxUrl, use local variable as much as possible
-        this.ajaxUrl = serviceBaseUrl + '/events';
+        // this.ajaxUrl = serviceBaseUrl + '/events/';
+        ajax.url = serviceBaseUrl + '/events/';
         switch (this.eventType) {
             case 'getEvents':
+            case 'pastEvents':
                 ajax.method = 'GET';
                 ajax.headers['Version'] = '1.0';
-                var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
                 if (loggedInUser) {
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
                 }
@@ -140,6 +175,8 @@ Polymer({
                 }
                 break;
             case 'putEvents':
+                //this.ajaxUrl += event.id;
+                ajax.url += event.id;
                 ajax.body = JSON.stringify(event);
                 ajax.method = 'PUT';
                 ajax.headers['Version'] = '1.0';
@@ -149,7 +186,9 @@ Polymer({
                 break;
             case 'deleteEvents':
                 // TODO: Check if this.id has defined, convert this.ajaxUrl to local variable
-                this.ajaxUrl += '/' + this.id;
+                // this.ajaxUrl += event.id;
+                ajax.url += event.id;
+                // ajax.body = JSON.stringify(event.id);
                 ajax.method = 'DELETE';
                 ajax.headers['Version'] = '1.0';
                 if (loggedInUser) {
@@ -172,10 +211,12 @@ Polymer({
         this.messageText = message;
     },
 
-    handleAjaxResponse: function (event, a, b, c) {
+    handleAjaxResponse: function (event) {
         // var jsonResponse = e.detail.response;
         switch (this.eventType) {
             case 'getEvents':
+            case 'pastEvents':
+                //this.items = JSON.parse(event.detail.response);
                 this.items = event.detail.response;
                 this.populateGrid();
                 break;
@@ -183,8 +224,13 @@ Polymer({
                 break;
             case 'postEvents':
                 this.eventObject.id = event.detail.response.id;
-                this.items.push(this.eventObject);
-                this.populateGrid();
+                var index = this.items.findIndex(e => e.Name === this.eventObject.Name);
+                this.items[index] = this.eventObject;
+                //this.items.push(this.eventObject);
+                //this.populateGrid();
+                var grid = this.$.grid;
+                var gridItems = grid[index];
+                var aa = gridItems;
                 break;
             case 'putEvents':
                 var index = this.items.findIndex(e => e.id === this.eventObject.id);
@@ -192,25 +238,24 @@ Polymer({
                 this.populateGrid();
                 break;
             case 'deleteEvents':
-
+                var index = this.items.findIndex(e => e.id === this.eventObject.id);
+                this.items.splice(index, 1);
+                this.populateGrid();
                 break;
         }
     },
-    populateGrid: function () {
+    emptyGrid: function () {
         var grid = this.$.grid;
         grid.size = 0;
         grid.items = [];
-
+    },
+    populateGrid: function () {
+        this.emptyGrid();
+        var grid = this.$.grid;
         grid.size = this.items.length;
         grid.items = this.items;
         this.emptyEventFields();
-    },
-    handleResponse: function (event) {
-        console.log('handleResponse function is called');
-        var grid = this.$.grid;
-        this.items = event.detail.response;
-        grid.size = this.items.length;
-        grid.items = this.items;
+        this.$.grid.style.display = '';
     },
     observers: ['resetSelection(inverted)'],
     resetSelection: function (inverted) {
