@@ -3,6 +3,7 @@ Polymer({
 
   ready: function () {
     console.log('login-form ready function called!:');
+    this.fire("status-message-update");
     this.password_min_length = 4;
     this.name_min_length = 2;
     this.setViewsAsPerMode('login');  //other values: createAccount, findPassword
@@ -157,16 +158,15 @@ Polymer({
         }
 
         Polymer.globalsManager.set('loggedInUser', loggedInUser);
-
+        //this.set('localStorage.loggedUser', loggedInUser);  
         this.getUserDetailsAjaxCall();
-      //this.set('localStorage.loggedUser', loggedInUser);  
-
+        break;
       case 'findPassword':
-        this.fire("status-message-update", { severity: 'info', message: 'Check your email for the password' });
-        return;
+        this.fire("status-message-update", { severity: 'info', message: 'We sent you the password in your email. Please check.' });
+        break;
       case 'createAccount':
         this.fire("status-message-update", { severity: 'info', message: 'Registration successful. Please login now.' });
-        return;
+        break;
     }
   },
 
@@ -187,7 +187,6 @@ Polymer({
       }
     } else {
       message = 'Something went wrong. Check if there is any CORS error.';
-
     }
     this.fire("status-message-update", { severity: 'error', message: message });
   },
@@ -202,29 +201,31 @@ Polymer({
       ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
       this.userDetailsAjaxUrl = serviceBaseUrl + '/userdetails/' + loggedInUser.id;
       ajax.generateRequest();
+    } else {
+      // Impossible to arrive at this point given that it is only called after user has logged in.
+      this.fire("status-message-update", { severity: 'error', message: 'User is not logged in. Can not get User details.' });
     }
   },
 
   handleUserDetailsErrorResponse: function (e) {
-    console.log("User details call failed");
+    console.log("User details get failed");
     var userDetailsJsonResponse = e.detail.request.xhr.response;
     this.displayErrorMessage(userDetailsJsonResponse);
-    this.fire('on-login-successful');
   },
 
   handleUserDetailsAjaxResponse: function (e) {
-    console.log("User details call succeeded");
+    console.log("User details get succeeded");
     var userDetailsJsonResponse = e.detail.response;
-    this.fire('on-login-successful');
-    var userDetails = {
-      name: this.name,
-      email: this.email,
-      country: this.countryValue,
-      region: this.regionValue,
-      city: this.city
+    if (userDetailsJsonResponse.name) {
+      var userDetails = {
+        name: userDetailsJsonResponse.name,
+        country: userDetailsJsonResponse.country,
+        region: userDetailsJsonResponse.region,
+        city: userDetailsJsonResponse.city
+      }
+      Polymer.globalsManager.set('userDetails', userDetails);
     }
 
-    Polymer.globalsManager.set('userDetails', userDetails);
-    console.log(userDetails);//temporary
+    this.fire('on-login-successful');
   }
 });

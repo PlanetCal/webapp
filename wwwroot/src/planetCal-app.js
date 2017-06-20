@@ -36,7 +36,7 @@ Polymer({
     }
     var userDetails = Polymer.globalsManager.globals.userDetails;
     var firstTimeLogon = true;
-    if (userDetails && userDetails.country) {
+    if (userDetails && userDetails.name) {
       firstTimeLogon = false;
     }
 
@@ -71,12 +71,24 @@ Polymer({
     this.toggleEventsView = !this.toggleEventsView;
   },
 
+  onMessageStatusCloseHandler: function () {
+    this.updateMessage();
+  },
+
   _messageUpdateHandler: function (e) {
     if (e.detail && e.detail.message) {
-      this.messageText = e.detail.message;
+      this.updateMessage(e.detail.message, e.detail.severity);
+    }
+    else {
+      this.updateMessage();
+    }
+  },
+  updateMessage(message, severity) {
+    if (message) {
+      this.messageText = message;
       this.$.msg.style.display = 'block';
 
-      switch (e.detail.severity) {
+      switch (severity) {
         case ('info'):
           this.iconName = "icons:info"; //info
           this.$.severityIcon.style.color = "white";
