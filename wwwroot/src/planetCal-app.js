@@ -17,6 +17,7 @@ Polymer({
     'page-load-requested': '_pageLoadRequestHandler',
     'on-logout-requested': '_logoutRequestHandler',
     'on-login-successful': '_loginSuccessHandler',
+    'status-message-update': '_messageUpdateHandler'
   },
 
   _pageLoadRequestHandler: function (e) {
@@ -29,18 +30,21 @@ Polymer({
   },
 
   _loginSuccessHandler: function () {
-    var firstTimeLogon = false;
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
     if (loggedInUser) {
       this.userId = loggedInUser.id;
-      firstTimeLogon = loggedInUser.firstTimeLogon;
+    }
+    var userDetails = Polymer.globalsManager.globals.userDetails;
+    var firstTimeLogon = true;
+    if (userDetails && userDetails.country) {
+      firstTimeLogon = false;
     }
 
     if (firstTimeLogon) {
       this.set('route.path', '/welcome');
     } else {
-      this.set('route.path', '/events');
       this.toggleEventsView = !this.toggleEventsView;
+      this.set('route.path', '/events');
     }
   },
 
@@ -65,6 +69,32 @@ Polymer({
     }
 
     this.toggleEventsView = !this.toggleEventsView;
+  },
+
+  _messageUpdateHandler: function (e) {
+    if (e.detail && e.detail.message) {
+      this.messageText = e.detail.message;
+      this.$.msg.style.display = 'block';
+
+      switch (e.detail.severity) {
+        case ('info'):
+          this.iconName = "icons:info"; //info
+          this.$.severityIcon.style.color = "white";
+          break;
+        case ('warning'):
+          this.iconName = "icons:warning"; //warning
+          this.$.severityIcon.style.color = "yellow";
+          break;
+        case ('error'):
+          this.iconName = "icons:highlight-off"; //error
+          this.$.severityIcon.style.color = "white";
+          break;
+      }
+    }
+    else {
+      this.messageText = "";
+      this.$.msg.style.display = 'none';
+    }
   },
 
   _showPage404: function () {

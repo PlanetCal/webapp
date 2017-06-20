@@ -8,6 +8,13 @@ Polymer({
     this.setViewsAsPerMode('login');  //other values: createAccount, findPassword
     this.$.email_status.style.display = 'none';
     this.$.password_status.style.display = 'none';
+    var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+    if (loggedInUser) {
+      this.name = loggedInUser.name;
+    }
+    else {
+      this.name = 'guest';
+    }
   },
 
   isNameValid: function (name) {
@@ -41,8 +48,7 @@ Polymer({
 
   setViewsAsPerMode: function (mode) {
     this.mode = mode;
-    this.$.msg.style.display = 'none';
-
+    this.fire("status-message-update");
     switch (this.mode) {
       case 'login':
         this.titleText = 'Login';
@@ -71,7 +77,7 @@ Polymer({
         this.titleText = 'Create Account';
         break;
       default:
-        alert('It should not be possible');
+        this.fire("status-message-update", { severity: 'error', message: 'It should not be possible' });
     }
   },
 
@@ -80,27 +86,26 @@ Polymer({
   },
 
   submitOnclick: function () {
-    this.$.msg.style.display = 'block';
-    this.messageText = '';
+
     if (this.mode === 'createAccount' && !this.isNameValid(this.name)) {
-      this.messageText = 'Name should be at least ' + this.name_min_length + ' chars long.';
+      this.fire("status-message-update", { severity: 'error', message: 'Name should be at least ' + this.name_min_length + ' chars long.' });
       return;
     }
 
     if (!this.isEmailValid(this.email)) {
-      this.messageText = 'Email is not valid';
+      this.fire("status-message-update", { severity: 'error', message: 'Email is not valid' });
       return;
     }
 
     if (this.mode !== 'findPassword' && !this.isPasswordValid(this.password)) {
-      this.messageText = 'Password should be at least ' + this.password_min_length + ' chars long.';
+      this.fire("status-message-update", { severity: 'error', message: 'Password should be at least ' + this.password_min_length + ' chars long.' });
       return;
     }
 
-    this.makeAjaxCall();
+    this.makeLoginAjaxCall();
   },
 
-  makeAjaxCall: function () {
+  makeLoginAjaxCall: function () {
     var ajax = this.$.ajax;
     var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
 
@@ -125,7 +130,6 @@ Polymer({
   },
 
   handleErrorResponse: function (e) {
-    var req = e.detail.request;
     var jsonResponse = e.detail.request.xhr.response;
     switch (this.mode) {
       case 'login':
@@ -133,7 +137,7 @@ Polymer({
         this.displayErrorMessage(jsonResponse);
         break;
       case 'findPassword':
-        this.messageText = 'Not yet implemented';
+        his.fire("status-message-update", { severity: 'warning', message: 'Not yet implemented' });
         break;
     }
   },
@@ -153,16 +157,16 @@ Polymer({
         }
 
         Polymer.globalsManager.set('loggedInUser', loggedInUser);
-        //this.set('localStorage.loggedUser', loggedInUser);  
-        this.fire('on-login-successful');
 
-        break;
+        this.getUserDetailsAjaxCall();
+      //this.set('localStorage.loggedUser', loggedInUser);  
+
       case 'findPassword':
-        this.messageText = 'Check your email for the password';
-        break;
+        this.fire("status-message-update", { severity: 'info', message: 'Check your email for the password' });
+        return;
       case 'createAccount':
-        this.messageText = 'Registration successful. Please login now.';
-        break;
+        this.fire("status-message-update", { severity: 'info', message: 'Registration successful. Please login now.' });
+        return;
     }
   },
 
@@ -174,14 +178,53 @@ Polymer({
           message = 'Login failed. Check your email or password. If you are a new user, please register.';
           break;
         case 'GenericHttpRequestException':
+
           message = 'Oh! ohh! Looks like there is some internal issue. Please try again after some time.';
           break;
         default:
           message = errorResponse.errorcode + ' has not been handled yet.';
           break;
       }
+    } else {
+      message = 'Something went wrong. Check if there is any CORS error.';
+
+    }
+    this.fire("status-message-update", { severity: 'error', message: message });
+  },
+
+  getUserDetailsAjaxCall: function () {
+    var ajax = this.$.userDetailsAjax;
+    var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
+    ajax.method = 'GET';
+    ajax.headers['Version'] = '1.0';
+    var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+    if (loggedInUser) {
+      ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+      this.userDetailsAjaxUrl = serviceBaseUrl + '/userdetails/' + loggedInUser.id;
+      ajax.generateRequest();
+    }
+  },
+
+  handleUserDetailsErrorResponse: function (e) {
+    console.log("User details call failed");
+    var userDetailsJsonResponse = e.detail.request.xhr.response;
+    this.displayErrorMessage(userDetailsJsonResponse);
+    this.fire('on-login-successful');
+  },
+
+  handleUserDetailsAjaxResponse: function (e) {
+    console.log("User details call succeeded");
+    var userDetailsJsonResponse = e.detail.response;
+    this.fire('on-login-successful');
+    var userDetails = {
+      name: this.name,
+      email: this.email,
+      country: this.countryValue,
+      region: this.regionValue,
+      city: this.city
     }
 
-    this.messageText = message;
+    Polymer.globalsManager.set('userDetails', userDetails);
+    console.log(userDetails);//temporary
   }
 });

@@ -1,0 +1,42 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/src/components/cal-settings/cal-settings-styles.html">
+<link rel="import" href="/src/elements/country-region-selector/country-region-selector.html">
+
+<dom-module id="cal-settings">
+    <template>
+        <style include="cal-settings-styles"></style>
+        <h1>User Profile</h1>
+        <p>Change Region:</p>
+        <country-region-selector country-value="{{countryValue}}" region-value="{{regionValue}}" city-value='{{city}}'></country-region-selector>
+        <paper-button class="saveButton" raised on-tap="">
+            <iron-icon icon="icons:send"></iron-icon> Save</paper-button>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cal-settings',
+            listeners: {
+                '--on-country-changed': 'countryChangedHandler',
+                '--on-region-changed': 'regionChangedHandler',
+                '--on-city-changed': 'cityChangedHandler',
+            },
+
+            ready: function () {
+                this.countryValue = "US";
+                this.regionValue = "Washington";
+                this.city = "";
+            },
+
+            countryChangedHandler: function (e) {
+                this.countryValue = e.detail.countryValue;
+            },
+
+            regionChangedHandler: function (e) {
+                this.regionValue = e.detail.regionValue;
+            },
+            cityChangedHandler: function (e) {
+                this.city = e.detail.cityValue;
+            },
+        });
+    </script>
+</dom-module>
