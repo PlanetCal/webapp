@@ -8,31 +8,22 @@
       }
 
        :host {
-        --primary-background-color: #0e0e0e;
-        color: #FFFFFF;
-        --paper-menu-button-content: {
-          color: #FFFFFF;
-          top: 45px;
-          width: 140px;
-          .dropdown-content.selectable-content {
-            paper-item {
-              color: #FFF;
-            }
-          }
-          .link {
-            color: #FFF;
-            text-decoration: none;
-          }
-          .login {
-            cursor: pointer;
-            text-decoration: underline;
-          }
-        }
+        --primary-background-color: #444;
       }
 
-      ;
-       :host([vertical-align="top"]) .dropdown-content {
+      .dropdown-content {
+        width: 140px;
+      }
+
+      .link {
         color: #FFF;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .login {
+        cursor: pointer;
+        text-decoration: underline;
       }
 
       .horizontal {

@@ -19,6 +19,10 @@ Polymer({
       this.userName = loggedInUser.name;
       this.userId = loggedInUser.id;
       this.email = loggedInUser.email;
+      this.userProfileLink = '/user-profile';
+    }
+    else {
+      this.userProfileLink = '';
     }
 
     if (this.userId) {
@@ -31,6 +35,12 @@ Polymer({
     }
   },
 
+  settingsClickHandler: function () {
+    if (!this.userId) {
+      this.fire("status-message-update", { severity: 'error', message: "Please log-in first." });
+    }
+  },
+
   _userIdChanged: function () {
     this._initialize();
   },
@@ -38,7 +48,7 @@ Polymer({
   _loginOrLogoutHandler: function (page) {
     if (this.userId) {
       //this.set('localStorage.loggedUser', null); 
-      Polymer.globalsManager.set('loggedInUser', {});
+      Polymer.globalsManager.set('loggedInUser', null);
       this.email = null;
       this.userId = null;
       this.userName = '';

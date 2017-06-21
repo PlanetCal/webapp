@@ -19,11 +19,11 @@
 					<a class='login' on-tap='_loginOrLogoutHandler' tabindex='1'>[[loginOrLogout]]</a>
 				</div>
 				<div class='horizontal'>
-					<paper-menu-button id='planet-dropdown' horizontal-align="right">
+					<paper-menu-button horizontal-align="right" vertical-align="top" vertical-offset="50">
 						<paper-icon-button noink icon="more-horiz" class="dropdown-trigger" alt="bottom align"></paper-icon-button>
 						<paper-menu class="dropdown-content">
 							<paper-item><a class='link' href='/' tabindex='1'>Home</a></paper-item>
-							<paper-item><a class='link' href='/user-profile' text='Settings' tabindex='2'>Settings</a></paper-item>
+							<paper-item><a class='link' href='[[userProfileLink]]' text='Settings' on-tap='settingsClickHandler' tabindex='2'>Settings</a></paper-item>
 							<paper-item><a class='link' href='/about' text='About' tabindex='3'>About</a></paper-item>
 							<paper-item><a class='link' href='/contact' text='Contact' tabindex='4'>Contact</paper-item>
 					  </paper-menu>
