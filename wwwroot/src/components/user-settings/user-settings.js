@@ -10,11 +10,21 @@ Polymer({
   },
 
   ready: function () {
+    console.log("User-settings ready function called");
+    this._initialize();
+  },
+
+  _onLocalStorageLoad: function () {
     this._initialize();
   },
 
   _initialize: function () {
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+    if (this.localStorage && !loggedInUser) {
+      loggedInUser = this.localStorage.loggedInUser;
+      Polymer.globalsManager.set('loggedInUser', loggedInUser);
+    }
+
     if (loggedInUser) {
       this.userName = loggedInUser.name;
       this.userId = loggedInUser.id;
@@ -33,6 +43,12 @@ Polymer({
       this.userName = '';
       this.loginOrLogout = 'Sign in';
     }
+
+    var userDetails = Polymer.globalsManager.globals.userDetails;
+    if (this.localStorage && !userDetails) {
+      userDetails = this.localStorage.userDetails;
+      Polymer.globalsManager.set('userDetails', userDetails);
+    }
   },
 
   settingsClickHandler: function () {
@@ -47,8 +63,11 @@ Polymer({
 
   _loginOrLogoutHandler: function (page) {
     if (this.userId) {
-      //this.set('localStorage.loggedUser', null); 
+      this.set('localStorage.loggedInUser', null);
       Polymer.globalsManager.set('loggedInUser', null);
+      this.set('localStorage.userDetails', null);
+      Polymer.globalsManager.set('userDetails', null);
+
       this.email = null;
       this.userId = null;
       this.userName = '';

@@ -9,13 +9,6 @@ Polymer({
     this.setViewsAsPerMode('login');  //other values: createAccount, findPassword
     this.$.email_status.style.display = 'none';
     this.$.password_status.style.display = 'none';
-    var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-    if (loggedInUser) {
-      this.name = loggedInUser.name;
-    }
-    else {
-      this.name = 'guest';
-    }
   },
 
   isNameValid: function (name) {
@@ -158,7 +151,7 @@ Polymer({
         }
 
         Polymer.globalsManager.set('loggedInUser', loggedInUser);
-        //this.set('localStorage.loggedUser', loggedInUser);  
+        this.set('localStorage.loggedInUser', loggedInUser);
         this.getUserDetailsAjaxCall();
         break;
       case 'findPassword':
@@ -197,6 +190,7 @@ Polymer({
     ajax.method = 'GET';
     ajax.headers['Version'] = '1.0';
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+
     if (loggedInUser) {
       ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
       this.userDetailsAjaxUrl = serviceBaseUrl + '/userdetails/' + loggedInUser.id;
@@ -224,6 +218,7 @@ Polymer({
         city: userDetailsJsonResponse.city
       }
       Polymer.globalsManager.set('userDetails', userDetails);
+      this.set('localStorage.userDetails', userDetails);
     }
 
     this.fire('on-login-successful');

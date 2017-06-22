@@ -30,6 +30,7 @@ Polymer({
 
     var loggedinUserChanged = false;
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+
     if (loggedInUser) {
       if (loggedInUser !== this._currentLoggedInUser) {
         loggedinUserChanged = true;
@@ -50,6 +51,7 @@ Polymer({
     ajax.method = 'GET';
     ajax.headers['Version'] = '1.0';
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+
     if (loggedInUser) {
       ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
     }

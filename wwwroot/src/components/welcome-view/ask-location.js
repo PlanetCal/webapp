@@ -14,6 +14,7 @@ Polymer({
     this.city = "";
     this.product = Polymer.globalsManager.globals.product.displayName;
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+
     if (loggedInUser) {
       this.name = loggedInUser.name;
     }
@@ -48,6 +49,7 @@ Polymer({
 
   makeAjaxCall: function () {
     var userDetails = Polymer.globalsManager.globals.userDetails;
+
     var firstTimeLogon = true;
     if (userDetails && userDetails.name) {
       firstTimeLogon = false;
@@ -95,6 +97,7 @@ Polymer({
       city: this.city
     }
     Polymer.globalsManager.set('userDetails', userDetails);
+    this.set('localStorage.userDetails', userDetails);
 
     if (this.navigation === 'forward') {
       this.fire('page-load-requested', { page: '/ask-groups' });

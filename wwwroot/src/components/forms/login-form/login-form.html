@@ -65,6 +65,7 @@
 			<iron-ajax id='userDetailsAjax' handle-as='json' url="[[userDetailsAjaxUrl]]" content-type='application/json' on-error='handleUserDetailsErrorResponse'
 			 on-response='handleUserDetailsAjaxResponse'></iron-ajax>
 		</div>
+		<iron-localstorage name="planetCal-storage" value="{{localStorage}}"></iron-localstorage>
 	</template>
 	<script type="text/javascript" src="login-form.js"></script>
 </dom-module>

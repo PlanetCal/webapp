@@ -20,6 +20,15 @@ Polymer({
     'status-message-update': '_messageUpdateHandler'
   },
 
+  ready: function () {
+    console.log("Planetcal-app ready function called");
+  },
+
+  initializeLocalStorage: function () {
+    this.localStorage = {
+    }
+  },
+
   _pageLoadRequestHandler: function (e) {
     //console.log('_loginRequestHandler');
     this.set('route.path', e.detail.page)
@@ -31,10 +40,18 @@ Polymer({
 
   _loginSuccessHandler: function () {
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+    if (this.localStorage && !loggedInUser) {
+      loggedInUser = this.localStorage.loggedInUser;
+    }
+
     if (loggedInUser) {
       this.userId = loggedInUser.id;
     }
     var userDetails = Polymer.globalsManager.globals.userDetails;
+    if (this.localStorage && !userDetails) {
+      userDetails = this.localStorage.userDetails;
+    }
+
     var firstTimeLogon = true;
     if (userDetails && userDetails.name) {
       firstTimeLogon = false;
