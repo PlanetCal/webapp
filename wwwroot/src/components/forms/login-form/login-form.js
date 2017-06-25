@@ -158,7 +158,7 @@ Polymer({
         this.fire("status-message-update", { severity: 'info', message: 'We sent you the password in your email. Please check.' });
         break;
       case 'createAccount':
-        this.fire("status-message-update", { severity: 'info', message: 'Registration successful. Please login now.' });
+        this.fire("status-message-update", { severity: 'info', message: 'Email Validation pending! We will send you an email soon with the instructions to complete the registration.' });
         break;
     }
   },
@@ -171,8 +171,10 @@ Polymer({
           message = 'Login failed. Check your email or password. If you are a new user, please register.';
           break;
         case 'GenericHttpRequestException':
-
           message = 'Oh! ohh! Looks like there is some internal issue. Please try again after some time.';
+          break;
+        case 'EmailValidationPending':
+          message = 'Email validation is pending. Check your email to receive the validation link.';
           break;
         default:
           message = errorResponse.errorcode + ' has not been handled yet.';
