@@ -49,7 +49,6 @@ Polymer({
         this.$.nameFieldDiv.style.display = 'none';
         this.$.loginLinkDiv.style.display = 'none';
         this.sumbitButtonText = 'Login';
-        this.$.passwordInputDiv.style.display = 'block';
         this.$.forgotAccountLinkDiv.style.display = 'block';
         this.$.createAccountLinkDiv.style.display = 'block';
         break;
@@ -58,16 +57,15 @@ Polymer({
         this.$.loginLinkDiv.style.display = 'block';
         this.$.forgotAccountLinkDiv.style.display = 'none';
         this.$.createAccountLinkDiv.style.display = 'none';
-        this.$.passwordInputDiv.style.display = 'none';
         this.sumbitButtonText = 'Email me';
-        this.titleText = 'Find password';
+        this.titleText = 'Pick a new password';
         break;
       case 'createAccount':
         this.$.nameFieldDiv.style.display = 'block';
         this.$.loginLinkDiv.style.display = 'block';
         this.$.forgotAccountLinkDiv.style.display = 'none';
         this.$.createAccountLinkDiv.style.display = 'none';
-        this.sumbitButtonText = 'Signup';
+        this.sumbitButtonText = 'Email me';
         this.titleText = 'Create Account';
         break;
       default:
@@ -91,7 +89,7 @@ Polymer({
       return;
     }
 
-    if (this.mode !== 'findPassword' && !this.isPasswordValid(this.password)) {
+    if (!this.isPasswordValid(this.password)) {
       this.fire("status-message-update", { severity: 'error', message: 'Password should be at least ' + this.password_min_length + ' chars long.' });
       return;
     }
@@ -111,6 +109,10 @@ Polymer({
         ajax.headers['Version'] = '1.0';
         break;
       case 'findPassword':
+        this.ajaxUrl = serviceBaseUrl + '/userauth';
+        this.ajaxBody = JSON.stringify({ email: this.email, password: this.password });
+        ajax.method = 'PUT';
+        ajax.headers['Version'] = '1.0';
         break;
       case 'createAccount':
         this.ajaxUrl = serviceBaseUrl + '/userauth';
@@ -125,15 +127,7 @@ Polymer({
 
   handleErrorResponse: function (e) {
     var jsonResponse = e.detail.request.xhr.response;
-    switch (this.mode) {
-      case 'login':
-      case 'createAccount':
-        this.displayErrorMessage(jsonResponse);
-        break;
-      case 'findPassword':
-        his.fire("status-message-update", { severity: 'warning', message: 'Not yet implemented' });
-        break;
-    }
+    this.displayErrorMessage(jsonResponse);
   },
 
   handleAjaxResponse: function (e) {
@@ -155,10 +149,8 @@ Polymer({
         this.getUserDetailsAjaxCall();
         break;
       case 'findPassword':
-        this.fire("status-message-update", { severity: 'info', message: 'We sent you the password in your email. Please check.' });
-        break;
       case 'createAccount':
-        this.fire("status-message-update", { severity: 'info', message: 'Email Validation pending! We will send you an email soon with the instructions to complete the registration.' });
+        this.fire("status-message-update", { severity: 'info', message: 'Great! Emailing you the link to validate. Check your email account.' });
         break;
     }
   },
@@ -176,12 +168,16 @@ Polymer({
         case 'EmailValidationPending':
           message = 'Email validation is pending. Check your email to receive the validation link.';
           break;
+        case 'UserNotFound':
+          message = 'User does not exist in PlanetCal. Please register first.';
+          break;
+
         default:
           message = errorResponse.errorcode + ' has not been handled yet.';
           break;
       }
     } else {
-      message = 'Something went wrong. Check if there is any CORS error.';
+      message = 'Something went wrong.';
     }
     this.fire("status-message-update", { severity: 'error', message: message });
   },
