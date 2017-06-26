@@ -14,6 +14,7 @@ Polymer({
     this.city = "";
     this.product = Polymer.globalsManager.globals.product.displayName;
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+
     if (loggedInUser) {
       this.name = loggedInUser.name;
     }
@@ -26,12 +27,12 @@ Polymer({
     console.info(this.regionValue);
     console.info(this.city);
     this.makeAjaxCall();
-    this.fire('page-load-requested', { page: '/welcome' });
+    this.navigation = 'previous';
   },
 
   forwardhandler: function () {
     this.makeAjaxCall();
-    this.fire('page-load-requested', { page: '/ask-groups' });
+    this.navigation = 'forward';
   },
 
   countryChangedHandler: function (e) {
@@ -48,29 +49,32 @@ Polymer({
 
   makeAjaxCall: function () {
     var userDetails = Polymer.globalsManager.globals.userDetails;
+
     var firstTimeLogon = true;
-    if (userDetails && userDetails.country) {
+    if (userDetails && userDetails.name) {
       firstTimeLogon = false;
-    }
-    if (firstTimeLogon == false) {
-      var way = 'PUT'
-    }
-    else {
-      var way = 'POST'
     }
     var ajax = this.$.ajax;
     var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
     this.ajaxUrl = serviceBaseUrl + '/userdetails';
-    ajax.method = way;
     ajax.headers['Version'] = '1.0';
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
     if (loggedInUser) {
       ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
 
+      if (firstTimeLogon == false) {
+        var httpMethod = 'PUT'
+        this.ajaxUrl = this.ajaxUrl + '/' + loggedInUser.id;
+      }
+      else {
+        var httpMethod = 'POST'
+      }
+
+      ajax.method = httpMethod;
+
       this.ajaxBody = JSON.stringify({
         id: loggedInUser.id,
         name: loggedInUser.name,
-        email: loggedInUser.email,
         country: this.countryValue,
         region: this.regionValue,
         city: this.city
@@ -79,24 +83,50 @@ Polymer({
       ajax.generateRequest();
     }
     else {
-      //alert("please login first")
-      //to do: add error handling
+      this.fire("status-message-update", { severity: 'error', message: 'Please login first' });
     }
 
   },
 
   handleAjaxResponse: function (e) {
     var jsonResponse = e.detail.response;
+    var userDetails = {
+      name: this.name,
+      country: this.countryValue,
+      region: this.regionValue,
+      city: this.city
+    }
+    Polymer.globalsManager.set('userDetails', userDetails);
+    this.set('localStorage.userDetails', userDetails);
+
+    if (this.navigation === 'forward') {
+      this.fire('page-load-requested', { page: '/ask-groups' });
+    }
+    else if (this.navigation === 'previous') {
+      this.fire('page-load-requested', { page: '/welcome' });
+    }
   },
 
   handleErrorResponse: function (e) {
     var req = e.detail.request;
     var jsonResponse = e.detail.request.xhr.response;
-    //to do: add error handling
-
+    this.displayErrorMessage(jsonResponse);
   },
 
-
-
-
+  displayErrorMessage: function (errorResponse) {
+    var message = '';
+    if (errorResponse !== null) {
+      switch (errorResponse.errorcode) {
+        case 'GenericHttpRequestException':
+          message = 'Oh! ohh! Looks like there is some internal issue. Please try again after some time.';
+          break;
+        default:
+          message = errorResponse.errorcode + ' has not been handled yet.';
+          break;
+      }
+    } else {
+      message = 'Something went wrong. Check if there is any CORS error.';
+    }
+    this.fire("status-message-update", { severity: 'error', message: message });
+  },
 });

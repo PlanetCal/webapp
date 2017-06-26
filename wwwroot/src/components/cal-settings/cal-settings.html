@@ -1,15 +1,20 @@
-<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/src/polymer-refs.html">
 <link rel="import" href="/src/components/cal-settings/cal-settings-styles.html">
 <link rel="import" href="/src/elements/country-region-selector/country-region-selector.html">
-
 <dom-module id="cal-settings">
     <template>
         <style include="cal-settings-styles"></style>
-        <h1>User Profile</h1>
-        <p>Change Region:</p>
+        <h1>User Settings</h1>
+        <p>Location:</p>
         <country-region-selector country-value="{{countryValue}}" region-value="{{regionValue}}" city-value='{{city}}'></country-region-selector>
-        <paper-button class="saveButton" raised on-tap="">
-            <iron-icon icon="icons:send"></iron-icon> Save</paper-button>
+        <paper-button class="saveButton" raised on-tap="saveSettingsHandler">
+            Save
+        </paper-button>
+
+        <iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" body='[[ajaxBody]]' content-type='application/json' on-error='handleErrorResponse'
+            on-response='handleAjaxResponse'></iron-ajax>
+
+        <iron-localstorage name="planetCal-storage" value="{{localStorage}}"></iron-localstorage>
     </template>
 
     <script>
@@ -22,9 +27,14 @@
             },
 
             ready: function () {
-                this.countryValue = "US";
-                this.regionValue = "Washington";
-                this.city = "";
+
+                var userDetails = Polymer.globalsManager.globals.userDetails;
+
+                if (userDetails && userDetails.name) {
+                    this.countryValue = userDetails.country;
+                    this.city = userDetails.city;
+                    this.regionValue = userDetails.region;
+                }
             },
 
             countryChangedHandler: function (e) {
@@ -36,6 +46,85 @@
             },
             cityChangedHandler: function (e) {
                 this.city = e.detail.cityValue;
+            },
+
+            saveSettingsHandler: function () {
+                var userDetails = Polymer.globalsManager.globals.userDetails;
+
+                var firstTimeLogon = true;
+                if (userDetails && userDetails.name) {
+                    firstTimeLogon = false;
+                }
+                var ajax = this.$.ajax;
+                var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
+                this.ajaxUrl = serviceBaseUrl + '/userdetails';
+                ajax.headers['Version'] = '1.0';
+                var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+
+                if (loggedInUser) {
+                    this.name = loggedInUser.name;
+
+                    ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+
+                    if (firstTimeLogon == false) {
+                        var httpMethod = 'PUT'
+                        this.ajaxUrl = this.ajaxUrl + '/' + loggedInUser.id;
+                    }
+                    else {
+                        var httpMethod = 'POST'
+                    }
+
+                    ajax.method = httpMethod;
+
+                    this.ajaxBody = JSON.stringify({
+                        id: loggedInUser.id,
+                        name: loggedInUser.name,
+                        country: this.countryValue,
+                        region: this.regionValue,
+                        city: this.city
+                    });
+
+                    ajax.generateRequest();
+                }
+                else {
+                    this.fire("status-message-update", { severity: 'error', message: 'Please login first' });
+                }
+            },
+
+            handleAjaxResponse: function (e) {
+                var jsonResponse = e.detail.response;
+                var userDetails = {
+                    name: this.name,
+                    country: this.countryValue,
+                    region: this.regionValue,
+                    city: this.city
+                }
+                Polymer.globalsManager.set('userDetails', userDetails);
+                this.set('localStorage.userDetails', userDetails);
+                this.fire("status-message-update", { severity: 'info', message: 'Settings saved!' });
+            },
+
+            handleErrorResponse: function (e) {
+                var req = e.detail.request;
+                var jsonResponse = e.detail.request.xhr.response;
+                this.displayErrorMessage(jsonResponse);
+            },
+
+            displayErrorMessage: function (errorResponse) {
+                var message = '';
+                if (errorResponse !== null) {
+                    switch (errorResponse.errorcode) {
+                        case 'GenericHttpRequestException':
+                            message = 'Oh! ohh! Looks like there is some internal issue. Please try again after some time.';
+                            break;
+                        default:
+                            message = errorResponse.errorcode + ' has not been handled yet.';
+                            break;
+                    }
+                } else {
+                    message = 'Something went wrong. Check if there is any CORS error.';
+                }
+                this.fire("status-message-update", { severity: 'error', message: message });
             },
         });
     </script>

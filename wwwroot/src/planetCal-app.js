@@ -20,6 +20,15 @@ Polymer({
     'status-message-update': '_messageUpdateHandler'
   },
 
+  ready: function () {
+    console.log("Planetcal-app ready function called");
+  },
+
+  initializeLocalStorage: function () {
+    this.localStorage = {
+    }
+  },
+
   _pageLoadRequestHandler: function (e) {
     //console.log('_loginRequestHandler');
     this.set('route.path', e.detail.page)
@@ -31,12 +40,20 @@ Polymer({
 
   _loginSuccessHandler: function () {
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+    if (this.localStorage && !loggedInUser) {
+      loggedInUser = this.localStorage.loggedInUser;
+    }
+
     if (loggedInUser) {
       this.userId = loggedInUser.id;
     }
     var userDetails = Polymer.globalsManager.globals.userDetails;
+    if (this.localStorage && !userDetails) {
+      userDetails = this.localStorage.userDetails;
+    }
+
     var firstTimeLogon = true;
-    if (userDetails && userDetails.country) {
+    if (userDetails && userDetails.name) {
       firstTimeLogon = false;
     }
 
@@ -71,12 +88,24 @@ Polymer({
     this.toggleEventsView = !this.toggleEventsView;
   },
 
+  onMessageStatusCloseHandler: function () {
+    this.updateMessage();
+  },
+
   _messageUpdateHandler: function (e) {
     if (e.detail && e.detail.message) {
-      this.messageText = e.detail.message;
+      this.updateMessage(e.detail.message, e.detail.severity);
+    }
+    else {
+      this.updateMessage();
+    }
+  },
+  updateMessage(message, severity) {
+    if (message) {
+      this.messageText = message;
       this.$.msg.style.display = 'block';
 
-      switch (e.detail.severity) {
+      switch (severity) {
         case ('info'):
           this.iconName = "icons:info"; //info
           this.$.severityIcon.style.color = "white";

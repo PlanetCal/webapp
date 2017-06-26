@@ -3,18 +3,12 @@ Polymer({
 
   ready: function () {
     console.log('login-form ready function called!:');
+    this.fire("status-message-update");
     this.password_min_length = 4;
     this.name_min_length = 2;
     this.setViewsAsPerMode('login');  //other values: createAccount, findPassword
     this.$.email_status.style.display = 'none';
     this.$.password_status.style.display = 'none';
-    var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-    if (loggedInUser) {
-      this.name = loggedInUser.name;
-    }
-    else {
-      this.name = 'guest';
-    }
   },
 
   isNameValid: function (name) {
@@ -55,7 +49,6 @@ Polymer({
         this.$.nameFieldDiv.style.display = 'none';
         this.$.loginLinkDiv.style.display = 'none';
         this.sumbitButtonText = 'Login';
-        this.$.passwordInputDiv.style.display = 'block';
         this.$.forgotAccountLinkDiv.style.display = 'block';
         this.$.createAccountLinkDiv.style.display = 'block';
         break;
@@ -64,16 +57,15 @@ Polymer({
         this.$.loginLinkDiv.style.display = 'block';
         this.$.forgotAccountLinkDiv.style.display = 'none';
         this.$.createAccountLinkDiv.style.display = 'none';
-        this.$.passwordInputDiv.style.display = 'none';
         this.sumbitButtonText = 'Email me';
-        this.titleText = 'Find password';
+        this.titleText = 'Pick a new password';
         break;
       case 'createAccount':
         this.$.nameFieldDiv.style.display = 'block';
         this.$.loginLinkDiv.style.display = 'block';
         this.$.forgotAccountLinkDiv.style.display = 'none';
         this.$.createAccountLinkDiv.style.display = 'none';
-        this.sumbitButtonText = 'Signup';
+        this.sumbitButtonText = 'Email me';
         this.titleText = 'Create Account';
         break;
       default:
@@ -97,7 +89,7 @@ Polymer({
       return;
     }
 
-    if (this.mode !== 'findPassword' && !this.isPasswordValid(this.password)) {
+    if (!this.isPasswordValid(this.password)) {
       this.fire("status-message-update", { severity: 'error', message: 'Password should be at least ' + this.password_min_length + ' chars long.' });
       return;
     }
@@ -117,6 +109,10 @@ Polymer({
         ajax.headers['Version'] = '1.0';
         break;
       case 'findPassword':
+        this.ajaxUrl = serviceBaseUrl + '/userauth';
+        this.ajaxBody = JSON.stringify({ email: this.email, password: this.password });
+        ajax.method = 'PUT';
+        ajax.headers['Version'] = '1.0';
         break;
       case 'createAccount':
         this.ajaxUrl = serviceBaseUrl + '/userauth';
@@ -131,15 +127,7 @@ Polymer({
 
   handleErrorResponse: function (e) {
     var jsonResponse = e.detail.request.xhr.response;
-    switch (this.mode) {
-      case 'login':
-      case 'createAccount':
-        this.displayErrorMessage(jsonResponse);
-        break;
-      case 'findPassword':
-        his.fire("status-message-update", { severity: 'warning', message: 'Not yet implemented' });
-        break;
-    }
+    this.displayErrorMessage(jsonResponse);
   },
 
   handleAjaxResponse: function (e) {
@@ -157,16 +145,13 @@ Polymer({
         }
 
         Polymer.globalsManager.set('loggedInUser', loggedInUser);
-
+        this.set('localStorage.loggedInUser', loggedInUser);
         this.getUserDetailsAjaxCall();
-      //this.set('localStorage.loggedUser', loggedInUser);  
-
+        break;
       case 'findPassword':
-        this.fire("status-message-update", { severity: 'info', message: 'Check your email for the password' });
-        return;
       case 'createAccount':
-        this.fire("status-message-update", { severity: 'info', message: 'Registration successful. Please login now.' });
-        return;
+        this.fire("status-message-update", { severity: 'info', message: 'Great! Emailing you the link to validate. Check your email account.' });
+        break;
     }
   },
 
@@ -178,16 +163,21 @@ Polymer({
           message = 'Login failed. Check your email or password. If you are a new user, please register.';
           break;
         case 'GenericHttpRequestException':
-
           message = 'Oh! ohh! Looks like there is some internal issue. Please try again after some time.';
           break;
+        case 'EmailValidationPending':
+          message = 'Email validation is pending. Check your email to receive the validation link.';
+          break;
+        case 'UserNotFound':
+          message = 'User does not exist in PlanetCal. Please register first.';
+          break;
+
         default:
           message = errorResponse.errorcode + ' has not been handled yet.';
           break;
       }
     } else {
-      message = 'Something went wrong. Check if there is any CORS error.';
-
+      message = 'Something went wrong.';
     }
     this.fire("status-message-update", { severity: 'error', message: message });
   },
@@ -198,33 +188,37 @@ Polymer({
     ajax.method = 'GET';
     ajax.headers['Version'] = '1.0';
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+
     if (loggedInUser) {
       ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
       this.userDetailsAjaxUrl = serviceBaseUrl + '/userdetails/' + loggedInUser.id;
       ajax.generateRequest();
+    } else {
+      // Impossible to arrive at this point given that it is only called after user has logged in.
+      this.fire("status-message-update", { severity: 'error', message: 'User is not logged in. Can not get User details.' });
     }
   },
 
   handleUserDetailsErrorResponse: function (e) {
-    console.log("User details call failed");
+    console.log("User details get failed");
     var userDetailsJsonResponse = e.detail.request.xhr.response;
     this.displayErrorMessage(userDetailsJsonResponse);
-    this.fire('on-login-successful');
   },
 
   handleUserDetailsAjaxResponse: function (e) {
-    console.log("User details call succeeded");
+    console.log("User details get succeeded");
     var userDetailsJsonResponse = e.detail.response;
-    this.fire('on-login-successful');
-    var userDetails = {
-      name: this.name,
-      email: this.email,
-      country: this.countryValue,
-      region: this.regionValue,
-      city: this.city
+    if (userDetailsJsonResponse.name) {
+      var userDetails = {
+        name: userDetailsJsonResponse.name,
+        country: userDetailsJsonResponse.country,
+        region: userDetailsJsonResponse.region,
+        city: userDetailsJsonResponse.city
+      }
+      Polymer.globalsManager.set('userDetails', userDetails);
+      this.set('localStorage.userDetails', userDetails);
     }
 
-    Polymer.globalsManager.set('userDetails', userDetails);
-    console.log(userDetails);//temporary
+    this.fire('on-login-successful');
   }
 });

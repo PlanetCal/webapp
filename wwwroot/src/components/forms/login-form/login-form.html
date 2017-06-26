@@ -1,10 +1,4 @@
-<link rel="import" href="/bower_components/polymer/polymer.html">
-<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="/bower_components/iron-icons/communication-icons.html">
-<link rel="import" href="/bower_components/iron-icons/social-icons.html">
-<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="/bower_components/paper-input/paper-input.html">
-<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/src/polymer-refs.html">
 
 <link rel="import" href="/src/components/forms/form-styles.html">
 <dom-module id="login-form">
@@ -61,7 +55,7 @@
 					<a class='link' id="createAccount" on-tap="linkClickHandler" tabindex="2">Register</a>
 				</div>
 				<div id="forgotAccountLinkDiv">
-					<a class='link' id="findPassword" on-tap="linkClickHandler" tabindex="3">Forgot password</a>
+					<a class='link' id="findPassword" on-tap="linkClickHandler" tabindex="3">Forgot password / Change password</a>
 				</div>
 			</form>
 
@@ -71,6 +65,7 @@
 			<iron-ajax id='userDetailsAjax' handle-as='json' url="[[userDetailsAjaxUrl]]" content-type='application/json' on-error='handleUserDetailsErrorResponse'
 			 on-response='handleUserDetailsAjaxResponse'></iron-ajax>
 		</div>
+		<iron-localstorage name="planetCal-storage" value="{{localStorage}}"></iron-localstorage>
 	</template>
 	<script type="text/javascript" src="login-form.js"></script>
 </dom-module>
