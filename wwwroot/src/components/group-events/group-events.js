@@ -27,6 +27,11 @@ Polymer({
             type: Boolean,
             value: false,
             notify: true,
+        },
+        isSaveValid: {
+            type: Boolean,
+            value: false,
+            notify: true,
         }
     },
     ready: function () {
@@ -82,16 +87,29 @@ Polymer({
     cancelEvent: function (e) {
         this.emptyEventFields();
     },
+    notLoggedInError: function (type) {
+        alert('Please login to ' + type);
+        return false;
+    },
     deleteEvents: function () {
         var grid = this.$.grid;
         //this.makeAjaxCall(grid.selectedItems);
     },
     deleteEvent: function (e) {
+        e.preventDefault();
+        if (!this.loggedInUser()) {
+            return this.notLoggedInError('delete');
+        }
         this.eventType = 'deleteEvents';
         this.eventObject = e.model.item;
         this.makeAjaxCall(e.model.item);
     },
     editEvent: function (e) {
+        e.preventDefault();
+        if (!this.loggedInUser()) {
+            return this.notLoggedInError('edit');
+        }
+
         var editedItem = e.model.item;
         this.showDialog();
         this.id = editedItem.id;
