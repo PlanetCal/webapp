@@ -97,7 +97,7 @@ Polymer({
     },
     deleteEvent: function (e) {
         e.preventDefault();
-        if (!this.loggedInUser()) {
+        if (!Polymer.globalsManager.globals.loggedInUser) {
             return this.notLoggedInError('delete');
         }
         this.eventType = 'deleteEvents';
@@ -106,7 +106,7 @@ Polymer({
     },
     editEvent: function (e) {
         e.preventDefault();
-        if (!this.loggedInUser()) {
+        if (!Polymer.globalsManager.globals.loggedInUser) {
             return this.notLoggedInError('edit');
         }
 
