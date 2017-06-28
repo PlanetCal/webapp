@@ -35,8 +35,24 @@ Polymer({
         }
     },
     ready: function () {
+        var nameFieldDiv = this.$.nameFieldDiv;
         var items = [];
         this.loadEvents();
+    },
+    validate: function () {
+        var elements = document.getElementsByClassName('addEvent');
+        var isValid = true;
+        for (var i = 0; i < elements.length; i++) {
+            var tempIsValid = elements[i].validate();
+            if (!tempIsValid) {
+                isValid = tempIsValid
+            }
+        }
+        return isValid;
+        //document.getElementsByClassName('.addEvent').validate();
+    },
+    validateOnChange: function (e) {
+        e.target.validate();
     },
     pastEvents: function (e) {
         //this.emptyGrid();
@@ -59,6 +75,11 @@ Polymer({
         var body = document.querySelector('body');
         Polymer.dom(body).appendChild(this.$.addEvent);
         this.$.addEvent.open();
+        var elements = document.getElementsByClassName('addEvent');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].invalid = false;
+        }
+        elements[0].invalid = false;
     },
     addEventToGrid: function () {
         this.eventObject = this.constructEventObject();
@@ -79,10 +100,12 @@ Polymer({
 
     },
     saveEvent: function (e) {
-        this.eventObject = this.constructEventObject();
-        this.eventType = this.eventObject.id ? 'putEvents' : 'postEvents';
-        this.makeAjaxCall(this.eventObject);
-
+        var isValid = this.validate();
+        if (isValid) {
+            this.eventObject = this.constructEventObject();
+            this.eventType = this.eventObject.id ? 'putEvents' : 'postEvents';
+            this.makeAjaxCall(this.eventObject);
+        }
     },
     cancelEvent: function (e) {
         this.emptyEventFields();

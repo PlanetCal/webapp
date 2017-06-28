@@ -24,39 +24,49 @@
         <div class="dialog-textbox" style="width: 600px;">
           <fieldset>
             <div id="nameFieldDiv">
-              <paper-input label="Name" value="{{name}}" char-counter maxlength="50" style="width: 560px;">
+              <paper-input label="Name" class="addEvent" value="{{name}}" char-counter maxlength="50" style="width: 560px;" required error-message="required"
+                on-change="validateOnChange">
               </paper-input>
             </div>
             <div>
-              <paper-input label="Description" value="{{description}}" aria-multiline="5" char-counter maxlength="500" style="width: 560px;">
+              <paper-input label="Description" class="addEvent" value="{{description}}" aria-multiline="5" char-counter maxlength="500"
+                style="width: 560px;" required error-message="required" on-change="validateOnChange">
               </paper-input>
             </div>
             <div style="display: flex; width: 570px;">
-              <paper-input label="StartDateTime" value="{{startDateTime}}" char-counter maxlength="50" style="width: 250px;">
+              <paper-input label="StartDateTime" class="addEvent" value="{{startDateTime}}" char-counter maxlength="50" style="width: 250px;"
+                required error-message="required" on-change="validateOnChange">
               </paper-input>
               <span style="width: 60px;"></span>
-              <paper-input label="EndDateTime" value="{{endDateTime}}" char-counter maxlength="50" style="width: 250px;">
+              <paper-input label="EndDateTime" class="addEvent" value="{{endDateTime}}" char-counter maxlength="50" style="width: 250px;"
+                required error-message="required" on-change="validateOnChange">
               </paper-input>
             </div>
             <div style="display: flex; width: 570px;">
-              <paper-input label="StreetNumber" value="{{streetNumber}}" char-counter maxlength="15" style="width: 150px;">
+              <paper-input label="StreetNumber" class="addEvent" value="{{streetNumber}}" char-counter maxlength="15" style="width: 150px;"
+                required error-message="required" on-change="validateOnChange">
               </paper-input>
               <span style="width: 30px;"></span>
-              <paper-input label="StreetName" value="{{streetName}}" char-counter maxlength="25" style="width: 390px;">
+              <paper-input label="StreetName" class="addEvent" value="{{streetName}}" char-counter maxlength="25" style="width: 390px;"
+                required error-message="required" on-change="validateOnChange">
               </paper-input>
             </div>
             <div style="display: flex; width: 570px;">
-              <paper-input label="City" value="{{city}}" char-counter maxlength="20" style="width: 180px;">
+              <paper-input label="City" class="addEvent" value="{{city}}" char-counter maxlength="20" style="width: 180px;" required error-message="required"
+                on-change="validateOnChange">
               </paper-input>
               <span style="width: 30px;"></span>
-              <paper-input label="State" value="{{state}}" char-counter maxlength="20" style="width: 180px;">
+              <paper-input label="State" class="addEvent" value="{{state}}" char-counter maxlength="20" style="width: 180px;" required
+                error-message="required" on-change="validateOnChange">
               </paper-input>
               <span style="width: 30px;"></span>
-              <paper-input label="PostalCode" value="{{postalCode}}" char-counter maxlength="10" style="width: 150px;">
+              <paper-input label="PostalCode" class="addEvent" value="{{postalCode}}" char-counter maxlength="10" style="width: 150px;"
+                required error-message="required" on-change="validateOnChange">
               </paper-input>
             </div>
             <div>
-              <paper-input label="Location" value="{{location}}" char-counter maxlength="10">
+              <paper-input label="Location" class="addEvent" value="{{location}}" char-counter maxlength="10" required error-message="required"
+                on-change="validateOnChange">
               </paper-input>
             </div>
           </fieldset>
