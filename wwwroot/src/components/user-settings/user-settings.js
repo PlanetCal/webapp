@@ -30,9 +30,11 @@ Polymer({
       this.userId = loggedInUser.id;
       this.email = loggedInUser.email;
       this.userProfileLink = '/user-profile';
+      this.changePasswordLink = '/change-password';
     }
     else {
       this.userProfileLink = '';
+      this.changePasswordLink = '';
     }
 
     if (this.userId) {

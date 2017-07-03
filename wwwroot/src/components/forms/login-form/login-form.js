@@ -1,12 +1,21 @@
 Polymer({
   is: 'login-form',
 
+  properties: {
+    mode: {
+      type: String
+    }
+  },
+
   ready: function () {
     console.log('login-form ready function called!:');
     this.fire("status-message-update");
+
     this.password_min_length = 4;
     this.name_min_length = 2;
-    this.setViewsAsPerMode('login');  //other values: createAccount, findPassword
+    this.mode = this.mode || 'login';
+
+    this.setViewsAsPerMode(this.mode);  //other values: createAccount, findPassword
     this.$.email_status.style.display = 'none';
     this.$.password_status.style.display = 'none';
   },
@@ -73,6 +82,14 @@ Polymer({
         break;
       default:
         this.fire("status-message-update", { severity: 'error', message: 'It should not be possible' });
+    }
+
+    var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+    if (loggedInUser) {
+      this.name = loggedInUser.name;
+      this.email = loggedInUser.email;
+      this.$.loginLinkDiv.style.display = 'none';
+      this.$.createAccountLinkDiv.style.display = 'none';
     }
   },
 
