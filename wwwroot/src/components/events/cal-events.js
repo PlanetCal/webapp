@@ -94,11 +94,19 @@ Polymer({
   },
 
   getVenue: function (item) {
-    return item[0].Name;
+    if (item && item[0]) {
+      return item[0].Name;
+    } else {
+      return '';
+    }
   },
 
   getVenueLink: function (item) {
-    return item[0].WebSite;
+    if (item && item[0]) {
+      return item[0].WebSite;
+    } else {
+      return '';
+    }
   },
 
   getDuration: function (dateStart, dateEnd) {
