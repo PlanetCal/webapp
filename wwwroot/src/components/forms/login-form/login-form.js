@@ -46,6 +46,7 @@ Polymer({
     switch (this.mode) {
       case 'login':
         this.titleText = 'Login';
+        this.PasswordLabel = 'Password';
         this.$.nameFieldDiv.style.display = 'none';
         this.$.loginLinkDiv.style.display = 'none';
         this.sumbitButtonText = 'Login';
@@ -53,20 +54,22 @@ Polymer({
         this.$.createAccountLinkDiv.style.display = 'block';
         break;
       case 'findPassword':
+        this.titleText = 'Pick a new password';
+        this.PasswordLabel = 'New password';
+        this.sumbitButtonText = 'Email me';
         this.$.nameFieldDiv.style.display = 'none';
         this.$.loginLinkDiv.style.display = 'block';
         this.$.forgotAccountLinkDiv.style.display = 'none';
         this.$.createAccountLinkDiv.style.display = 'none';
-        this.sumbitButtonText = 'Email me';
-        this.titleText = 'Pick a new password';
         break;
       case 'createAccount':
+        this.titleText = 'Create Account';
+        this.PasswordLabel = 'Password';
+        this.sumbitButtonText = 'Email me';
         this.$.nameFieldDiv.style.display = 'block';
         this.$.loginLinkDiv.style.display = 'block';
         this.$.forgotAccountLinkDiv.style.display = 'none';
         this.$.createAccountLinkDiv.style.display = 'none';
-        this.sumbitButtonText = 'Email me';
-        this.titleText = 'Create Account';
         break;
       default:
         this.fire("status-message-update", { severity: 'error', message: 'It should not be possible' });
@@ -150,7 +153,7 @@ Polymer({
         break;
       case 'findPassword':
       case 'createAccount':
-        this.fire("status-message-update", { severity: 'info', message: 'Great! Emailing you the link to validate. Check your email account.' });
+        this.fire("status-message-update", { severity: 'info', message: 'Emailing you the link to validate. Please complete the process, and come back to login.' });
         break;
     }
   },
