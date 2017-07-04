@@ -18,6 +18,9 @@ Polymer({
     this.setViewsAsPerMode(this.mode);  //other values: createAccount, findPassword
     this.$.email_status.style.display = 'none';
     this.$.password_status.style.display = 'none';
+
+    this.$.a11y1.target = this.$.form;
+    this.$.a11y2.target = this.$.form;
   },
 
   isNameValid: function (name) {
