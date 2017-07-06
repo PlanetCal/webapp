@@ -22,13 +22,15 @@
         }
         Polymer.globalsManager.set('selectedDate', selectedDate);
 
-        var product = {
-          name: 'PlanetCal',
-          displayName: 'PlanetCal',
-        }
-        Polymer.globalsManager.set('product', product);
+        Polymer.globalsManager.set('product',
+          {
+            name: 'PlanetCal',
+            displayName: 'PlanetCal',
+          });
 
         Polymer.globalsManager.set('serviceBaseUrl', 'http://localhost:1337');
+
+        Polymer.globalsManager.set('emptyGuid', '00000000-0000-0000-0000-000000000000');
       }
     });
   </script>

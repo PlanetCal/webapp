@@ -12,6 +12,14 @@ Polymer({
     this.countryValue = "";
     this.regionValue = "";
     this.city = "";
+
+    var userDetails = Polymer.globalsManager.globals.userDetails;
+    if (userDetails && userDetails.name) {
+      this.countryValue = userDetails.country;
+      this.city = userDetails.city;
+      this.regionValue = userDetails.region;
+    }
+
     this.product = Polymer.globalsManager.globals.product.displayName;
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
 

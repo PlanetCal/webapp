@@ -4,6 +4,8 @@
 <dom-module id="login-form">
 	<template>
 		<style include="form-styles"></style>
+		<iron-a11y-keys id="a11y1" keys="enter" on-keys-pressed="submitOnclick"></iron-a11y-keys>
+		<iron-a11y-keys id="a11y2" keys="esc" on-keys-pressed="cancelOnclick"></iron-a11y-keys>
 		<div>
 			<form id="form" method="post">
 				<div id="title">[[titleText]]</div>
@@ -23,7 +25,7 @@
 					</div>
 
 					<div id="passwordInputDiv">
-						<paper-input type="password" label="Password" value="{{password}}" on-input="passwordOnkeyup" char-counter maxlength="50">
+						<paper-input type="password" label="[[PasswordLabel]]" value="{{password}}" on-input="passwordOnkeyup" char-counter maxlength="50">
 							<iron-icon icon="communication:vpn-key" prefix></iron-icon>
 						</paper-input>
 						<div class="status" id="password_status">

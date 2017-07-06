@@ -1,14 +1,26 @@
 Polymer({
   is: 'login-form',
 
+  properties: {
+    mode: {
+      type: String
+    }
+  },
+
   ready: function () {
     console.log('login-form ready function called!:');
     this.fire("status-message-update");
+
     this.password_min_length = 4;
     this.name_min_length = 2;
-    this.setViewsAsPerMode('login');  //other values: createAccount, findPassword
+    this.mode = this.mode || 'login';
+
+    this.setViewsAsPerMode(this.mode);  //other values: createAccount, findPassword
     this.$.email_status.style.display = 'none';
     this.$.password_status.style.display = 'none';
+
+    this.$.a11y1.target = this.$.form;
+    this.$.a11y2.target = this.$.form;
   },
 
   isNameValid: function (name) {
@@ -46,6 +58,7 @@ Polymer({
     switch (this.mode) {
       case 'login':
         this.titleText = 'Login';
+        this.PasswordLabel = 'Password';
         this.$.nameFieldDiv.style.display = 'none';
         this.$.loginLinkDiv.style.display = 'none';
         this.sumbitButtonText = 'Login';
@@ -53,23 +66,33 @@ Polymer({
         this.$.createAccountLinkDiv.style.display = 'block';
         break;
       case 'findPassword':
+        this.titleText = 'Pick a new password';
+        this.PasswordLabel = 'New password';
+        this.sumbitButtonText = 'Email me';
         this.$.nameFieldDiv.style.display = 'none';
         this.$.loginLinkDiv.style.display = 'block';
         this.$.forgotAccountLinkDiv.style.display = 'none';
         this.$.createAccountLinkDiv.style.display = 'none';
-        this.sumbitButtonText = 'Email me';
-        this.titleText = 'Pick a new password';
         break;
       case 'createAccount':
+        this.titleText = 'Create Account';
+        this.PasswordLabel = 'Password';
+        this.sumbitButtonText = 'Email me';
         this.$.nameFieldDiv.style.display = 'block';
         this.$.loginLinkDiv.style.display = 'block';
         this.$.forgotAccountLinkDiv.style.display = 'none';
         this.$.createAccountLinkDiv.style.display = 'none';
-        this.sumbitButtonText = 'Email me';
-        this.titleText = 'Create Account';
         break;
       default:
         this.fire("status-message-update", { severity: 'error', message: 'It should not be possible' });
+    }
+
+    var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+    if (loggedInUser) {
+      this.name = loggedInUser.name;
+      this.email = loggedInUser.email;
+      this.$.loginLinkDiv.style.display = 'none';
+      this.$.createAccountLinkDiv.style.display = 'none';
     }
   },
 
@@ -150,7 +173,7 @@ Polymer({
         break;
       case 'findPassword':
       case 'createAccount':
-        this.fire("status-message-update", { severity: 'info', message: 'Great! Emailing you the link to validate. Check your email account.' });
+        this.fire("status-message-update", { severity: 'info', message: 'Emailing you the link to validate. Please complete the process, and come back to login.' });
         break;
     }
   },
