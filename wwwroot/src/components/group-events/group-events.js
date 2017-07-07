@@ -35,6 +35,7 @@ Polymer({
         }
     },
     ready: function () {
+        this.fire("status-message-update");
         var nameFieldDiv = this.$.nameFieldDiv;
         var items = [];
         this.loadEvents();
@@ -64,6 +65,7 @@ Polymer({
     },
     loadEvents: function () {
         //this.emptyGrid();
+        this.fire("status-message-update", { severity: 'info', message: 'Loading events from server ...' });
         this.eventType = 'getEvents';
         this.$.grid.style.display = 'none';
         this.$.btnPast.disabled = false;
@@ -71,7 +73,10 @@ Polymer({
         this.makeAjaxCall();
     },
     showDialog: function (event) {
+        this.$.eventDialogHeader.textContent = "Add Event";
         this.$.saveevent.textContent = "Save";
+        this.$.saveevent.disabled = false;
+        this.$.cancelevent.disabled = false;
         var body = document.querySelector('body');
         Polymer.dom(body).appendChild(this.$.addEvent);
         this.$.addEvent.open();
@@ -102,6 +107,8 @@ Polymer({
     saveEvent: function (e) {
         var isValid = this.validate();
         if (isValid) {
+            this.$.saveevent.disabled = true;
+            this.$.cancelevent.disabled = true;
             this.eventObject = this.constructEventObject();
             this.eventType = this.eventObject.id ? 'putEvents' : 'postEvents';
             this.makeAjaxCall(this.eventObject);
@@ -147,6 +154,7 @@ Polymer({
         this.postalCode = editedItem.Address.PostalCode;
         this.location = editedItem.Location;
         this.groups = editedItem.Groups;
+        this.$.eventDialogHeader.textContent = "Update Event";
         this.$.saveevent.textContent = "Update";
     },
     emptyEventFields: function () {
@@ -241,15 +249,15 @@ Polymer({
     },
 
     handleErrorResponse: function (e) {
-        console.log('cal-events got error from ajax!');
-
+        console.log('group-events got error from ajax!');
+        this.fire("status-message-update", { severity: 'error', message: 'Error occurred on previous operation ...' });
         var req = e.detail.request;
         var jsonResponse = e.detail.request.xhr.response;
         var message = 'Error:';
         message = message + ' Here are the Details: Error Status: ' + req.status + ' Error StatusText: ' + req.statusText;
 
-        this.$.msg.style.display = 'block';
-        this.messageText = message;
+        // this.$.msg.style.display = 'block';
+        // this.messageText = message;
     },
 
     handleAjaxResponse: function (event) {
@@ -260,6 +268,7 @@ Polymer({
                 //this.items = JSON.parse(event.detail.response);
                 this.items = event.detail.response;
                 this.populateGrid();
+                this.fire("status-message-update", { severity: 'info', message: 'Successfully loaded events from server ...' });
                 break;
             case 'publishEvents':
                 break;
@@ -268,20 +277,23 @@ Polymer({
                 var index = this.items.findIndex(e => e.Name === this.eventObject.Name);
                 this.items[index] = this.eventObject;
                 //this.items.push(this.eventObject);
-                //this.populateGrid();
-                var grid = this.$.grid;
-                var gridItems = grid[index];
-                var aa = gridItems;
+                this.populateGrid();
+                this.fire("status-message-update", { severity: 'info', message: 'Event saved successfully ...' });
+                // var grid = this.$.grid;
+                // var gridItems = grid[index];
+                // var aa = gridItems;
                 break;
             case 'putEvents':
                 var index = this.items.findIndex(e => e.id === this.eventObject.id);
                 this.items[index] = this.eventObject;
                 this.populateGrid();
+                this.fire("status-message-update", { severity: 'info', message: 'Event updated successfully ...' });
                 break;
             case 'deleteEvents':
                 var index = this.items.findIndex(e => e.id === this.eventObject.id);
                 this.items.splice(index, 1);
                 this.populateGrid();
+                this.fire("status-message-update", { severity: 'info', message: 'Event deleted successfully ...' });
                 break;
         }
     },
@@ -297,6 +309,7 @@ Polymer({
         grid.items = this.items;
         this.emptyEventFields();
         this.$.grid.style.display = '';
+
     },
     observers: ['resetSelection(inverted)'],
     resetSelection: function (inverted) {

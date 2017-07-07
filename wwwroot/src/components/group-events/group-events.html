@@ -1,25 +1,14 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/src/polymer-refs.html">
 
-<link rel="import" href="/bower_components/vaadin-grid/vaadin-grid.html">
-<link rel="import" href="/bower_components/vaadin-grid/vaadin-grid-selection-column.html">
-<link rel="import" href="/bower_components/paper-input/paper-input.html">
-<link rel="import" href="/bower_components/paper-button/paper-button.html">
-<link rel="import" href="/bower_components/paper-progress/paper-progress.html">
-<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
 <script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-
-<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="/bower_components/paper-dialog/paper-dialog.html">
-
-<script src="/bower_components/moment/moment.js"></script>
-
 <link rel="import" href="./group-events-styles.html">
 
 <dom-module id="group-events">
   <template>
     <!-- Dialog or popup start -->
     <paper-dialog modal id="addEvent" class="size-position">
-      <h2>Add Event</h2>
+      <h2 id="eventDialogHeader"></h2>
       <paper-dialog-scrollable>
         <div class="dialog-textbox" style="width: 600px;">
           <fieldset>
@@ -37,6 +26,7 @@
               <paper-input label="StartDateTime" class="addEvent" value="{{startDateTime}}" char-counter maxlength="50" style="width: 250px;"
                 required error-message="required" on-change="validateOnChange">
               </paper-input>
+
               <span style="width: 60px;"></span>
               <paper-input label="EndDateTime" class="addEvent" value="{{endDateTime}}" char-counter maxlength="50" style="width: 250px;"
                 required error-message="required" on-change="validateOnChange">
@@ -82,16 +72,16 @@
     <style include="group-events-styles"></style>
     <div id="msg">[[messageText]]</div>
     <div>
-      <iron-icon icon="delete-sweep" class="delete" title="Delete selected" on-tap="deleteEvents"></iron-icon>
+      <iron-icon icon="icons:delete-sweep" class="delete" title="Delete selected" on-tap="deleteEvents"></iron-icon>
       <paper-button id="btnUpcoming" class="blue" on-tap="loadEvents">Upcoming</paper-button>
       <paper-button id="btnPast" class="blue" on-tap="pastEvents">past</paper-button>
       <paper-button raised class="indigo" on-tap="showDialog">Add Event</paper-button>
       <paper-button raised class="indigo" on-tap="publishEvents">Publish</paper-button>
     </div>
     <!-- List of Buttons End -->
-    <template is="dom-if" if="{{isLoading}}">
+    <!--template is="dom-if" if="{{isLoading}}">
       <paper-progress indeterminate></paper-progress>
-    </template>
+    </template-->
     <!--iron-ajax auto url="../../data/Data.json" handle-as="json" on-response="handleResponse">
     </iron-ajax-->
     <iron-ajax id='ajax' handle-as='json' loading={{isLoading}} url="[[ajaxUrl]]" content-type='application/json' on-error='handleErrorResponse'
@@ -140,8 +130,8 @@
         <template class="header">Action</template>
         <template>
           <div>
-            <iron-icon icon="create" class="delete" title="Edit" on-tap="editEvent"></iron-icon>
-            <iron-icon icon="delete" class="delete" title="Delete" on-tap="deleteEvent"></iron-icon>
+            <iron-icon icon="icons:create" class="delete" title="Edit" on-tap="editEvent"></iron-icon>
+            <iron-icon icon="icons:delete" class="delete" title="Delete" on-tap="deleteEvent"></iron-icon>
           </div>
         </template>
       </vaadin-grid-column>
