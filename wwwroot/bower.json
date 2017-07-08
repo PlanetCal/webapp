@@ -34,7 +34,9 @@
     "vaadin-grid": "^2.0.2",
     "paper-dialog": "^2.0.0",
     "moment": "^2.18.1",
-    "paper-progress": "^2.0.1"
+    "paper-progress": "^2.0.1",
+    "paper-date-picker": "polymer-paper-date-picker#^1.2.0",
+    "paper-time-picker": "^1.1.5"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
