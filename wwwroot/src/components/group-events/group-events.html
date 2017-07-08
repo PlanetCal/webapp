@@ -35,19 +35,19 @@
             </div>
             <div id="divDate" style="display: flex; width: 570px; margin-top: 10px;">
               <paper-input label="Start Date" class="addEvent" value="{{startDate}}" style="width: 160px;" readonly required error-message="required"
-                on-change="validateOnChange">
+                on-tap="onStartDateChange" on-change="validateOnChange">
               </paper-input>
               <iron-icon class="event-icons" icon="icons:event" title="Start Date" on-tap="onStartDateChange"></iron-icon>
               <paper-input label="Start Time" class="addEvent" value="{{startTime}}" style="width: 80px; margin-left: 10px;" readonly required
-                error-message="required" on-change="validateOnChange">
+                error-message="required" on-tap="onStartTimeChange" on-change="validateOnChange">
               </paper-input>
               <iron-icon class="event-icons" icon="icons:alarm" title="Start Time" on-tap="onStartTimeChange"></iron-icon>
               <paper-input label="End Date" class="addEvent" value="{{endDate}}" style="width: 160px;margin-left: 15px;" readonly required
-                error-message="required" on-change="validateOnChange">
+                error-message="required" on-tap="onEndDateChange" on-change="validateOnChange">
               </paper-input>
               <iron-icon class="event-icons" icon="icons:event" title="End Date" on-tap="onEndDateChange"></iron-icon>
               <paper-input label="End Time" class="addEvent" value="{{endTime}}" style="width: 80px; margin-left: 10px;" readonly required
-                error-message="required" on-change="validateOnChange">
+                error-message="required" on-tap="onEndTimeChange" on-change="validateOnChange">
               </paper-input>
               <iron-icon class="event-icons" icon="icons:alarm" title="End Time" on-tap="onEndTimeChange"></iron-icon>
 
@@ -95,28 +95,28 @@
     <paper-dialog id="startDatePickerDialog" class="paper-date-picker-dialog" modal>
       <paper-date-picker id="startDatePicker" date="{{startDateTime}}"></paper-date-picker>
       <div class="buttons">
-        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-dismiss on-tap="cancelStartDate">Cancel</paper-button>
         <paper-button dialog-confirm on-tap="setStartDate">OK</paper-button>
       </div>
     </paper-dialog>
     <paper-dialog id="startTimePickerDialog" modal class="paper-time-picker-dialog">
       <paper-time-picker id="startTimePicker" time="{{startTime}}"></paper-time-picker>
       <div class="buttons">
-        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-dismiss on-tap="cancelStartTime">Cancel</paper-button>
         <paper-button dialog-confirm on-tap="setStartTime">OK</paper-button>
       </div>
     </paper-dialog>
     <paper-dialog id="endDatePickerDialog" class="paper-date-picker-dialog" modal>
       <paper-date-picker id="endDatePicker" date="{{endDateTime}}"></paper-date-picker>
       <div class="buttons">
-        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-dismiss on-tap="cancelEndDate">Cancel</paper-button>
         <paper-button dialog-confirm on-tap="setEndDate">OK</paper-button>
       </div>
     </paper-dialog>
     <paper-dialog id="endTimePickerDialog" modal class="paper-time-picker-dialog">
       <paper-time-picker id="endTimePicker" time="{{endTime}}"></paper-time-picker>
       <div class="buttons">
-        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-dismiss on-tap="cancelEndTime">Cancel</paper-button>
         <paper-button dialog-confirm on-tap="setEndTime">OK</paper-button>
       </div>
     </paper-dialog>

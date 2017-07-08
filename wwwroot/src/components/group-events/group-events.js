@@ -104,6 +104,7 @@ Polymer({
         var body = document.querySelector('body');
         Polymer.dom(body).appendChild(this.$.startDatePickerDialog);
         this.$.startDatePickerDialog.open();
+        this.tempStartDateTime = this.startDateTime;
     },
     setStartDate: function () {
         this.startDate = this.formatDate(this.startDateTime);
@@ -129,6 +130,7 @@ Polymer({
         var body = document.querySelector('body');
         Polymer.dom(body).appendChild(this.$.endDatePickerDialog);
         this.$.endDatePickerDialog.open();
+        this.tempEndDateTime = this.endDateTime;
     },
     setEndDate: function () {
         this.endDate = this.formatDate(this.endDateTime);
@@ -149,6 +151,18 @@ Polymer({
             tempDate.setMinutes(this.getMinutes(this.endTime));
             this.endDateTime = tempDate;
         }
+    },
+    cancelStartDate: function () {
+        this.startDateTime = this.tempStartDateTime;
+    },
+    cancelEndDate: function () {
+        this.endDateTime = this.tempEndDateTime;
+    },
+    cancelStartTime: function () {
+        this.startTime = this.formatTime(this.endDateTime);
+    },
+    cancelEndTime: function () {
+        this.endTime = this.formatTime(this.endDateTime);
     },
     saveEvent: function (e) {
         var isValid = this.validate();
@@ -301,6 +315,10 @@ Polymer({
     },
 
     handleErrorResponse: function (e) {
+        var dialog = this.$.addEvent;
+        if (dialog) {
+            dialog.close();
+        }
         console.log('group-events got error from ajax!');
         this.fire("status-message-update", { severity: 'error', message: 'Error occurred on previous operation ...' });
         var req = e.detail.request;
