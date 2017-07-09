@@ -46,9 +46,9 @@
 
       _dataChanged: function () {
         if (this.rootRow === true) {
-          this.url = "/src/components/groups/mockdata/groups.json";
+          this.url = "/src/components/groups/browse/mockdata/groups.json";
         } else if (this.parentGroupId !== null && this.parentGroupId !== '' && this.parentGroupId !== undefined) {
-          this.url = "/src/components/groups/mockdata/groups" + this.parentGroupId + ".json";
+          this.url = "/src/components/groups/browse/mockdata/groups" + this.parentGroupId + ".json";
         }
       },
 
