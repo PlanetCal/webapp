@@ -1,0 +1,94 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/src/polymer-refs.html">
+<link rel="import" href="groups-edit-styles.html">
+<script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+
+<dom-module id="groups-edit">
+  <template>
+    <style include="groups-edit-styles"></style>
+    <div>
+      <div style="margin: 10px; display: flex;">
+        <paper-button class="back" on-tap="delete">
+          <iron-icon icon="icons:arrow-back"></iron-icon> Back to Groups</paper-button>
+        <h3 style="margin-left: 15%">Group Details</h3>
+      </div>
+      <fieldset>
+        <div>
+          <paper-input label="Name" class="saveGroups" value="{{name}}" char-counter maxlength="50" required error-message="required"
+            on-change="validateOnChange">
+          </paper-input>
+        </div>
+        <div>
+          <paper-textarea class="saveGroups" label="Description" value="{{description}}" id="desc" char-counter maxlength="500" max-rows="4"
+            required error-message="required" on-change="validateOnChange"></paper-textarea>
+        </div>
+        <div style="display: flex; width: 100%">
+          <paper-input label="Street Number" class="saveGroups" value="{{streetNumber}}" char-counter maxlength="15" style="width: 30%;"
+            required error-message="required" on-change="validateOnChange">
+          </paper-input>
+          <span style="width: 5%"></span>
+          <paper-input label="Street Name" class="saveGroups" value="{{streetName}}" char-counter maxlength="50" style="width: 67%;"
+            required error-message="required" on-change="validateOnChange">
+          </paper-input>
+        </div>
+        <div style="display: flex;">
+          <paper-input label="City" class="saveGroups" value="{{city}}" char-counter maxlength="20" style="width: 30%;" required error-message="required"
+            on-change="validateOnChange">
+          </paper-input>
+          <span style="width: 5%;"></span>
+          <paper-input label="State" class="saveGroups" value="{{state}}" char-counter maxlength="20" style="width: 30%;" required
+            error-message="required" on-change="validateOnChange">
+          </paper-input>
+          <span style="width: 5%;"></span>
+          <paper-input label="Postal Code" class="saveGroups" value="{{postalCode}}" char-counter maxlength="10" style="width: 30%;"
+            required error-message="required" on-change="validateOnChange">
+          </paper-input>
+        </div>
+        <div style="display: flex;">
+          <paper-input label="Location" class="saveGroups" value="{{location}}" char-counter maxlength="10" style="width: 30%;" required
+            error-message="required" on-change="validateOnChange">
+          </paper-input>
+          <span style="width: 5%;"></span>
+          <paper-input label="Phone" class="saveGroups" value="{{phone}}" char-counter maxlength="20" style="width: 30%;" required
+            error-message="required" on-change="validateOnChange">
+          </paper-input>
+          <span style="width: 5%;"></span>
+          <paper-input label="Email" class="saveGroups" value="{{email}}" char-counter maxlength="10" style="width: 30%;" required
+            error-message="required" on-change="validateOnChange">
+          </paper-input>
+        </div>
+        <div style="display: flex; width: 100%">
+          <paper-input label="owner" class="saveGroups" value="{{owner}}" char-counter maxlength="30" style="width: 30%;" required
+            error-message="required" on-change="validateOnChange">
+          </paper-input>
+          <span style="width: 5%"></span>
+          <paper-input label="Website" class="saveGroups" value="{{website}}" char-counter maxlength="50" style="width: 30%;" required
+            error-message="required" on-change="validateOnChange">
+          </paper-input>
+          <span style="width: 5%;"></span>
+          <paper-input label="Privacy" class="saveGroups" value="{{privacy}}" char-counter maxlength="10" style="width: 30%;" required
+            error-message="required" on-change="validateOnChange" readonly>
+          </paper-input>
+        </div>
+        <div>
+          <paper-textarea label="Administrators" class="saveGroups" value="{{administrators}}" char-counter maxlength="200" max-rows="2">
+          </paper-textarea>
+        </div>
+        <div>
+          <paper-textarea label="Members" class="saveGroups" value="{{members}}" char-counter maxlength="200" max-rows="" 2>
+          </paper-textarea>
+        </div>
+        <div class="buttons">
+          <paper-button class="blue" on-tap="delete">
+            <iron-icon icon="icons:delete"></iron-icon> Delete</paper-button>
+          <paper-button class="blue" on-tap="reset">
+            <iron-icon icon="icons:refresh"></iron-icon> Reset</paper-button>
+          <paper-button class="blue" on-tap="saveGroup">
+            <iron-icon icon="icons:done"></iron-icon> Save Group</paper-button>
+        </div>
+      </fieldset>
+    </div>
+    <iron-localstorage name='planetCal-storage' value='{{localStorage}}' on-iron-localstorage-load='_onLocalStorageLoad'></iron-localstorage>
+  </template>
+  <script type="text/javascript" src="/src/components/groups/edit/groups-edit.js"></script>
+</dom-module>

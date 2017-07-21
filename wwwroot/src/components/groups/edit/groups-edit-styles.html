@@ -1,0 +1,62 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<dom-module id="groups-edit-styles">
+    <template>
+        <style>
+             :host {
+                display: block;
+            }
+            
+            body {
+                background-color: lightblue;
+            }
+            
+            a {
+                text-decoration: none;
+                color: var(--paper-blue-a200);
+                ;
+            }
+            
+            a:hover {
+                text-decoration: underline;
+                color: lightseagreen;
+            }
+            
+            paper-button {
+                font-family: 'Roboto', 'Noto', sans-serif;
+                font-weight: normal;
+                font-size: 14px;
+                -webkit-font-smoothing: antialiased;
+            }
+            
+            paper-button.blue {
+                color: var(--paper-blue-a200);
+                width: 150px;
+                --paper-button-ink-color: var(--paper-blue-a200);
+            }
+            
+            paper-button.blue:hover {
+                background-color: var(--paper-blue-100);
+            }
+            
+            paper-button.back {
+                background-color: var(--paper-blue-100);
+                color: var(--paper-blue-a200);
+                width: 250px;
+                --paper-button-ink-color: var(--paper-blue-a200);
+            }
+            
+            paper-button.back:hover {
+                color: lightseagreen;
+            }
+            
+            div.buttons {
+                width: 100%;
+                text-align: right;
+                margin-top: 20px;
+                margin-right: 20px;
+                align-content: inherit;
+            }
+        </style>
+    </template>
+</dom-module>

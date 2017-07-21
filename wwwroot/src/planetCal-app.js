@@ -17,6 +17,7 @@ Polymer({
     'page-load-requested': '_pageLoadRequestHandler',
     'on-logout-requested': '_logoutRequestHandler',
     'on-login-successful': '_loginSuccessHandler',
+    'on-edit-group': '_onEditGroup',
     'status-message-update': '_messageUpdateHandler'
   },
 
@@ -63,6 +64,10 @@ Polymer({
       this.toggleEventsView = !this.toggleEventsView;
       this.set('route.path', '/events');
     }
+  },
+
+  _onEditGroup: function () {
+    this.set('route.path', '/groups-edit');
   },
 
   _routePageChanged: function (page) {
