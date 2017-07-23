@@ -95,7 +95,7 @@ Polymer({
 
   getVenue: function (item) {
     if (item && item[0]) {
-      return item[0].Name;
+      return item[0].name;
     } else {
       return '';
     }
@@ -103,7 +103,7 @@ Polymer({
 
   getVenueLink: function (item) {
     if (item && item[0]) {
-      return item[0].WebSite;
+      return item[0].webSite;
     } else {
       return '';
     }

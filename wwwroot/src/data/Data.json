@@ -1,1024 +1,1024 @@
 [
   {
-    "Name": "LEAP Days",
-    "Description": "LEAP Days",
-    "DateTime": "2016-08-29T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "LEAP Days",
+    "description": "LEAP Days",
+    "dateTime": "2016-08-29T24:00Z",
+    "duration": 120,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "No School - Labor Day",
-    "Description": "No School - Labor Day",
-    "DateTime": "2016-09-05T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No School - Labor Day",
+    "description": "No School - Labor Day",
+    "dateTime": "2016-09-05T24:00Z",
+    "duration": 120,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "First Day of School (grades 1-12)",
-    "Description": "First Day of School (grades 1-12)",
-    "DateTime": "2016-09-06T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "First Day of School (grades 1-12)",
+    "description": "First Day of School (grades 1-12)",
+    "dateTime": "2016-09-06T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "First Day of School",
-    "Description": "First Day of School",
-    "DateTime": "2016-09-06T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "First Day of School",
+    "description": "First Day of School",
+    "dateTime": "2016-09-06T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "First Day of School for Kindergarten",
-    "Description": "First Day of School for Kindergarten",
-    "DateTime": "2016-09-09T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "First Day of School for Kindergarten",
+    "description": "First Day of School for Kindergarten",
+    "dateTime": "2016-09-09T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "1.5 hrs. early release schedule begins",
-    "Description": "1.5 hrs. early release schedule begins",
-    "DateTime": "2016-09-14T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "1.5 hrs. early release schedule begins",
+    "description": "1.5 hrs. early release schedule begins",
+    "dateTime": "2016-09-14T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Half-Day Elementary Conferences",
-    "Description": "Half-Day Elementary Conferences",
-    "DateTime": "2016-10-17T24:00Z",
-    "Duration": 72,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Half-Day Elementary Conferences",
+    "description": "Half-Day Elementary Conferences",
+    "dateTime": "2016-10-17T24:00Z",
+    "duration": 72,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "No School - LEAP Day",
-    "Description": "No School - LEAP Day",
-    "DateTime": "2016-10-21T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No School - LEAP Day",
+    "description": "No School - LEAP Day",
+    "dateTime": "2016-10-21T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Last Day 1st Quarter (Secondary)",
-    "Description": "Last Day 1st Quarter (Secondary)",
-    "DateTime": "2016-11-08T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Last Day 1st Quarter (Secondary)",
+    "description": "Last Day 1st Quarter (Secondary)",
+    "dateTime": "2016-11-08T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "No School - Veterans Day",
-    "Description": "No School - Veterans Day",
-    "DateTime": "2016-11-11T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No School - Veterans Day",
+    "description": "No School - Veterans Day",
+    "dateTime": "2016-11-11T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Secondary Grades Due",
-    "Description": "Secondary Grades Due",
-    "DateTime": "2016-11-15T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Secondary Grades Due",
+    "description": "Secondary Grades Due",
+    "dateTime": "2016-11-15T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Veterans Day (Observed)",
-    "Description": "Veterans Day (Observed)",
-    "DateTime": "2016-11-11T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Veterans Day (Observed)",
+    "description": "Veterans Day (Observed)",
+    "dateTime": "2016-11-11T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Elementary Early Dismissal",
-    "Description": "Elementary Early Dismissal",
-    "DateTime": "2016-11-17T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Elementary Early Dismissal",
+    "description": "Elementary Early Dismissal",
+    "dateTime": "2016-11-17T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Elementary Early Dismissal",
-    "Description": "Elementary Early Dismissal",
-    "DateTime": "2016-11-18T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Elementary Early Dismissal",
+    "description": "Elementary Early Dismissal",
+    "dateTime": "2016-11-18T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Elementary Early Dismissal",
-    "Description": "Elementary Early Dismissal",
-    "DateTime": "2016-11-21T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Elementary Early Dismissal",
+    "description": "Elementary Early Dismissal",
+    "dateTime": "2016-11-21T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Elementary Early Dismissal",
-    "Description": "Elementary Early Dismissal",
-    "DateTime": "2016-11-22T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Elementary Early Dismissal",
+    "description": "Elementary Early Dismissal",
+    "dateTime": "2016-11-22T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Elementary Early Dismissal",
-    "Description": "Elementary Early Dismissal",
-    "DateTime": "2016-11-23T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Elementary Early Dismissal",
+    "description": "Elementary Early Dismissal",
+    "dateTime": "2016-11-23T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Half-Day",
-    "Description": "Half-Day",
-    "DateTime": "2016-11-23T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Half-Day",
+    "description": "Half-Day",
+    "dateTime": "2016-11-23T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Thanksgiving Break",
-    "Description": "Thanksgiving Break",
-    "DateTime": "2016-11-23T24:00Z",
-    "Duration": 48,
-    "Groups": [ "Northshore School District" ]
+    "name": "Thanksgiving Break",
+    "description": "Thanksgiving Break",
+    "dateTime": "2016-11-23T24:00Z",
+    "duration": 48,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "No School - Thanksgiving Vacation",
-    "Description": "No School - Thanksgiving Vacation",
-    "DateTime": "2016-11-24T24:00Z",
-    "Duration": 48,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No School - Thanksgiving Vacation",
+    "description": "No School - Thanksgiving Vacation",
+    "dateTime": "2016-11-24T24:00Z",
+    "duration": 48,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "No School (Winter Break)",
-    "Description": "No School (Winter Break)",
-    "DateTime": "2017-12-16T24:00Z",
-    "Duration": 288,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "No School (Winter Break)",
+    "description": "No School (Winter Break)",
+    "dateTime": "2017-12-16T24:00Z",
+    "duration": 288,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "No School - Winter Break",
-    "Description": "No School - Winter Break",
-    "DateTime": "2016-12-16T24:00Z",
-    "Duration": 264,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No School - Winter Break",
+    "description": "No School - Winter Break",
+    "dateTime": "2016-12-16T24:00Z",
+    "duration": 264,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Winter Break",
-    "Description": "Winter Break",
-    "DateTime": "2016-12-19T24:00Z",
-    "Duration": 264,
-    "Groups": [ "Northshore School District" ]
+    "name": "Winter Break",
+    "description": "Winter Break",
+    "dateTime": "2016-12-19T24:00Z",
+    "duration": 264,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "First Winter Break",
-    "Description": "No school for students or staff",
-    "DateTime": "2016-12-21T24:00Z",
-    "Duration": 216,
-    "Groups": [ "Issaquah School District" ]
+    "name": "First Winter Break",
+    "description": "No school for students or staff",
+    "dateTime": "2016-12-21T24:00Z",
+    "duration": 216,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "New Year's Day",
-    "Description": "New Year's Day, also called simply New Year's or New Year, is observed on January 1, the first day of the year on the modern Gregorian calendar as well as the Julian calendar.",
-    "DateTime": "2017-01-02T24:00Z",
-    "Duration": 24,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "New Year's Day",
+    "description": "New Year's Day, also called simply New Year's or New Year, is observed on January 1, the first day of the year on the modern Gregorian calendar as well as the Julian calendar.",
+    "dateTime": "2017-01-02T24:00Z",
+    "duration": 24,
+    "groups": [ "USA", "Microsoft" ]
   },
   {
-    "Name": "Martin Luther King Day",
-    "Description": "The day is celebrated as the birthday of Martin Luther King Jr.",
-    "DateTime": "2017-01-16T24:00Z",
-    "Duration": 24,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "Martin Luther King Day",
+    "description": "The day is celebrated as the birthday of Martin Luther King Jr.",
+    "dateTime": "2017-01-16T24:00Z",
+    "duration": 24,
+    "groups": [ "USA", "Microsoft" ]
   },
   {
-    "Name": "No School - MLK Jr. Day",
-    "Description": "No School - MLK Jr. Day",
-    "DateTime": "2017-01-16T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No School - MLK Jr. Day",
+    "description": "No School - MLK Jr. Day",
+    "dateTime": "2017-01-16T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Martin Luther King Day",
-    "Description": "Martin Luther King Day",
-    "DateTime": "2017-01-16T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Martin Luther King Day",
+    "description": "Martin Luther King Day",
+    "dateTime": "2017-01-16T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Martin Luther King Jr. Day",
-    "Description": "No school for students or staff",
-    "DateTime": "2017-01-16T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Martin Luther King Jr. Day",
+    "description": "No school for students or staff",
+    "dateTime": "2017-01-16T24:00Z",
+    "duration": 24,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "No School (MLK Jr. Day)",
-    "Description": "No School (MLK Jr. Day)",
-    "DateTime": "2017-01-16T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "No School (MLK Jr. Day)",
+    "description": "No School (MLK Jr. Day)",
+    "dateTime": "2017-01-16T24:00Z",
+    "duration": 24,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "Elementary Grades Due",
-    "Description": "Elementary Grades Due",
-    "DateTime": "2017-01-18T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Elementary Grades Due",
+    "description": "Elementary Grades Due",
+    "dateTime": "2017-01-18T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Half-Day Elementary Conferences",
-    "Description": "Half-Day Elementary Conferences",
-    "DateTime": "2017-01-24T24:00Z",
-    "Duration": 72,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Half-Day Elementary Conferences",
+    "description": "Half-Day Elementary Conferences",
+    "dateTime": "2017-01-24T24:00Z",
+    "duration": 72,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Last Day 1st Semester",
-    "Description": "Last Day 1st Semester",
-    "DateTime": "2017-01-27T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Last Day 1st Semester",
+    "description": "Last Day 1st Semester",
+    "dateTime": "2017-01-27T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Teacher Work Day",
-    "Description": "No school for students",
-    "DateTime": "2017-01-30T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Teacher Work Day",
+    "description": "No school for students",
+    "dateTime": "2017-01-30T24:00Z",
+    "duration": 24,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "Non-Student Day",
-    "Description": "Non-Student Day",
-    "DateTime": "2017-01-30T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Non-Student Day",
+    "description": "Non-Student Day",
+    "dateTime": "2017-01-30T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Secondary Grades Due",
-    "Description": "Secondary Grades Due",
-    "DateTime": "2017-02-03T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Secondary Grades Due",
+    "description": "Secondary Grades Due",
+    "dateTime": "2017-02-03T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Elementary Early Dismissal",
-    "Description": "Elementary Early Dismissal",
-    "DateTime": "2017-02-10T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Elementary Early Dismissal",
+    "description": "Elementary Early Dismissal",
+    "dateTime": "2017-02-10T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Valentines Fun",
-    "Description": "Valentines Fun",
-    "DateTime": "2017-02-14T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "Valentines Fun",
+    "description": "Valentines Fun",
+    "dateTime": "2017-02-14T24:00Z",
+    "duration": 24,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "No School - Mid-Winter Break",
-    "Description": "No School - Mid-Winter Break",
-    "DateTime": "2017-02-16T24:00Z",
-    "Duration": 48,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No School - Mid-Winter Break",
+    "description": "No School - Mid-Winter Break",
+    "dateTime": "2017-02-16T24:00Z",
+    "duration": 48,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "No School (Teachers IB Training)",
-    "Description": "No School (Teachers IB Training)",
-    "DateTime": "2017-02-17T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "No School (Teachers IB Training)",
+    "description": "No School (Teachers IB Training)",
+    "dateTime": "2017-02-17T24:00Z",
+    "duration": 24,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "No School (Presidents Day)",
-    "Description": "No School (Presidents Day))",
-    "DateTime": "2017-02-20T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "No School (Presidents Day)",
+    "description": "No School (Presidents Day))",
+    "dateTime": "2017-02-20T24:00Z",
+    "duration": 24,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "President's Day",
-    "Description": "President's Day",
-    "DateTime": "2017-02-20T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "President's Day",
+    "description": "President's Day",
+    "dateTime": "2017-02-20T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Presidents Day",
-    "Description": "The day is celebrated in honor of George Washington, the first President of the United States.",
-    "DateTime": "2017-02-20T24:00Z",
-    "Duration": 24,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "Presidents Day",
+    "description": "The day is celebrated in honor of George Washington, the first President of the United States.",
+    "dateTime": "2017-02-20T24:00Z",
+    "duration": 24,
+    "groups": [ "USA", "Microsoft" ]
   },
   {
-    "Name": "Mid-Winter Break",
-    "Description": "Mid-Winter Break",
-    "DateTime": "2017-02-21T24:00Z",
-    "Duration": 96,
-    "Groups": [ "Northshore School District" ]
+    "name": "Mid-Winter Break",
+    "description": "Mid-Winter Break",
+    "dateTime": "2017-02-21T24:00Z",
+    "duration": 96,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Presidents Day & Second Winter Break",
-    "Description": "No school for students or staff",
-    "DateTime": "2017-01-30T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Presidents Day & Second Winter Break",
+    "description": "No school for students or staff",
+    "dateTime": "2017-01-30T24:00Z",
+    "duration": 120,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "No School - Presidents Day",
-    "Description": "No School - Presidents Day",
-    "DateTime": "2017-02-20T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No School - Presidents Day",
+    "description": "No School - Presidents Day",
+    "dateTime": "2017-02-20T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "PK/K/Bilingual/2/3 Parent Teacher Conferences",
-    "Description": "PK/K/Bilingual/2/3 Parent Teacher Conferences",
-    "DateTime": "2017-03-06T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "PK/K/Bilingual/2/3 Parent Teacher Conferences",
+    "description": "PK/K/Bilingual/2/3 Parent Teacher Conferences",
+    "dateTime": "2017-03-06T24:00Z",
+    "duration": 120,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "Enrichment Session 2 ends",
-    "Description": "Enrichment Session 2 ends",
-    "DateTime": "2017-03-10T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "Enrichment Session 2 ends",
+    "description": "Enrichment Session 2 ends",
+    "dateTime": "2017-03-10T24:00Z",
+    "duration": 24,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "Enrichment Session 3 begins",
-    "Description": "Enrichment Session 3 begins",
-    "DateTime": "2017-03-13T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "Enrichment Session 3 begins",
+    "description": "Enrichment Session 3 begins",
+    "dateTime": "2017-03-13T24:00Z",
+    "duration": 24,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "1/4/5 Parent Teacher Conferences",
-    "Description": "1/4/5 Parent Teacher Conferences",
-    "DateTime": "2017-03-13T24:00Z",
-    "Duration": 96,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "1/4/5 Parent Teacher Conferences",
+    "description": "1/4/5 Parent Teacher Conferences",
+    "dateTime": "2017-03-13T24:00Z",
+    "duration": 96,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "No School (Teachers IB Training)",
-    "Description": "No School (Teachers IB Training)",
-    "DateTime": "2017-03-17T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "No School (Teachers IB Training)",
+    "description": "No School (Teachers IB Training)",
+    "dateTime": "2017-03-17T24:00Z",
+    "duration": 24,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "No School - LEAP Day",
-    "Description": "No School - LEAP Day",
-    "DateTime": "2017-03-10T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No School - LEAP Day",
+    "description": "No School - LEAP Day",
+    "dateTime": "2017-03-10T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Full School Day - No Early Release",
-    "Description": "Full School Day - No Early Release",
-    "DateTime": "2017-03-22T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Full School Day - No Early Release",
+    "description": "Full School Day - No Early Release",
+    "dateTime": "2017-03-22T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "No School - Spring Break",
-    "Description": "No School - Spring Break",
-    "DateTime": "2017-04-03T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No School - Spring Break",
+    "description": "No School - Spring Break",
+    "dateTime": "2017-04-03T24:00Z",
+    "duration": 120,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "No School (Spring Break)",
-    "Description": "No School (Spring Break)",
-    "DateTime": "2017-04-03T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "No School (Spring Break)",
+    "description": "No School (Spring Break)",
+    "dateTime": "2017-04-03T24:00Z",
+    "duration": 120,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "Full School Day - No Early Release",
-    "Description": "Full School Day - No Early Release",
-    "DateTime": "2017-04-12T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Full School Day - No Early Release",
+    "description": "Full School Day - No Early Release",
+    "dateTime": "2017-04-12T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Last Day 3rd Quarter (Secondary)",
-    "Description": "Last Day 3rd Quarter (Secondary)",
-    "DateTime": "2017-04-04T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Last Day 3rd Quarter (Secondary)",
+    "description": "Last Day 3rd Quarter (Secondary)",
+    "dateTime": "2017-04-04T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Spring Break",
-    "Description": "No school for students or staff",
-    "DateTime": "2017-04-10T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Spring Break",
+    "description": "No school for students or staff",
+    "dateTime": "2017-04-10T24:00Z",
+    "duration": 120,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "Spring Break",
-    "Description": "Spring Break",
-    "DateTime": "2017-04-10T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Northshore School District" ]
+    "name": "Spring Break",
+    "description": "Spring Break",
+    "dateTime": "2017-04-10T24:00Z",
+    "duration": 120,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Secondary Grades Due",
-    "Description": "Secondary Grades Due",
-    "DateTime": "2017-04-21T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Secondary Grades Due",
+    "description": "Secondary Grades Due",
+    "dateTime": "2017-04-21T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Testing Week",
-    "Description": "Testing Week",
-    "DateTime": "2017-04-24T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "Testing Week",
+    "description": "Testing Week",
+    "dateTime": "2017-04-24T24:00Z",
+    "duration": 120,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "Teacher Appreciation",
-    "Description": "Teacher Appreciation",
-    "DateTime": "2017-05-01T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "Teacher Appreciation",
+    "description": "Teacher Appreciation",
+    "dateTime": "2017-05-01T24:00Z",
+    "duration": 120,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "Full School Day - No Early Release",
-    "Description": "Full School Day - No Early Release",
-    "DateTime": "2017-05-03T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Full School Day - No Early Release",
+    "description": "Full School Day - No Early Release",
+    "dateTime": "2017-05-03T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Memorial Day",
-    "Description": "Memorial Day is for remembering the people who died while serving in the country's armed forces.",
-    "DateTime": "2017-05-29T24:00Z",
-    "Duration": 24,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "Memorial Day",
+    "description": "Memorial Day is for remembering the people who died while serving in the country's armed forces.",
+    "dateTime": "2017-05-29T24:00Z",
+    "duration": 24,
+    "groups": [ "USA", "Microsoft" ]
   },
   {
-    "Name": "Memorial Day",
-    "Description": "Memorial Day",
-    "DateTime": "2017-04-10T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Memorial Day",
+    "description": "Memorial Day",
+    "dateTime": "2017-04-10T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "No School - Memorial Day",
-    "Description": "No School - Memorial Day",
-    "DateTime": "2017-05-29T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No School - Memorial Day",
+    "description": "No School - Memorial Day",
+    "dateTime": "2017-05-29T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Memorial Day",
-    "Description": "No school for students or staff",
-    "DateTime": "2017-04-10T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Memorial Day",
+    "description": "No school for students or staff",
+    "dateTime": "2017-04-10T24:00Z",
+    "duration": 120,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "No School (Memorial Day)",
-    "Description": "No School (Memorial Day)",
-    "DateTime": "2017-05-29T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "No School (Memorial Day)",
+    "description": "No School (Memorial Day)",
+    "dateTime": "2017-05-29T24:00Z",
+    "duration": 24,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "Parent Appreciation",
-    "Description": "Parent Appreciation",
-    "DateTime": "2017-05-30T24:00Z",
-    "Duration": 96,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "Parent Appreciation",
+    "description": "Parent Appreciation",
+    "dateTime": "2017-05-30T24:00Z",
+    "duration": 96,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "Full School Day - No Early Release",
-    "Description": "Full School Day - No Early Release",
-    "DateTime": "2017-05-31T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Full School Day - No Early Release",
+    "description": "Full School Day - No Early Release",
+    "dateTime": "2017-05-31T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Enrichment Session 3 ends",
-    "Description": "Enrichment Session 3 ends",
-    "DateTime": "2017-06-09T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "Enrichment Session 3 ends",
+    "description": "Enrichment Session 3 ends",
+    "dateTime": "2017-06-09T24:00Z",
+    "duration": 24,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "Bilingual/5 Graduation",
-    "Description": "Bilingual/5 Graduation",
-    "DateTime": "2017-06-13T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "Bilingual/5 Graduation",
+    "description": "Bilingual/5 Graduation",
+    "dateTime": "2017-06-13T24:00Z",
+    "duration": 24,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "Pre-K Graduation",
-    "Description": "Pre-K Graduation",
-    "DateTime": "2017-06-14T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": "Pre-K Graduation",
+    "description": "Pre-K Graduation",
+    "dateTime": "2017-06-14T24:00Z",
+    "duration": 24,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": " Last Day of School (End-of-Year Fun)",
-    "Description": " Last Day of School (End-of-Year Fun)",
-    "DateTime": "2017-06-15T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Bellevue Childrens Academy" ]
+    "name": " Last Day of School (End-of-Year Fun)",
+    "description": " Last Day of School (End-of-Year Fun)",
+    "dateTime": "2017-06-15T24:00Z",
+    "duration": 24,
+    "groups": [ "Bellevue Childrens Academy" ]
   },
   {
-    "Name": "Last day of school for students",
-    "Description": "Last day of school for students",
-    "DateTime": "2017-06-16T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Last day of school for students",
+    "description": "Last day of school for students",
+    "dateTime": "2017-06-16T24:00Z",
+    "duration": 24,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "Summer Holidays",
-    "Description": "Summer Holidays",
-    "DateTime": "2017-06-19T24:00Z",
-    "Duration": 312,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Summer Holidays",
+    "description": "Summer Holidays",
+    "dateTime": "2017-06-19T24:00Z",
+    "duration": 312,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "Elementary Grades Due",
-    "Description": "Elementary Grades Due",
-    "DateTime": "2017-06-16T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Elementary Grades Due",
+    "description": "Elementary Grades Due",
+    "dateTime": "2017-06-16T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Full School Day - No Early Release",
-    "Description": "Full School Day - No Early Release",
-    "DateTime": "2017-06-21T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Full School Day - No Early Release",
+    "description": "Full School Day - No Early Release",
+    "dateTime": "2017-06-21T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Half-Day - Last Day of School",
-    "Description": "Half-Day - Last Day of School",
-    "DateTime": "2017-06-23T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Half-Day - Last Day of School",
+    "description": "Half-Day - Last Day of School",
+    "dateTime": "2017-06-23T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Summer Holidays",
-    "Description": "Summer Holidays",
-    "DateTime": "2017-06-23T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Summer Holidays",
+    "description": "Summer Holidays",
+    "dateTime": "2017-06-23T24:00Z",
+    "duration": 120,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Last Day of School",
-    "Description": "Last Day of School",
-    "DateTime": "2017-06-26T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Last Day of School",
+    "description": "Last Day of School",
+    "dateTime": "2017-06-26T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Grading Days Elementary and Secondary",
-    "Description": "Grading Days Elementary and Secondary",
-    "DateTime": "2017-06-27T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Grading Days Elementary and Secondary",
+    "description": "Grading Days Elementary and Secondary",
+    "dateTime": "2017-06-27T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Grading Days Elementary and Secondary",
-    "Description": "Grading Days Elementary and Secondary",
-    "DateTime": "2017-06-30T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Grading Days Elementary and Secondary",
+    "description": "Grading Days Elementary and Secondary",
+    "dateTime": "2017-06-30T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Last Day of School",
-    "Description": "Last Day of School",
-    "DateTime": "2017-06-26T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Last Day of School",
+    "description": "Last Day of School",
+    "dateTime": "2017-06-26T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Summer Holidays",
-    "Description": "Summer Holidays",
-    "DateTime": "2017-06-27T24:00Z",
-    "Duration": 1224,
-    "Groups": [ "Northshore School District" ]
+    "name": "Summer Holidays",
+    "description": "Summer Holidays",
+    "dateTime": "2017-06-27T24:00Z",
+    "duration": 1224,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Independence Day",
-    "Description": "An Independence Day is an annual event commemorating the anniversary of a nation's independence or statehood.",
-    "DateTime": "2017-07-04T24:00Z",
-    "Duration": 24,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "Independence Day",
+    "description": "An Independence Day is an annual event commemorating the anniversary of a nation's independence or statehood.",
+    "dateTime": "2017-07-04T24:00Z",
+    "duration": 24,
+    "groups": [ "USA", "Microsoft" ]
   },
   {
-    "Name": "Labor Day",
-    "Description": "Labor Day honors the labor movement and the contributions that workers have made to the strength, prosperity, laws and well-being of the country.",
-    "DateTime": "2017-09-04T24:00Z",
-    "Duration": 24,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "Labor Day",
+    "description": "Labor Day honors the labor movement and the contributions that workers have made to the strength, prosperity, laws and well-being of the country.",
+    "dateTime": "2017-09-04T24:00Z",
+    "duration": 24,
+    "groups": [ "USA", "Microsoft" ]
   },
   {
-    "Name": "No school - Labor Day",
-    "Description": "No school - Labor Day",
-    "DateTime": "2017-09-04T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No school - Labor Day",
+    "description": "No school - Labor Day",
+    "dateTime": "2017-09-04T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "First Day of School (grades 1-12)",
-    "Description": "First Day of School (grades 1-12)",
-    "DateTime": "2017-09-05T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "First Day of School (grades 1-12)",
+    "description": "First Day of School (grades 1-12)",
+    "dateTime": "2017-09-05T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "First day of school for students",
-    "Description": "First day of school for students",
-    "DateTime": "2017-09-06T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Issaquah School District" ]
+    "name": "First day of school for students",
+    "description": "First day of school for students",
+    "dateTime": "2017-09-06T24:00Z",
+    "duration": 24,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "First Day of School",
-    "Description": "First Day of School",
-    "DateTime": "2017-09-26T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "First Day of School",
+    "description": "First Day of School",
+    "dateTime": "2017-09-26T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "1.5 hrs. early release schedule begins",
-    "Description": "1.5 hrs. early release schedule begins",
-    "DateTime": "2017-09-06T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "1.5 hrs. early release schedule begins",
+    "description": "1.5 hrs. early release schedule begins",
+    "dateTime": "2017-09-06T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "First Day of School for Kindergarten",
-    "Description": "First Day of School for Kindergarten",
-    "DateTime": "2017-09-08T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "First Day of School for Kindergarten",
+    "description": "First Day of School for Kindergarten",
+    "dateTime": "2017-09-08T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Half-Day Elementary Conferences",
-    "Description": "Half-Day Elementary Conferences",
-    "DateTime": "2017-10-16T24:00Z",
-    "Duration": 72,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Half-Day Elementary Conferences",
+    "description": "Half-Day Elementary Conferences",
+    "dateTime": "2017-10-16T24:00Z",
+    "duration": 72,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "No school - LEAP Day",
-    "Description": "No school - LEAP Day",
-    "DateTime": "2017-10-20T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No school - LEAP Day",
+    "description": "No school - LEAP Day",
+    "dateTime": "2017-10-20T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Teacher Work Day",
-    "Description": "No school for students",
-    "DateTime": "2017-10-23T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Teacher Work Day",
+    "description": "No school for students",
+    "dateTime": "2017-10-23T24:00Z",
+    "duration": 24,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "Last Day 1st Quarter (Secondary)",
-    "Description": "Last Day 1st Quarter (Secondary)",
-    "DateTime": "2017-11-07T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Last Day 1st Quarter (Secondary)",
+    "description": "Last Day 1st Quarter (Secondary)",
+    "dateTime": "2017-11-07T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "No school - Veterans Day",
-    "Description": "No school - Veterans Day",
-    "DateTime": "2017-11-10T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No school - Veterans Day",
+    "description": "No school - Veterans Day",
+    "dateTime": "2017-11-10T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Veterans Day (Observed)",
-    "Description": "Veterans Day (Observed)",
-    "DateTime": "2017-11-10T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Veterans Day (Observed)",
+    "description": "Veterans Day (Observed)",
+    "dateTime": "2017-11-10T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Veterans Day Observance",
-    "Description": "No school for students or staff",
-    "DateTime": "2017-11-10T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Veterans Day Observance",
+    "description": "No school for students or staff",
+    "dateTime": "2017-11-10T24:00Z",
+    "duration": 24,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "Secondary Grades Due",
-    "Description": "Secondary Grades Due",
-    "DateTime": "2017-11-14T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Secondary Grades Due",
+    "description": "Secondary Grades Due",
+    "dateTime": "2017-11-14T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Half-Day",
-    "Description": "Half-Day",
-    "DateTime": "2017-11-22T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Half-Day",
+    "description": "Half-Day",
+    "dateTime": "2017-11-22T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Thanksgiving Break",
-    "Description": "Thanksgiving Break",
-    "DateTime": "2017-11-23T24:00Z",
-    "Duration": 48,
-    "Groups": [ "Northshore School District" ]
+    "name": "Thanksgiving Break",
+    "description": "Thanksgiving Break",
+    "dateTime": "2017-11-23T24:00Z",
+    "duration": 48,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "No school - Thanksgiving Vacation",
-    "Description": "No school - Thanksgiving Vacation",
-    "DateTime": "2017-11-23T24:00Z",
-    "Duration": 48,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No school - Thanksgiving Vacation",
+    "description": "No school - Thanksgiving Vacation",
+    "dateTime": "2017-11-23T24:00Z",
+    "duration": 48,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Thanksgiving Day & After",
-    "Description": "Thanksgiving Day is celebrated as a day of giving thanks for the blessing of the harvest and of the preceding year.",
-    "DateTime": "2017-11-23T24:00Z",
-    "Duration": 48,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "Thanksgiving Day & After",
+    "description": "Thanksgiving Day is celebrated as a day of giving thanks for the blessing of the harvest and of the preceding year.",
+    "dateTime": "2017-11-23T24:00Z",
+    "duration": 48,
+    "groups": [ "USA", "Microsoft" ]
   },
   {
-    "Name": "Thanksgiving holiday",
-    "Description": "No school for students or staff",
-    "DateTime": "2017-11-23T24:00Z",
-    "Duration": 48,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Thanksgiving holiday",
+    "description": "No school for students or staff",
+    "dateTime": "2017-11-23T24:00Z",
+    "duration": 48,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "No school - Winter Break",
-    "Description": "No school - Winter Break",
-    "DateTime": "2017-12-18T24:00Z",
-    "Duration": 264,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No school - Winter Break",
+    "description": "No school - Winter Break",
+    "dateTime": "2017-12-18T24:00Z",
+    "duration": 264,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Winter Break",
-    "Description": "Winter Break",
-    "DateTime": "2017-12-18T24:00Z",
-    "Duration": 264,
-    "Groups": [ "Northshore School District" ]
+    "name": "Winter Break",
+    "description": "Winter Break",
+    "dateTime": "2017-12-18T24:00Z",
+    "duration": 264,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "First Winter Break",
-    "Description": "No school for students or staff",
-    "DateTime": "2017-12-21T24:00Z",
-    "Duration": 192,
-    "Groups": [ "Issaquah School District" ]
+    "name": "First Winter Break",
+    "description": "No school for students or staff",
+    "dateTime": "2017-12-21T24:00Z",
+    "duration": 192,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "Christmas Eve & Day",
-    "Description": "Christmas or Christmas Day is an annual festival commemorating the birth of Jesus Christ, observed most commonly on December 25 as a religious and cultural celebration among billions of people around the world.",
-    "DateTime": "2017-12-25T24:00Z",
-    "Duration": 48,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "Christmas Eve & Day",
+    "description": "Christmas or Christmas Day is an annual festival commemorating the birth of Jesus Christ, observed most commonly on December 25 as a religious and cultural celebration among billions of people around the world.",
+    "dateTime": "2017-12-25T24:00Z",
+    "duration": 48,
+    "groups": [ "USA", "Microsoft" ]
   },
   {
-    "Name": "New Year's Day",
-    "Description": "New Year's Day, also called simply New Year's or New Year, is observed on January 1, the first day of the year on the modern Gregorian calendar as well as the Julian calendar.",
-    "DateTime": "2018-01-02T24:00Z",
-    "Duration": 24,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "New Year's Day",
+    "description": "New Year's Day, also called simply New Year's or New Year, is observed on January 1, the first day of the year on the modern Gregorian calendar as well as the Julian calendar.",
+    "dateTime": "2018-01-02T24:00Z",
+    "duration": 24,
+    "groups": [ "USA", "Microsoft" ]
   },
   {
-    "Name": "Martin Luther King Day",
-    "Description": "The day is celebrated as the birthday of Martin Luther King Jr.",
-    "DateTime": "2018-01-15T24:00Z",
-    "Duration": 24,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "Martin Luther King Day",
+    "description": "The day is celebrated as the birthday of Martin Luther King Jr.",
+    "dateTime": "2018-01-15T24:00Z",
+    "duration": 24,
+    "groups": [ "USA", "Microsoft" ]
   },
   {
-    "Name": "No school - MLK Jr. Day",
-    "Description": "No school - MLK Jr. Day",
-    "DateTime": "2018-01-15T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No school - MLK Jr. Day",
+    "description": "No school - MLK Jr. Day",
+    "dateTime": "2018-01-15T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Martin Luther King Day",
-    "Description": "Martin Luther King Day",
-    "DateTime": "2018-01-15T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Martin Luther King Day",
+    "description": "Martin Luther King Day",
+    "dateTime": "2018-01-15T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Dr. Martin Luther King, Jr. Day",
-    "Description": "No school for students or staff",
-    "DateTime": "2017-01-15T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Dr. Martin Luther King, Jr. Day",
+    "description": "No school for students or staff",
+    "dateTime": "2017-01-15T24:00Z",
+    "duration": 24,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "Half-Day Elementary Conferences",
-    "Description": "Half-Day Elementary Conferences",
-    "DateTime": "2018-01-23T24:00Z",
-    "Duration": 72,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Half-Day Elementary Conferences",
+    "description": "Half-Day Elementary Conferences",
+    "dateTime": "2018-01-23T24:00Z",
+    "duration": 72,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Last Day 1st Semester (Secondary)",
-    "Description": "Last Day 1st Semester (Secondary)",
-    "DateTime": "2018-01-26T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Last Day 1st Semester (Secondary)",
+    "description": "Last Day 1st Semester (Secondary)",
+    "dateTime": "2018-01-26T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Teacher Work Day",
-    "Description": "No school for students",
-    "DateTime": "2017-01-29T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Teacher Work Day",
+    "description": "No school for students",
+    "dateTime": "2017-01-29T24:00Z",
+    "duration": 24,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "Non-Student Day",
-    "Description": "Non-Student Day",
-    "DateTime": "2018-01-29T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Non-Student Day",
+    "description": "Non-Student Day",
+    "dateTime": "2018-01-29T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Secondary Grades Due",
-    "Description": "Secondary Grades Due",
-    "DateTime": "2018-02-02T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Secondary Grades Due",
+    "description": "Secondary Grades Due",
+    "dateTime": "2018-02-02T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "No school - Mid-Winter Break",
-    "Description": "No school - Mid-Winter Break",
-    "DateTime": "2018-02-15T24:00Z",
-    "Duration": 48,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No school - Mid-Winter Break",
+    "description": "No school - Mid-Winter Break",
+    "dateTime": "2018-02-15T24:00Z",
+    "duration": 48,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Presidents Day",
-    "Description": "The day is celebrated in honor of George Washington, the first President of the United States.",
-    "DateTime": "2018-02-19T24:00Z",
-    "Duration": 24,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "Presidents Day",
+    "description": "The day is celebrated in honor of George Washington, the first President of the United States.",
+    "dateTime": "2018-02-19T24:00Z",
+    "duration": 24,
+    "groups": [ "USA", "Microsoft" ]
   },
   {
-    "Name": "President's Day",
-    "Description": "President's Day",
-    "DateTime": "2018-02-15T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "President's Day",
+    "description": "President's Day",
+    "dateTime": "2018-02-15T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "No school - Presidents Day",
-    "Description": "No school - Presidents Day",
-    "DateTime": "2018-02-19T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No school - Presidents Day",
+    "description": "No school - Presidents Day",
+    "dateTime": "2018-02-19T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Presidents Day & Second Winter Break",
-    "Description": "No school for students or staff",
-    "DateTime": "2018-02-19T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Presidents Day & Second Winter Break",
+    "description": "No school for students or staff",
+    "dateTime": "2018-02-19T24:00Z",
+    "duration": 120,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "Mid-Winter Break",
-    "Description": "Mid-Winter Break",
-    "DateTime": "2018-02-20T24:00Z",
-    "Duration": 96,
-    "Groups": [ "Northshore School District" ]
+    "name": "Mid-Winter Break",
+    "description": "Mid-Winter Break",
+    "dateTime": "2018-02-20T24:00Z",
+    "duration": 96,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "No school - LEAP Day",
-    "Description": "No school - LEAP Day",
-    "DateTime": "2018-03-09T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No school - LEAP Day",
+    "description": "No school - LEAP Day",
+    "dateTime": "2018-03-09T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "No school - Spring Break",
-    "Description": "No school - Spring Break",
-    "DateTime": "2018-04-02T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No school - Spring Break",
+    "description": "No school - Spring Break",
+    "dateTime": "2018-04-02T24:00Z",
+    "duration": 120,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Spring Break",
-    "Description": "No school for students or staff",
-    "DateTime": "2018-04-09T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Spring Break",
+    "description": "No school for students or staff",
+    "dateTime": "2018-04-09T24:00Z",
+    "duration": 120,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "Spring Break",
-    "Description": "Spring Break",
-    "DateTime": "2018-04-09T24:00Z",
-    "Duration": 120,
-    "Groups": [ "Northshore School District" ]
+    "name": "Spring Break",
+    "description": "Spring Break",
+    "dateTime": "2018-04-09T24:00Z",
+    "duration": 120,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Last Day 3rd Quarter (Secondary)",
-    "Description": "Last Day 3rd Quarter (Secondary)",
-    "DateTime": "2018-04-13T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Last Day 3rd Quarter (Secondary)",
+    "description": "Last Day 3rd Quarter (Secondary)",
+    "dateTime": "2018-04-13T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Secondary Grades Due",
-    "Description": "Secondary Grades Due",
-    "DateTime": "2018-04-20T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Secondary Grades Due",
+    "description": "Secondary Grades Due",
+    "dateTime": "2018-04-20T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "No school - LEAP Day",
-    "Description": "No school - LEAP Day",
-    "DateTime": "2018-05-25T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No school - LEAP Day",
+    "description": "No school - LEAP Day",
+    "dateTime": "2018-05-25T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "No school",
-    "Description": "First inclement weather make up day",
-    "DateTime": "2018-05-25T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Issaquah School District" ]
+    "name": "No school",
+    "description": "First inclement weather make up day",
+    "dateTime": "2018-05-25T24:00Z",
+    "duration": 24,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "Memorial Day",
-    "Description": "Memorial Day is for remembering the people who died while serving in the country's armed forces.",
-    "DateTime": "2018-05-28T24:00Z",
-    "Duration": 24,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "Memorial Day",
+    "description": "Memorial Day is for remembering the people who died while serving in the country's armed forces.",
+    "dateTime": "2018-05-28T24:00Z",
+    "duration": 24,
+    "groups": [ "USA", "Microsoft" ]
   },
   {
-    "Name": "Memorial Day",
-    "Description": "Memorial Day",
-    "DateTime": "2018-05-28T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Memorial Day",
+    "description": "Memorial Day",
+    "dateTime": "2018-05-28T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "No school - Memorial Day",
-    "Description": "No school - Memorial Day",
-    "DateTime": "2018-05-28T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "No school - Memorial Day",
+    "description": "No school - Memorial Day",
+    "dateTime": "2018-05-28T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Memorial Day",
-    "Description": "No school for students or staff",
-    "DateTime": "2018-05-28T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Memorial Day",
+    "description": "No school for students or staff",
+    "dateTime": "2018-05-28T24:00Z",
+    "duration": 24,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "Elementary Grades Due",
-    "Description": "Elementary Grades Due",
-    "DateTime": "2018-06-13T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Elementary Grades Due",
+    "description": "Elementary Grades Due",
+    "dateTime": "2018-06-13T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Half-Day - Last Day of School",
-    "Description": "Half-Day - Last Day of School, Last Day 2nd Semester (Secondary), Secondary Grades Due",
-    "DateTime": "2018-06-20T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Lake Washington School District" ]
+    "name": "Half-Day - Last Day of School",
+    "description": "Half-Day - Last Day of School, Last Day 2nd Semester (Secondary), Secondary Grades Due",
+    "dateTime": "2018-06-20T24:00Z",
+    "duration": 24,
+    "groups": [ "Lake Washington School District" ]
   },
   {
-    "Name": "Last day of school for students",
-    "Description": "Last day of school for students",
-    "DateTime": "2018-06-20T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Issaquah School District" ]
+    "name": "Last day of school for students",
+    "description": "Last day of school for students",
+    "dateTime": "2018-06-20T24:00Z",
+    "duration": 24,
+    "groups": [ "Issaquah School District" ]
   },
   {
-    "Name": "Last Day of School",
-    "Description": "Last Day of School",
-    "DateTime": "2018-06-21T24:00Z",
-    "Duration": 24,
-    "Groups": [ "Northshore School District" ]
+    "name": "Last Day of School",
+    "description": "Last Day of School",
+    "dateTime": "2018-06-21T24:00Z",
+    "duration": 24,
+    "groups": [ "Northshore School District" ]
   },
   {
-    "Name": "Independence Day",
-    "Description": "An Independence Day is an annual event commemorating the anniversary of a nation's independence or statehood.",
-    "DateTime": "2018-07-04T24:00Z",
-    "Duration": 24,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "Independence Day",
+    "description": "An Independence Day is an annual event commemorating the anniversary of a nation's independence or statehood.",
+    "dateTime": "2018-07-04T24:00Z",
+    "duration": 24,
+    "groups": [ "USA", "Microsoft" ]
   },
   {
-    "Name": "Labor Day",
-    "Description": "Labor Day honors the labor movement and the contributions that workers have made to the strength, prosperity, laws and well-being of the country.",
-    "DateTime": "2018-09-03T24:00Z",
-    "Duration": 24,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "Labor Day",
+    "description": "Labor Day honors the labor movement and the contributions that workers have made to the strength, prosperity, laws and well-being of the country.",
+    "dateTime": "2018-09-03T24:00Z",
+    "duration": 24,
+    "groups": [ "USA", "Microsoft" ]
   },
   {
-    "Name": "Thanksgiving Day & After",
-    "Description": "Thanksgiving Day is celebrated as a day of giving thanks for the blessing of the harvest and of the preceding year.",
-    "DateTime": "2018-11-22T24:00Z",
-    "Duration": 48,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "Thanksgiving Day & After",
+    "description": "Thanksgiving Day is celebrated as a day of giving thanks for the blessing of the harvest and of the preceding year.",
+    "dateTime": "2018-11-22T24:00Z",
+    "duration": 48,
+    "groups": [ "USA", "Microsoft" ]
   },
   {
-    "Name": "Christmas Eve & Day",
-    "Description": "Christmas or Christmas Day is an annual festival commemorating the birth of Jesus Christ, observed most commonly on December 25 as a religious and cultural celebration among billions of people around the world.",
-    "DateTime": "2018-12-24T24:00Z",
-    "Duration": 48,
-    "Groups": [ "USA", "Microsoft" ]
+    "name": "Christmas Eve & Day",
+    "description": "Christmas or Christmas Day is an annual festival commemorating the birth of Jesus Christ, observed most commonly on December 25 as a religious and cultural celebration among billions of people around the world.",
+    "dateTime": "2018-12-24T24:00Z",
+    "duration": 48,
+    "groups": [ "USA", "Microsoft" ]
   }
 ]
