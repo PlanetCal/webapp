@@ -6,8 +6,8 @@
 <dom-module id="groups-display">
     <link rel="import" type="css" href="groups-display-styles.css">
     <template>
-        <div>
-            <h2>Groups</h2>
+        <div style="display: flex; vertical-align: top;">
+            <h2 style="vertical-align: top;">Groups [ <a class="link-create" href="/groups-edit">CREATE</a> ]</h2>
         </div>
         <iron-ajax id="requestRepos" auto url="../../../data/Data.Groups.json" handle-as="json" on-response="handleResponse">
         </iron-ajax>
@@ -15,7 +15,7 @@
         <template is="dom-repeat" items="{{items}}">
             <paper-card heading="{{item.Name}}" elevation="5" image="{{item.Icon}}" animated-shadow="true" animated title="{{item.Name}}">
                 <div class="card-content">
-                    <div>[[DisplayLimitedText(item.Discription, 240)]]</div>
+                    <div>[[DisplayLimitedText(item.Discription, 120)]]</div>
                     <div style="height: 20px;"></div>
                     <div class="text-phone">
                         <iron-icon icon="icons:perm-phone-msg"></iron-icon> {{item.Contact.Phone}}

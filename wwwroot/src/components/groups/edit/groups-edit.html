@@ -8,7 +8,7 @@
     <style include="groups-edit-styles"></style>
     <div>
       <div style="margin: 10px; display: flex;">
-        <paper-button class="back" on-tap="delete">
+        <paper-button class="back" on-tap="backToGroups">
           <iron-icon icon="icons:arrow-back"></iron-icon> Back to Groups</paper-button>
         <h3 style="margin-left: 15%">Group Details</h3>
       </div>
@@ -49,17 +49,17 @@
             error-message="required" on-change="validateOnChange">
           </paper-input>
           <span style="width: 5%;"></span>
-          <paper-input label="Phone" class="saveGroups" value="{{phone}}" char-counter maxlength="20" style="width: 30%;" required
+          <paper-input label="Phone" class="saveGroups" value="{{phone}}" char-counter maxlength="15" style="width: 30%;" required
             error-message="required" on-change="validateOnChange">
           </paper-input>
           <span style="width: 5%;"></span>
-          <paper-input label="Email" class="saveGroups" value="{{email}}" char-counter maxlength="10" style="width: 30%;" required
+          <paper-input label="Email" class="saveGroups" value="{{email}}" char-counter maxlength="25" style="width: 30%;" required
             error-message="required" on-change="validateOnChange">
           </paper-input>
         </div>
         <div style="display: flex; width: 100%">
           <paper-input label="owner" class="saveGroups" value="{{owner}}" char-counter maxlength="30" style="width: 30%;" required
-            error-message="required" on-change="validateOnChange">
+            error-message="required" readonly on-change="validateOnChange">
           </paper-input>
           <span style="width: 5%"></span>
           <paper-input label="Website" class="saveGroups" value="{{website}}" char-counter maxlength="50" style="width: 30%;" required
@@ -78,13 +78,30 @@
           <paper-textarea label="Members" class="saveGroups" value="{{members}}" char-counter maxlength="200" max-rows="" 2>
           </paper-textarea>
         </div>
+        <div style="display: flex;">
+          <div style="vertical-align: top;">
+            <paper-input type="file" label="Upload Image" class="saveGroups" on-change="previewImage" style="vertical-align: top;" required
+              error-message="required"></paper-input>
+          </div>
+          <img id="previewImage" src="{{previewSrc}}" width="300" height="150" style="margin-left: 5%;  vertical-align: top;" />
+        </div>
         <div class="buttons">
+          <!--div>
+            <span style="margin-left: 5%; vertical-align: top; text-align: left">
+              <h3>Instructions for group image upload: </h3>
+              <ul>
+                <li>Image size can maximum be 2MB</li>
+                <li>Recommended width and height of image is 300 X 150</li>
+                <li>Size more than 300 X 150 will be reset to this size</li>
+              </ul>
+          </span>
+          </div-->
           <paper-button class="blue" on-tap="delete">
             <iron-icon icon="icons:delete"></iron-icon> Delete</paper-button>
           <paper-button class="blue" on-tap="reset">
             <iron-icon icon="icons:refresh"></iron-icon> Reset</paper-button>
-          <paper-button class="blue" on-tap="saveGroup">
-            <iron-icon icon="icons:done"></iron-icon> Save Group</paper-button>
+          <paper-button class="blue" id="savegroup" on-tap="saveGroup">
+            <iron-icon icon="icons:done"></iron-icon> Save</paper-button>
         </div>
       </fieldset>
     </div>

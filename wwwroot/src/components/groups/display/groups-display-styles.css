@@ -1,12 +1,12 @@
 
 paper-card {
-    height: 430px;
+    height: 355px;
     margin: 10px;
     width: 300px;
     background-color: lightblue;
     vertical-align: top;
     --paper-card-header-image: {
-        height: 150px;
+        height: 140px;
     }
 }
 paper-card:hover {
@@ -47,6 +47,18 @@ a.link-events:hover {
     text-decoration: underline;
     color: darkslategray;
 }
+
+a.link-create {
+    text-decoration: none;
+    color: var(--paper-blue-a200);
+    ;
+}
+            
+a.link-create:hover {
+    text-decoration: underline;
+    color: #41B4F1;
+}
+
 
 .card-footer {
     text-align: right;

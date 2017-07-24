@@ -18,6 +18,7 @@ Polymer({
     'on-logout-requested': '_logoutRequestHandler',
     'on-login-successful': '_loginSuccessHandler',
     'on-edit-group': '_onEditGroup',
+    'on-back-to-groups': '_onBackToGroups',
     'status-message-update': '_messageUpdateHandler'
   },
 
@@ -68,6 +69,10 @@ Polymer({
 
   _onEditGroup: function () {
     this.set('route.path', '/groups-edit');
+  },
+
+  _onBackToGroups: function () {
+    this.set('route.path', '/groups-display');
   },
 
   _routePageChanged: function (page) {

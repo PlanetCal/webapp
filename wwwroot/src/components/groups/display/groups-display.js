@@ -62,8 +62,8 @@ Polymer({
         var editedGroup = e.model.item;
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
         //TODO: check whether the current user has edit permission
-
         this.set('localStorage.editedGroup', editedGroup);
         this.fire('on-edit-group');
+        //window.location.href = 'groups-edit';
     }
 });
