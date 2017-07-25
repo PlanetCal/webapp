@@ -6,6 +6,8 @@
 <dom-module id="groups-edit">
   <template>
     <style include="groups-edit-styles"></style>
+    <iron-ajax id='ajax' handle-as='json' loading={{isLoading}} url="[[ajaxUrl]]" content-type='application/json' on-error='handleErrorResponse'
+      on-response='handleAjaxResponse'></iron-ajax>
     <div>
       <div style="margin: 10px; display: flex;">
         <paper-button class="back" on-tap="backToGroups">
@@ -19,8 +21,8 @@
           </paper-input>
         </div>
         <div>
-          <paper-textarea class="saveGroups" label="Description" value="{{description}}" id="desc" char-counter maxlength="500" max-rows="4"
-            required error-message="required" on-change="validateOnChange"></paper-textarea>
+          <paper-textarea class="saveGroups" label="Description" value="{{description}}" char-counter maxlength="500" max-rows="4"
+            required error-message="required" on-keydown="validateOnChange" on-change="validateOnChange"></paper-textarea>
         </div>
         <div style="display: flex; width: 100%">
           <paper-input label="Street Number" class="saveGroups" value="{{streetNumber}}" char-counter maxlength="15" style="width: 30%;"
@@ -59,7 +61,7 @@
         </div>
         <div style="display: flex; width: 100%">
           <paper-input label="owner" class="saveGroups" value="{{owner}}" char-counter maxlength="30" style="width: 30%;" required
-            error-message="required" readonly on-change="validateOnChange">
+            error-message="required" on-change="validateOnChange">
           </paper-input>
           <span style="width: 5%"></span>
           <paper-input label="Website" class="saveGroups" value="{{website}}" char-counter maxlength="50" style="width: 30%;" required
@@ -80,8 +82,8 @@
         </div>
         <div style="display: flex;">
           <div style="vertical-align: top;">
-            <paper-input type="file" label="Upload Image" class="saveGroups" on-change="previewImage" style="vertical-align: top;" required
-              error-message="required"></paper-input>
+            <paper-input type="file" label="Upload Image" id="groupImage" on-change="previewImage" style="vertical-align: top;" required
+              error-message="required" accept="image/*"></paper-input>
           </div>
           <img id="previewImage" src="{{previewSrc}}" width="300" height="150" style="margin-left: 5%;  vertical-align: top;" />
         </div>
