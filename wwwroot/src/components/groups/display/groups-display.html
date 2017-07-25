@@ -13,20 +13,20 @@
         </iron-ajax>
         <!--iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" content-type='application/json' on-error='handleErrorResponse' on-response='handleAjaxResponse'></iron-ajax-->
         <template is="dom-repeat" items="{{items}}">
-            <paper-card heading="{{item.Name}}" elevation="5" image="{{item.Icon}}" animated-shadow="true" animated title="{{item.Name}}">
+            <paper-card heading="{{item.name}}" elevation="5" image="{{item.icon}}" animated-shadow="true" animated title="{{item.name}}">
                 <div class="card-content">
-                    <div>[[DisplayLimitedText(item.Discription, 120)]]</div>
+                    <div>[[DisplayLimitedText(item.description, 120)]]</div>
                     <div style="height: 20px;"></div>
                     <div class="text-phone">
-                        <iron-icon icon="icons:perm-phone-msg"></iron-icon> {{item.Contact.Phone}}
+                        <iron-icon icon="icons:perm-phone-msg"></iron-icon> {{item.contact.phone}}
                     </div>
                     <div>
                         <iron-icon icon="communication:email"></iron-icon>
-                        <a href="mailto:{{item.Contact.Email}}" title="Email">{{item.Contact.Email}}</a>
+                        <a href="mailto:{{item.contact.email}}" title="Email">{{item.contact.email}}</a>
                     </div>
                     <div>
                         <iron-icon class="icon" icon="hardware:laptop"></iron-icon>
-                        <a href="{{item.WebSite}}" target="_blank" title="Website">{{item.WebSite}}</a>
+                        <a href="{{item.webSite}}" target="_blank" title="Website">{{item.webSite}}</a>
                     </div>
                 </div>
                 <div class="card-footer">

@@ -104,22 +104,22 @@ Polymer({
     populateEditedGroup: function (editedGroup) {
         //TODO: Popualte all values from local storage to corresponding fields.
         this.id = editedGroup.id;
-        this.name = editedGroup.Name;
-        this.description = editedGroup.Discription;
-        this.streetNumber = editedGroup.Address.StreetNumber;
-        this.streetName = editedGroup.Address.StreetName;
-        this.city = editedGroup.Address.City;
-        this.state = editedGroup.Address.State;
-        this.postalCode = editedGroup.Address.PostalCode;
-        this.location = editedGroup.Location;
-        this.phone = editedGroup.Contact.Phone;
-        this.email = editedGroup.Contact.Email;
-        this.owner = editedGroup.Owner;
-        this.website = editedGroup.WebSite;
-        this.administrators = editedGroup.Administrators;
-        this.members = editedGroup.Members;
-        this.privacy = editedGroup.Privacy;
-        this.previewSrc = editedGroup.Icon;
+        this.name = editedGroup.name;
+        this.description = editedGroup.description;
+        this.streetNumber = editedGroup.address.streetNumber;
+        this.streetName = editedGroup.address.streetName;
+        this.city = editedGroup.address.city;
+        this.state = editedGroup.address.state;
+        this.postalCode = editedGroup.address.postalCode;
+        this.location = editedGroup.location;
+        this.phone = editedGroup.contact.phone;
+        this.email = editedGroup.contact.email;
+        this.owner = editedGroup.owner;
+        this.website = editedGroup.webSite;
+        this.administrators = editedGroup.administrators;
+        this.members = editedGroup.members;
+        this.privacy = editedGroup.privacy;
+        this.previewSrc = editedGroup.icon;
     },
 
     reset: function () {

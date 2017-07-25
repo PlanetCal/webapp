@@ -203,21 +203,21 @@ Polymer({
         var editedItem = e.model.item;
         this.showDialog();
         this.id = editedItem.id;
-        this.name = editedItem.Name;
-        this.description = editedItem.Description;
-        this.startDateTime = new Date(editedItem.StartDateTime);
-        this.startDate = this.formatDate(editedItem.StartDateTime);
-        this.startTime = this.formatTime(editedItem.StartDateTime);
-        this.endDateTime = new Date(editedItem.EndDateTime);
-        this.endDate = this.formatDate(editedItem.EndDateTime);
-        this.endTime = this.formatTime(editedItem.EndDateTime);
-        this.streetNumber = editedItem.Address.StreetNumber;
-        this.streetName = editedItem.Address.StreetName;
-        this.city = editedItem.Address.City;
-        this.state = editedItem.Address.State;
-        this.postalCode = editedItem.Address.PostalCode;
-        this.location = editedItem.Location;
-        this.groups = editedItem.Groups;
+        this.name = editedItem.name;
+        this.description = editedItem.description;
+        this.startDateTime = new Date(editedItem.startDateTime);
+        this.startDate = this.formatDate(editedItem.startDateTime);
+        this.startTime = this.formatTime(editedItem.startDateTime);
+        this.endDateTime = new Date(editedItem.endDateTime);
+        this.endDate = this.formatDate(editedItem.endDateTime);
+        this.endTime = this.formatTime(editedItem.endDateTime);
+        this.streetNumber = editedItem.address.streetNumber;
+        this.streetName = editedItem.address.streetName;
+        this.city = editedItem.address.city;
+        this.state = editedItem.address.state;
+        this.postalCode = editedItem.address.postalCode;
+        this.location = editedItem.location;
+        this.groups = editedItem.groups;
         this.$.eventDialogHeader.textContent = "Update Event";
         this.$.saveevent.textContent = "Update";
     },
@@ -249,19 +249,19 @@ Polymer({
         if (this.id && this.id !== 'null') {
             obj.id = this.id;
         }
-        obj.Name = this.name;
-        obj.Description = this.description;
-        obj.StartDateTime = this.startDateTime;
-        obj.EndDateTime = this.endDateTime;
-        obj.Address = {};
-        obj.Address.StreetNumber = this.streetNumber;
-        obj.Address.StreetName = this.streetName;
-        obj.Address.City = this.city;
-        obj.Address.State = this.state;
-        obj.Address.PostalCode = this.postalCode;
-        obj.Location = this.location;
-        obj.Groups = {};
-        obj.Groups = this.groups ? this.groups : [];
+        obj.name = this.name;
+        obj.description = this.description;
+        obj.startDateTime = this.startDateTime;
+        obj.endDateTime = this.endDateTime;
+        obj.address = {};
+        obj.address.streetNumber = this.streetNumber;
+        obj.address.streetName = this.streetName;
+        obj.address.city = this.city;
+        obj.address.state = this.state;
+        obj.address.postalCode = this.postalCode;
+        obj.location = this.location;
+        obj.groups = {};
+        obj.groups = this.groups ? this.groups : [];
         return obj;
     },
     makeAjaxCall: function (event = null) {

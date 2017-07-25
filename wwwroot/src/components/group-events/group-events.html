@@ -9,7 +9,7 @@
     margin-top: 30px;
     cursor: pointer;
   }
-  
+
   .event-icons:hover {
     color: #0FCFFF;
   }
@@ -143,7 +143,7 @@
     <vaadin-grid id="grid" inverted$="[[inverted]]" on-active-item-changed="onActiveItemChanged">
       <template class="row-details">
         <div style="margin-left: 20px;">
-          <p><b>Description: </b> [[item.Description]]</p>
+          <p><b>Description: </b> [[item.description]]</p>
         </div>
       </template>
       <vaadin-grid-column width="5%" flex-grow="0">
@@ -157,28 +157,28 @@
       <vaadin-grid-column width="30%">
         <template class="header">Name</template>
         <template>
-          [[item.Name]]
+          [[item.name]]
         </template>
       </vaadin-grid-column>
       <vaadin-grid-column width="15%">
         <template class="header">Start Date</template>
         <template>
-          <div>[[formatDate(item.StartDateTime)]]</div>
-          <div>[[formatTime(item.StartDateTime)]]</div>
+          <div>[[formatDate(item.startDateTime)]]</div>
+          <div>[[formatTime(item.startDateTime)]]</div>
         </template>
       </vaadin-grid-column>
       <vaadin-grid-column width="15%">
         <template class="header">End Date</template>
         <template>
-          <div>[[formatDate(item.EndDateTime)]]</div>
-          <div>[[formatTime(item.EndDateTime)]]</div>
+          <div>[[formatDate(item.endDateTime)]]</div>
+          <div>[[formatTime(item.endDateTime)]]</div>
         </template>
       </vaadin-grid-column>
       <vaadin-grid-column width="25%">
         <template class="header">Address</template>
         <template>
-          [[item.Address.StreetNumber]] [[item.Address.StreetName]], [[item.Address.City]], <br> [[item.Address.State]],
-          [[item.Address.PostalCode]]
+          [[item.address.streetNumber]] [[item.address.streetName]], [[item.address.city]], <br> [[item.address.state]],
+          [[item.address.postalCode]]
         </template>
       </vaadin-grid-column>
       <vaadin-grid-column width="7%">
