@@ -239,14 +239,14 @@ Polymer({
     saveGroup: function (e) {
         var isValid = this.validate();
         isValid = isValid && this.validateGroupImage();
-        isValid = isValid && this.isGroupImageChanged && this.isValidFileType(this.$.groupImage.inputElement.files[0]);
+        isValid = isValid && this.isGroupImageChanged && this.isValidFileType(this.$.groupImage.inputElement.files[0].type);
         if (isValid) {
             this.$.savegroup.disabled = true;
             //this.$.cancelevent.disabled = true;
             this.groupObject = this.constructGroupObject();
-            this.groupType = this.groupObject.id ? 'putgroup' : 'postgroup';
-            //this.makeAjaxCall(this.groupObject);
-            this.resizeImageSelection();
+            this.groupType = this.groupObject.id ? 'putGroup' : 'postGroup';
+            this.makeAjaxCall(this.groupObject);
+            //this.resizeImageSelection();
         }
     },
 
@@ -257,7 +257,7 @@ Polymer({
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
         ajax.url = serviceBaseUrl + '/groups/';
         switch (this.groupType) {
-            case 'postgroup':
+            case 'postGroup':
                 ajax.body = JSON.stringify(group);
                 ajax.method = 'POST';
                 ajax.headers['Version'] = '1.0';
@@ -265,7 +265,7 @@ Polymer({
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
                 }
                 break;
-            case 'putgroup':
+            case 'putGroup':
                 ajax.url += group.id;
                 ajax.body = JSON.stringify(group);
                 ajax.method = 'PUT';
@@ -274,7 +274,7 @@ Polymer({
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
                 }
                 break;
-            case 'deleteGroup':
+            case 'deletegroup':
                 ajax.url += group.id;
                 // ajax.body = JSON.stringify(event.id);
                 ajax.method = 'DELETE';
@@ -284,7 +284,7 @@ Polymer({
                 }
                 break;
             case 'groupImage':
-                ajax.url = serviceBaseUrl + '/blob/' + this.groupObject.id;
+                ajax.url = serviceBaseUrl + '/blob';
                 ajax.body = group;
                 ajax.method = 'POST';
                 ajax.headers['Version'] = '1.0';
@@ -308,12 +308,12 @@ Polymer({
 
     handleAjaxResponse: function () {
         switch (this.groupType) {
-            case 'postgroup':
+            case 'postGroup':
                 this.groupObject.id = event.detail.response.id;
                 this.uploadImage();
                 //this.fire("status-message-update", { severity: 'info', message: 'Event saved successfully ...' });
                 break;
-            case 'putEvents':
+            case 'putGroup':
                 if (this.isGroupImageChanged) {
                     this.uploadImage();
                     this.isGroupImageChanged = false;
@@ -322,7 +322,7 @@ Polymer({
                     this.backToGroups();
                 }
                 break;
-            case 'deleteEvents':
+            case 'deleteGroup':
                 //TODO: do we need to delete the image?
                 this.backToGroups();
                 break;

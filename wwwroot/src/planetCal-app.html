@@ -35,7 +35,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </app-drawer>
 
       <!-- Main content -->
-      <app-header-layout has-scrolling-region>
+      <app-header-layout>
 
         <app-header condenses reveals effects='waterfall'>
           <app-toolbar>
@@ -54,7 +54,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </div>
         </app-header>
 
-        <iron-pages selected='{{page}}' attr-for-selected='name' fallback-selection='events' role='main'>
+        <iron-pages selected='{{page}}' style="height: 100%;" attr-for-selected='name' fallback-selection='events' role='main'>
           <events-page toggle-view=[[toggleEventsView]] name='events'></events-page>
           <login-page name='login'></login-page>
           <recommendations-page name='recommendations'></recommendations-page>

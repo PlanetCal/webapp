@@ -10,7 +10,7 @@ Polymer({
         this.fire("status-message-update");
         // var nameFieldDiv = this.$.nameFieldDiv;
         var items = [];
-        //this.loadGroups();
+        this.loadGroups();
     },
     loadGroups: function () {
         this.groupType = 'getGroups';
@@ -20,19 +20,64 @@ Polymer({
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-        ajax.url = serviceBaseUrl + '/groups/';
+        //ajax.url = serviceBaseUrl + '/groups/';
+        //ajax.url = serviceBaseUrl + '/userdetails/' + loggedInUser.id + '/groups?fields=name|description|privacy';
+        ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|owner|administrators|members|location|address|contact|webSite';
         switch (this.groupType) {
             case 'getGroups':
                 ajax.method = 'GET';
                 ajax.headers['Version'] = '1.0';
+                if (loggedInUser) {
+                    ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+                }
         }
         ajax.generateRequest();
     },
     handleAjaxResponse: function (groups) {
         // var jsonResponse = e.detail.response;
-        switch (this.eventType) {
+        switch (this.groupType) {
             case 'getGroups':
-                this.items = groups.detail.response;
+                var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+                var tempItems = groups.detail.response;
+                tempItems.forEach(function (item, index) {
+                    // To identify which groups the current user can edit
+                    if (item.owner.toLowerCase() === loggedInUser.id.toLowerCase()) {
+                        item.isEdit = true;
+                    }
+                    else {
+                        item.isEdit = false;
+                    }
+                    if (!item.icon) {
+                        item.icon = '';
+                    }
+                    if (!item.administrators) {
+                        item.administrators = [];
+                    }
+                    if (!item.members) {
+                        item.members = [];
+                    }
+                    if (!item.location) {
+                        item.location = '';
+                    }
+                    if (!item.address) {
+                        item.address = [];
+                        item.address.streetNumber = '';
+                        item.address.streetName = '';
+                        item.address.city = '';
+                        item.address.state = '';
+                        item.address.postalCode = '';
+                    }
+                    if (!item.contact) {
+                        item.contact = [];
+                        item.contact.phone = '';
+                        item.contact.email = '';
+                    }
+                    if (!item.webSite) {
+                        item.webSite = '';
+                    }
+                });
+                this.items = tempItems;
+                break;
         }
     },
     handleErrorResponse: function (e) {
@@ -48,7 +93,46 @@ Polymer({
         // this.messageText = message;
     },
     handleResponse: function (data) {
-        this.items = data.detail.response;
+        var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+        var tempItems = data.detail.response;
+        tempItems.forEach(function (item, index) {
+            // To identify which groups the current user can edit
+            if (item.owner.toLowerCase() === loggedInUser.id.toLowerCase()) {
+                item.isEdit = true;
+            }
+            else {
+                item.isEdit = false;
+            }
+            if (!item.icon) {
+                item.icon = '';
+            }
+            if (!item.administrators) {
+                item.administrators = [];
+            }
+            if (!item.members) {
+                item.members = [];
+            }
+            if (!item.location) {
+                item.location = '';
+            }
+            if (!item.address) {
+                item.address = [];
+                item.address.streetNumber = '';
+                item.address.streetName = '';
+                item.address.city = '';
+                item.address.state = '';
+                item.address.postalCode = '';
+            }
+            if (!item.contact) {
+                item.contact = [];
+                item.contact.phone = '';
+                item.contact.email = '';
+            }
+            if (!item.webSite) {
+                item.webSite = '';
+            }
+        });
+        this.items = tempItems;
     },
     DisplayLimitedText: function (text, count) {
         if (text.length > count) {
@@ -61,9 +145,26 @@ Polymer({
     editGroup: function (e) {
         var editedGroup = e.model.item;
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+        if (editedGroup.name.toLowerCase() === 'default') {
+            this.fire("status-message-update", { severity: 'error', message: 'You are not allowed to edit the default group.' });
+            return;
+        }
+        // if (!editedGroup.isEdit) {
+        //     this.fire("status-message-update", { severity: 'error', message: 'You are not owner to edit the group.' });
+        //     return;
+        // }
         //TODO: check whether the current user has edit permission
         this.set('localStorage.editedGroup', editedGroup);
         this.fire('on-edit-group');
         //window.location.href = 'groups-edit';
+    },
+    deleteGroup: function (e) {
+        var group = e.model.item;
+        var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+        if (group.owner.toLowerCase() !== loggedInUser.email.toLowerCase()) {
+            this.fire("status-message-update", { severity: 'error', message: 'You are not owner to delete the group.' });
+            return;
+        }
+        //TODO: Add code changes to delete
     }
 });
