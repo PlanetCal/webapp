@@ -1,6 +1,10 @@
 Polymer({
   is: 'cal-events',
 
+  listeners: {
+    'search-pressed': 'searchPressedHandler',
+  },
+
   properties: {
     toggleView: {
       type: Boolean,
@@ -10,6 +14,25 @@ Polymer({
 
   ready: function () {
     this._dateChanged();
+  },
+
+  searchPressedHandler: function (e) {
+    var tempData = this.masterData;
+    this.searchText = e.detail.searchInput.toLowerCase();
+    if (this.searchText !== '') {
+      var newData = []; //new bucket
+      for (var i = 0; i < tempData.length; i++) {
+        var venue = this.getVenue(tempData[i].groups);
+        if ((tempData[i].name.toLowerCase().indexOf(this.searchText) >= 0) ||
+          (tempData[i].description.toLowerCase().indexOf(this.searchText) >= 0) ||
+          (venue.toLowerCase().indexOf(this.searchText) >= 0)) {
+          newData.push(tempData[i]);
+        }
+      }
+      this.data = newData;
+    } else {
+      this.data = this.masterData;
+    }
   },
 
   _dateChanged: function () {
@@ -86,6 +109,7 @@ Polymer({
     this.fire("status-message-update");
 
     this.data = e.detail.response;
+    this.masterData = this.data;
   },
 
   getDate: function (date) {

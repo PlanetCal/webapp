@@ -12,6 +12,10 @@ Polymer({
         }
     },
 
+    searchPressed: function () {
+        this.fire('search-pressed', { searchInput: this.searchInput });
+    },
+
     toggleSearch: function (e) {
         if (e) { // comes first
             e.stopPropagation();
