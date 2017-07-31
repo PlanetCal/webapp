@@ -2,25 +2,21 @@
   {
     "id": "Local",
     "name": "Local",
-    "icon": "communication:location-on",
-    "chidren": "10"
+    "icon": "communication:location-on"
   },
   {
     "id": "School",
     "name": "School",
-    "icon": "social:school",
-    "chidren": "5"
+    "icon": "social:school"
   },
   {
     "id": "Work",
     "name": "Work",
-    "icon": "icons:work",
-    "chidren": "5"
+    "icon": "icons:work"
   },
   {
     "id": "Sports",
     "name": "Sports",
-    "icon": "av:games",
-    "chidren": "5"
+    "icon": "av:games"
   }
 ]

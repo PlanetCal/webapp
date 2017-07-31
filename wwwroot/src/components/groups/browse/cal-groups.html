@@ -6,8 +6,8 @@
   <template>
     <style include="group-styles" is=""></style>
 
-    <iron-ajax url="[[url]]" last-response="{{data}}" auto on-response="handleResponse"></iron-ajax>
-
+    <iron-ajax url="[[url]]" last-response="{{data}}" auto on-response="handleAjaxResponse"></iron-ajax>
+    <iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" on-error='handleErrorResponse' on-response='handleAjaxResponse'></iron-ajax>
     <template is="dom-if" if="[[rootRow]]">
       <paper-tabs class='paper-tabs' selected="{{selectedTab}}">
         <template is="dom-repeat" items="[[data]]">
@@ -45,23 +45,64 @@
       },
 
       _dataChanged: function () {
-        if (this.rootRow === true) {
+        if (this.id === 'rootRow') {
           this.url = "/src/components/groups/browse/mockdata/groups.json";
         } else if (this.parentGroupId !== null && this.parentGroupId !== '' && this.parentGroupId !== undefined) {
-          this.url = "/src/components/groups/browse/mockdata/groups" + this.parentGroupId + ".json";
+          var ajax = this.$.ajax;
+          var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
+          var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+          if (loggedInUser) {
+            ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+            ajax.method = 'GET';
+            ajax.headers['Version'] = '1.0';
+
+            // this.ajaxUrl = serviceBaseUrl + "/groups" + this.parentGroupId;
+            if (this.id === 'firstRow') {
+              this.ajaxUrl = serviceBaseUrl + "/groups?fields=name|icon|childGroups&filter=category=" + this.parentGroupId;
+            } else {
+              this.ajaxUrl = serviceBaseUrl + "/groups?fields=name|icon|childGroups&filter=parentGroup=" + this.parentGroupId;
+            }
+
+            ajax.generateRequest();
+          } else {
+            this.fire("status-message-update", { severity: 'error', message: 'User is not logged in.' });
+          }
         }
       },
 
       _selectionChanged: function () {
-        if (this.data != null) {
+        if (this.data != null && this.data.length > 0) {
           this.selectedGroupId = this.data[this.selectedTab].id;
           //console.log("id:" + this.id + ", selectedTab:" + this.selectedTab + ",selectedGroupId:" + this.selectedGroupId)
           this.fire('on-group-selected', { groupsId: this.id, selectedGroupId: this.selectedGroupId })
         }
       },
 
-      handleResponse: function (e) {
+      handleAjaxResponse: function (e) {
+        this.data = e.detail.response;
         this._selectionChanged();
+      },
+
+      handleErrorResponse: function (e) {
+        var jsonResponse = e.detail.request.xhr.response;
+        this.displayErrorMessage(jsonResponse);
+      },
+
+      displayErrorMessage: function (errorResponse) {
+        var message = '';
+        if (errorResponse !== null) {
+          switch (errorResponse.errorcode) {
+            case 'GenericHttpRequestException':
+              message = 'Oh! ohh! Looks like there is some internal issue. Please try again after some time.';
+              break;
+            default:
+              message = errorResponse.errorcode + ' has not been handled yet.';
+              break;
+          }
+        } else {
+          message = 'Something went wrong.';
+        }
+        this.fire("status-message-update", { severity: 'error', message: message });
       },
     });
   </script>

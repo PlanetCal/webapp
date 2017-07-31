@@ -5,7 +5,8 @@
     "description": "Lake Washington School District is a high-performing public school district serving Kirkland, Redmond, and Sammamish, Washington. It is the fourth largest district in the state of Washington, with over 27,800 students in 52 schools. The district's vision is Every Student Future Ready: Prepared for College, Prepared for the Global Workplace, Prepared for Personal Success.",
     "icon": "/src/components/groups/display/Events1.jpg",
     "privacy": "Open",
-    "owner": "v.rajarajan@gmail.com",
+    "owner": "",
+    "category": "School",
     "administrators": [],
     "members": [],
     "location": "USA",
@@ -28,7 +29,8 @@
     "description": "Northshore School District is committed to strengthening our community through excellence in education. Our students are recognized nationally for academic & extra-curricular achievement. We serve students in Bothell, Kenmore and Woodinville, WA.",
     "icon": "/src/components/groups/display/Events2.jpg",
     "privacy": "Open",
-    "owner": "v.rajarajan@gmail.com",
+    "owner": "",
+    "category": "School",
     "administrators": [],
     "members": [],
     "location": "USA",
@@ -52,6 +54,7 @@
     "icon": "/src/components/groups/display/Events3.jpg",
     "privacy": "Open",
     "owner": "",
+    "category": "School",
     "administrators": [],
     "members": [],
     "location": "USA",
@@ -75,6 +78,7 @@
     "icon": "",
     "privacy": "Open",
     "owner": "",
+    "category": "School",
     "administrators": [],
     "members": [],
     "location": "USA",
@@ -98,6 +102,7 @@
     "icon": "",
     "privacy": "Open",
     "owner": "",
+    "category": "Work",
     "administrators": [],
     "members": [],
     "location": "USA",
@@ -119,7 +124,8 @@
     "description": "Online shopping from the earth's biggest selection of books, magazines, music, DVDs, videos, electronics, computers, software, apparel & accessories, shoes, jewelry, tools & hardware, housewares, furniture, sporting goods, beauty & personal care, gourmet food & just about anything else.",
     "icon": "",
     "privacy": "Open",
-    "owner": "v.rajarajan@gmail.com",
+    "owner": "",
+    "category": "Work",
     "administrators": [],
     "members": [],
     "location": "USA",
@@ -135,5 +141,245 @@
       "email": "support@amazon.com"
     },
     "webSite": "http://www.amazon.com"
+  },
+  {
+    "id": "A93FB969-94AB-4B9D-950D-3468B269F371",
+    "name": "Soccer",
+    "description": "Soccer group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Sports",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@Soccer.com"
+    },
+    "webSite": "http://www.Soccer.com"
+  },
+  {
+    "id": "8D7B87AB-5656-403A-91CF-9C8C614FAECF",
+    "name": "Football",
+    "description": "Football group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Sports",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@Football.com"
+    },
+    "webSite": "http://www.Football.com"
+  },
+  {
+    "id": "FFAF8196-A788-48CE-94EC-FFED930BB8C9",
+    "name": "Hockey",
+    "description": "Hockey group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Sports",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@Hockey.com"
+    },
+    "webSite": "http://www.Hockey.com"
+  },
+  {
+    "id": "0DE6A9C5-1D72-4843-8AC2-8E88860D4C51",
+    "name": "Baseball",
+    "description": "Baseball group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Sports",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@Baseball.com"
+    },
+    "webSite": "http://www.Baseball.com"
+  },
+  {
+    "id": "C4C95A70-31B7-4517-86C5-CF836FC3A02C",
+    "name": "Cricket",
+    "description": "Cricket group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Sports",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@Cricket.com"
+    },
+    "webSite": "http://www.Cricket.com"
+  },
+  {
+    "id": "FEDCB9FA-77E7-44A4-9DC0-59D6DBBCACBE",
+    "name": "Basketball",
+    "description": "Basketball group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Sports",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@Basketball.com"
+    },
+    "webSite": "http://www.Basketball.com"
+  },
+  {
+    "id": "1F225431-F299-4FB9-88B9-E4D2143F6BBC",
+    "name": "Restaurants",
+    "description": "Restaurants group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Local",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@Restaurants.com"
+    },
+    "webSite": "http://www.Restaurants.com"
+  },
+  {
+    "id": "0AB06C4A-0454-469E-A15A-1341BC7A2BE0",
+    "name": "Hospitals",
+    "description": "Hospitals group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Local",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@Hospitals.com"
+    },
+    "webSite": "http://www.Hospitals.com"
+  },
+  {
+    "id": "C6B4C801-9AF0-4655-B9E3-00DD5FE0D2AF",
+    "name": "hotels",
+    "description": "hotels group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Local",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@hotels.com"
+    },
+    "webSite": "http://www.hotels.com"
+  },
+  {
+    "id": "6B759B5A-3CF3-450E-8788-2A85B8DF5BAC",
+    "name": "Malls",
+    "description": "Malls group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Local",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@Malls.com"
+    },
+    "webSite": "http://www.Malls.com"
   }
 ]
