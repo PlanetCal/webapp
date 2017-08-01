@@ -1,6 +1,8 @@
 <link rel="import" href="/src/polymer-refs.html">
 <link rel="import" href="/src/components/cal-settings/cal-settings-styles.html">
 <link rel="import" href="/src/elements/country-region-selector/country-region-selector.html">
+<link rel="import" href="/src/components/groups/browse/groups-tree.html">
+
 <dom-module id="cal-settings">
     <template>
         <style include="cal-settings-styles"></style>
@@ -10,8 +12,10 @@
         </p>
         <p> Email: [[email]]</p>
 
-        <p>Location:</p>
+        <h3>Location:</h3>
         <country-region-selector country-value="{{countryValue}}" region-value="{{regionValue}}" city-value='{{city}}'></country-region-selector>
+        <h3>Group Selection:</h3>
+        <groups-tree></groups-tree>
         <paper-button class="saveButton" raised on-tap="saveSettingsHandler">
             Save
         </paper-button>

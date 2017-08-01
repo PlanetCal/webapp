@@ -4,19 +4,21 @@
 
 <dom-module id="groups-tree">
   <template>
+    <iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" on-error='handleErrorResponse' on-response='handleAjaxResponse'></iron-ajax>
+
     <style include="group-styles" is=""></style>
 
-    <cal-groups id='rootRow' root-row></cal-groups>
+    <cal-groups id='rootRow' following-groups-initialized=[[followingGroupsInitialized]] root-row></cal-groups>
     <hr>
     <table>
       <td>
-        <cal-groups id='firstRow' parent-group-id=[[firstRowParentGroupId]]></cal-groups>
+        <cal-groups id='firstRow' parent-group-id=[[firstRowParentGroupId]] following-groups-initialized=[[followingGroupsInitialized]]></cal-groups>
       </td>
       <td>
-        <cal-groups id='secondRow' parent-group-id='[[secondRowParentGroupId]]'></cal-groups>
+        <cal-groups id='secondRow' parent-group-id='[[secondRowParentGroupId]]' following-groups-initialized=[[followingGroupsInitialized]]></cal-groups>
       </td>
       <td>
-        <cal-groups id='thirdRow' parent-group-id='[[thirdRowParentGroupId]]'></cal-groups>
+        <cal-groups id='thirdRow' parent-group-id='[[thirdRowParentGroupId]]' following-groups-initialized=[[followingGroupsInitialized]]></cal-groups>
       </td>
     </table>
   </template>
@@ -32,10 +34,47 @@
       },
       ready: function () {
         this.selectedTab = 0;
+
+        var ajax = this.$.ajax;
+        var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
+        var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+        if (loggedInUser) {
+          ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+          ajax.method = 'GET';
+          ajax.headers['Version'] = '1.0';
+          this.ajaxUrl = serviceBaseUrl + "/userDetails/" + loggedInUser.id + "/followingGroups?fields=name|icon";
+          ajax.generateRequest();
+        } else {
+          this.fire("status-message-update", { severity: 'error', message: 'User is not logged in.' });
+        }
       },
 
-      handleResponse: function (e) {
-        this._dataChanged();
+      handleAjaxResponse: function (e) {
+        var followingGroups = e.detail.response;
+        Polymer.globalsManager.set('followingGroups', followingGroups);
+        this.followingGroupsInitialized = 1;
+      },
+
+      handleErrorResponse: function (e) {
+        var jsonResponse = e.detail.request.xhr.response;
+        this.displayErrorMessage(jsonResponse);
+      },
+
+      displayErrorMessage: function (errorResponse) {
+        var message = '';
+        if (errorResponse !== null) {
+          switch (errorResponse.errorcode) {
+            case 'GenericHttpRequestException':
+              message = 'Oh! ohh! Looks like there is some internal issue. Please try again after some time.';
+              break;
+            default:
+              message = errorResponse.errorcode + ' has not been handled yet.';
+              break;
+          }
+        } else {
+          message = 'Something went wrong.';
+        }
+        this.fire("status-message-update", { severity: 'error', message: message });
       },
 
       _dataChanged: function () {

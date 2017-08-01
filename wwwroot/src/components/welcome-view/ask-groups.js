@@ -10,12 +10,72 @@ Polymer({
   },
 
   previoushandler: function () {
-    console.info(this.regionValue);
-    console.info(this.city);
-    this.fire('page-load-requested', { page: '/ask-location' });
+    this.makeAjaxCall();
+    this.navigation = 'previous';
   },
 
   forwardhandler: function () {
-    this.fire('page-load-requested', { page: '/events' });
+    this.makeAjaxCall();
+    this.navigation = 'forward';
+  },
+
+  makeAjaxCall: function () {
+
+    var ajax = this.$.ajax;
+    var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+    if (loggedInUser) {
+      ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+      ajax.method = 'PUT';
+      var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
+      this.ajaxUrl = serviceBaseUrl + '/userdetails/' + loggedInUser.id;
+      ajax.headers['Version'] = '1.0';
+
+      var followingGroups = Polymer.globalsManager.globals.followingGroups;
+      var groupsToSave = [];
+      for (var i in followingGroups) {
+        groupsToSave.push(followingGroups[i].id);
+      }
+      var userDetails = Polymer.globalsManager.globals.userDetails;
+      userDetails.id = loggedInUser.id;
+      userDetails.followingGroups = groupsToSave;
+
+      this.ajaxBody = JSON.stringify(userDetails);
+      ajax.generateRequest();
+    }
+    else {
+      this.fire("status-message-update", { severity: 'error', message: 'Please login first' });
+    }
+  },
+
+  handleAjaxResponse: function (e) {
+    if (this.navigation === 'forward') {
+      this.fire('page-load-requested', { page: '/events' });
+    }
+    else if (this.navigation === 'previous') {
+      this.fire('page-load-requested', { page: '/ask-location' });
+    }
+  },
+
+  handleErrorResponse: function (e) {
+    var req = e.detail.request;
+    var jsonResponse = e.detail.request.xhr.response;
+    this.displayErrorMessage(jsonResponse);
+  },
+
+  displayErrorMessage: function (errorResponse) {
+    var message = '';
+    if (errorResponse !== null) {
+      switch (errorResponse.errorcode) {
+        case 'GenericHttpRequestException':
+          message = 'Oh! ohh! Looks like there is some internal issue. Please try again after some time.';
+          break;
+        default:
+          message = errorResponse.errorcode + ' has not been handled yet.';
+          break;
+      }
+    } else {
+      message = 'Something went wrong. Check if there is any CORS error.';
+    }
+    this.fire("status-message-update", { severity: 'error', message: message });
   },
 });

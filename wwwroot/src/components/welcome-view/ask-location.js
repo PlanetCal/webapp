@@ -32,8 +32,6 @@ Polymer({
   },
 
   previoushandler: function () {
-    console.info(this.regionValue);
-    console.info(this.city);
     this.makeAjaxCall();
     this.navigation = 'previous';
   },
