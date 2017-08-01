@@ -6,9 +6,8 @@
         <style include="search-bar-styles"></style>
         <div on-click="toggleSearch">
             <input class="textInput" is="iron-input" bind-value="{{searchInput}}" type="search" placeholder="Search Events" id="input"
-                on-keyup="onKeyPress" autocomplete="off">
-            <paper-icon-button icon="search" on-tap="searchPressed">
-            </paper-icon-button>
+                on-keyup="isEnterPressed" autocomplete="off">
+            <paper-icon-button icon="search" on-tap="searchPressed"></paper-icon-button>
         </div>
     </template>
     <script type="text/javascript" src="search-bar.js"></script>

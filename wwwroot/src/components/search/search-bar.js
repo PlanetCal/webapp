@@ -12,6 +12,12 @@ Polymer({
         }
     },
 
+    isEnterPressed: function (e) {
+        if (e.keyCode == 13) { // Enter
+            this.searchPressed()
+        }
+    },
+
     searchPressed: function () {
         this.fire('search-pressed', { searchInput: this.searchInput });
     },
@@ -29,11 +35,4 @@ Polymer({
         });
     },
 
-    onKeyPress: function (e) {
-        if (e.keyCode == 13) { // Enter
-            var q = this.searchInput;
-            //q = 'site:mysite.com+' + q; // edit site here
-            this.show = false;
-        }
-    }
 });
