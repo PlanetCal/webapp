@@ -17,22 +17,38 @@ Polymer({
   },
 
   searchPressedHandler: function (e) {
-    var tempData = this.masterData;
-    this.searchText = e.detail.searchInput.toLowerCase();
-    if (this.searchText !== '') {
-      var newData = []; //new bucket
-      for (var i = 0; i < tempData.length; i++) {
-        var venue = this.getVenue(tempData[i].groups);
-        if ((tempData[i].name.toLowerCase().indexOf(this.searchText) >= 0) ||
-          (tempData[i].description.toLowerCase().indexOf(this.searchText) >= 0) ||
-          (venue.toLowerCase().indexOf(this.searchText) >= 0)) {
-          newData.push(tempData[i]);
+    var allEvents = this.eventsFromServer;
+    var searchText = e.detail.searchInput.trim().toLowerCase();
+    if (searchText !== '') {
+      var splitText = searchText.split(' ');
+      var filteredEvents = [] //new array to store search result
+      for (var i = 0; i < allEvents.length; i++) {
+        if (this.eventMatchesSearch(allEvents[i], splitText)) {
+          filteredEvents.push(allEvents[i]);
         }
       }
-      this.data = newData;
+
+      this.data = filteredEvents;
     } else {
-      this.data = this.masterData;
+      this.data = this.eventsFromServer;
     }
+  },
+
+  eventMatchesSearch: function (currentEvent, searchWordsArray) {
+    var eventVenue = this.getVenue(currentEvent.groups).toLowerCase();
+    var eventName = currentEvent.name.toLowerCase();
+    var eventDescription = currentEvent.description.toLowerCase();
+    var eventName = currentEvent.name.toLowerCase();
+
+    for (var r = 0; r < searchWordsArray.length; r++) {
+      if (searchWordsArray[r] !== '' &&
+        (eventName.indexOf(searchWordsArray[r]) >= 0) ||
+        (eventDescription.indexOf(searchWordsArray[r]) >= 0) ||
+        (eventVenue.indexOf(searchWordsArray[r]) >= 0)) {
+        return true;
+      }
+    }
+    return false;
   },
 
   _dateChanged: function () {
@@ -109,7 +125,7 @@ Polymer({
     this.fire("status-message-update");
 
     this.data = e.detail.response;
-    this.masterData = this.data;
+    this.eventsFromServer = this.data;
   },
 
   getDate: function (date) {
