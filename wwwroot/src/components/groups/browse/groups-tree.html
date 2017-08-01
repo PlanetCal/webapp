@@ -4,23 +4,24 @@
 
 <dom-module id="groups-tree">
   <template>
+    <style include="group-styles" is=""></style>
     <iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" on-error='handleErrorResponse' on-response='handleAjaxResponse'></iron-ajax>
 
-    <style include="group-styles" is=""></style>
-
-    <cal-groups id='rootRow' following-groups-initialized=[[followingGroupsInitialized]] root-row></cal-groups>
-    <hr>
-    <table>
-      <td>
-        <cal-groups id='firstRow' parent-group-id=[[firstRowParentGroupId]] following-groups-initialized=[[followingGroupsInitialized]]></cal-groups>
-      </td>
-      <td>
-        <cal-groups id='secondRow' parent-group-id='[[secondRowParentGroupId]]' following-groups-initialized=[[followingGroupsInitialized]]></cal-groups>
-      </td>
-      <td>
-        <cal-groups id='thirdRow' parent-group-id='[[thirdRowParentGroupId]]' following-groups-initialized=[[followingGroupsInitialized]]></cal-groups>
-      </td>
-    </table>
+    <div class='left-align'>
+      <cal-groups id='rootRow' following-groups-initialized=[[followingGroupsInitialized]] root-row></cal-groups>
+      <hr>
+      <table>
+        <td>
+          <cal-groups id='firstRow' parent-group-id=[[firstRowParentGroupId]] following-groups-initialized=[[followingGroupsInitialized]]></cal-groups>
+        </td>
+        <td>
+          <cal-groups id='secondRow' parent-group-id='[[secondRowParentGroupId]]' following-groups-initialized=[[followingGroupsInitialized]]></cal-groups>
+        </td>
+        <td>
+          <cal-groups id='thirdRow' parent-group-id='[[thirdRowParentGroupId]]' following-groups-initialized=[[followingGroupsInitialized]]></cal-groups>
+        </td>
+      </table>
+    </div>
   </template>
   <script>
     Polymer({
