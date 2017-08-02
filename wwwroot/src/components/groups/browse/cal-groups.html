@@ -79,6 +79,9 @@
             this.fire("status-message-update", { severity: 'error', message: 'User is not logged in.' });
           }
         }
+        else {
+          this.data = [];
+        }
       },
 
       checkState: function (groupId) {
@@ -114,8 +117,10 @@
 
       _selectionChanged: function () {
         if (this.data != null && this.data.length > 0) {
+          if (this.data.length <= this.selectedTab) {
+            this.selectedTab = 0;
+          }
           this.selectedGroupId = this.data[this.selectedTab].id;
-          //console.log("id:" + this.id + ", selectedTab:" + this.selectedTab + ",selectedGroupId:" + this.selectedGroupId)
           this.fire('on-group-selected', { groupsId: this.id, selectedGroupId: this.selectedGroupId })
         }
       },
