@@ -69,7 +69,7 @@
 
             // this.ajaxUrl = serviceBaseUrl + "/groups" + this.parentGroupId;
             if (this.id === 'firstRow') {
-              this.ajaxUrl = serviceBaseUrl + "/groups?fields=name|icon|childGroups&filter=category=" + this.parentGroupId;
+              this.ajaxUrl = serviceBaseUrl + "/groups?fields=name|icon|childGroups|parentGroup&filter=category=" + this.parentGroupId;
             } else {
               this.ajaxUrl = serviceBaseUrl + "/groups?fields=name|icon|childGroups&filter=parentGroup=" + this.parentGroupId;
             }
@@ -121,7 +121,14 @@
       },
 
       handleAjaxResponse: function (e) {
-        this.data = e.detail.response;
+        if (this.id === 'firstRow') {
+          var tempData = e.detail.response.filter(function (el) {
+            return (!el.parentGroup);
+          });
+          this.data = tempData;
+        } else {
+          this.data = e.detail.response;
+        }
         this._selectionChanged();
       },
 

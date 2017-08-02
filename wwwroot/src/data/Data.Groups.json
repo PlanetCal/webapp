@@ -264,12 +264,13 @@
   },
   {
     "id": "FEDCB9FA-77E7-44A4-9DC0-59D6DBBCACBE",
-    "name": "Basketball",
-    "description": "Basketball group.",
+    "name": "Olympics",
+    "description": "Olympics group.",
     "icon": "",
     "privacy": "Open",
     "owner": "",
     "category": "Sports",
+    "childGroups": "B1069D44-CC47-482E-964C-5D361CD15F80",
     "administrators": [],
     "members": [],
     "location": "USA",
@@ -282,9 +283,85 @@
     },
     "contact": {
       "phone": "2062661000",
-      "email": "support@Basketball.com"
+      "email": "support@Olympics.com"
     },
-    "webSite": "http://www.Basketball.com"
+    "webSite": "http://www.Olympics.com"
+  },
+  {
+    "id": "B1069D44-CC47-482E-964C-5D361CD15F80",
+    "name": "2020",
+    "description": "2020 group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Sports",
+    "parentGroup": "FEDCB9FA-77E7-44A4-9DC0-59D6DBBCACBE",
+    "childGroups": "5B154304-8E6F-48C2-B771-8945C87154C8, 88CE540A-431F-4A5F-9218-01BE2C765740",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@2020.com"
+    },
+    "webSite": "http://www.2020.com"
+  },
+  {
+    "id": "5B154304-8E6F-48C2-B771-8945C87154C8",
+    "name": "Swimming",
+    "description": "Swimming group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Sports",
+    "parentGroup": "B1069D44-CC47-482E-964C-5D361CD15F80",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@Swimming.com"
+    },
+    "webSite": "http://www.Swimming.com"
+  },
+  {
+    "id": "88CE540A-431F-4A5F-9218-01BE2C765740",
+    "name": "Gymnastics",
+    "description": "Gymnastics group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Sports",
+    "parentGroup": "B1069D44-CC47-482E-964C-5D361CD15F80",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@Gymnastics.com"
+    },
+    "webSite": "http://www.Gymnastics.com"
   },
   {
     "id": "1F225431-F299-4FB9-88B9-E4D2143F6BBC",
@@ -294,6 +371,7 @@
     "privacy": "Open",
     "owner": "",
     "category": "Local",
+    "childGroups": "98D38C42-6D67-47DB-97E6-250BDDD3C054, 442EA9CA-BEF5-4E96-BA7D-0135E11826F9, E3DDB17A-23A3-4F19-B1CA-06C4212DD294",
     "administrators": [],
     "members": [],
     "location": "USA",
@@ -309,6 +387,81 @@
       "email": "support@Restaurants.com"
     },
     "webSite": "http://www.Restaurants.com"
+  },
+  {
+    "id": "98D38C42-6D67-47DB-97E6-250BDDD3C054",
+    "name": "Kanishka",
+    "description": "Kanishka group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Local",
+    "parentGroup": "1F225431-F299-4FB9-88B9-E4D2143F6BBC",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@Kanishka.com"
+    },
+    "webSite": "http://www.Kanishka.com"
+  },
+  {
+    "id": "442EA9CA-BEF5-4E96-BA7D-0135E11826F9",
+    "name": "Qdoba",
+    "description": "Qdoba group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Local",
+    "parentGroup": "1F225431-F299-4FB9-88B9-E4D2143F6BBC",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@Qdoba.com"
+    },
+    "webSite": "http://www.Qdoba.com"
+  },
+  {
+    "id": "E3DDB17A-23A3-4F19-B1CA-06C4212DD294",
+    "name": "Inchin",
+    "description": "Inchin group.",
+    "icon": "",
+    "privacy": "Open",
+    "owner": "",
+    "category": "Local",
+    "parentGroup": "1F225431-F299-4FB9-88B9-E4D2143F6BBC",
+    "administrators": [],
+    "members": [],
+    "location": "USA",
+    "address": {
+      "streetNumber": 410,
+      "streetName": "Terry Ave N",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98109"
+    },
+    "contact": {
+      "phone": "2062661000",
+      "email": "support@Inchin.com"
+    },
+    "webSite": "http://www.Inchin.com"
   },
   {
     "id": "0AB06C4A-0454-469E-A15A-1341BC7A2BE0",
@@ -336,7 +489,7 @@
   },
   {
     "id": "C6B4C801-9AF0-4655-B9E3-00DD5FE0D2AF",
-    "name": "hotels",
+    "name": "Hotels",
     "description": "hotels group.",
     "icon": "",
     "privacy": "Open",
