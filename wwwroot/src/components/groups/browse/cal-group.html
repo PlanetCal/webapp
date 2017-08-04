@@ -4,7 +4,7 @@
 <dom-module id="cal-group">
   <template>
     <style include="group-styles" is=""></style>
-    <div class='card' on-tap="tapHandler">
+    <div on-tap="tapHandler">
       <template is="dom-if" if="[[checkboxVisible]]">
         <div class="horizontal">
           <paper-checkbox checked='{{checked}}' disabled='{{disabled}}' on-change='onCheckStateChange'>

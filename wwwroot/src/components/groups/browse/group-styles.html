@@ -6,10 +6,17 @@
       .horizontal {
         width: auto;
         float: left;
+        margin-left: 8px;
       }
 
       .paper-tabs {
-        --paper-tabs-selection-bar-color: #0177D7;
+        background-color: var(--app-color-l);
+        margin-right: -5px;
+        margin-bottom: 12px;
+      }
+
+      .paper-tabs .iron-selected {
+        background-color: var(--app-color-p);
       }
 
       .left-align {
@@ -18,28 +25,29 @@
 
       .card {
         margin-right: 2px;
+        margin-bottom: 12px;
+        padding-bottom: 15px;
         padding-right: 5px;
-        background-color: white;
-        color: var(--app-secondary-color);
-        width: auto;
+        background-color: var(--app-color-p);
+        color: var(--app-text-color-dark);
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        border: solid thin rgb(134, 178, 203);
       }
 
       td {
-        width: auto;
         vertical-align: top;
       }
 
       iron-selector {
         display: block;
-        padding: 0 26px;
+        padding-left: 15px;
         text-decoration: none;
-        color: var(--app-secondary-color);
+        color: var(--app-text-color-dark);
         line-height: 40px;
-        width: auto;
       }
 
       iron-selector .iron-selected {
-        background: #0177D7;
+        background: var(--app-color-n);
       }
     </style>
   </template>

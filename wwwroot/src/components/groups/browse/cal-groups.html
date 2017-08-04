@@ -9,7 +9,7 @@
     <iron-ajax url="[[url]]" last-response="{{data}}" auto on-response="handleAjaxResponse"></iron-ajax>
     <iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" on-error='handleErrorResponse' on-response='handleAjaxResponse'></iron-ajax>
     <template is="dom-if" if="[[rootRow]]">
-      <paper-tabs class='paper-tabs' selected="{{selectedTab}}">
+      <paper-tabs class='paper-tabs' no-bar noink scrollable fit-container selected="{{selectedTab}}">
         <template is="dom-repeat" items="[[data]]">
           <paper-tab>
             <cal-group id="[[item.id]]" name="[[item.name]]" icon="[[item.icon]]"></cal-group>
