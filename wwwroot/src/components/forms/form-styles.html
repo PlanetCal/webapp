@@ -6,7 +6,7 @@
        :host {
         display: block;
         position: relative;
-        background-color: white;
+        background-color: #ffffff;
       }
 
       form {
@@ -21,8 +21,8 @@
       }
 
       form div#title {
-        color: white;
-        background-color: gray;
+        color: var(--app-text-color-light);
+        background-color: var(--app-color-j);
         border-radius: 4px;
         font-family: sans-serif;
         font-size: 2.0em;
@@ -38,7 +38,7 @@
 
       paper-input {
         /* Label and underline color when the input is focused */
-        --paper-input-container-focus-color: blue;
+        --paper-input-container-focus-color: var(--app-color-o);
         --paper-input-container-input: {
           font-size: 16px;
         }
@@ -61,11 +61,13 @@
 
       paper-button.button {
         height: 2em;
-        background-color: darkgray;
+        background-color: var(--app-color-l);
         padding: 10px;
+        margin-top: 10px;
+        margin-left: 0px;
         text-align: center;
         border-radius: 5px;
-        color: #fff;
+        color: var(--app-text-color-light);
         text-decoration: none;
         border: none;
         cursor: pointer;
@@ -73,7 +75,7 @@
       }
 
       paper-button.button:hover {
-        background-color: grey;
+        background-color: var(--app-color-j);
       }
 
       .link {

@@ -4,19 +4,28 @@
     <template>
         <style>
              :host {
-                --app-primary-color: #555555;
-                --app-secondary-color: black;
+                --app-text-color-dark: black;
+                --app-text-color-light: white;
+                --app-msg-bar-color: rgba(255, 74, 0, 0.85);
+                --app-color-g: #034;
+                --app-color-h: #145;
+                --app-color-i: #256;
+                --app-color-j: #367;
+                --app-color-k: #478;
+                --app-color-l: #589;
+                --app-color-m: #69a;
+                --app-color-n: #7ab;
+                --app-color-o: #8bc;
+                --app-color-p: #9cd;
+                --app-color-q: #7de;
+                --app-color-r: #7ef;
 
                 display: block;
             }
 
             app-header {
-                color: #fff;
-                background-color: var(--app-primary-color);
-            }
-
-            app-header paper-icon-button {
-                --paper-icon-button-ink-color: white;
+                color: var(--app-text-color-light);
+                background-color: var(--app-color-g);
             }
 
             .drawer-list {
@@ -31,18 +40,18 @@
                 display: block;
                 padding: 0 26px;
                 text-decoration: none;
-                color: var(--app-secondary-color);
+                color: var(--app-text-color-dark);
                 line-height: 40px;
             }
 
             .drawer-list a.iron-selected {
-                color: black;
+                color: var(--app-text-color-dark);
                 font-weight: bold;
             }
 
             div#msg {
-                color: white;
-                background-color: rgba(255, 74, 0, 0.85);
+                color: var(--app-text-color-light);
+                background-color: var(--app-msg-bar-color);
                 font-family: sans-serif;
                 font-size: 0.9em;
                 font-weight: 300;
@@ -63,7 +72,7 @@
             }
 
             .link {
-                color: white;
+                color: var(--app-text-color-light);
                 text-decoration: underline;
                 cursor: pointer;
             }

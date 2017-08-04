@@ -7,9 +7,9 @@
                 display: block;
             }
             /* Vaadin Grid styles -- Start*/
-            
+
             vaadin-grid {
-                color: #fff;
+                color: var(--app-text-color-light);
                 height: 100%;
                 --divider-color: rgb(223, 232, 239);
                 --vaadin-grid-cell: {
@@ -20,7 +20,7 @@
                 ;
                 --vaadin-grid-body-cell: {
                     height: 50px;
-                    color: black;
+                    color: var(--app-text-color-dark);
                 }
                 ;
                 --vaadin-grid-header-cell: {
@@ -57,7 +57,7 @@
                 ;
                 --vaadin-grid-body-row-details-cell: {
                     background-color: #6F778C;
-                    color: black;
+                    color: var(--app-text-color-dark);
                     display: flex;
                     vertical-align: top;
                 }
@@ -67,12 +67,12 @@
                 }
                 ;
             }
-            
+
             vaadin-grid input[type=checkbox] {
                 height: 16px;
                 width: 16px;
             }
-            
+
             vaadin-grid .image {
                 height: 40px;
                 display: inline-block;
@@ -80,60 +80,60 @@
                 vertical-align: middle;
                 margin-right: 5px;
             }
-            
+
             vaadin-grid .header-content {
                 display: flex;
                 padding: 16px;
                 justify-content: space-between;
             }
-            
+
             vaadin-grid .details-cell {
                 background: #fff;
                 width: 100%;
             }
-            
+
             .details {
                 background-color: white;
-                color: black;
+                color: var(--app-text-color-dark);
                 padding: 10px;
                 margin: 10px;
                 display: flex;
                 vertical-align: top;
             }
             /* Paper button styles -- Start*/
-            
+
             paper-button {
                 font-family: 'Roboto', 'Noto', sans-serif;
                 font-weight: normal;
                 font-size: 14px;
                 -webkit-font-smoothing: antialiased;
             }
-            
+
             paper-button.blue {
                 color: var(--paper-blue-a200);
                 width: 150px;
                 --paper-button-ink-color: var(--paper-blue-a200);
             }
-            
+
             paper-button.blue:hover {
                 background-color: var(--paper-blue-100);
             }
-            
+
             paper-button.indigo {
                 background-color: var(--paper-indigo-500);
-                color: white;
+                color: var(--app-text-color-light);
                 width: 200px;
                 --paper-button-raised-keyboard-focus: {
                     background-color: var(--paper-blue-a200) !important;
-                    color: white !important;
+                    color: var(--app-text-color-light) !important;
                 }
                 ;
             }
-            
+
             paper-button.indigo:hover {
                 background-color: var(--paper-indigo-400);
             }
-            
+
             paper-progress {
                 --paper-progress-active-color: lightblue;
                 --paper-progress-secondary-color: lightblue;
@@ -142,7 +142,7 @@
                 width: 50%;
                 padding: 25px 0;
             }
-            
+
             paper-dialog.size-position {
                 position: fixed;
                 top: 16px;
@@ -151,45 +151,45 @@
                 height: 600px;
                 overflow: auto;
             }
-            
+
             iron-icon.delete-icon {
                 margin-left: 12px;
                 cursor: pointer;
                 color: #007e9e;
             }
-            
+
             iron-icon.delete-icon:hover {
                 color: #0FCFFF;
             }
-            
+
             iron-icon.delete-icon:active {
                 color: red;
             }
-            
+
             iron-icon.grid-icon {
                 margin-left: 12px;
                 cursor: pointer;
-                color: white;
+                color: var(--app-text-color-light);
             }
-            
+
             iron-icon.grid-icon:hover {
                 color: var(--paper-indigo-400);
             }
-            
+
             iron-icon.grid-icon:active {
                 color: red;
             }
-            
+
             span.test {
                 display: inline-block;
                 border-bottom: 1px solid black;
                 padding-bottom: 2px;
             }
-            
+
             #divDate.start-time {
                 color: red;
             }
-            
+
             paper-dialog#addEvent.size-position.start-time {
                 color: red;
             }

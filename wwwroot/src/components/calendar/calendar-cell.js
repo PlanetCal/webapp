@@ -45,7 +45,7 @@ Polymer({
         }
 
         if (this.today) {
-            this.customStyle['--cal-cell-background-color'] = 'yellow';
+            this.customStyle['--cal-cell-background-color'] = '#7ef';
         } else {
             this.customStyle['--cal-cell-background-color'] = 'default';
         }
