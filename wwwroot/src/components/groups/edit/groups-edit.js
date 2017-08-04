@@ -28,7 +28,6 @@ Polymer({
     },
     ready: function () {
         this.fire("status-message-update");
-        var nameFieldDiv = this.$.nameFieldDiv;
         var items = [];
         var editedGroup = '';
         if (this.localStorage) {
@@ -36,18 +35,7 @@ Polymer({
         } else {
             this.reset();
         }
-        // var groupDetails = Polymer.globalsManager.globals.groupDetails;
-        // var dd = groupDetails;
     },
-
-    // validateOnChange: function () {
-    //     var editedGroup = '';
-    //     if (this.localStorage) {
-    //         editedGroup = this.localStorage.editedGroup;
-    //     }
-    //     var groupDetails = Polymer.globalsManager.globals.groupDetails;
-    // },
-
     _onLocalStorageLoad: function () {
         var editedGroup = '';
         if (this.localStorage && this.localStorage.editedGroup) {
@@ -63,7 +51,6 @@ Polymer({
         if (inputElement.files && inputElement.files.length > 0) {
             if (this.isValidFileType(inputElement.files[0].type)) {
                 var output = inputElement.files[0];
-                //document.getElementById('PreviewImage').src = window.URL.createObjectURL(file);
                 this.displayContents(output);
                 this.isGroupImageChanged = true;
             }
@@ -77,26 +64,24 @@ Polymer({
         }
     },
     displayContents: function (output) {
-        //this.$.PreviewImage.src = window.URL.createObjectURL(output);
         this.previewSrc = window.URL.createObjectURL(output);
     },
-    resizeImageSelection: function () {
-        //var file = e.target.inputElement.files[0];
-        var file = this.$.groupImage.inputElement.files[0];
-        var img = document.createElement("img");
-        img.src = window.URL.createObjectURL(file);
+    resizeImageSelection: function (file) {
+        var myURL = window.URL || window.webkitURL;
+        var img = this.$.previewImage;
+        var imageWidth = 300, imageHeight = 140;
+        img.width = imageWidth;
+        img.height = imageHeight;
 
         var canvas = document.createElement('canvas');
-        canvas.width = 300;
-        canvas.height = 400;
-        var ctx = canvas.getContext("2d");
+        canvas.width = imageWidth;
+        canvas.height = imageHeight;
+
+        var ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
         var dataUrl = canvas.toDataURL('image/jpeg');
-        return dataUrl;
-        //var resizedImage = this.dataURLToBlob(dataUrl);
-        //this.$.previewImage.src = dataUrl;
-        //this.previewImage(e);
+        return this.dataURLToBlob(dataUrl);
     },
     dataURLToBlob: function (dataURL) {
         var BASE64_MARKER = ';base64,';
@@ -107,7 +92,6 @@ Polymer({
 
             return new Blob([raw], { type: contentType });
         }
-
         var parts = dataURL.split(BASE64_MARKER);
         var contentType = parts[0].split(':')[1];
         var raw = window.atob(parts[1]);
@@ -118,11 +102,8 @@ Polymer({
         for (var i = 0; i < rawLength; ++i) {
             uInt8Array[i] = raw.charCodeAt(i);
         }
-
         return new Blob([uInt8Array], { type: contentType });
     },
-
-
     populateEditedGroup: function (editedGroup) {
         //TODO: Popualte all values from local storage to corresponding fields.
         this.id = editedGroup.id;
@@ -143,7 +124,6 @@ Polymer({
         this.privacy = editedGroup.privacy;
         this.previewSrc = editedGroup.icon;
     },
-
     reset: function () {
         var tempOwner = '';
         if (Polymer.globalsManager.globals.loggedInUser != null && Polymer.globalsManager.globals.loggedInUser != '') {
@@ -191,7 +171,6 @@ Polymer({
             }
         }
         return isValid;
-        //document.getElementsByClassName('.addEvent').validate();
     },
     validateGroupImage: function () {
         if (!this.previewSrc || this.previewSrc == '')
@@ -203,7 +182,7 @@ Polymer({
         e.target.$.input.validate();
     },
     isValidFileType: function (fileType) {
-        if (fileType == 'image/jpeg' || fileType == 'image/bmp' || fileType == 'image/png') {
+        if (fileType == 'image/jpg' || 'image/jpeg' || fileType == 'image/bmp' || fileType == 'image/png') {
             return true;
         }
         else {
@@ -215,7 +194,6 @@ Polymer({
         if (this.id && this.id !== 'null') {
             obj.id = this.id;
         }
-
         obj.name = this.name;
         obj.description = this.description;
         obj.address = {};
@@ -241,21 +219,25 @@ Polymer({
         isValid = isValid && this.validateGroupImage();
         isValid = isValid && this.isGroupImageChanged && this.isValidFileType(this.$.groupImage.inputElement.files[0].type);
         if (isValid) {
-            this.$.savegroup.disabled = true;
-            //this.$.cancelevent.disabled = true;
+            this.fire("status-message-update", { severity: 'info', message: 'Save group in progress....' });
+            this.enableORdisableGroup(true);
             this.groupObject = this.constructGroupObject();
             this.groupType = this.groupObject.id ? 'putGroup' : 'postGroup';
             this.makeAjaxCall(this.groupObject);
-            //this.resizeImageSelection();
         }
     },
-
+    enableORdisableGroup: function (value) {
+        this.$.savegroup.disabled = value;
+        this.$.resetgroup.disabled = value;
+        this.$.deletegroup.disabled = value;
+    },
     makeAjaxCall: function (group = null) {
         //this.isLoading = true;
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
         ajax.url = serviceBaseUrl + '/groups/';
+        ajax.contentType = 'application/json';
         switch (this.groupType) {
             case 'postGroup':
                 ajax.body = JSON.stringify(group);
@@ -284,14 +266,22 @@ Polymer({
                 }
                 break;
             case 'groupImage':
-                ajax.url = serviceBaseUrl + '/blob';
-                ajax.body = group;
+                var data = new FormData();
+                var file = this.$$('#groupImage').$.input.files[0];
+                var fileName = this.groupObject.id + '.jpg';
+                var dataURL = this.resizeImageSelection(file);
+                data.append(fileName, dataURL);
+                //data.append(fileName, file);
+                ajax.url = serviceBaseUrl + '/blob/';
+                ajax.body = data;
+                ajax.contentType = undefined;
                 ajax.method = 'POST';
                 ajax.headers['Version'] = '1.0';
                 if (loggedInUser) {
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
                 }
                 ajax.headers['groupid'] = this.groupObject.id;
+                this.fire("status-message-update", { severity: 'info', message: 'Image upload in progress....' });
                 break;
         }
         ajax.generateRequest();
@@ -304,6 +294,7 @@ Polymer({
         var jsonResponse = e.detail.request.xhr.response;
         var message = 'Error:';
         message = message + ' Here are the Details: Error Status: ' + req.status + ' Error StatusText: ' + req.statusText;
+        this.enableORdisableGroup(false);
     },
 
     handleAjaxResponse: function () {
@@ -327,17 +318,22 @@ Polymer({
                 this.backToGroups();
                 break;
             case 'groupImage':
-                this.updateImageURL(event.detail.response.id);
+                this.updateImageURL(event.detail.response.url);
                 break;
 
         }
     },
     uploadImage: function () {
         this.groupType = 'groupImage';
-        this.makeAjaxCall(this.resizeImageSelection());
+        this.makeAjaxCall();
     },
     updateImageURL: function (imageURL) {
+        this.groupType = 'putGroup';
         this.groupObject.icon = imageURL;
+        this.fire("status-message-update", { severity: 'info', message: 'Redirecting to Groups page after save....' });
         this.makeAjaxCall(this.groupObject);
+    },
+    editImage: function () {
+        this.$$('#groupImage').$.input.click();
     }
 });

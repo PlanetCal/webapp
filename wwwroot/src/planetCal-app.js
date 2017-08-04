@@ -68,10 +68,12 @@ Polymer({
   },
 
   _onEditGroup: function () {
+    this.toggleGroupsView = !this.toggleGroupsView;
     this.set('route.path', '/groups-edit');
   },
 
   _onBackToGroups: function () {
+    this.toggleGroupsView = !this.toggleGroupsView;
     this.set('route.path', '/groups-display');
   },
 

@@ -1,13 +1,10 @@
-<link rel="import" href="/bower_components/polymer/polymer.html">
 <link rel="import" href="/src/polymer-refs.html">
-
-<script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 
 <dom-module id="groups-display">
     <link rel="import" type="css" href="groups-display-styles.css">
     <template>
         <div style="display: flex; vertical-align: top;">
-            <h2 style="vertical-align: top;">Groups [ <a class="link-create" href="/groups-edit">CREATE</a> ]</h2>
+            <h2 style="vertical-align: top;">Groups [ <a class="link-create" href="#" on-tap="createGroup">CREATE</a> ]</h2>
         </div>
         <!--iron-ajax id="requestRepos" auto url="../../../data/Data.Groups.json" handle-as="json" on-response="handleResponse">
         </iron-ajax-->

@@ -1,7 +1,5 @@
-<link rel="import" href="/bower_components/polymer/polymer.html">
 <link rel="import" href="/src/polymer-refs.html">
 <link rel="import" href="groups-edit-styles.html">
-<script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 
 <dom-module id="groups-edit">
   <template>
@@ -9,7 +7,7 @@
     <iron-ajax id='ajax' handle-as='json' loading={{isLoading}} url="[[ajaxUrl]]" content-type='application/json' on-error='handleErrorResponse'
       on-response='handleAjaxResponse'></iron-ajax>
     <div>
-      <div style="margin: 10px; display: flex;">
+      <div style="margin: 10px; display: flex; display: none;">
         <paper-button class="back" on-tap="backToGroups">
           <iron-icon icon="icons:arrow-back"></iron-icon> Back to Groups</paper-button>
         <h3 style="margin-left: 15%">Group Details</h3>
@@ -81,11 +79,12 @@
           </paper-textarea>
         </div>
         <div style="display: flex;">
-          <div style="vertical-align: top;">
+          <div style="vertical-align: top; visibility: hidden;">
             <paper-input type="file" label="Upload Image" id="groupImage" on-change="previewImage" style="vertical-align: top;" required
               error-message="required" accept="image/*"></paper-input>
           </div>
-          <img id="previewImage" src="{{previewSrc}}" width="300" height="150" style="margin-left: 5%;  vertical-align: top;" />
+          <img id="previewImage" src="{{previewSrc}}" width="300" height="140" style="margin-left: 5%;  vertical-align: top;" />
+          <iron-icon class="icon-edit" icon="icons:create" title="Edit" on-tap="editImage"></iron-icon>
         </div>
         <div class="buttons">
           <!--div>
@@ -98,9 +97,9 @@
               </ul>
           </span>
           </div-->
-          <paper-button class="blue" on-tap="delete">
+          <paper-button class="blue" id="deletegroup" on-tap="delete">
             <iron-icon icon="icons:delete"></iron-icon> Delete</paper-button>
-          <paper-button class="blue" on-tap="reset">
+          <paper-button class="blue" id="resetgroup" on-tap="reset">
             <iron-icon icon="icons:refresh"></iron-icon> Reset</paper-button>
           <paper-button class="blue" id="savegroup" on-tap="saveGroup">
             <iron-icon icon="icons:done"></iron-icon> Save</paper-button>

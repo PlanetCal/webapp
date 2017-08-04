@@ -7,7 +7,13 @@ Polymer({
         },
     },
     ready: function () {
+
         this.fire("status-message-update");
+        var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+        if (typeof loggedInUser === 'undefined') {
+            this.fire("status-message-update", { severity: 'error', message: 'Please login to view the groups.' });
+            return;
+        }
         // var nameFieldDiv = this.$.nameFieldDiv;
         var items = [];
         this.loadGroups();
@@ -20,8 +26,8 @@ Polymer({
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-        //ajax.url = serviceBaseUrl + '/groups/';
-        //ajax.url = serviceBaseUrl + '/userdetails/' + loggedInUser.id + '/groups?fields=name|description|privacy';
+        //ajax.url = serviceBaseUrl + '/userdetails/' + loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|owner|administrators|members|location|address|contact|webSite';
+        //Keep below line to switch to normal get groups call
         ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|owner|administrators|members|location|address|contact|webSite';
         switch (this.groupType) {
             case 'getGroups':
@@ -149,14 +155,21 @@ Polymer({
             this.fire("status-message-update", { severity: 'error', message: 'You are not allowed to edit the default group.' });
             return;
         }
+        //check whether the current user has edit permission
         // if (!editedGroup.isEdit) {
         //     this.fire("status-message-update", { severity: 'error', message: 'You are not owner to edit the group.' });
         //     return;
         // }
-        //TODO: check whether the current user has edit permission
+
         this.set('localStorage.editedGroup', editedGroup);
-        this.fire('on-edit-group');
-        //window.location.href = 'groups-edit';
+        //this.fire('on-edit-group');
+        window.location.href = 'groups-edit';
+    },
+    createGroup: function (e) {
+        if (this.localStorage) {
+            this.set('localStorage.editedGroup', null);
+        }
+        window.location.href = 'groups-edit';
     },
     deleteGroup: function (e) {
         var group = e.model.item;

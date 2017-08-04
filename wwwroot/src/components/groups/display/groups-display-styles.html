@@ -2,23 +2,78 @@
 
 <dom-module id="groups-display-styles">
     <template>
-        <style is="groups-display-styles">
+        <style>
              :host {
                 display: block;
             }
             
-            div#test.test {
-                color: darkgreen;
+            paper-card {
+                height: 355px;
+                margin: 10px;
+                width: 300px;
+                background-color: lightblue;
+                vertical-align: top;
+                --paper-card-header-image: {
+                    height: 140px;
+                }
             }
             
-            .paper-card {
-                display: inline-block;
-                position: relative;
-                box-sizing: border-box;
-                background-color: blue;
-                border-radius: 2px;
-                font-family: 'Roboto', 'Noto', sans-serif;
-                -webkit-font-smoothing: antialiased;
+            paper-card:hover {
+                background-color: #41B4F1;
+            }
+            
+            iron-icon {
+                color: #6F778C;
+            }
+            
+            iron-icon.icon-edit {
+                color: #6F778C;
+                cursor: pointer;
+                margin-left: 10px;
+            }
+            
+            iron-icon.icon-edit:hover {
+                color: lightcoral;
+            }
+            
+            .text-phone {
+                color: #6F778C;
+            }
+            
+            a {
+                text-decoration: none;
+                color: #6F778C;
+            }
+            
+            a:hover {
+                text-decoration: underline;
+                color: #393E48;
+            }
+            
+            a.link-events {
+                text-decoration: none;
+                color: #6F778C;
+            }
+            
+            a.link-events:hover {
+                text-decoration: underline;
+                color: darkslategray;
+            }
+            
+            a.link-create {
+                text-decoration: none;
+                color: var(--paper-blue-a200);
+                ;
+            }
+            
+            a.link-create:hover {
+                text-decoration: underline;
+                color: #41B4F1;
+            }
+            
+            .card-footer {
+                text-align: right;
+                margin-right: 20px;
             }
         </style>
     </template>
