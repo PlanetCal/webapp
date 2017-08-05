@@ -1,5 +1,8 @@
 Polymer({
     is: 'groups-edit',
+    behaviors: [
+        Polymer.IronResizableBehavior,
+    ],
     properties: {
         page: {
             type: Number,
@@ -25,6 +28,13 @@ Polymer({
             type: Object,
             value: {},
         },
+        timeout: {
+            type: String,
+            value: null,
+        }
+    },
+    listeners: {
+        'iron-resize': 'onGroupsEditResize',
     },
     ready: function () {
         this.fire("status-message-update");
@@ -320,7 +330,6 @@ Polymer({
             case 'groupImage':
                 this.updateImageURL(event.detail.response.url);
                 break;
-
         }
     },
     uploadImage: function () {
@@ -335,5 +344,28 @@ Polymer({
     },
     editImage: function () {
         this.$$('#groupImage').$.input.click();
-    }
+    },
+    onGroupsEditResize: function () {
+        //This function will be called when the window is resized.
+        var width = window.innerWidth
+            || document.documentElement.clientWidth
+            || document.body.clientWidth;
+        var instructions = this.$$('#imageUploadInstructions');
+
+        if (this.timeout) { return }
+        this.timeout = setTimeout(() => {
+            if (width < 800) {
+                if (instructions) {
+                    instructions.style.display = 'none';
+                }
+            }
+            else {
+                if (instructions) {
+                    instructions.style.display = '';
+                }
+            }
+            clearTimeout(this.timeout)
+            this.timeout = null
+        }, 2000)
+    },
 });

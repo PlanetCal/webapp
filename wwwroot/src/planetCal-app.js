@@ -1,5 +1,8 @@
 Polymer({
   is: 'planetCal-app',
+  behaviors: [
+    Polymer.IronResizableBehavior
+  ],
   properties: {
     page: {
       type: String,
@@ -19,7 +22,8 @@ Polymer({
     'on-login-successful': '_loginSuccessHandler',
     'on-edit-group': '_onEditGroup',
     'on-back-to-groups': '_onBackToGroups',
-    'status-message-update': '_messageUpdateHandler'
+    'status-message-update': '_messageUpdateHandler',
+    'iron-resize': '_onIronResize'
   },
 
   ready: function () {
@@ -140,5 +144,8 @@ Polymer({
 
   _showPage404: function () {
     this.page = 'view404';
+  },
+  _onIronResize: function () {
+    //TODO: If we want to do any window resize at project level, add code here.
   },
 });
