@@ -224,12 +224,18 @@ Polymer({
         //obj.icon = this.previewSrc;
         return obj;
     },
+    delete: function (e) {
+        this.groupObject = this.constructGroupObject();
+        this.groupType = 'deleteGroup';
+        this.fire("status-message-update", { severity: 'info', message: 'Delete group in progress...' });
+        this.makeAjaxCall(this.groupObject);
+    },
     saveGroup: function (e) {
         var isValid = this.validate();
         isValid = isValid && this.validateGroupImage();
         isValid = isValid && this.isGroupImageChanged && this.isValidFileType(this.$.groupImage.inputElement.files[0].type);
         if (isValid) {
-            this.fire("status-message-update", { severity: 'info', message: 'Save group in progress....' });
+            this.fire("status-message-update", { severity: 'info', message: 'Save group in progress...' });
             this.enableORdisableGroup(true);
             this.groupObject = this.constructGroupObject();
             this.groupType = this.groupObject.id ? 'putGroup' : 'postGroup';
@@ -266,7 +272,7 @@ Polymer({
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
                 }
                 break;
-            case 'deletegroup':
+            case 'deleteGroup':
                 ajax.url += group.id;
                 // ajax.body = JSON.stringify(event.id);
                 ajax.method = 'DELETE';
@@ -291,7 +297,7 @@ Polymer({
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
                 }
                 ajax.headers['groupid'] = this.groupObject.id;
-                this.fire("status-message-update", { severity: 'info', message: 'Image upload in progress....' });
+                this.fire("status-message-update", { severity: 'info', message: 'Image upload in progress...' });
                 break;
         }
         ajax.generateRequest();
@@ -312,7 +318,8 @@ Polymer({
             case 'postGroup':
                 this.groupObject.id = event.detail.response.id;
                 this.uploadImage();
-                //this.fire("status-message-update", { severity: 'info', message: 'Event saved successfully ...' });
+                this.isGroupImageChanged = false;
+                this.fire("status-message-update", { severity: 'info', message: 'new group creation in progress...' });
                 break;
             case 'putGroup':
                 if (this.isGroupImageChanged) {
@@ -339,7 +346,7 @@ Polymer({
     updateImageURL: function (imageURL) {
         this.groupType = 'putGroup';
         this.groupObject.icon = imageURL;
-        this.fire("status-message-update", { severity: 'info', message: 'Redirecting to Groups page after save....' });
+        this.fire("status-message-update", { severity: 'info', message: 'Redirecting to Groups page after save...' });
         this.makeAjaxCall(this.groupObject);
     },
     editImage: function () {

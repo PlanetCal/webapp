@@ -26,9 +26,9 @@ Polymer({
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-        //ajax.url = serviceBaseUrl + '/userdetails/' + loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|owner|administrators|members|location|address|contact|webSite';
+        ajax.url = serviceBaseUrl + '/userdetails/' + loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|owner|administrators|members|location|address|contact|webSite';
         //Keep below line to switch to normal get groups call
-        ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|owner|administrators|members|location|address|contact|webSite';
+        //ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|owner|administrators|members|location|address|contact|webSite';
         switch (this.groupType) {
             case 'getGroups':
                 ajax.method = 'GET';
