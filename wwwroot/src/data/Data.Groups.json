@@ -8,7 +8,6 @@
     "owner": "",
     "category": "School",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 16250,
@@ -32,7 +31,6 @@
     "owner": "",
     "category": "School",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 3330,
@@ -56,7 +54,6 @@
     "owner": "",
     "category": "School",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 14600,
@@ -80,7 +77,6 @@
     "owner": "",
     "category": "School",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 565,
@@ -104,7 +100,6 @@
     "owner": "",
     "category": "Work",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetName": "One Microsoft Way",
@@ -127,7 +122,6 @@
     "owner": "",
     "category": "Work",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -151,7 +145,6 @@
     "owner": "",
     "category": "Sports",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -175,7 +168,6 @@
     "owner": "",
     "category": "Sports",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -199,7 +191,6 @@
     "owner": "",
     "category": "Sports",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -223,7 +214,6 @@
     "owner": "",
     "category": "Sports",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -247,7 +237,6 @@
     "owner": "",
     "category": "Sports",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -274,7 +263,6 @@
       "B1069D44-CC47-482E-964C-5D361CD15F80"
     ],
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -303,7 +291,6 @@
       "88CE540A-431F-4A5F-9218-01BE2C765740"
     ],
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -328,7 +315,6 @@
     "category": "Sports",
     "parentGroup": "B1069D44-CC47-482E-964C-5D361CD15F80",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -353,7 +339,6 @@
     "category": "Sports",
     "parentGroup": "B1069D44-CC47-482E-964C-5D361CD15F80",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -382,7 +367,6 @@
       "E3DDB17A-23A3-4F19-B1CA-06C4212DD294"
     ],
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -407,7 +391,6 @@
     "category": "Local",
     "parentGroup": "1F225431-F299-4FB9-88B9-E4D2143F6BBC",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -432,7 +415,6 @@
     "category": "Local",
     "parentGroup": "1F225431-F299-4FB9-88B9-E4D2143F6BBC",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -457,7 +439,6 @@
     "category": "Local",
     "parentGroup": "1F225431-F299-4FB9-88B9-E4D2143F6BBC",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -481,7 +462,6 @@
     "owner": "",
     "category": "Local",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -505,7 +485,6 @@
     "owner": "",
     "category": "Local",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
@@ -529,7 +508,6 @@
     "owner": "",
     "category": "Local",
     "administrators": [],
-    "members": [],
     "location": "USA",
     "address": {
       "streetNumber": 410,
