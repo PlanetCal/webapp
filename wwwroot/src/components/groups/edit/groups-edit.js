@@ -127,7 +127,6 @@ Polymer({
         this.location = editedGroup.location;
         this.phone = editedGroup.contact.phone;
         this.email = editedGroup.contact.email;
-        this.owner = editedGroup.owner;
         this.website = editedGroup.webSite;
         this.administrators = editedGroup.administrators;
         this.members = editedGroup.members;
@@ -135,10 +134,6 @@ Polymer({
         this.previewSrc = editedGroup.icon;
     },
     reset: function () {
-        var tempOwner = '';
-        if (Polymer.globalsManager.globals.loggedInUser != null && Polymer.globalsManager.globals.loggedInUser != '') {
-            tempOwner = Polymer.globalsManager.globals.loggedInUser.email;
-        }
         this.id = '';
         this.name = '';
         this.description = '';
@@ -150,7 +145,6 @@ Polymer({
         this.location = '';
         this.phone = '';
         this.email = '';
-        this.owner = tempOwner;
         this.website = '';
         this.administrators = [];
         this.members = [];
@@ -165,8 +159,8 @@ Polymer({
     },
     backToGroups: function () {
         this.resetLocalStorageForEditedGroup();
-        //this.fire('on-back-to-groups', { page: '/groups-display' });
-        window.location.href = 'groups-display';
+        //this.fire('on-back-to-groups', { page: '/groups-owned' });
+        window.location.href = 'groups-owned';
     },
     validate: function () {
         var elements = document.getElementsByClassName('saveGroups');
@@ -216,7 +210,6 @@ Polymer({
         obj.contact = {};
         obj.contact.phone = this.phone;
         obj.contact.email = this.email;
-        obj.owner = this.owner;
         obj.webSite = this.website;
         obj.administrators = this.administrators;
         obj.members = this.members;

@@ -5,6 +5,10 @@ Polymer({
             type: String,
             value: '',
         },
+        ajaxType: {
+            type: String,
+            value: '',
+        },
     },
     ready: function () {
 
@@ -19,17 +23,23 @@ Polymer({
         this.loadGroups();
     },
     loadGroups: function () {
-        this.groupType = 'getGroups';
+        this.ajaxType = 'getGroups';
         this.makeAjaxCall();
     },
     makeAjaxCall: function (event = null) {
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-        ajax.url = serviceBaseUrl + '/userdetails/' + loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|owner|administrators|members|location|address|contact|webSite';
+        if (this.groupType === 'subscribed') {
+            ajax.url = serviceBaseUrl + '/userdetails/' + loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy';
+        }
+        else {
+            ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&filter=createdBy=' + loggedInUser.id;
+        }
+
         //Keep below line to switch to normal get groups call
-        //ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|owner|administrators|members|location|address|contact|webSite';
-        switch (this.groupType) {
+        //ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|createdBy|administrators|members|location|address|contact|webSite|modifiedBy';
+        switch (this.ajaxType) {
             case 'getGroups':
                 ajax.method = 'GET';
                 ajax.headers['Version'] = '1.0';
@@ -41,23 +51,23 @@ Polymer({
     },
     handleAjaxResponse: function (groups) {
         // var jsonResponse = e.detail.response;
-        switch (this.groupType) {
+        switch (this.ajaxType) {
             case 'getGroups':
                 var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
                 var tempItems = groups.detail.response;
                 tempItems.forEach(function (item, index) {
                     // To identify which groups the current user can edit
-                    if (item.owner.toLowerCase() === loggedInUser.id.toLowerCase()) {
+                    if (item.createdBy && item.createdBy.toLowerCase() === loggedInUser.id.toLowerCase()) {
                         item.isEdit = true;
                     }
                     else {
                         item.isEdit = false;
                     }
                     // To identify which groups are private
-                    if (item.privacy.toLowerCase() === 'private') {
+                    if (item.privacy.toLowerCase() === 'closed') {
                         item.isPrivate = true;
                         item.isEdit = false;
-                        item.name += ' [Private]';
+                        item.name += ' [Closed Group]';
                     }
                     if (!item.icon || item.icon === '') {
                         item.icon = '../src/images/noimage.png';
@@ -109,7 +119,7 @@ Polymer({
         var tempItems = data.detail.response;
         tempItems.forEach(function (item, index) {
             // To identify which groups the current user can edit
-            if (item.owner.toLowerCase() === loggedInUser.id.toLowerCase()) {
+            if (item.createdBy.toLowerCase() === loggedInUser.id.toLowerCase()) {
                 item.isEdit = true;
             }
             else {
@@ -189,7 +199,7 @@ Polymer({
     deleteGroup: function (e) {
         var group = e.model.item;
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-        if (group.owner.toLowerCase() !== loggedInUser.email.toLowerCase()) {
+        if (group.createdBy.toLowerCase() !== loggedInUser.email.toLowerCase()) {
             this.fire("status-message-update", { severity: 'error', message: 'You are not owner to delete the group.' });
             return;
         }

@@ -56,8 +56,8 @@
           error-message="required" on-change="validateOnChange">
         </paper-input>
       </div>
-      <div style="display: flex; width: 100%">
-        <paper-input label="owner" class="saveGroups" value="{{owner}}" char-counter maxlength="30" style="width: 30%;" required
+      <div style="display: flex; width: 100%;">
+        <paper-input label="Category" class="saveGroups" value="{{category}}" char-counter maxlength="30" style="width: 30%;" required
           error-message="required" on-change="validateOnChange">
         </paper-input>
         <span style="width: 5%"></span>
@@ -69,14 +69,14 @@
           error-message="required" on-change="validateOnChange" readonly>
         </paper-input>
       </div>
-      <div>
+      <!--div>
         <paper-textarea label="Administrators" class="saveGroups" value="{{administrators}}" char-counter maxlength="200" max-rows="2">
         </paper-textarea>
       </div>
       <div>
         <paper-textarea label="Members" class="saveGroups" value="{{members}}" char-counter maxlength="200" max-rows="" 2>
         </paper-textarea>
-      </div>
+      </div-->
       <div style="display: flex;">
         <img id="previewImage" src="{{previewSrc}}" width="300" height="140" style="vertical-align: top;" />
         <iron-icon class="icon-edit" icon="icons:create" title="Edit" on-tap="editImage"></iron-icon>

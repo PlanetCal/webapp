@@ -16,10 +16,10 @@
                 <div class="card-content" style="height:150px;">
                     <div>[[DisplayLimitedText(item.description, 120)]]</div>
                     <div style="height: 20px;"></div>
-                    <div class$="text-phone {{hideForPrivate(item.isPrivate, item.isEdit)}}">
+                    <div class$="text-phone {{hideForPrivate(item.isPrivate)}}">
                         <iron-icon icon="icons:perm-phone-msg"></iron-icon> {{item.contact.phone}}
                     </div>
-                    <div class$="{{hideForPrivate(item.isPrivate, item.isEdit)}}">
+                    <div class$="{{hideForPrivate(item.isPrivate)}}">
                         <iron-icon icon="communication:email"></iron-icon>
                         <a href="mailto:{{item.contact.email}}" title="Email">{{item.contact.email}}</a>
                     </div>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a class="link-events" href="../../../../user-profile" title="Go to Events">Unsubscribe</a> |
+                    <span class$="{{hideForPrivate(item.isPrivate)}}"><a class="link-events" href="../../../../user-profile" title="Go to Events">Unsubscribe</a> |</span>
                     <a class="link-events" href="group-events/{{item.id}}" title="Go to Events">Events</a>
                     <iron-icon class$="icon-edit {{hideForEdit(item.isEdit)}}" icon="icons:create" title="Edit" on-tap="editGroup"></iron-icon>
                     <iron-icon class$="icon-edit {{hideForEdit(item.isEdit)}}" icon="icons:delete" title="Delete" on-tap="deleteGroup"></iron-icon>
