@@ -53,8 +53,14 @@ Polymer({
                     else {
                         item.isEdit = false;
                     }
-                    if (!item.icon) {
-                        item.icon = '';
+                    // To identify which groups are private
+                    if (item.privacy.toLowerCase() === 'private') {
+                        item.isPrivate = true;
+                        item.isEdit = false;
+                        item.name += ' [Private]';
+                    }
+                    if (!item.icon || item.icon === '') {
+                        item.icon = '../src/images/noimage.png';
                     }
                     if (!item.administrators) {
                         item.administrators = [];
@@ -109,6 +115,15 @@ Polymer({
             else {
                 item.isEdit = false;
             }
+            // To identify which groups are private
+            if (item.privacy.toLowerCase() === 'private') {
+                item.isPrivate = true;
+                item.name += '[Private]';
+            }
+            else {
+                item.isPrivate = false;
+            }
+
             if (!item.icon) {
                 item.icon = '';
             }
@@ -179,5 +194,20 @@ Polymer({
             return;
         }
         //TODO: Add code changes to delete
+    },
+    populateCardClass: function (isPrivate) {
+        if (isPrivate)
+            return 'paper-card-private';
+        this.updateStyles();
+    },
+    hideForPrivate: function (isPrivate) {
+        if (isPrivate)
+            return 'displayNone';
+        this.updateStyles();
+    },
+    hideForEdit: function (isEdit) {
+        if (!isEdit)
+            return 'displayNone';
+        this.updateStyles();
     }
 });

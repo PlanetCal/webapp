@@ -5,13 +5,15 @@
         <style>
              :host {
                 display: block;
+                margin-left: 0.5%;
+                margin-right: 0.5%;
             }
             
             paper-card {
                 height: 355px;
                 margin: 10px;
                 width: 300px;
-                background-color: lightblue;
+                background-color: var(--app-color-p);
                 vertical-align: top;
                 --paper-card-header-image: {
                     height: 140px;
@@ -19,61 +21,73 @@
             }
             
             paper-card:hover {
-                background-color: #41B4F1;
+                background-color: var(--app-color-r);
+            }
+            
+            .paper-card-private {
+                background-color: var(--app-color-q);
+            }
+            
+            .paper-card-private:hover {
+                background-color: var(--app-color-r);
             }
             
             iron-icon {
-                color: #6F778C;
+                color: var(--app-color-i);
             }
             
             iron-icon.icon-edit {
-                color: #6F778C;
+                color: var(--app-color-i);
                 cursor: pointer;
                 margin-left: 10px;
             }
             
             iron-icon.icon-edit:hover {
-                color: lightcoral;
+                color: var(--app-color-g);
             }
             
             .text-phone {
-                color: #6F778C;
+                color: var(--app-color-k);
             }
             
             a {
                 text-decoration: none;
-                color: #6F778C;
+                color: var(--app-color-k);
             }
             
             a:hover {
                 text-decoration: underline;
-                color: #393E48;
+                color: var(--app-color-g);
             }
             
             a.link-events {
                 text-decoration: none;
-                color: #6F778C;
+                color: var(--app-color-i);
             }
             
             a.link-events:hover {
                 text-decoration: underline;
-                color: darkslategray;
+                color: var(--app-color-g);
             }
             
             a.link-create {
                 text-decoration: none;
-                color: var(--paper-blue-a200);
+                color: var(--app-color-m);
                 ;
             }
             
             a.link-create:hover {
                 text-decoration: underline;
-                color: #41B4F1;
+                color: var(--app-color-k);
             }
             
             .card-footer {
                 text-align: right;
                 margin-right: 20px;
+            }
+            
+            .displayNone {
+                display: none;
             }
         </style>
     </template>

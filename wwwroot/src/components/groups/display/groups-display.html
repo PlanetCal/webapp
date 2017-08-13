@@ -1,8 +1,9 @@
 <link rel="import" href="/src/polymer-refs.html">
+<link rel="import" href="groups-display-styles.html">
 
 <dom-module id="groups-display">
-    <link rel="import" type="css" href="groups-display-styles.css">
     <template>
+        <style include="groups-display-styles"></style>
         <div style="display: flex; vertical-align: top;">
             <h2 style="vertical-align: top;">Groups [ <a class="link-create" href="#" on-tap="createGroup">CREATE</a> ]</h2>
         </div>
@@ -10,26 +11,28 @@
         </iron-ajax-->
         <iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" content-type='application/json' on-error='handleErrorResponse' on-response='handleAjaxResponse'></iron-ajax>
         <template is="dom-repeat" items="{{items}}">
-            <paper-card heading="{{item.name}}" elevation="5" image="{{item.icon}}" animated-shadow="true" animated title="{{item.name}}">
-                <div class="card-content">
+            <paper-card class$="{{populateCardClass(item.isPrivate)}}" heading="{{item.name}}" elevation="5" image="{{item.icon}}" animated-shadow="true"
+                animated title="{{item.name}}">
+                <div class="card-content" style="height:150px;">
                     <div>[[DisplayLimitedText(item.description, 120)]]</div>
                     <div style="height: 20px;"></div>
-                    <div class="text-phone">
+                    <div class$="text-phone {{hideForPrivate(item.isPrivate, item.isEdit)}}">
                         <iron-icon icon="icons:perm-phone-msg"></iron-icon> {{item.contact.phone}}
                     </div>
-                    <div>
+                    <div class$="{{hideForPrivate(item.isPrivate, item.isEdit)}}">
                         <iron-icon icon="communication:email"></iron-icon>
                         <a href="mailto:{{item.contact.email}}" title="Email">{{item.contact.email}}</a>
                     </div>
-                    <div>
+                    <div class$="{{hideForPrivate(item.isPrivate, item.isEdit)}}">
                         <iron-icon class="icon" icon="hardware:laptop"></iron-icon>
                         <a href="{{item.webSite}}" target="_blank" title="Website">{{item.webSite}}</a>
                     </div>
                 </div>
                 <div class="card-footer">
+                    <a class="link-events" href="../../../../user-profile" title="Go to Events">Unsubscribe</a> |
                     <a class="link-events" href="group-events/{{item.id}}" title="Go to Events">Events</a>
-                    <iron-icon class="icon-edit" icon="icons:create" title="Edit" on-tap="editGroup"></iron-icon>
-                    <iron-icon class="icon-edit" icon="icons:delete" title="Delete" on-tap="deleteGroup"></iron-icon>
+                    <iron-icon class$="icon-edit {{hideForEdit(item.isEdit)}}" icon="icons:create" title="Edit" on-tap="editGroup"></iron-icon>
+                    <iron-icon class$="icon-edit {{hideForEdit(item.isEdit)}}" icon="icons:delete" title="Delete" on-tap="deleteGroup"></iron-icon>
                 </div>
             </paper-card>
         </template>

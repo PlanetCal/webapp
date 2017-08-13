@@ -338,7 +338,7 @@ Polymer({
                 //this.items = JSON.parse(event.detail.response);
                 this.items = event.detail.response;
                 this.populateGrid();
-                this.fire("status-message-update", { severity: 'info', message: 'Successfully loaded events from server ...' });
+                this.fire("status-message-update");
                 break;
             case 'postEvents':
                 this.eventObject.id = event.detail.response.id;

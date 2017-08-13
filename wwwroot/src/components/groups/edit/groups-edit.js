@@ -221,7 +221,8 @@ Polymer({
         obj.administrators = this.administrators;
         obj.members = this.members;
         obj.privacy = this.privacy;
-        //obj.icon = this.previewSrc;
+        if (!this.isGroupImageChanged)
+            obj.icon = this.previewSrc;
         return obj;
     },
     delete: function (e) {
@@ -233,7 +234,9 @@ Polymer({
     saveGroup: function (e) {
         var isValid = this.validate();
         isValid = isValid && this.validateGroupImage();
-        isValid = isValid && this.isGroupImageChanged && this.isValidFileType(this.$.groupImage.inputElement.files[0].type);
+        if (isValid && this.isGroupImageChanged) {
+            isValid = this.isValidFileType(this.$.groupImage.inputElement.files[0].type);
+        }
         if (isValid) {
             this.fire("status-message-update", { severity: 'info', message: 'Save group in progress...' });
             this.enableORdisableGroup(true);
