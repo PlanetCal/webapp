@@ -132,6 +132,7 @@ Polymer({
         this.members = editedGroup.members;
         this.privacy = editedGroup.privacy;
         this.previewSrc = editedGroup.icon;
+        this.category = editedGroup.category;
     },
     reset: function () {
         this.id = '';
@@ -150,6 +151,7 @@ Polymer({
         this.members = [];
         this.privacy = 'Open';
         this.previewSrc = '';
+        this.category = '';
         this.resetLocalStorageForEditedGroup();
     },
     resetLocalStorageForEditedGroup: function () {
@@ -214,6 +216,7 @@ Polymer({
         obj.administrators = this.administrators;
         obj.members = this.members;
         obj.privacy = this.privacy;
+        obj.category = this.category;
         if (!this.isGroupImageChanged)
             obj.icon = this.previewSrc;
         return obj;
