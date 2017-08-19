@@ -455,6 +455,24 @@
     ]
   },
   {
+    "id": "32331752-333F-423C-9C47-D5E63E08FA8C",
+    "name": "New Year's Day",
+    "description": "New Year's Day, also called simply New Year's or New Year, is observed on January 1, the first day of the year on the modern Gregorian calendar as well as the Julian calendar.",
+    "type": "Holiday",
+    "startDateTime": "2017-08-24T24:00Z",
+    "endDateTime": "2017-08-25T24:00Z",
+    "location": "USA",
+    "address": {
+      "streetName": "One Microsoft Way",
+      "city": "Redmond",
+      "state": "WA",
+      "postalCode": "98052"
+    },
+    "groups": [
+      "FCC4B6F4-56AF-429C-9812-38284B4DA429"
+    ]
+  },
+  {
     "id": "32331752-333F-423C-9C47-D5E63E08FA8D",
     "name": "New Year's Day",
     "description": "New Year's Day, also called simply New Year's or New Year, is observed on January 1, the first day of the year on the modern Gregorian calendar as well as the Julian calendar.",
