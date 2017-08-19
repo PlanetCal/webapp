@@ -17,45 +17,6 @@
           on-change="validateOnChange">
         </paper-input>
       </div>
-      <div>
-        <paper-textarea class="saveGroups" label="Description" value="{{description}}" char-counter maxlength="500" max-rows="4"
-          required error-message="required" on-keydown="validateOnChange" on-change="validateOnChange"></paper-textarea>
-      </div>
-      <div style="display: flex; width: 100%">
-        <paper-input label="Street Number" class="saveGroups" value="{{streetNumber}}" char-counter maxlength="15" style="width: 30%;"
-          required error-message="required" on-change="validateOnChange">
-        </paper-input>
-        <span style="width: 5%"></span>
-        <paper-input label="Street Name" class="saveGroups" value="{{streetName}}" char-counter maxlength="50" style="width: 67%;"
-          required error-message="required" on-change="validateOnChange">
-        </paper-input>
-      </div>
-      <div style="display: flex;">
-        <paper-input label="City" class="saveGroups" value="{{city}}" char-counter maxlength="20" style="width: 30%;" required error-message="required"
-          on-change="validateOnChange">
-        </paper-input>
-        <span style="width: 5%;"></span>
-        <paper-input label="State" class="saveGroups" value="{{state}}" char-counter maxlength="20" style="width: 30%;" required
-          error-message="required" on-change="validateOnChange">
-        </paper-input>
-        <span style="width: 5%;"></span>
-        <paper-input label="Postal Code" class="saveGroups" value="{{postalCode}}" char-counter maxlength="10" style="width: 30%;"
-          required error-message="required" on-change="validateOnChange">
-        </paper-input>
-      </div>
-      <div style="display: flex;">
-        <paper-input label="Location" class="saveGroups" value="{{location}}" char-counter maxlength="10" style="width: 30%;" required
-          error-message="required" on-change="validateOnChange">
-        </paper-input>
-        <span style="width: 5%;"></span>
-        <paper-input label="Phone" class="saveGroups" value="{{phone}}" char-counter maxlength="15" style="width: 30%;" required
-          error-message="required" on-change="validateOnChange">
-        </paper-input>
-        <span style="width: 5%;"></span>
-        <paper-input label="Email" class="saveGroups" value="{{email}}" char-counter maxlength="25" style="width: 30%;" required
-          error-message="required" on-change="validateOnChange">
-        </paper-input>
-      </div>
       <div style="display: flex; width: 100%;">
         <paper-dropdown-menu label="Category" style="width: 30%;" required error-message="required" on-change="validateOnChange">
           <paper-listbox attr-for-selected="value" slot="dropdown-content" class="dropdown-content" selected="{{category}}">
@@ -67,14 +28,72 @@
           </paper-listbox>
         </paper-dropdown-menu>
         <span style="width: 5%"></span>
+        <paper-dropdown-menu label="Privacy" style="width: 30%;" required error-message="required" on-change="validateOnChange">
+          <paper-listbox attr-for-selected="value" slot="dropdown-content" class="dropdown-content" selected="{{privacy}}">
+            <paper-item value="Open">Open</paper-item>
+            <paper-item value="Closed">Closed</paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
+        <span style="width: 5%;"></span>
         <paper-input label="Website" class="saveGroups" value="{{website}}" char-counter maxlength="50" style="width: 30%;" required
           error-message="required" on-change="validateOnChange">
         </paper-input>
-        <span style="width: 5%;"></span>
-        <paper-input label="Privacy" class="saveGroups" value="{{privacy}}" char-counter maxlength="10" style="width: 30%;" required
-          error-message="required" on-change="validateOnChange" readonly>
-        </paper-input>
       </div>
+      <div>
+        <paper-collapse-group>
+          <paper-collapse-item header="Optional Fields" icon="icons:info" style="cursor: pointer;" title="click here to show/hide optional fields">
+            <div>
+              <paper-textarea class="saveGroups" label="Description" value="{{description}}" char-counter maxlength="500" max-rows="4"></paper-textarea>
+            </div>
+            <div style="display: flex; width: 100%">
+              <paper-input label="Street Number" class="saveGroups" value="{{streetNumber}}" char-counter maxlength="15" style="width: 30%;">
+              </paper-input>
+              <span style="width: 5%"></span>
+              <paper-input label="Street Name" class="saveGroups" value="{{streetName}}" char-counter maxlength="50" style="width: 67%;">
+              </paper-input>
+            </div>
+            <div style="display: flex;">
+              <paper-input label="City" class="saveGroups" value="{{city}}" char-counter maxlength="20" style="width: 30%;">
+              </paper-input>
+              <span style="width: 5%;"></span>
+              <paper-input label="State" class="saveGroups" value="{{state}}" char-counter maxlength="20" style="width: 30%;">
+              </paper-input>
+              <span style="width: 5%;"></span>
+              <paper-input label="Postal Code" class="saveGroups" value="{{postalCode}}" char-counter maxlength="10" style="width: 30%;">
+              </paper-input>
+            </div>
+            <div style="display: flex;">
+              <paper-input label="Location" class="saveGroups" value="{{location}}" char-counter maxlength="10" style="width: 30%;">
+              </paper-input>
+              <span style="width: 5%;"></span>
+              <paper-input label="Phone" class="saveGroups" value="{{phone}}" char-counter maxlength="15" style="width: 30%;">
+              </paper-input>
+              <span style="width: 5%;"></span>
+              <paper-input label="Email" class="saveGroups" value="{{email}}" char-counter maxlength="25" style="width: 30%;">
+              </paper-input>
+            </div>
+            <div style="display: flex;">
+              <img id="previewImage" src="{{previewSrc}}" width="300" height="140" style="vertical-align: top;" />
+              <iron-icon class="icon-edit" icon="icons:file-upload" title="Edit" on-tap="editImage"></iron-icon>
+              <span id="imageUploadInstructions" style="margin-left: 5%; vertical-align: top; text-align: left;">
+              <h3>Instructions for group image upload: </h3>
+              <ul>
+                <li>Image size can maximum be 2MB</li>
+                <li>Recommended width and height of image is 300 X 150</li>
+                <li>Size more than 300 X 150 will be reset to this size</li>
+              </ul>
+          </span>
+            </div>
+            <div>
+              <div style="vertical-align: top; visibility: hidden; margin-top: -45px;">
+                <paper-input type="file" label="Upload Image" id="groupImage" on-change="previewImage" style="vertical-align: top;" accept="image/*"></paper-input>
+              </div>
+            </div>
+          </paper-collapse-item>
+        </paper-collapse-group>
+      </div>
+
+
       <!--div>
         <paper-textarea label="Administrators" class="saveGroups" value="{{administrators}}" char-counter maxlength="200" max-rows="2">
         </paper-textarea>
@@ -83,24 +102,7 @@
         <paper-textarea label="Members" class="saveGroups" value="{{members}}" char-counter maxlength="200" max-rows="" 2>
         </paper-textarea>
       </div-->
-      <div style="display: flex;">
-        <img id="previewImage" src="{{previewSrc}}" width="300" height="140" style="vertical-align: top;" />
-        <iron-icon class="icon-edit" icon="icons:create" title="Edit" on-tap="editImage"></iron-icon>
-        <span id="imageUploadInstructions" style="margin-left: 5%; vertical-align: top; text-align: left;">
-              <h3>Instructions for group image upload: </h3>
-              <ul>
-                <li>Image size can maximum be 2MB</li>
-                <li>Recommended width and height of image is 300 X 150</li>
-                <li>Size more than 300 X 150 will be reset to this size</li>
-              </ul>
-          </span>
-      </div>
-      <div>
-        <div style="vertical-align: top; visibility: hidden; margin-top: -45px;">
-          <paper-input type="file" label="Upload Image" id="groupImage" on-change="previewImage" style="vertical-align: top;" required
-            error-message="required" accept="image/*"></paper-input>
-        </div>
-      </div>
+
       <div class="buttons">
         <!--div>
             

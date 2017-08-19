@@ -188,7 +188,7 @@ Polymer({
         e.target.$.input.validate();
     },
     isValidFileType: function (fileType) {
-        if (fileType == 'image/jpg' || 'image/jpeg' || fileType == 'image/bmp' || fileType == 'image/png') {
+        if (fileType == 'image/jpg' || fileType == 'image/jpeg' || fileType == 'image/bmp' || fileType == 'image/png') {
             return true;
         }
         else {
@@ -229,7 +229,7 @@ Polymer({
     },
     saveGroup: function (e) {
         var isValid = this.validate();
-        isValid = isValid && this.validateGroupImage();
+        //isValid = isValid && this.validateGroupImage();
         if (isValid && this.isGroupImageChanged) {
             isValid = this.isValidFileType(this.$.groupImage.inputElement.files[0].type);
         }
@@ -261,6 +261,7 @@ Polymer({
                 if (loggedInUser) {
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
                 }
+                this.fire("status-message-update", { severity: 'info', message: 'new group creation in progress...' });
                 break;
             case 'putGroup':
                 ajax.url += group.id;
@@ -316,9 +317,13 @@ Polymer({
         switch (this.groupType) {
             case 'postGroup':
                 this.groupObject.id = event.detail.response.id;
-                this.uploadImage();
-                this.isGroupImageChanged = false;
-                this.fire("status-message-update", { severity: 'info', message: 'new group creation in progress...' });
+                if (this.isGroupImageChanged) {
+                    this.uploadImage();
+                    this.isGroupImageChanged = false;
+                }
+                else {
+                    this.backToGroups();
+                }
                 break;
             case 'putGroup':
                 if (this.isGroupImageChanged) {

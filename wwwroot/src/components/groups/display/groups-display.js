@@ -26,7 +26,7 @@ Polymer({
         this.ajaxType = 'getGroups';
         this.makeAjaxCall();
     },
-    makeAjaxCall: function (event = null) {
+    makeAjaxCall: function (group = null) {
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
@@ -46,6 +46,15 @@ Polymer({
                 if (loggedInUser) {
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
                 }
+                break;
+            case 'deleteGroup':
+                ajax.method = 'DELETE';
+                ajax.url = serviceBaseUrl + '/groups/' + group.id;
+                ajax.headers['Version'] = '1.0';
+                if (loggedInUser) {
+                    ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+                }
+                break;
         }
         ajax.generateRequest();
     },
@@ -99,6 +108,10 @@ Polymer({
                     }
                 });
                 this.items = tempItems;
+                break;
+            case 'deleteGroup':
+                this.fire("status-message-update", { severity: 'info', message: 'Successfully deleted the group' });
+                this.ajaxType = 'getGroups';
                 break;
         }
     },
@@ -198,12 +211,14 @@ Polymer({
     },
     deleteGroup: function (e) {
         var group = e.model.item;
+        this.ajaxType = 'deleteGroup'
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-        if (group.createdBy.toLowerCase() !== loggedInUser.email.toLowerCase()) {
+        if (group.createdBy.toLowerCase() !== loggedInUser.id.toLowerCase()) {
             this.fire("status-message-update", { severity: 'error', message: 'You are not owner to delete the group.' });
             return;
         }
         //TODO: Add code changes to delete
+        this.makeAjaxCall(group);
     },
     populateCardClass: function (isPrivate) {
         if (isPrivate)
