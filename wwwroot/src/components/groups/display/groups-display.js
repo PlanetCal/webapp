@@ -43,6 +43,7 @@ Polymer({
             case 'getGroups':
                 ajax.method = 'GET';
                 ajax.headers['Version'] = '1.0';
+                ajax.body = '';
                 if (loggedInUser) {
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
                 }
@@ -51,6 +52,7 @@ Polymer({
                 ajax.method = 'DELETE';
                 ajax.url = serviceBaseUrl + '/groups/' + group.id;
                 ajax.headers['Version'] = '1.0';
+                ajax.body = '';
                 if (loggedInUser) {
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
                 }

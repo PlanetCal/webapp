@@ -272,6 +272,7 @@ Polymer({
             case 'deleteGroup':
                 ajax.url += group.id;
                 // ajax.body = JSON.stringify(event.id);
+                ajax.body = '';
                 ajax.method = 'DELETE';
                 ajax.headers['Version'] = '1.0';
                 if (loggedInUser) {
