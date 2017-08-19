@@ -21,6 +21,7 @@ Polymer({
     'on-logout-requested': '_logoutRequestHandler',
     'on-login-successful': '_loginSuccessHandler',
     'on-edit-group': '_onEditGroup',
+    'on-go-to-events': '_onGoToEvents',
     'on-back-to-groups': '_onBackToGroups',
     'status-message-update': '_messageUpdateHandler',
     'iron-resize': '_onIronResize'
@@ -74,6 +75,11 @@ Polymer({
   _onEditGroup: function () {
     this.toggleGroupsView = !this.toggleGroupsView;
     this.set('route.path', '/groups-edit');
+  },
+
+  _onGoToEvents: function () {
+    this.toggleGroupEventsView = !this.toggleGroupEventsView;
+    this.set('route.path', '/group-events');
   },
 
   _onBackToGroups: function () {

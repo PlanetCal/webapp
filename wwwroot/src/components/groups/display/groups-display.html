@@ -29,8 +29,8 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <span class$="{{hideForPrivate(item.isPrivate)}}"><a class="link-events" href="../../../../user-profile" title="Go to Events">Unsubscribe</a> |</span>
-                    <a class="link-events" href="group-events/{{item.id}}" title="Go to Events">Events</a>
+                    <span class$="{{hideForPrivate(item.isPrivate)}}"><a class="link-events" href="../../../../user-profile" title="Unsubscribe">Unsubscribe</a> |</span>
+                    <a class="link-events" href="#" on-tap="goToEvents" title="Go to Events">Events</a>
                     <iron-icon class$="icon-edit {{hideForEdit(item.isEdit)}}" icon="icons:create" title="Edit" on-tap="editGroup"></iron-icon>
                     <iron-icon class$="icon-edit {{hideForEdit(item.isEdit)}}" icon="icons:delete" title="Delete" on-tap="deleteGroup"></iron-icon>
                 </div>

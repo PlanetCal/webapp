@@ -7,6 +7,10 @@ Polymer({
             value: 0,
             // observer: '_handlePageChanged',
         },
+        toggleView: {
+            type: Boolean,
+            observer: 'pageLoad'
+        },
         inverted: {
             type: Boolean,
             value: false,
@@ -16,6 +20,10 @@ Polymer({
             value: false,
         },
         eventObject: {
+            type: Object,
+            value: {},
+        },
+        groupObject: {
             type: Object,
             value: {},
         },
@@ -35,8 +43,12 @@ Polymer({
         }
     },
     ready: function () {
+        this.pageLoad();
+    },
+    pageLoad: function () {
         this.fire("status-message-update");
         var nameFieldDiv = this.$.nameFieldDiv;
+        groupObject = Polymer.globalsManager.globals.editedGroup;
         var items = [];
         this.loadEvents();
     },
@@ -260,8 +272,8 @@ Polymer({
         obj.address.state = this.state;
         obj.address.postalCode = this.postalCode;
         obj.location = this.location;
-        obj.groups = {};
-        obj.groups = this.groups ? this.groups : [];
+        obj.groups = [];
+        obj.groups.push(groupObject.id);
         return obj;
     },
     makeAjaxCall: function (event = null) {
@@ -269,13 +281,22 @@ Polymer({
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-        // TODO: Consider removing this.ajaxUrl, use local variable as much as possible
-        // this.ajaxUrl = serviceBaseUrl + '/events/';
+        var currentDate = moment().format("YYYY-MM-DD");
+        var pastDate = moment().subtract(90, 'day').format("YYYY-MM-DD");
+        var fields = '?fields=name|description|startDateTime|endDateTime|address|location|groups'
         ajax.url = serviceBaseUrl + '/events/';
         switch (this.eventType) {
             case 'getEvents':
+                ajax.method = 'GET';
+                ajax.url += fields + '&groupids=' + groupObject.id + '&filter=startDateTime>=' + currentDate; // + '$AND$startDateTime<=' + 2017 - 09 - 20;
+                ajax.headers['Version'] = '1.0';
+                if (loggedInUser) {
+                    ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+                }
+                break;
             case 'pastEvents':
                 ajax.method = 'GET';
+                ajax.url += fields + '&groupids=' + groupObject.id + '&filter=startDateTime<' + currentDate; + '$AND$startDateTime>=' + pastDate;
                 ajax.headers['Version'] = '1.0';
                 if (loggedInUser) {
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;

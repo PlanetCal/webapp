@@ -217,6 +217,11 @@ Polymer({
         //TODO: Add code changes to delete
         this.makeAjaxCall(group);
     },
+    goToEvents: function (e) {
+        var groupDetails = e.model.item;
+        Polymer.globalsManager.set('editedGroup', groupDetails);
+        this.fire('on-go-to-events');
+    },
     populateCardClass: function (isPrivate) {
         if (isPrivate)
             return 'paper-card-private';
