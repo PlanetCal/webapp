@@ -10,6 +10,10 @@ Polymer({
             value: 0,
             // observer: '_handlePageChanged',
         },
+        toggleView: {
+            type: Boolean,
+            observer: 'pageLoad'
+        },
         isSaveValid: {
             type: Boolean,
             value: false,
@@ -37,19 +41,13 @@ Polymer({
         'iron-resize': 'onGroupsEditResize',
     },
     ready: function () {
+        this.pageLoad();
+    },
+    pageLoad: function () {
         this.fire("status-message-update");
         var items = [];
-        var editedGroup = '';
-        if (this.localStorage) {
-            editedGroup = this.localStorage.editedGroup;
-        } else {
-            this.reset();
-        }
-    },
-    _onLocalStorageLoad: function () {
-        var editedGroup = '';
-        if (this.localStorage && this.localStorage.editedGroup) {
-            editedGroup = this.localStorage.editedGroup;
+        var editedGroup = Polymer.globalsManager.globals.editedGroup;
+        if (editedGroup) {
             this.populateEditedGroup(editedGroup);
         }
         else {
@@ -115,7 +113,6 @@ Polymer({
         return new Blob([uInt8Array], { type: contentType });
     },
     populateEditedGroup: function (editedGroup) {
-        //TODO: Popualte all values from local storage to corresponding fields.
         this.id = editedGroup.id;
         this.name = editedGroup.name;
         this.description = editedGroup.description;
@@ -151,18 +148,18 @@ Polymer({
         this.members = [];
         this.privacy = 'Open';
         this.previewSrc = '';
-        this.category = '';
+        this.category = 'Local';
         this.resetLocalStorageForEditedGroup();
     },
     resetLocalStorageForEditedGroup: function () {
-        if (this.localStorage) {
-            this.set('localStorage.editedGroup', null);
+        if (Polymer.globalsManager.editedGroup) {
+            Polymer.globalsManager.set('editedGroup', null);
         }
     },
     backToGroups: function () {
         this.resetLocalStorageForEditedGroup();
-        //this.fire('on-back-to-groups', { page: '/groups-owned' });
-        window.location.href = 'groups-owned';
+        this.fire('on-back-to-groups');
+        //window.location.href = 'groups-owned';
     },
     validate: function () {
         var elements = document.getElementsByClassName('saveGroups');

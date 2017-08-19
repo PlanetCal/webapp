@@ -193,21 +193,18 @@ Polymer({
             this.fire("status-message-update", { severity: 'error', message: 'You are not allowed to edit the default group.' });
             return;
         }
-        //check whether the current user has edit permission
-        // if (!editedGroup.isEdit) {
-        //     this.fire("status-message-update", { severity: 'error', message: 'You are not owner to edit the group.' });
-        //     return;
-        // }
 
         this.set('localStorage.editedGroup', editedGroup);
-        //this.fire('on-edit-group');
-        window.location.href = 'groups-edit';
+        Polymer.globalsManager.set('editedGroup', editedGroup);
+        this.fire('on-edit-group');
+        //window.location.href = 'groups-edit';
     },
     createGroup: function (e) {
-        if (this.localStorage) {
-            this.set('localStorage.editedGroup', null);
+        if (Polymer.globalsManager.editedGroup) {
+            Polymer.globalsManager.set('editedGroup', null);
         }
-        window.location.href = 'groups-edit';
+        //window.location.href = 'groups-edit';
+        this.fire('on-edit-group');
     },
     deleteGroup: function (e) {
         var group = e.model.item;

@@ -5,13 +5,19 @@
   <template>
     <style include="shared-styles"></style>
     <div>
-      <groups-edit></groups-edit>
+      <groups-edit toggle-view=[[toggleView]]></groups-edit>
     </div>
   </template>
 
   <script>
     Polymer({
       is: 'groups-edit-page',
+
+      properties: {
+        toggleView: {
+          type: Boolean
+        }
+      },
     });
   </script>
 </dom-module>

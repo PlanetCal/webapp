@@ -77,8 +77,8 @@ Polymer({
   },
 
   _onBackToGroups: function () {
-    this.toggleGroupsView = !this.toggleGroupsView;
-    this.set('route.path', '/groups-display');
+    //this.toggleGroupsView = !this.toggleGroupsView;
+    this.set('route.path', '/groups-owned');
   },
 
   _routePageChanged: function (page) {
