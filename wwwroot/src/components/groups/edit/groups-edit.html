@@ -72,6 +72,9 @@
               <paper-input label="Email" class="saveGroups" value="{{email}}" char-counter maxlength="25" style="width: 30%;">
               </paper-input>
             </div>
+            <paper-textarea label="Administrators" class="saveGroups" value="{{administrators}}" char-counter maxlength="200" max-rows="2">
+            </paper-textarea>
+
             <div style="display: flex;">
               <img id="previewImage" src="{{previewSrc}}" width="300" height="140" style="vertical-align: top;" />
               <iron-icon class="icon-edit" icon="icons:file-upload" title="Edit" on-tap="editImage"></iron-icon>
@@ -95,8 +98,6 @@
 
 
       <!--div>
-        <paper-textarea label="Administrators" class="saveGroups" value="{{administrators}}" char-counter maxlength="200" max-rows="2">
-        </paper-textarea>
       </div>
       <div>
         <paper-textarea label="Members" class="saveGroups" value="{{members}}" char-counter maxlength="200" max-rows="" 2>
