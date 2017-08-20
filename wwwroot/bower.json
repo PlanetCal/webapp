@@ -40,7 +40,7 @@
     "iron-resizable-behavior": "^1.0.6",
     "paper-dropdown-menu": "^2.0.0",
     "paper-listbox": "^2.0.0",
-    "paper-collapse-item": "^1.1.5"
+    "iron-collapse": "^2.0.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

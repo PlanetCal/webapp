@@ -26,7 +26,9 @@ Polymer({
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
         if (this.groupType === 'subscribed') {
-            ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy';
+            ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|category|createdBy|members|location|address|contact|webSite|modifiedBy';
+        } else if (this.groupType === 'administered') {
+            ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&administeredByMe=true';
         }
         else {
             ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&filter=createdBy=' + this.loggedInUser.id;
@@ -88,6 +90,9 @@ Polymer({
                     break;
                 case 'GroupNotExistant':
                     message = 'Group does not exist.';
+                    break;
+                case 'UserNotAuthorized':
+                    message = 'User is not authorized.';
                     break;
                 default:
                     message = errorResponse.errorcode + ' has not been handled yet.';
@@ -156,9 +161,15 @@ Polymer({
     },
 
     hideForEdit: function (item) {
-        var isEdit = this.loggedInUser.id === item.createdBy;
+        var isEdit = this.loggedInUser.id === item.createdBy || this.groupType === 'administered';
         return isEdit ? '' : 'displayNone';
     },
+
+    hideForDelete: function (item) {
+        var isDelete = this.loggedInUser.id === item.createdBy;
+        return isDelete ? '' : 'displayNone';
+    },
+
 
     groupIcon: function (item) {
         return (!item.icon || item.icon === '') ? '../src/images/noimage.png' : item.icon;

@@ -95,6 +95,21 @@ Polymer({
     },
 
     backhandler: function () {
+        var today = new Date();
+        var todaysMonth = today.getMonth(); //January is 0!
+        var todaysYear = today.getFullYear();
+
+        // if (todaysMonth === 0) {
+        //     todaysMonth = 11;
+        //     todaysYear = todaysYear - 1;
+        // } else {
+        //     todaysMonth = todaysMonth - 1;
+        // }
+
+        if (this._month === todaysMonth && this._year === todaysYear) {
+            return;
+        }
+
         if (this._month === 0) {
             this._month = 11;
             this._year = this._year - 1;

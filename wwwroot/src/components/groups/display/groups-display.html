@@ -4,9 +4,8 @@
 <dom-module id="groups-display">
     <template>
         <style include="groups-display-styles"></style>
-        <div style="display: flex; vertical-align: top;">
-            <h2 style="vertical-align: top;">Groups [ <a class="link-create" href="#" on-tap="createGroup">CREATE</a> ]</h2>
-        </div>
+        <h2 style="vertical-align: top;">Groups [ <a class="link-create" href="#" on-tap="createGroup">CREATE</a> ]</h2>
+        <h2>List of my [[groupType]] groups:</h2>
         <iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" content-type='application/json' on-error='handleErrorResponse' on-response='handleAjaxResponse'></iron-ajax>
         <template is="dom-repeat" items="{{items}}">
             <paper-card class$="[[populateCardClass(item)]]" heading="[[groupDisplayName(item)]]" elevation="5" image="[[groupIcon(item)]]"
@@ -30,7 +29,7 @@
                     <span class$="[[hideSubscribeButton(item)]]"><a class="link-events" href="../../../../user-profile" title="Unsubscribe">Unsubscribe</a> |</span>
                     <a class="link-events" href="#" on-tap="goToEvents" title="Go to Events">Events</a>
                     <iron-icon class$="icon-edit [[hideForEdit(item)]]" icon="icons:create" title="Edit" on-tap="editGroup"></iron-icon>
-                    <iron-icon class$="icon-edit [[hideForEdit(item)]]" icon="icons:delete" title="Delete" on-tap="deleteGroup"></iron-icon>
+                    <iron-icon class$="icon-edit [[hideForDelete(item)]]" icon="icons:delete" title="Delete" on-tap="deleteGroup"></iron-icon>
                 </div>
             </paper-card>
         </template>

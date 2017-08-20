@@ -324,7 +324,7 @@ Polymer({
                 // TODO: Check if this.id has defined, convert this.ajaxUrl to local variable
                 // this.ajaxUrl += event.id;
                 ajax.url += event.id;
-                // ajax.body = JSON.stringify(event.id);
+                ajax.body = "";
                 ajax.method = 'DELETE';
                 ajax.headers['Version'] = '1.0';
                 if (loggedInUser) {
@@ -340,15 +340,26 @@ Polymer({
         if (dialog) {
             dialog.close();
         }
-        console.log('group-events got error from ajax!');
-        this.fire("status-message-update", { severity: 'error', message: 'Error occurred on previous operation ...' });
-        var req = e.detail.request;
-        var jsonResponse = e.detail.request.xhr.response;
-        var message = 'Error:';
-        message = message + ' Here are the Details: Error Status: ' + req.status + ' Error StatusText: ' + req.statusText;
 
-        // this.$.msg.style.display = 'block';
-        // this.messageText = message;
+        var errorResponse = e.detail.request.xhr.response;
+        message = 'Server threw error. Check if you are logged in.';
+        if (errorResponse !== null) {
+            switch (errorResponse.errorcode) {
+                case 'GenericHttpRequestException':
+                    message = 'Oh! ohh! Looks like there is some internal issue. Please try again after some time.';
+                    break;
+                case 'EventNotExistant':
+                    message = 'Event does not exist.';
+                    break;
+                case 'UserNotAuthorized':
+                    message = 'User is not authorized.';
+                    break;
+                default:
+                    message = errorResponse.errorcode + ' has not been handled yet.';
+                    break;
+            }
+        }
+        this.fire("status-message-update", { severity: 'error', message: message });
     },
 
     handleAjaxResponse: function (event) {
@@ -367,19 +378,16 @@ Polymer({
                 //this.items[index] = this.eventObject;
                 this.items.push(this.eventObject);
                 this.populateGrid();
-                this.fire("status-message-update", { severity: 'info', message: 'Event saved successfully ...' });
                 break;
             case 'putEvents':
                 var index = this.items.findIndex(e => e.id === this.eventObject.id);
                 this.items[index] = this.eventObject;
                 this.populateGrid();
-                this.fire("status-message-update", { severity: 'info', message: 'Event updated successfully ...' });
                 break;
             case 'deleteEvents':
                 var index = this.items.findIndex(e => e.id === this.eventObject.id);
                 this.items.splice(index, 1);
                 this.populateGrid();
-                this.fire("status-message-update", { severity: 'info', message: 'Event deleted successfully ...' });
                 break;
         }
     },

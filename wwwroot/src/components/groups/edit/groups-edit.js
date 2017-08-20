@@ -41,8 +41,11 @@ Polymer({
         'iron-resize': 'onGroupsEditResize',
     },
     ready: function () {
+        this.regionExpanded = false;
+        this.updateExpandButtonTextAndIcon(this.regionExpanded);
         this.pageLoad();
     },
+
     pageLoad: function () {
         this.fire("status-message-update");
         var items = [];
@@ -126,11 +129,12 @@ Polymer({
         this.email = editedGroup.contact.email;
         this.website = editedGroup.webSite;
         this.administrators = editedGroup.administrators ? editedGroup.administrators.join(';') : '';
-        this.members = editedGroup.members;
+        //this.members = editedGroup.members;
         this.privacy = editedGroup.privacy;
         this.previewSrc = editedGroup.icon;
         this.category = editedGroup.category;
     },
+
     reset: function () {
         this.id = '';
         this.name = '';
@@ -144,13 +148,30 @@ Polymer({
         this.phone = '';
         this.email = '';
         this.website = '';
-        this.administrators = [];
-        this.members = [];
-        this.privacy = 'Open';
+        this.administrators = '';
+        //this.members = [];
+        this.privacy = 'Closed';
         this.previewSrc = '';
-        this.category = 'Local';
+        this.category = 'Personal';
         this.resetGlobalManagerForEditedGroup();
     },
+
+    updateExpandButtonTextAndIcon: function (expanded) {
+        if (!expanded) {
+            this.expandButtonText = 'Show advanced (optional) fields';
+            this.expandButtonIcon = 'icons:expand-more';
+        } else {
+            this.expandButtonText = 'Collapse advanced (optional) fields';
+            this.expandButtonIcon = 'icons:expand-less';
+        }
+    },
+
+    toggle: function () {
+        this.$.collapse.toggle();
+        this.regionExpanded = !this.regionExpanded;
+        this.updateExpandButtonTextAndIcon(this.regionExpanded);
+    },
+
     resetGlobalManagerForEditedGroup: function () {
         if (Polymer.globalsManager.editedGroup) {
             Polymer.globalsManager.set('editedGroup', null);
@@ -252,7 +273,7 @@ Polymer({
         ajax.url = serviceBaseUrl + '/groups/';
         ajax.contentType = 'application/json';
         if (group && group.administrators) {
-            group.administrators = group.administrators.split([',', ';'])
+            group.administrators = group.administrators.toLowerCase().split([',', ';'])
             for (var i = 0; i < group.administrators.length; i++) {
                 if (!this.isEmailValid(group.administrators[i])) {
                     this.fire("status-message-update", { severity: 'error', message: group.administrators[i] + ' is not a valid administrator email.' });
@@ -313,12 +334,25 @@ Polymer({
     },
 
     handleErrorResponse: function (e) {
-        console.log('Save group got error from ajax!');
-        this.fire("status-message-update", { severity: 'error', message: 'Error occurred on save groups...' });
-        var req = e.detail.request;
-        var jsonResponse = e.detail.request.xhr.response;
-        var message = 'Error:';
-        message = message + ' Here are the Details: Error Status: ' + req.status + ' Error StatusText: ' + req.statusText;
+        var errorResponse = e.detail.request.xhr.response;
+        message = 'Server threw error. Check if you are logged in.';
+        if (errorResponse !== null) {
+            switch (errorResponse.errorcode) {
+                case 'GenericHttpRequestException':
+                    message = 'Oh! ohh! Looks like there is some internal issue. Please try again after some time.';
+                    break;
+                case 'GroupNotExistant':
+                    message = 'Group does not exist.';
+                    break;
+                case 'UserNotAuthorized':
+                    message = 'User is not authorized.';
+                    break;
+                default:
+                    message = errorResponse.errorcode + ' has not been handled yet.';
+                    break;
+            }
+        }
+        this.fire("status-message-update", { severity: 'error', message: message });
         this.enableOrDisableGroup(false);
     },
 
