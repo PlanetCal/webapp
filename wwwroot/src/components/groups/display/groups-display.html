@@ -7,36 +7,33 @@
         <div style="display: flex; vertical-align: top;">
             <h2 style="vertical-align: top;">Groups [ <a class="link-create" href="#" on-tap="createGroup">CREATE</a> ]</h2>
         </div>
-        <!--iron-ajax id="requestRepos" auto url="../../../data/Data.Groups.json" handle-as="json" on-response="handleResponse">
-        </iron-ajax-->
         <iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" content-type='application/json' on-error='handleErrorResponse' on-response='handleAjaxResponse'></iron-ajax>
         <template is="dom-repeat" items="{{items}}">
-            <paper-card class$="{{populateCardClass(item.isPrivate)}}" heading="{{item.name}}" elevation="5" image="{{item.icon}}" animated-shadow="true"
-                animated title="{{item.name}}">
+            <paper-card class$="[[populateCardClass(item)]]" heading="[[groupDisplayName(item)]]" elevation="5" image="[[groupIcon(item)]]"
+                animated-shadow="true">
                 <div class="card-content" style="height:150px;">
                     <div>[[DisplayLimitedText(item.description, 120)]]</div>
                     <div style="height: 20px;"></div>
-                    <div class$="text-phone {{hideForPrivate(item.isPrivate)}}">
-                        <iron-icon icon="icons:perm-phone-msg"></iron-icon> {{item.contact.phone}}
+                    <div class$="text-phone [[hideForPhone(item)]]">
+                        <iron-icon icon="icons:perm-phone-msg"></iron-icon> [[item.contact.phone]]
                     </div>
-                    <div class$="{{hideForPrivate(item.isPrivate)}}">
+                    <div class$="[[hideForEmail(item)]]">
                         <iron-icon icon="communication:email"></iron-icon>
-                        <a href="mailto:{{item.contact.email}}" title="Email">{{item.contact.email}}</a>
+                        <a href="mailto:[[item.contact.email]]" title="Email">[[item.contact.email]]</a>
                     </div>
-                    <div class$="{{hideForPrivate(item.isPrivate, item.isEdit)}}">
+                    <div class$="{{hideForWebsite(item)}}">
                         <iron-icon class="icon" icon="hardware:laptop"></iron-icon>
-                        <a href="{{item.webSite}}" target="_blank" title="Website">{{item.webSite}}</a>
+                        <a href="[[item.webSite]]" target="_blank" title="Website">[[item.webSite]]</a>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <span class$="{{hideForPrivate(item.isPrivate)}}"><a class="link-events" href="../../../../user-profile" title="Unsubscribe">Unsubscribe</a> |</span>
+                    <span class$="[[hideSubscribeButton(item)]]"><a class="link-events" href="../../../../user-profile" title="Unsubscribe">Unsubscribe</a> |</span>
                     <a class="link-events" href="#" on-tap="goToEvents" title="Go to Events">Events</a>
-                    <iron-icon class$="icon-edit {{hideForEdit(item.isEdit)}}" icon="icons:create" title="Edit" on-tap="editGroup"></iron-icon>
-                    <iron-icon class$="icon-edit {{hideForEdit(item.isEdit)}}" icon="icons:delete" title="Delete" on-tap="deleteGroup"></iron-icon>
+                    <iron-icon class$="icon-edit [[hideForEdit(item)]]" icon="icons:create" title="Edit" on-tap="editGroup"></iron-icon>
+                    <iron-icon class$="icon-edit [[hideForEdit(item)]]" icon="icons:delete" title="Delete" on-tap="deleteGroup"></iron-icon>
                 </div>
             </paper-card>
         </template>
-        <iron-localstorage name="planetCal-storage" value="{{localStorage}}"></iron-localstorage>
     </template>
     <script type="text/javascript" src="/src/components/groups/display/groups-display.js"></script>
 </dom-module>

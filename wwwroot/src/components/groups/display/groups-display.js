@@ -4,48 +4,43 @@ Polymer({
         groupType: {
             type: String,
             value: '',
-        },
-        ajaxType: {
-            type: String,
-            value: '',
-        },
+        }
     },
-    ready: function () {
 
+    ready: function () {
         this.fire("status-message-update");
-        var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-        if (typeof loggedInUser === 'undefined') {
+        this.loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+        if (!this.loggedInUser) {
             this.fire("status-message-update", { severity: 'error', message: 'Please login to view the groups.' });
             return;
         }
-        // var nameFieldDiv = this.$.nameFieldDiv;
-        var items = [];
         this.loadGroups();
     },
+
     loadGroups: function () {
-        this.ajaxType = 'getGroups';
+        this.ajaxCall = 'getGroups';
         this.makeAjaxCall();
     },
+
     makeAjaxCall: function (group = null) {
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
-        var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
         if (this.groupType === 'subscribed') {
-            ajax.url = serviceBaseUrl + '/userdetails/' + loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy';
+            ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy';
         }
         else {
-            ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&filter=createdBy=' + loggedInUser.id;
+            ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&filter=createdBy=' + this.loggedInUser.id;
         }
 
         //Keep below line to switch to normal get groups call
         //ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|createdBy|administrators|members|location|address|contact|webSite|modifiedBy';
-        switch (this.ajaxType) {
+        switch (this.ajaxCall) {
             case 'getGroups':
                 ajax.method = 'GET';
                 ajax.headers['Version'] = '1.0';
                 ajax.body = '';
-                if (loggedInUser) {
-                    ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+                if (this.loggedInUser) {
+                    ajax.headers['Authorization'] = 'Bearer ' + this.loggedInUser.token;
                 }
                 break;
             case 'deleteGroup':
@@ -53,133 +48,55 @@ Polymer({
                 ajax.url = serviceBaseUrl + '/groups/' + group.id;
                 ajax.headers['Version'] = '1.0';
                 ajax.body = '';
-                if (loggedInUser) {
-                    ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+                if (this.loggedInUser) {
+                    ajax.headers['Authorization'] = 'Bearer ' + this.loggedInUser.token;
                 }
                 break;
         }
         ajax.generateRequest();
     },
+
     handleAjaxResponse: function (groups) {
-        // var jsonResponse = e.detail.response;
-        switch (this.ajaxType) {
+        switch (this.ajaxCall) {
             case 'getGroups':
-                var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-                var tempItems = groups.detail.response;
-                tempItems.forEach(function (item, index) {
-                    // To identify which groups the current user can edit
-                    if (item.createdBy && item.createdBy.toLowerCase() === loggedInUser.id.toLowerCase()) {
-                        item.isEdit = true;
-                    }
-                    else {
-                        item.isEdit = false;
-                    }
-                    // To identify which groups are private
-                    if (item.privacy.toLowerCase() === 'closed') {
-                        item.isPrivate = true;
-                        item.isEdit = false;
-                        item.name += ' [Closed Group]';
-                    }
-                    if (!item.icon || item.icon === '') {
-                        item.icon = '../src/images/noimage.png';
-                    }
-                    if (!item.administrators) {
-                        item.administrators = [];
-                    }
-                    if (!item.members) {
-                        item.members = [];
-                    }
-                    if (!item.location) {
-                        item.location = '';
-                    }
-                    if (!item.address) {
-                        item.address = [];
-                        item.address.streetNumber = '';
-                        item.address.streetName = '';
-                        item.address.city = '';
-                        item.address.state = '';
-                        item.address.postalCode = '';
-                    }
-                    if (!item.contact) {
-                        item.contact = [];
-                        item.contact.phone = '';
-                        item.contact.email = '';
-                    }
-                    if (!item.webSite) {
-                        item.webSite = '';
-                    }
-                });
-                this.items = tempItems;
+                this.items = groups.detail.response;
                 break;
             case 'deleteGroup':
-                this.fire("status-message-update", { severity: 'info', message: 'Successfully deleted the group' });
-                this.ajaxType = 'getGroups';
+                var deletedGroup = groups.detail.response;
+                this.items = this.removeGroupAndReturnArray(this.items, deletedGroup);
                 break;
         }
     },
-    handleErrorResponse: function (e) {
 
-        console.log('Displaying groups got error from ajax!');
-        this.fire("status-message-update", { severity: 'error', message: 'Error occurred on get groups ...' });
-        var req = e.detail.request;
-        var jsonResponse = e.detail.request.xhr.response;
-        var message = 'Error:';
-        message = message + ' Here are the Details: Error Status: ' + req.status + ' Error StatusText: ' + req.statusText;
-
-        // this.$.msg.style.display = 'block';
-        // this.messageText = message;
-    },
-    handleResponse: function (data) {
-        var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-        var tempItems = data.detail.response;
-        tempItems.forEach(function (item, index) {
-            // To identify which groups the current user can edit
-            if (item.createdBy.toLowerCase() === loggedInUser.id.toLowerCase()) {
-                item.isEdit = true;
-            }
-            else {
-                item.isEdit = false;
-            }
-            // To identify which groups are private
-            if (item.privacy.toLowerCase() === 'private') {
-                item.isPrivate = true;
-                item.name += '[Private]';
-            }
-            else {
-                item.isPrivate = false;
-            }
-
-            if (!item.icon) {
-                item.icon = '';
-            }
-            if (!item.administrators) {
-                item.administrators = [];
-            }
-            if (!item.members) {
-                item.members = [];
-            }
-            if (!item.location) {
-                item.location = '';
-            }
-            if (!item.address) {
-                item.address = [];
-                item.address.streetNumber = '';
-                item.address.streetName = '';
-                item.address.city = '';
-                item.address.state = '';
-                item.address.postalCode = '';
-            }
-            if (!item.contact) {
-                item.contact = [];
-                item.contact.phone = '';
-                item.contact.email = '';
-            }
-            if (!item.webSite) {
-                item.webSite = '';
+    removeGroupAndReturnArray: function (groupArray, groupId) {
+        var newArray = [];
+        groupArray.forEach(function (element, index, array) {
+            if (element.id !== groupId.id) {
+                newArray.push(element);
             }
         });
-        this.items = tempItems;
+        return newArray;
     },
+
+    handleErrorResponse: function (e) {
+        var errorResponse = e.detail.request.xhr.response;
+        message = 'Server threw error. Check if you are logged in.';
+        if (errorResponse !== null) {
+            switch (errorResponse.errorcode) {
+                case 'GenericHttpRequestException':
+                    message = 'Oh! ohh! Looks like there is some internal issue. Please try again after some time.';
+                    break;
+                case 'GroupNotExistant':
+                    message = 'Group does not exist.';
+                    break;
+                default:
+                    message = errorResponse.errorcode + ' has not been handled yet.';
+                    break;
+            }
+        }
+        this.fire("status-message-update", { severity: 'error', message: message });
+    },
+
     DisplayLimitedText: function (text, count) {
         if (text.length > count) {
             return text.substring(0, count - 3) + '...';
@@ -188,55 +105,74 @@ Polymer({
             return text;
         }
     },
+
     editGroup: function (e) {
         var editedGroup = e.model.item;
-        var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-        if (editedGroup.name.toLowerCase() === 'default') {
-            this.fire("status-message-update", { severity: 'error', message: 'You are not allowed to edit the default group.' });
-            return;
-        }
 
-        this.set('localStorage.editedGroup', editedGroup);
         Polymer.globalsManager.set('editedGroup', editedGroup);
         this.fire('on-edit-group');
-        //window.location.href = 'groups-edit';
     },
+
     createGroup: function (e) {
         if (Polymer.globalsManager.editedGroup) {
             Polymer.globalsManager.set('editedGroup', null);
         }
-        //window.location.href = 'groups-edit';
         this.fire('on-edit-group');
     },
+
     deleteGroup: function (e) {
         var group = e.model.item;
-        this.ajaxType = 'deleteGroup'
-        var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-        if (group.createdBy.toLowerCase() !== loggedInUser.id.toLowerCase()) {
-            this.fire("status-message-update", { severity: 'error', message: 'You are not owner to delete the group.' });
-            return;
-        }
-        //TODO: Add code changes to delete
+        this.ajaxCall = 'deleteGroup'
+
+        // The logic to decide if user can delete the group is more involved than this. For now, let server handle the deletes, and throw error if it can't.
+        // if (group.createdBy !== this.loggedInUser.id) {
+        //     this.fire("status-message-update", { severity: 'error', message: 'You are not owner to delete the group.' });
+        //     return;
+        // }
+
         this.makeAjaxCall(group);
     },
+
     goToEvents: function (e) {
         var groupDetails = e.model.item;
         Polymer.globalsManager.set('editedGroup', groupDetails);
         this.fire('on-go-to-events');
     },
-    populateCardClass: function (isPrivate) {
-        if (isPrivate)
-            return 'paper-card-private';
-        this.updateStyles();
+
+    populateCardClass: function (item) {
+        return item.privacy === 'Closed' ? 'paper-card-private' : '';
     },
-    hideForPrivate: function (isPrivate) {
-        if (isPrivate)
-            return 'displayNone';
-        this.updateStyles();
+
+    hideForPhone: function (item) {
+        return item.contact && item.contact.phone ? '' : 'displayNone';
     },
-    hideForEdit: function (isEdit) {
-        if (!isEdit)
-            return 'displayNone';
-        this.updateStyles();
+
+    hideForEmail: function (item) {
+        return item.contact && item.contact.email ? '' : 'displayNone';
+    },
+
+    hideForWebsite: function (item) {
+        return item.webSite ? '' : 'displayNone';
+    },
+
+    hideForEdit: function (item) {
+        var isEdit = this.loggedInUser.id === item.createdBy;
+        return isEdit ? '' : 'displayNone';
+    },
+
+    groupIcon: function (item) {
+        return (!item.icon || item.icon === '') ? '../src/images/noimage.png' : item.icon;
+    },
+
+    hideSubscribeButton: function (item) {
+        return this.groupType !== 'subscribed' ? 'displayNone' : '';
+    },
+
+    groupDisplayName: function (item) {
+        var displayName = item.name;
+        if (item.privacy === 'Closed') {
+            displayName += ' [Closed]';
+        }
+        return displayName;
     }
 });
