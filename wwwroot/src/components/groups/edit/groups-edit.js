@@ -251,7 +251,7 @@ Polymer({
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
         ajax.url = serviceBaseUrl + '/groups/';
         ajax.contentType = 'application/json';
-        if (group) {
+        if (group && group.administrator) {
             group.administrators = group.administrators.split([',', ';'])
         }
 
