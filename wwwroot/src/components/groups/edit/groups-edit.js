@@ -253,6 +253,12 @@ Polymer({
         ajax.contentType = 'application/json';
         if (group && group.administrators) {
             group.administrators = group.administrators.split([',', ';'])
+            for (var i = 0; i < group.administrators.length; i++) {
+                if (!this.isEmailValid(group.administrators[i])) {
+                    this.fire("status-message-update", { severity: 'error', message: group.administrators[i] + ' is not a valid administrator email.' });
+                    return;
+                }
+            }
         }
 
         switch (this.ajaxCall) {
@@ -314,6 +320,11 @@ Polymer({
         var message = 'Error:';
         message = message + ' Here are the Details: Error Status: ' + req.status + ' Error StatusText: ' + req.statusText;
         this.enableOrDisableGroup(false);
+    },
+
+    isEmailValid: function (email) {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
     },
 
     handleAjaxResponse: function () {
