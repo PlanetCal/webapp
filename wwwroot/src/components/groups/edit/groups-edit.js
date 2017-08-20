@@ -24,7 +24,7 @@ Polymer({
             value: false,
             notify: true,
         },
-        groupType: {
+        ajaxCall: {
             type: String,
             value: '',
         },
@@ -125,7 +125,7 @@ Polymer({
         this.phone = editedGroup.contact.phone;
         this.email = editedGroup.contact.email;
         this.website = editedGroup.webSite;
-        this.administrators = editedGroup.administrators;
+        this.administrators = editedGroup.administrators ? editedGroup.administrators.join(';') : '';
         this.members = editedGroup.members;
         this.privacy = editedGroup.privacy;
         this.previewSrc = editedGroup.icon;
@@ -149,17 +149,17 @@ Polymer({
         this.privacy = 'Open';
         this.previewSrc = '';
         this.category = 'Local';
-        this.resetLocalStorageForEditedGroup();
+        this.resetGlobalManagerForEditedGroup();
     },
-    resetLocalStorageForEditedGroup: function () {
+    resetGlobalManagerForEditedGroup: function () {
         if (Polymer.globalsManager.editedGroup) {
             Polymer.globalsManager.set('editedGroup', null);
         }
     },
     backToGroups: function () {
-        this.resetLocalStorageForEditedGroup();
+        this.resetGlobalManagerForEditedGroup();
+        this.fire("status-message-update");
         this.fire('on-back-to-groups');
-        //window.location.href = 'groups-owned';
     },
     validate: function () {
         var elements = document.getElementsByClassName('saveGroups');
@@ -220,7 +220,7 @@ Polymer({
     },
     delete: function (e) {
         this.groupObject = this.constructGroupObject();
-        this.groupType = 'deleteGroup';
+        this.ajaxCall = 'deleteGroup';
         this.fire("status-message-update", { severity: 'info', message: 'Delete group in progress...' });
         this.makeAjaxCall(this.groupObject);
     },
@@ -232,25 +232,30 @@ Polymer({
         }
         if (isValid) {
             this.fire("status-message-update", { severity: 'info', message: 'Save group in progress...' });
-            this.enableORdisableGroup(true);
+            this.enableOrDisableGroup(true);
             this.groupObject = this.constructGroupObject();
-            this.groupType = this.groupObject.id ? 'putGroup' : 'postGroup';
+            this.ajaxCall = this.groupObject.id ? 'putGroup' : 'postGroup';
             this.makeAjaxCall(this.groupObject);
         }
     },
-    enableORdisableGroup: function (value) {
+    enableOrDisableGroup: function (value) {
         this.$.savegroup.disabled = value;
         this.$.resetgroup.disabled = value;
         this.$.deletegroup.disabled = value;
     },
-    makeAjaxCall: function (group = null) {
+
+    makeAjaxCall: function (group) {
         //this.isLoading = true;
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
         ajax.url = serviceBaseUrl + '/groups/';
         ajax.contentType = 'application/json';
-        switch (this.groupType) {
+        if (group) {
+            group.administrators = group.administrators.split([',', ';'])
+        }
+
+        switch (this.ajaxCall) {
             case 'postGroup':
                 ajax.body = JSON.stringify(group);
                 ajax.method = 'POST';
@@ -308,11 +313,11 @@ Polymer({
         var jsonResponse = e.detail.request.xhr.response;
         var message = 'Error:';
         message = message + ' Here are the Details: Error Status: ' + req.status + ' Error StatusText: ' + req.statusText;
-        this.enableORdisableGroup(false);
+        this.enableOrDisableGroup(false);
     },
 
     handleAjaxResponse: function () {
-        switch (this.groupType) {
+        switch (this.ajaxCall) {
             case 'postGroup':
                 this.groupObject.id = event.detail.response.id;
                 if (this.isGroupImageChanged) {
@@ -342,11 +347,11 @@ Polymer({
         }
     },
     uploadImage: function () {
-        this.groupType = 'groupImage';
+        this.ajaxCall = 'groupImage';
         this.makeAjaxCall();
     },
     updateImageURL: function (imageURL) {
-        this.groupType = 'putGroup';
+        this.ajaxCall = 'putGroup';
         this.groupObject.icon = imageURL;
         this.fire("status-message-update", { severity: 'info', message: 'Redirecting to Groups page after save...' });
         this.makeAjaxCall(this.groupObject);
