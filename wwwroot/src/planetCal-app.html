@@ -19,7 +19,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include='planetCal-app-styles'></style>
     <iron-localstorage name="planetCal-storage" value="{{localStorage}}" on-iron-localstorage-load-empty="initializeLocalStorage"></iron-localstorage>
     <global-variables></global-variables>
-    <app-location route='{{route}}'></app-location>
+    <app-location route='{{route}}' query-params='{{queryParams}}'></app-location>
     <app-route route='{{route}}' pattern='/:page' data='{{routeData}}' tail='{{subroute}}'></app-route>
 
     <app-drawer-layout fullbleed>
@@ -55,7 +55,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-header>
 
         <iron-pages selected='{{page}}' style="height: 100%;" attr-for-selected='name' fallback-selection='events' role='main'>
-          <events-page toggle-view=[[toggleEventsView]] name='events'></events-page>
+          <events-page start-date=[[queryParams.startDate]] days-count=[[queryParams.daysCount]] toggle-view=[[toggleEventsView]] name='events'></events-page>
           <login-page name='login'></login-page>
           <recommendations-page name='recommendations'></recommendations-page>
           <user-profile-page name='user-profile'></user-profile-page>

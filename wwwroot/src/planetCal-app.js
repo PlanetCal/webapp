@@ -37,7 +37,9 @@ Polymer({
   },
 
   _pageLoadRequestHandler: function (e) {
-    //console.log('_loginRequestHandler');
+    if (e.detail.page === '/events') {
+      this.setQueryParamsForEventsPage();
+    }
     this.set('route.path', e.detail.page)
   },
 
@@ -67,9 +69,18 @@ Polymer({
     if (firstTimeLogon) {
       this.set('route.path', '/welcome');
     } else {
-      this.toggleEventsView = !this.toggleEventsView;
+      //display events page
+      this.setQueryParamsForEventsPage();
       this.set('route.path', '/events');
     }
+  },
+
+  setQueryParamsForEventsPage: function () {
+    var selectedDate = Polymer.globalsManager.globals.selectedDate;
+    var startDate = "" + selectedDate.year + "-" + selectedDate.month + "-" + selectedDate.day;
+    var daysCount = Polymer.globalsManager.globals.daysCount;
+    this.toggleEventsView = !this.toggleEventsView;
+    this.queryParams = { startDate: startDate, daysCount: daysCount };
   },
 
   _onEditGroup: function () {
@@ -96,6 +107,10 @@ Polymer({
   },
 
   _pageChanged: function (page) {
+    if (page !== 'events') {
+      this.queryParams = {};
+    }
+
     // Load page import on demand. Show 404 page if fails
     this.set('route.path', '/' + page)
     var resolvedPageUrl = this.resolveUrl('pages/' + page + '-page.html');
@@ -103,10 +118,10 @@ Polymer({
   },
 
   _calDateSelectHandler: function (e) {
+    this.setQueryParamsForEventsPage();
     if (!this.$.drawer.persistent) {
       this.$.drawer.close();
     }
-
     this.toggleEventsView = !this.toggleEventsView;
   },
 

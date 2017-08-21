@@ -9,6 +9,12 @@ Polymer({
     toggleView: {
       type: Boolean,
       observer: '_dateChanged'
+    },
+    startDate: {
+      type: String,
+    },
+    daysCount: {
+      type: Number,
     }
   },
 
@@ -54,8 +60,19 @@ Polymer({
   _dateChanged: function () {
 
     var dateChanged = false;
+    console.log('startDate ' + this.startDate);
+    console.log('daysCount ' + this.daysCount);
+    var selectedDate = null;
+    if (this.startDate) {
+      var array = this.startDate.split('-');
+      if (array.length == 3) {
+        selectedDate = { year: array[0], month: array[1], day: array[2] };
+      }
+    }
+    if (!selectedDate) {
+      selectedDate = Polymer.globalsManager.globals.selectedDate;
+    }
 
-    var selectedDate = Polymer.globalsManager.globals.selectedDate;
     if (selectedDate) {
       this.selectedDay = selectedDate.day;
       this.selectedMonth = selectedDate.month;

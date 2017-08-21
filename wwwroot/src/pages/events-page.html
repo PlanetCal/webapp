@@ -3,11 +3,14 @@
 <link rel="import" href="/src/shared-styles.html">
 <link rel="import" href="/src/components/search/search-bar.html">
 
+<!-- Example of the url:
+  http://localhost:8081/events?startDate=2017-8-18&daysCount=35-->
+
 <dom-module id="events-page">
   <template>
     <style include="shared-styles"></style>
     <div class="card">
-      <cal-events toggle-view=[[toggleView]] />
+      <cal-events toggle-view=[[toggleView]] start-date=[[startDate]] days-count=[[daysCount]] />
     </div>
   </template>
 
@@ -16,13 +19,16 @@
       is: 'events-page',
 
       properties: {
-        searchText: {
-          type: String,
-        },
         toggleView: {
           type: Boolean
+        },
+        startDate: {
+          type: String
+        },
+        daysCount: {
+          type: Number
         }
-      },
+      }
     });
   </script>
 </dom-module>
