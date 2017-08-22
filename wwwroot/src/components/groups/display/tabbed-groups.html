@@ -1,0 +1,19 @@
+<link rel="import" href="/src/polymer-refs.html">
+<link rel="import" href="groups-display-styles.html">
+<link rel="import" href="/src/components/groups/display/groups-display.html">
+
+<dom-module id="tabbed-groups">
+    <template>
+        <style include="groups-display-styles"></style>
+
+        <h2 style="vertical-align: top;">Groups [ <a class="link-create" href="#" on-tap="createGroup">CREATE</a> ]</h2>
+
+        <paper-tabs noink no-bar scrollable fit-container selected="{{selectedTab}}">
+            <paper-tab>My Groups</paper-tab>
+            <paper-tab>Subscribed Groups</paper-tab>
+            <paper-tab>Administered Groups</paper-tab>
+        </paper-tabs>
+        <groups-display group-type="[[selectedTab]]"></groups-display>
+    </template>
+    <script type="text/javascript" src="/src/components/groups/display/tabbed-groups.js"></script>
+</dom-module>

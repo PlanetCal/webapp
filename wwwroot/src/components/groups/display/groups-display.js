@@ -2,12 +2,20 @@ Polymer({
     is: 'groups-display',
     properties: {
         groupType: {
-            type: String,
-            value: '',
+            type: Number,
+            value: -1,
+            observer: '_dataChanged'
         }
     },
 
     ready: function () {
+        this._dataChanged();
+    },
+
+    _dataChanged: function () {
+        if (this.groupType < 0) {
+            return;
+        }
         this.fire("status-message-update");
         this.loggedInUser = Polymer.globalsManager.globals.loggedInUser;
         if (!this.loggedInUser) {
@@ -25,13 +33,14 @@ Polymer({
     makeAjaxCall: function (group = null) {
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
-        if (this.groupType === 'subscribed') {
-            ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|category|createdBy|members|location|address|contact|webSite|modifiedBy';
-        } else if (this.groupType === 'administered') {
-            ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&administeredByMe=true';
-        }
-        else {
+
+        if (this.groupType === 0) { //Owned
             ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&filter=createdBy=' + this.loggedInUser.id;
+        }
+        else if (this.groupType === 1) { //subscribed
+            ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|category|createdBy|members|location|address|contact|webSite|modifiedBy';
+        } else if (this.groupType === 2) { //administered
+            ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&administeredByMe=true';
         }
 
         //Keep below line to switch to normal get groups call
@@ -161,7 +170,7 @@ Polymer({
     },
 
     hideForEdit: function (item) {
-        var isEdit = this.loggedInUser.id === item.createdBy || this.groupType === 'administered';
+        var isEdit = this.loggedInUser.id === item.createdBy || this.groupType === 2;
         return isEdit ? '' : 'displayNone';
     },
 
@@ -176,7 +185,7 @@ Polymer({
     },
 
     hideSubscribeButton: function (item) {
-        return this.groupType !== 'subscribed' ? 'displayNone' : '';
+        return this.groupType !== 1 ? 'displayNone' : '';
     },
 
     groupDisplayName: function (item) {

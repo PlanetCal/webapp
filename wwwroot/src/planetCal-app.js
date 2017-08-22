@@ -95,7 +95,7 @@ Polymer({
 
   _onBackToGroups: function () {
     //this.toggleGroupsView = !this.toggleGroupsView;
-    this.set('route.path', '/groups-owned');
+    this.set('route.path', '/my-groups');
   },
 
   _routePageChanged: function (page) {
