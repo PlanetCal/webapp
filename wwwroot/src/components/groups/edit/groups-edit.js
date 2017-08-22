@@ -253,16 +253,10 @@ Polymer({
         }
         if (isValid) {
             this.fire("status-message-update", { severity: 'info', message: 'Save group in progress...' });
-            this.enableOrDisableGroup(true);
             this.groupObject = this.constructGroupObject();
             this.ajaxCall = this.groupObject.id ? 'putGroup' : 'postGroup';
             this.makeAjaxCall(this.groupObject);
         }
-    },
-    enableOrDisableGroup: function (value) {
-        this.$.savegroup.disabled = value;
-        this.$.resetgroup.disabled = value;
-        this.$.deletegroup.disabled = value;
     },
 
     makeAjaxCall: function (group) {
@@ -273,9 +267,9 @@ Polymer({
         ajax.url = serviceBaseUrl + '/groups/';
         ajax.contentType = 'application/json';
         if (group && group.administrators) {
-            group.administrators = group.administrators.toLowerCase().split([',', ';'])
+            group.administrators = group.administrators.toLowerCase().split(/,| |;/);
             for (var i = 0; i < group.administrators.length; i++) {
-                if (!this.isEmailValid(group.administrators[i])) {
+                if (group.administrators[i].length > 0 && !this.isEmailValid(group.administrators[i])) {
                     this.fire("status-message-update", { severity: 'error', message: group.administrators[i] + ' is not a valid administrator email.' });
                     return;
                 }
@@ -344,6 +338,9 @@ Polymer({
                 case 'GroupNotExistant':
                     message = 'Group does not exist.';
                     break;
+                case 'InvalidEmail':
+                    message = 'Administrator email is invalid.';
+                    break;
                 case 'UserNotAuthorized':
                     message = 'User is not authorized.';
                     break;
@@ -353,7 +350,6 @@ Polymer({
             }
         }
         this.fire("status-message-update", { severity: 'error', message: message });
-        this.enableOrDisableGroup(false);
     },
 
     isEmailValid: function (email) {

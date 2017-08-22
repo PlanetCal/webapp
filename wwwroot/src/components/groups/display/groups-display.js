@@ -53,6 +53,7 @@ Polymer({
                 if (this.loggedInUser) {
                     ajax.headers['Authorization'] = 'Bearer ' + this.loggedInUser.token;
                 }
+                this.fire("status-message-update", { severity: 'information', message: 'Loading groups...' });
                 break;
             case 'deleteGroup':
                 ajax.method = 'DELETE';
@@ -62,8 +63,10 @@ Polymer({
                 if (this.loggedInUser) {
                     ajax.headers['Authorization'] = 'Bearer ' + this.loggedInUser.token;
                 }
+                this.fire("status-message-update", { severity: 'information', message: 'Deleting group...' });
                 break;
         }
+
         ajax.generateRequest();
     },
 
@@ -77,6 +80,7 @@ Polymer({
                 this.items = this.removeGroupAndReturnArray(this.items, deletedGroup);
                 break;
         }
+        this.fire("status-message-update");
     },
 
     removeGroupAndReturnArray: function (groupArray, groupId) {
