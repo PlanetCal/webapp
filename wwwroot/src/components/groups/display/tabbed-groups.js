@@ -1,9 +1,17 @@
 Polymer({
     is: 'tabbed-groups',
+    groupType: {
+        type: String,
+        value: ''
+    },
+
 
     ready: function () {
-        this.selectedTab = 0;
-        //var groupTypes = ['owned', 'subscribed', 'administered'];
+        this.groupTypes = [
+            { id: 'owned', displayName: 'Owned' },
+            { id: 'subscribed', displayName: 'Subscribed' },
+            { id: 'administered', displayName: 'Administered' }
+        ];
     },
 
     createGroup: function (e) {

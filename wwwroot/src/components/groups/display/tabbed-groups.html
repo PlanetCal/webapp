@@ -6,12 +6,12 @@
     <template>
         <style include="groups-display-styles"></style>
         <h2>Groups [ <a class="link-create" href="#" on-tap="createGroup">CREATE</a> ]</h2>
-        <paper-tabs noink no-bar scrollable fit-container selected="{{selectedTab}}">
-            <paper-tab>My Groups</paper-tab>
-            <paper-tab>Subscribed Groups</paper-tab>
-            <paper-tab>Administered Groups</paper-tab>
+        <paper-tabs noink no-bar scrollable fit-container selected='{{groupType}}' attr-for-selected='id'>
+            <template is="dom-repeat" items="[[groupTypes]]">
+                <paper-tab id='[[item.id]]'>[[item.displayName]]</paper-tab>
+            </template>
         </paper-tabs>
-        <groups-display group-type="[[selectedTab]]"></groups-display>
+        <groups-display group-type="[[groupType]]"></groups-display>
     </template>
     <script type="text/javascript" src="/src/components/groups/display/tabbed-groups.js"></script>
 </dom-module>

@@ -24,7 +24,8 @@ Polymer({
     'on-go-to-events': '_onGoToEvents',
     'on-back-to-groups': '_onBackToGroups',
     'status-message-update': '_messageUpdateHandler',
-    'iron-resize': '_onIronResize'
+    'iron-resize': '_onIronResize',
+    'on-query-param-changed': '_updateQueryParams'
   },
 
   ready: function () {
@@ -127,6 +128,10 @@ Polymer({
 
   onMessageStatusCloseHandler: function () {
     this.updateMessage();
+  },
+
+  _updateQueryParams: function (e) {
+    this.queryParams = e.detail;
   },
 
   _messageUpdateHandler: function (e) {

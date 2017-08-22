@@ -2,8 +2,8 @@ Polymer({
     is: 'groups-display',
     properties: {
         groupType: {
-            type: Number,
-            value: -1,
+            type: String,
+            value: '',
             observer: '_dataChanged'
         }
     },
@@ -13,9 +13,16 @@ Polymer({
     },
 
     _dataChanged: function () {
-        if (this.groupType < 0) {
+        if (this.groupType === '') {
             return;
         }
+        if (this.earlierValue === this.groupType) {
+            return;
+        }
+        this.earlierValue = this.groupType;
+
+        this.fire("on-query-param-changed", { groupType: this.groupType });
+
         this.fire("status-message-update");
         this.loggedInUser = Polymer.globalsManager.globals.loggedInUser;
         if (!this.loggedInUser) {
@@ -34,17 +41,21 @@ Polymer({
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
 
-        if (this.groupType === 0) { //Owned
-            ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&filter=createdBy=' + this.loggedInUser.id;
-        }
-        else if (this.groupType === 1) { //subscribed
-            ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|category|createdBy|members|location|address|contact|webSite|modifiedBy';
-        } else if (this.groupType === 2) { //administered
-            ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&administeredByMe=true';
+        switch (this.groupType) {
+            case ('owned'):
+                ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&filter=createdBy=' + this.loggedInUser.id;
+                break;
+            case ('subscribed'):
+                ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|category|createdBy|members|location|address|contact|webSite|modifiedBy';
+                break;
+            case ('administered'):
+                ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&administeredByMe=true';
+                break;
+            default:
+                //this.fire("status-message-update", { severity: 'error', message: 'GroupType ' + this.groupType + ' is not supported.' });
+                return;
         }
 
-        //Keep below line to switch to normal get groups call
-        //ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|createdBy|administrators|members|location|address|contact|webSite|modifiedBy';
         switch (this.ajaxCall) {
             case 'getGroups':
                 ajax.method = 'GET';
@@ -174,7 +185,7 @@ Polymer({
     },
 
     hideForEdit: function (item) {
-        var isEdit = this.loggedInUser.id === item.createdBy || this.groupType === 2;
+        var isEdit = this.loggedInUser.id === item.createdBy || this.groupType === 'administered';
         return isEdit ? '' : 'displayNone';
     },
 
@@ -183,13 +194,12 @@ Polymer({
         return isDelete ? '' : 'displayNone';
     },
 
-
     groupIcon: function (item) {
         return (!item.icon || item.icon === '') ? '../src/images/noimage.png' : item.icon;
     },
 
     hideSubscribeButton: function (item) {
-        return this.groupType !== 1 ? 'displayNone' : '';
+        return this.groupType !== 'subscribed' ? 'displayNone' : '';
     },
 
     groupDisplayName: function (item) {

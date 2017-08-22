@@ -5,13 +5,16 @@
   <template>
     <style include="shared-styles"></style>
     <div>
-      <tabbed-groups></tabbed-groups>
+      <tabbed-groups group-type=[[groupType]]></tabbed-groups>
     </div>
   </template>
 
   <script>
     Polymer({
       is: 'my-groups-page',
+      groupType: {
+        type: String
+      }
     });
   </script>
 </dom-module>
