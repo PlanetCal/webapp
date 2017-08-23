@@ -152,7 +152,7 @@ Polymer({
             this.expandButtonText = 'Show advanced (optional) fields';
             this.expandButtonIcon = 'icons:expand-more';
         } else {
-            this.expandButtonText = 'Collapse advanced (optional) fields';
+            this.expandButtonText = 'Hide advanced (optional) fields';
             this.expandButtonIcon = 'icons:expand-less';
         }
     },

@@ -43,6 +43,8 @@ Polymer({
         }
     },
     ready: function () {
+        this.expanded = false;
+        this.updateExpandButtonTextAndIcon(this.expanded);
         this.pageLoad();
     },
     pageLoad: function () {
@@ -112,6 +114,23 @@ Polymer({
             dialog.close();
         }
     },
+
+    updateExpandButtonTextAndIcon: function (expanded) {
+        if (!expanded) {
+            this.expandButtonText = 'Show advanced (optional) fields';
+            this.expandButtonIcon = 'icons:expand-more';
+        } else {
+            this.expandButtonText = 'Hide advanced (optional) fields';
+            this.expandButtonIcon = 'icons:expand-less';
+        }
+    },
+
+    toggle: function () {
+        this.$.collapse.toggle();
+        this.regionExpanded = !this.regionExpanded;
+        this.updateExpandButtonTextAndIcon(this.regionExpanded);
+    },
+
     onStartDateChange: function (e) {
         var body = document.querySelector('body');
         Polymer.dom(body).appendChild(this.$.startDatePickerDialog);
@@ -231,7 +250,7 @@ Polymer({
         this.location = editedItem.location;
         this.groups = editedItem.groups;
         this.$.eventDialogHeader.textContent = "Update Event";
-        this.$.saveevent.textContent = "Update";
+        this.$.saveevent.textContent = "Save";
     },
     emptyEventFields: function () {
         this.id = null;
