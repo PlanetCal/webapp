@@ -64,7 +64,7 @@ Polymer({
                 if (this.loggedInUser) {
                     ajax.headers['Authorization'] = 'Bearer ' + this.loggedInUser.token;
                 }
-                this.fire("status-message-update", { severity: 'information', message: 'Loading groups...' });
+                this.fire("status-message-update", { severity: 'info', message: 'Loading groups...' });
                 break;
             case 'deleteGroup':
                 ajax.method = 'DELETE';
@@ -74,7 +74,7 @@ Polymer({
                 if (this.loggedInUser) {
                     ajax.headers['Authorization'] = 'Bearer ' + this.loggedInUser.token;
                 }
-                this.fire("status-message-update", { severity: 'information', message: 'Deleting group...' });
+                this.fire("status-message-update", { severity: 'info', message: 'Deleting group...' });
                 break;
         }
 
@@ -137,16 +137,8 @@ Polymer({
 
     editGroup: function (e) {
         var editedGroup = e.model.item;
-
         Polymer.globalsManager.set('editedGroup', editedGroup);
-        this.fire('on-edit-group');
-    },
-
-    createGroup: function (e) {
-        if (Polymer.globalsManager.editedGroup) {
-            Polymer.globalsManager.set('editedGroup', null);
-        }
-        this.fire('on-edit-group');
+        this.fire('page-load-requested', { page: '/groups-edit', queryParams: { groupId: editedGroup.id, groupTypeToGoTo: this.groupType } });
     },
 
     deleteGroup: function (e) {

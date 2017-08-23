@@ -20,9 +20,7 @@ Polymer({
     'page-load-requested': '_pageLoadRequestHandler',
     'on-logout-requested': '_logoutRequestHandler',
     'on-login-successful': '_loginSuccessHandler',
-    'on-edit-group': '_onEditGroup',
     'on-go-to-events': '_onGoToEvents',
-    'on-back-to-groups': '_onBackToGroups',
     'status-message-update': '_messageUpdateHandler',
     'iron-resize': '_onIronResize',
     'on-query-param-changed': '_updateQueryParams'
@@ -38,10 +36,13 @@ Polymer({
   },
 
   _pageLoadRequestHandler: function (e) {
+    this.set('route.path', e.detail.page);
+
     if (e.detail.page === '/events') {
       this.setQueryParamsForEventsPage();
+    } else if (e.detail.queryParams) {
+      this.queryParams = e.detail.queryParams;
     }
-    this.set('route.path', e.detail.page)
   },
 
   _logoutRequestHandler: function () {
@@ -84,20 +85,11 @@ Polymer({
     this.queryParams = { startDate: startDate, daysCount: daysCount };
   },
 
-  _onEditGroup: function () {
-    this.toggleGroupsView = !this.toggleGroupsView;
-    this.set('route.path', '/groups-edit');
-  },
-
   _onGoToEvents: function () {
     this.toggleGroupEventsView = !this.toggleGroupEventsView;
     this.set('route.path', '/group-events');
   },
 
-  _onBackToGroups: function () {
-    //this.toggleGroupsView = !this.toggleGroupsView;
-    this.set('route.path', '/my-groups');
-  },
 
   _routePageChanged: function (page) {
     this.page = page || 'events';

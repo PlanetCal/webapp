@@ -4,59 +4,50 @@ Polymer({
         Polymer.IronResizableBehavior,
     ],
     properties: {
-        page: {
-            type: Number,
-            notify: true,
-            value: 0,
-            // observer: '_handlePageChanged',
-        },
-        toggleView: {
-            type: Boolean,
-            observer: 'pageLoad'
-        },
-        isSaveValid: {
-            type: Boolean,
-            value: false,
-            notify: true,
-        },
-        isGroupImageChanged: {
-            type: Boolean,
-            value: false,
-            notify: true,
-        },
-        ajaxCall: {
+        groupTypeToGoBack: {
             type: String,
-            value: '',
+            observer: '_dataChanged',
         },
-        groupObject: {
-            type: Object,
-            value: {},
-        },
-        timeout: {
+        groupId: {
             type: String,
-            value: null,
+            observer: '_dataChanged',
         }
     },
     listeners: {
         'iron-resize': 'onGroupsEditResize',
     },
     ready: function () {
-        this.regionExpanded = false;
-        this.updateExpandButtonTextAndIcon(this.regionExpanded);
-        this.pageLoad();
+        this.isGroupImageChanged = false;
+        this.groupObject = {};
+        this._dataChanged();
+    },
+
+    _dataChanged: function () {
+        if (this.groupId && this.groupTypeToGoBack) {
+            this.regionExpanded = false;
+            this.updateExpandButtonTextAndIcon(this.regionExpanded);
+            this.pageLoad();
+        }
     },
 
     pageLoad: function () {
         this.fire("status-message-update");
         var items = [];
-        var editedGroup = Polymer.globalsManager.globals.editedGroup;
-        if (editedGroup) {
-            this.populateEditedGroup(editedGroup);
-        }
-        else {
+
+        if (this.groupId === 'null') {
             this.reset();
         }
+        else {
+            var editedGroup = Polymer.globalsManager.globals.editedGroup;
+            if (editedGroup && editedGroup.id === this.groupId) {
+                this.populateEditedGroup(editedGroup);
+            } else {
+                //we need to laod the group from the backend.
+                this.getGroup(this.groupId);
+            }
+        }
     },
+
     previewImage: function (e) {
         var inputElement = e.target.inputElement;
         if (inputElement.files && inputElement.files.length > 0) {
@@ -180,7 +171,7 @@ Polymer({
     backToGroups: function () {
         this.resetGlobalManagerForEditedGroup();
         this.fire("status-message-update");
-        this.fire('on-back-to-groups');
+        this.fire('page-load-requested', { page: 'my-groups', queryParams: { groupType: this.groupTypeToGoBack } });
     },
     validate: function () {
         var elements = document.getElementsByClassName('saveGroups');
@@ -239,6 +230,14 @@ Polymer({
             obj.icon = this.previewSrc;
         return obj;
     },
+
+    getGroup: function (groupId) {
+        this.ajaxCall = 'getGroup';
+        this.fire("status-message-update", { severity: 'info', message: 'Getting group in progress...' });
+        this.groupObject = { id: groupId };
+        this.makeAjaxCall(this.groupObject);
+    },
+
     delete: function (e) {
         this.groupObject = this.constructGroupObject();
         this.ajaxCall = 'deleteGroup';
@@ -267,7 +266,9 @@ Polymer({
         ajax.url = serviceBaseUrl + '/groups/';
         ajax.contentType = 'application/json';
         if (group && group.administrators) {
-            group.administrators = group.administrators.toLowerCase().split(/,| |;/);
+            if (!Array.isArray(group.administrators)) {
+                group.administrators = group.administrators.toLowerCase().split(/,| |;/);
+            }
             for (var i = 0; i < group.administrators.length; i++) {
                 if (group.administrators[i].length > 0 && !this.isEmailValid(group.administrators[i])) {
                     this.fire("status-message-update", { severity: 'error', message: group.administrators[i] + ' is not a valid administrator email.' });
@@ -277,6 +278,15 @@ Polymer({
         }
 
         switch (this.ajaxCall) {
+            case 'getGroup':
+                ajax.url += group.id + '?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy';
+                ajax.body = '';
+                ajax.method = 'GET';
+                ajax.headers['Version'] = '1.0';
+                if (loggedInUser) {
+                    ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+                }
+                break;
             case 'postGroup':
                 ajax.body = JSON.stringify(group);
                 ajax.method = 'POST';
@@ -297,7 +307,6 @@ Polymer({
                 break;
             case 'deleteGroup':
                 ajax.url += group.id;
-                // ajax.body = JSON.stringify(event.id);
                 ajax.body = '';
                 ajax.method = 'DELETE';
                 ajax.headers['Version'] = '1.0';
@@ -359,6 +368,11 @@ Polymer({
 
     handleAjaxResponse: function () {
         switch (this.ajaxCall) {
+            case 'getGroup':
+                this.groupObject = event.detail.response;
+                this.populateEditedGroup(this.groupObject);
+                this.fire("status-message-update");
+                break;
             case 'postGroup':
                 this.groupObject.id = event.detail.response.id;
                 if (this.isGroupImageChanged) {

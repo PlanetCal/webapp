@@ -5,7 +5,7 @@
   <template>
     <style include="shared-styles"></style>
     <div>
-      <groups-edit toggle-view=[[toggleView]]></groups-edit>
+      <groups-edit group-type-to-go-back=[[groupTypeToGoBack]] group-id=[[groupId]]></groups-edit>
     </div>
   </template>
 
@@ -14,8 +14,11 @@
       is: 'groups-edit-page',
 
       properties: {
-        toggleView: {
-          type: Boolean
+        groupId: {
+          type: String
+        },
+        groupTypeToGoBack: {
+          type: String
         }
       },
     });
