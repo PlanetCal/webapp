@@ -89,7 +89,7 @@
       </paper-dialog-scrollable>
       <div class="buttons">
         <paper-button id="cancelevent" on-tap="cancelEvent">Cancel</paper-button>
-        <paper-button id="saveevent" on-tap="saveEvent">Add to Grid</paper-button>
+        <paper-button id="saveevent" on-tap="saveEvent">Save</paper-button>
       </div>
     </paper-dialog>
 
@@ -122,10 +122,88 @@
         <paper-button dialog-confirm on-tap="setEndTime">OK</paper-button>
       </div>
     </paper-dialog>
+
+
+
+
     <paper-dialog class='size-position' id="dialogTest">
       <h2 class='test'>Greetings testers</h2>
-      <p>This is where you will test testy stuff</p>
+      <paper-dialog-scrollable>
+        <p>This is where you will test testy stuff</p>
+        <div class="dialog-textbox" style="width: 600px;">
+          <fieldset>
+            <div id="nameFieldDiv">
+              <paper-input label="Name" autofocus class="addEvent" value="{{name}}" char-counter maxlength="50" style="width: 560px;" required
+                error-message="required" on-change="validateOnChange">
+              </paper-input>
+            </div>
+            <div id="divDate" style="display: flex; width: 570px; margin-top: 10px;">
+              <paper-input label="Start Date" class="addEvent" value="{{startDate}}" style="width: 160px;" readonly required error-message="required"
+                on-tap="onStartDateChange" on-change="validateOnChange">
+              </paper-input>
+              <iron-icon class="event-icons" icon="icons:event" title="Start Date" on-tap="onStartDateChange"></iron-icon>
+              <paper-input label="Start Time" class="addEvent" value="{{startTime}}" style="width: 80px; margin-left: 10px;" readonly required
+                error-message="required" on-tap="onStartTimeChange" on-change="validateOnChange">
+              </paper-input>
+              <iron-icon class="event-icons" icon="icons:alarm" title="Start Time" on-tap="onStartTimeChange"></iron-icon>
+              <paper-input label="End Date" class="addEvent" value="{{endDate}}" style="width: 160px;margin-left: 15px;" readonly required
+                error-message="required" on-tap="onEndDateChange" on-change="validateOnChange">
+              </paper-input>
+              <iron-icon class="event-icons" icon="icons:event" title="End Date" on-tap="onEndDateChange"></iron-icon>
+              <paper-input label="End Time" class="addEvent" value="{{endTime}}" style="width: 80px; margin-left: 10px;" readonly required
+                error-message="required" on-tap="onEndTimeChange" on-change="validateOnChange">
+              </paper-input>
+              <iron-icon class="event-icons" icon="icons:alarm" title="End Time" on-tap="onEndTimeChange"></iron-icon>
+              <!--paper-input label="EndDateTime" class="addEvent" value="{{endDateTime}}" char-counter maxlength="50" style="width: 250px;"
+                required error-message="required" on-change="validateOnChange">
+              </paper-input-->
+            </div>
+            <paper-button class='blue' on-tap="toggle">
+              <iron-icon icon="[[expandButtonIcon]]"></iron-icon>[[expandButtonText]]</paper-button>
+            <iron-collapse id='collapse'>
+              <div>
+                <paper-input label="Description" class="addEvent" value="{{description}}" aria-multiline="5" char-counter maxlength="500"
+                  style="width: 560px;" on-change="validateOnChange">
+                </paper-input>
+              </div>
+              <div style="display: flex; width: 570px;">
+                <paper-input label="StreetNumber" class="addEvent" value="{{streetNumber}}" char-counter maxlength="15" style="width: 150px;"
+                  on-change="validateOnChange">
+                </paper-input>
+                <span style="width: 30px;"></span>
+                <paper-input label="StreetName" class="addEvent" value="{{streetName}}" char-counter maxlength="25" style="width: 390px;"
+                  on-change="validateOnChange">
+                </paper-input>
+              </div>
+              <div style="display: flex; width: 570px;">
+                <paper-input label="City" class="addEvent" value="{{city}}" char-counter maxlength="20" style="width: 180px;" on-change="validateOnChange">
+                </paper-input>
+                <span style="width: 30px;"></span>
+                <paper-input label="State" class="addEvent" value="{{state}}" char-counter maxlength="20" style="width: 180px;" on-change="validateOnChange">
+                </paper-input>
+                <span style="width: 30px;"></span>
+                <paper-input label="PostalCode" class="addEvent" value="{{postalCode}}" char-counter maxlength="10" style="width: 150px;"
+                  on-change="validateOnChange">
+                </paper-input>
+              </div>
+              <div>
+                <paper-input label="Location" class="addEvent" value="{{location}}" char-counter maxlength="10" on-change="validateOnChange">
+                </paper-input>
+              </div>
+
+
+          </fieldset>
+        </div>
+      </paper-dialog-scrollable>
+      <div class="buttons">
+        <paper-button id="cancelevent" on-tap="cancelEvent">Cancel</paper-button>
+        <paper-button id="saveevent" on-tap="saveEvent">Save</paper-button>
+      </div>
     </paper-dialog>
+
+
+
+
     <!-- Dialog for Date time picker - end -->
     <!-- Dialog or popup End -->
     <!-- List of Buttons start -->
