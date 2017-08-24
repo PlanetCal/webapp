@@ -1,6 +1,6 @@
 <link rel="import" href="/src/polymer-refs.html">
 <link rel="import" href="./group-events-styles.html">
-<!-- <style>
+<style>
   .event-icons {
     color: #007e9e;
     margin-left: 5px;
@@ -11,13 +11,17 @@
   .event-icons:hover {
     color: #0FCFFF;
   }
-</style> -->
+
+  paper-dialog.size-position {
+    top: 0px;
+  }
+</style>
 
 <dom-module id="group-events">
   <template>
-    <style include="groups-events-styles"></style>
+    <style include="group-events-styles"></style>
     <!-- Dialog or popup start -->
-    <paper-dialog modal id="addEvent" class="size-position">
+    <paper-dialog modal id="addEventDialog" class='size-position'>
       <h2 id="eventDialogHeader"></h2>
       <paper-dialog-scrollable>
         <div class="dialog-textbox" style="width: 600px;">
@@ -121,7 +125,6 @@
     <!-- Dialog for Date time picker - end -->
     <!-- Dialog or popup End -->
     <!-- List of Buttons start -->
-    <style include="group-events-styles"></style>
     <div id="msg">[[messageText]]</div>
     <div>
       <iron-icon icon="icons:delete-sweep" class="delete-icon" title="Delete selected" on-tap="deleteEvents"></iron-icon>
