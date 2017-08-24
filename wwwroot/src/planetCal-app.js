@@ -20,7 +20,6 @@ Polymer({
     'page-load-requested': '_pageLoadRequestHandler',
     'on-logout-requested': '_logoutRequestHandler',
     'on-login-successful': '_loginSuccessHandler',
-    'on-go-to-events': '_onGoToEvents',
     'status-message-update': '_messageUpdateHandler',
     'iron-resize': '_onIronResize',
     'on-query-param-changed': '_updateQueryParams'
@@ -84,12 +83,6 @@ Polymer({
     this.toggleEventsView = !this.toggleEventsView;
     this.queryParams = { startDate: startDate, daysCount: daysCount };
   },
-
-  _onGoToEvents: function () {
-    this.toggleGroupEventsView = !this.toggleGroupEventsView;
-    this.set('route.path', '/group-events');
-  },
-
 
   _routePageChanged: function (page) {
     this.page = page || 'events';
