@@ -60,6 +60,9 @@ Polymer({
         }
         elements[0].invalid = false;
     },
+    dialogTest: function (element) {
+        this.$.dialogTest.open();
+    },
     addEventToGrid: function () {
         this.eventObject = this.constructEventObject();
         if (this.eventObject.id) { // Update Event

@@ -122,15 +122,20 @@
         <paper-button dialog-confirm on-tap="setEndTime">OK</paper-button>
       </div>
     </paper-dialog>
+    <paper-dialog class='size-position' id="dialogTest">
+      <h2 class='test'>Greetings testers</h2>
+      <p>This is where you will test testy stuff</p>
+    </paper-dialog>
     <!-- Dialog for Date time picker - end -->
     <!-- Dialog or popup End -->
     <!-- List of Buttons start -->
     <div id="msg">[[messageText]]</div>
     <div>
-      <iron-icon icon="icons:delete-sweep" class="delete-icon" title="Delete selected" on-tap="deleteEvents"></iron-icon>
-      <paper-button id="btnUpcoming" class="blue" on-tap="loadEvents">Upcoming</paper-button>
-      <paper-button id="btnPast" class="blue" on-tap="pastEvents">past</paper-button>
-      <paper-button raised class="indigo" on-tap="showDialog">Add Event</paper-button>
+      <iron-icon icon="icons:delete-sweep" class="delete-icon" title="Delete selected" raised on-tap="deleteEvents"></iron-icon>
+      <paper-button id="btnUpcoming" class="blue" raised on-tap="loadEvents">Upcoming</paper-button>
+      <paper-button id="btnPast" class="blue" raised on-tap="pastEvents">past</paper-button>
+      <paper-button class="blue" raised on-tap="dialogTest">Tester Button</paper-button>
+      <paper-button raised class="indigo" raised on-tap="showDialog">Add Event</paper-button>
     </div>
     <!-- List of Buttons End -->
     <!--template is="dom-if" if="{{isLoading}}">
