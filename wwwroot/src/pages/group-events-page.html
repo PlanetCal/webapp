@@ -7,7 +7,7 @@
     <style include="shared-styles"></style>
     <div>
       <!--<event-main name="events-main" selected-day="[[selectedDay]]" selected-month="[[selectedMonth]]" selected-year="[[selectedYear]]"/>-->
-      <group-events toggle-view=[[toggleView]]></group-events>
+      <group-events group-id=[[groupId]]></group-events>
     </div>
   </template>
 
@@ -16,8 +16,8 @@
       is: 'group-events-page',
 
       properties: {
-        toggleView: {
-          type: Boolean
+        groupId: {
+          type: String
         }
       },
     });

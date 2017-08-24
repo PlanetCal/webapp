@@ -156,8 +156,7 @@ Polymer({
 
     goToEvents: function (e) {
         var groupDetails = e.model.item;
-        Polymer.globalsManager.set('editedGroup', groupDetails);
-        this.fire('on-go-to-events');
+        this.fire('page-load-requested', { page: '/group-events', queryParams: { groupId: groupDetails.id } });
     },
 
     populateCardClass: function (item) {

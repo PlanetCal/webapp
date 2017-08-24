@@ -1,46 +1,10 @@
 Polymer({
     is: 'group-events',
     properties: {
-        page: {
-            type: Number,
-            notify: true,
-            value: 0,
-            // observer: '_handlePageChanged',
-        },
-        toggleView: {
-            type: Boolean,
+        groupId: {
+            type: String,
             observer: 'pageLoad'
         },
-        inverted: {
-            type: Boolean,
-            value: false,
-        },
-        indeterminate: {
-            type: Boolean,
-            value: false,
-        },
-        eventObject: {
-            type: Object,
-            value: {},
-        },
-        groupObject: {
-            type: Object,
-            value: {},
-        },
-        eventType: {
-            type: String,
-            value: '',
-        },
-        isLoading: {
-            type: Boolean,
-            value: false,
-            notify: true,
-        },
-        isSaveValid: {
-            type: Boolean,
-            value: false,
-            notify: true,
-        }
     },
     ready: function () {
         this.expanded = false;
@@ -50,8 +14,6 @@ Polymer({
     pageLoad: function () {
         this.fire("status-message-update");
         var nameFieldDiv = this.$.nameFieldDiv;
-        groupObject = Polymer.globalsManager.globals.editedGroup;
-        var items = [];
         this.loadEvents();
     },
     validate: function () {
@@ -64,23 +26,21 @@ Polymer({
             }
         }
         return isValid;
-        //document.getElementsByClassName('.addEvent').validate();
     },
     validateOnChange: function (e) {
         e.target.validate();
     },
     pastEvents: function (e) {
-        //this.emptyGrid();
-        this.eventType = 'pastEvents';
+        this.fire("status-message-update", { severity: 'info', message: 'Loading past events...' });
+        this.ajaxCall = 'getPastEvents';
         this.$.grid.style.display = 'none';
         this.$.btnPast.disabled = true;
         this.$.btnUpcoming.disabled = false;
         this.makeAjaxCall();
     },
     loadEvents: function () {
-        //this.emptyGrid();
-        this.fire("status-message-update", { severity: 'info', message: 'Loading events from server ...' });
-        this.eventType = 'getEvents';
+        this.fire("status-message-update", { severity: 'info', message: 'Loading events...' });
+        this.ajaxCall = 'getEvents';
         this.$.grid.style.display = 'none';
         this.$.btnPast.disabled = false;
         this.$.btnUpcoming.disabled = true;
@@ -201,34 +161,29 @@ Polymer({
             this.$.saveevent.disabled = true;
             this.$.cancelevent.disabled = true;
             this.eventObject = this.constructEventObject();
-            this.eventType = this.eventObject.id ? 'putEvents' : 'postEvents';
+            this.ajaxCall = this.eventObject.id ? 'putEvents' : 'postEvents';
             this.makeAjaxCall(this.eventObject);
         }
     },
     cancelEvent: function (e) {
         this.emptyEventFields();
     },
-    notLoggedInError: function (type) {
-        alert('Please login to ' + type);
-        return false;
-    },
+
     deleteEvents: function () {
         var grid = this.$.grid;
         //this.makeAjaxCall(grid.selectedItems);
     },
     deleteEvent: function (e) {
         e.preventDefault();
-        if (!Polymer.globalsManager.globals.loggedInUser) {
-            return this.notLoggedInError('delete');
-        }
-        this.eventType = 'deleteEvents';
+        this.ajaxCall = 'deleteEvents';
         this.eventObject = e.model.item;
         this.makeAjaxCall(e.model.item);
     },
     editEvent: function (e) {
         e.preventDefault();
         if (!Polymer.globalsManager.globals.loggedInUser) {
-            return this.notLoggedInError('edit');
+            this.fire("status-message-update", { severity: 'error', message: "Please log-in first." });
+            return;
         }
 
         var editedItem = e.model.item;
@@ -291,53 +246,42 @@ Polymer({
         obj.address.state = this.state;
         obj.address.postalCode = this.postalCode;
         obj.location = this.location;
-        obj.groups = [];
-        obj.groups.push(groupObject.id);
+        obj.groups = [this.groupId];
         return obj;
     },
     makeAjaxCall: function (event = null) {
         //this.isLoading = true;
+        var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+        if (!loggedInUser) {
+            this.fire("status-message-update", { severity: 'error', message: "Please log-in first." });
+            return;
+        }
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
-        var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
         var currentDate = moment().format("YYYY-MM-DD");
         var pastDate = moment().subtract(90, 'day').format("YYYY-MM-DD");
         var fields = '?fields=name|description|startDateTime|endDateTime|address|location|groups'
         ajax.url = serviceBaseUrl + '/events/';
-        switch (this.eventType) {
+        ajax.headers['Version'] = '1.0';
+        ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+        switch (this.ajaxCall) {
             case 'getEvents':
                 ajax.method = 'GET';
-                ajax.url += fields + '&groupids=' + groupObject.id + '&filter=startDateTime>=' + currentDate; // + '$AND$startDateTime<=' + 2017 - 09 - 20;
-                ajax.headers['Version'] = '1.0';
-                if (loggedInUser) {
-                    ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
-                }
+                ajax.url += fields + '&groupids=' + this.groupId + '&filter=startDateTime>=' + currentDate; // + '$AND$startDateTime<=' + 2017 - 09 - 20;
                 break;
-            case 'pastEvents':
+            case 'getPastEvents':
                 ajax.method = 'GET';
-                ajax.url += fields + '&groupids=' + groupObject.id + '&filter=startDateTime<' + currentDate; + '$AND$startDateTime>=' + pastDate;
-                ajax.headers['Version'] = '1.0';
-                if (loggedInUser) {
-                    ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
-                }
+                ajax.url += fields + '&groupids=' + this.groupId + '&filter=startDateTime<' + currentDate; + '$AND$startDateTime>=' + pastDate;
                 break;
             case 'postEvents':
                 ajax.body = JSON.stringify(event);
                 ajax.method = 'POST';
-                ajax.headers['Version'] = '1.0';
-                if (loggedInUser) {
-                    ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
-                }
                 break;
             case 'putEvents':
                 //this.ajaxUrl += event.id;
                 ajax.url += event.id;
                 ajax.body = JSON.stringify(event);
                 ajax.method = 'PUT';
-                ajax.headers['Version'] = '1.0';
-                if (loggedInUser) {
-                    ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
-                }
                 break;
             case 'deleteEvents':
                 // TODO: Check if this.id has defined, convert this.ajaxUrl to local variable
@@ -345,10 +289,6 @@ Polymer({
                 ajax.url += event.id;
                 ajax.body = "";
                 ajax.method = 'DELETE';
-                ajax.headers['Version'] = '1.0';
-                if (loggedInUser) {
-                    ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
-                }
                 break;
         }
         ajax.generateRequest();
@@ -382,19 +322,15 @@ Polymer({
     },
 
     handleAjaxResponse: function (event) {
-        // var jsonResponse = e.detail.response;
-        switch (this.eventType) {
+        switch (this.ajaxCall) {
             case 'getEvents':
-            case 'pastEvents':
-                //this.items = JSON.parse(event.detail.response);
+            case 'getPastEvents':
                 this.items = event.detail.response;
                 this.populateGrid();
                 this.fire("status-message-update");
                 break;
             case 'postEvents':
                 this.eventObject.id = event.detail.response.id;
-                //var index = this.items.findIndex(e => e.Name === this.eventObject.Name);
-                //this.items[index] = this.eventObject;
                 this.items.push(this.eventObject);
                 this.populateGrid();
                 break;
