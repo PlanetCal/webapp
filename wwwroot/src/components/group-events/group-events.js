@@ -7,6 +7,8 @@ Polymer({
         },
     },
     ready: function () {
+        this.expanded = false;
+        this.updateExpandButtonTextAndIcon(this.expanded);
         this.pageLoad();
     },
     pageLoad: function () {
@@ -50,8 +52,8 @@ Polymer({
         this.$.saveevent.disabled = false;
         this.$.cancelevent.disabled = false;
         var body = document.querySelector('body');
-        Polymer.dom(body).appendChild(this.$.addEvent);
-        this.$.addEvent.open();
+        Polymer.dom(body).appendChild(this.$.addEventDialog);
+        this.$.addEventDialog.open();
         var elements = document.getElementsByClassName('addEvent');
         for (var i = 0; i < elements.length; i++) {
             elements[i].invalid = false;
@@ -67,10 +69,30 @@ Polymer({
             this.items.push(this.eventObject);
         }
         this.populateGrid();
-        var dialog = this.$.addEvent;
+        this.closeAddEventDialog();
+    },
+
+    closeAddEventDialog() {
+        var dialog = this.$.addEventDialog;
         if (dialog) {
             dialog.close();
         }
+    },
+
+    updateExpandButtonTextAndIcon: function (expanded) {
+        if (!expanded) {
+            this.expandButtonText = 'Show advanced (optional) fields';
+            this.expandButtonIcon = 'icons:expand-more';
+        } else {
+            this.expandButtonText = 'Hide advanced (optional) fields';
+            this.expandButtonIcon = 'icons:expand-less';
+        }
+    },
+
+    toggle: function () {
+        this.$.collapse.toggle();
+        this.regionExpanded = !this.regionExpanded;
+        this.updateExpandButtonTextAndIcon(this.regionExpanded);
     },
 
     onStartDateChange: function (e) {
@@ -187,7 +209,7 @@ Polymer({
         this.location = editedItem.location;
         this.groups = editedItem.groups;
         this.$.eventDialogHeader.textContent = "Update Event";
-        this.$.saveevent.textContent = "Update";
+        this.$.saveevent.textContent = "Save";
     },
     emptyEventFields: function () {
         this.id = null;
@@ -207,10 +229,7 @@ Polymer({
         this.location = null;
         this.groups = null;
         this.eventObject = {};
-        var dialog = this.$.addEvent;
-        if (dialog) {
-            dialog.close();
-        }
+        this.closeAddEventDialog();
     },
     constructEventObject: function () {
         var obj = {};
@@ -246,6 +265,7 @@ Polymer({
         ajax.url = serviceBaseUrl + '/events/';
         ajax.headers['Version'] = '1.0';
         ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+        ajax.body = "";
         switch (this.ajaxCall) {
             case 'getEvents':
                 ajax.method = 'GET';
@@ -269,7 +289,6 @@ Polymer({
                 // TODO: Check if this.id has defined, convert this.ajaxUrl to local variable
                 // this.ajaxUrl += event.id;
                 ajax.url += event.id;
-                ajax.body = "";
                 ajax.method = 'DELETE';
                 break;
         }
@@ -277,10 +296,8 @@ Polymer({
     },
 
     handleErrorResponse: function (e) {
-        var dialog = this.$.addEvent;
-        if (dialog) {
-            dialog.close();
-        }
+        this.closeAddEventDialog();
+
 
         var errorResponse = e.detail.request.xhr.response;
         message = 'Server threw error. Check if you are logged in.';

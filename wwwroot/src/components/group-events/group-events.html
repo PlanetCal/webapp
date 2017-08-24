@@ -7,16 +7,21 @@
     margin-top: 30px;
     cursor: pointer;
   }
-  
+
   .event-icons:hover {
     color: #0FCFFF;
+  }
+
+  paper-dialog.size-position {
+    top: 0px;
   }
 </style>
 
 <dom-module id="group-events">
   <template>
+    <style include="group-events-styles"></style>
     <!-- Dialog or popup start -->
-    <paper-dialog modal id="addEvent" class="size-position">
+    <paper-dialog modal id="addEventDialog" class='size-position'>
       <h2 id="eventDialogHeader"></h2>
       <paper-dialog-scrollable>
         <div class="dialog-textbox" style="width: 600px;">
@@ -24,11 +29,6 @@
             <div id="nameFieldDiv">
               <paper-input label="Name" class="addEvent" value="{{name}}" char-counter maxlength="50" style="width: 560px;" required error-message="required"
                 on-change="validateOnChange">
-              </paper-input>
-            </div>
-            <div>
-              <paper-input label="Description" class="addEvent" value="{{description}}" aria-multiline="5" char-counter maxlength="500"
-                style="width: 560px;" required error-message="required" on-change="validateOnChange">
               </paper-input>
             </div>
             <div id="divDate" style="display: flex; width: 570px; margin-top: 10px;">
@@ -48,38 +48,42 @@
                 error-message="required" on-tap="onEndTimeChange" on-change="validateOnChange">
               </paper-input>
               <iron-icon class="event-icons" icon="icons:alarm" title="End Time" on-tap="onEndTimeChange"></iron-icon>
-
               <!--paper-input label="EndDateTime" class="addEvent" value="{{endDateTime}}" char-counter maxlength="50" style="width: 250px;"
                 required error-message="required" on-change="validateOnChange">
               </paper-input-->
             </div>
-            <div style="display: flex; width: 570px;">
-              <paper-input label="StreetNumber" class="addEvent" value="{{streetNumber}}" char-counter maxlength="15" style="width: 150px;"
-                required error-message="required" on-change="validateOnChange">
-              </paper-input>
-              <span style="width: 30px;"></span>
-              <paper-input label="StreetName" class="addEvent" value="{{streetName}}" char-counter maxlength="25" style="width: 390px;"
-                required error-message="required" on-change="validateOnChange">
-              </paper-input>
-            </div>
-            <div style="display: flex; width: 570px;">
-              <paper-input label="City" class="addEvent" value="{{city}}" char-counter maxlength="20" style="width: 180px;" required error-message="required"
-                on-change="validateOnChange">
-              </paper-input>
-              <span style="width: 30px;"></span>
-              <paper-input label="State" class="addEvent" value="{{state}}" char-counter maxlength="20" style="width: 180px;" required
-                error-message="required" on-change="validateOnChange">
-              </paper-input>
-              <span style="width: 30px;"></span>
-              <paper-input label="PostalCode" class="addEvent" value="{{postalCode}}" char-counter maxlength="10" style="width: 150px;"
-                required error-message="required" on-change="validateOnChange">
-              </paper-input>
-            </div>
-            <div>
-              <paper-input label="Location" class="addEvent" value="{{location}}" char-counter maxlength="10" required error-message="required"
-                on-change="validateOnChange">
-              </paper-input>
-            </div>
+            <paper-button class='blue' on-tap="toggle">
+              <iron-icon icon="[[expandButtonIcon]]"></iron-icon>[[expandButtonText]]</paper-button>
+            <iron-collapse id='collapse'>
+              <div>
+                <paper-input label="Description" class="addEvent" value="{{description}}" aria-multiline="5" char-counter maxlength="500"
+                  style="width: 560px;" on-change="validateOnChange">
+                </paper-input>
+              </div>
+              <div style="display: flex; width: 570px;">
+                <paper-input label="StreetNumber" class="addEvent" value="{{streetNumber}}" char-counter maxlength="15" style="width: 150px;"
+                  on-change="validateOnChange">
+                </paper-input>
+                <span style="width: 30px;"></span>
+                <paper-input label="StreetName" class="addEvent" value="{{streetName}}" char-counter maxlength="25" style="width: 390px;"
+                  on-change="validateOnChange">
+                </paper-input>
+              </div>
+              <div style="display: flex; width: 570px;">
+                <paper-input label="City" class="addEvent" value="{{city}}" char-counter maxlength="20" style="width: 180px;" on-change="validateOnChange">
+                </paper-input>
+                <span style="width: 30px;"></span>
+                <paper-input label="State" class="addEvent" value="{{state}}" char-counter maxlength="20" style="width: 180px;" on-change="validateOnChange">
+                </paper-input>
+                <span style="width: 30px;"></span>
+                <paper-input label="PostalCode" class="addEvent" value="{{postalCode}}" char-counter maxlength="10" style="width: 150px;"
+                  on-change="validateOnChange">
+                </paper-input>
+              </div>
+              <div>
+                <paper-input label="Location" class="addEvent" value="{{location}}" char-counter maxlength="10" on-change="validateOnChange">
+                </paper-input>
+              </div>
           </fieldset>
         </div>
       </paper-dialog-scrollable>
@@ -121,7 +125,6 @@
     <!-- Dialog for Date time picker - end -->
     <!-- Dialog or popup End -->
     <!-- List of Buttons start -->
-    <style include="group-events-styles"></style>
     <div id="msg">[[messageText]]</div>
     <div>
       <iron-icon icon="icons:delete-sweep" class="delete-icon" title="Delete selected" on-tap="deleteEvents"></iron-icon>
@@ -152,7 +155,7 @@
           <input aria-label="Select Row" type="checkbox" on-change="selectItem" checked="[[isSelected(inverted, selected)]]">
         </template>
       </vaadin-grid-column>
-      <vaadin-grid-column width="30%">
+      <vaadin-grid-column width="27%">
         <template class="header">Name</template>
         <template>
           [[item.name]]
@@ -172,15 +175,16 @@
           <div>[[formatTime(item.endDateTime)]]</div>
         </template>
       </vaadin-grid-column>
-      <vaadin-grid-column width="25%">
+      <vaadin-grid-column width="20%">
         <template class="header">Address</template>
         <template>
           [[item.address.streetNumber]] [[item.address.streetName]], [[item.address.city]], <br> [[item.address.state]],
           [[item.address.postalCode]]
         </template>
       </vaadin-grid-column>
-      <vaadin-grid-column width="7%">
-        <template class="header">Action</template>
+      </iron-collapse>
+      <vaadin-grid-column width="10%">
+        <template class="header">Actions</template>
         <template>
           <div>
             <iron-icon icon="icons:create" class="grid-icon" title="Edit" on-tap="editEvent"></iron-icon>
