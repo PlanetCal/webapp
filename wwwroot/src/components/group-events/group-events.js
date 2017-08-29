@@ -14,7 +14,23 @@ Polymer({
     pageLoad: function () {
         this.fire("status-message-update");
         var nameFieldDiv = this.$.nameFieldDiv;
+        var editedGroup = Polymer.globalsManager.globals.editedGroup;
+        if (!editedGroup) {
+            this.getGroup(this.groupId);
+        }
+        else {
+            this.populateGroupDetails(editedGroup);
+        }
+    },
+    populateGroupDetails: function (editedGroup) {
+        this.$.groupName.textContent = editedGroup.name;
+        this.$.groupDesc.textContent = editedGroup.description;
         this.loadEvents();
+    },
+    getGroup: function (groupId) {
+        this.ajaxCall = 'getGroup';
+        this.fire("status-message-update", { severity: 'info', message: 'Getting group in progress...' });
+        this.makeAjaxCall();
     },
     validate: function () {
         var elements = document.getElementsByClassName('addEvent');
@@ -172,11 +188,6 @@ Polymer({
     cancelEvent: function (e) {
         this.emptyEventFields();
     },
-
-    deleteEvents: function () {
-        var grid = this.$.grid;
-        //this.makeAjaxCall(grid.selectedItems);
-    },
     deleteEvent: function (e) {
         e.preventDefault();
         this.ajaxCall = 'deleteEvents';
@@ -267,13 +278,17 @@ Polymer({
         ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
         ajax.body = "";
         switch (this.ajaxCall) {
+            case 'getGroup':
+                ajax.method = 'GET';
+                ajax.url = serviceBaseUrl + '/groups/' + this.groupId + '?fields=name|description';
+                break;
             case 'getEvents':
                 ajax.method = 'GET';
-                ajax.url += fields + '&groupids=' + this.groupId + '&filter=startDateTime>=' + currentDate; // + '$AND$startDateTime<=' + 2017 - 09 - 20;
+                ajax.url += fields + '&groupids=' + this.groupId + '&filter=endDateTime>=' + currentDate;
                 break;
             case 'getPastEvents':
                 ajax.method = 'GET';
-                ajax.url += fields + '&groupids=' + this.groupId + '&filter=startDateTime<' + currentDate; + '$AND$startDateTime>=' + pastDate;
+                ajax.url += fields + '&groupids=' + this.groupId + '&filter=endDateTime<' + currentDate; + '$AND$endDateTime>=' + pastDate;
                 break;
             case 'postEvents':
                 ajax.body = JSON.stringify(event);
@@ -322,6 +337,10 @@ Polymer({
 
     handleAjaxResponse: function (event) {
         switch (this.ajaxCall) {
+            case 'getGroup':
+                this.groupObject = event.detail.response;
+                this.populateGroupDetails(this.groupObject);
+                break;
             case 'getEvents':
             case 'getPastEvents':
                 this.items = event.detail.response;

@@ -7,11 +7,11 @@
     margin-top: 30px;
     cursor: pointer;
   }
-
+  
   .event-icons:hover {
     color: #0FCFFF;
   }
-
+  
   paper-dialog.size-position {
     top: 0px;
   }
@@ -126,8 +126,12 @@
     <!-- Dialog or popup End -->
     <!-- List of Buttons start -->
     <div id="msg">[[messageText]]</div>
-    <div>
-      <iron-icon icon="icons:delete-sweep" class="delete-icon" title="Delete selected" on-tap="deleteEvents"></iron-icon>
+    <div class="blueText" style="margin-top: 20px; margin-left: 10px;">
+      <span><b>Group Name: </b></span> <span id="groupName"></span><br>
+      <span><b>Group Description: </b></span> <span id="groupDesc"></span><br>
+    </div>
+    <div style="margin-top: 20px;">
+      <iron-icon icon="icons:delete-sweep" style="visibility: hidden" class="delete-icon" title="Delete selected"></iron-icon>
       <paper-button id="btnUpcoming" class="blue" on-tap="loadEvents">Upcoming</paper-button>
       <paper-button id="btnPast" class="blue" on-tap="pastEvents">past</paper-button>
       <paper-button raised class="indigo" on-tap="showDialog">Add Event</paper-button>

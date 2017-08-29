@@ -110,12 +110,18 @@ Polymer({
         this.id = editedGroup.id;
         this.name = editedGroup.name;
         this.description = editedGroup.description;
+        if (!editedGroup.address) {
+            editedGroup.address = {};
+        }
         this.streetNumber = editedGroup.address.streetNumber;
         this.streetName = editedGroup.address.streetName;
         this.city = editedGroup.address.city;
         this.state = editedGroup.address.state;
         this.postalCode = editedGroup.address.postalCode;
         this.location = editedGroup.location;
+        if (!editedGroup.contact) {
+            editedGroup.contact = {};
+        }
         this.phone = editedGroup.contact.phone;
         this.email = editedGroup.contact.email;
         this.website = editedGroup.webSite;
