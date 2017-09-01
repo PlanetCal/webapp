@@ -84,6 +84,23 @@
                 <paper-input label="Location" class="addEvent" value="{{location}}" char-counter maxlength="10" on-change="validateOnChange">
                 </paper-input>
               </div>
+              <div style="display: flex;">
+                <img id="previewImage" src="{{previewSrc}}" width="50" height="50" style="vertical-align: top;" />
+                <iron-icon class="icon-edit" icon="icons:file-upload" title="Edit" on-tap="editImage"></iron-icon>
+                <span id="imageUploadInstructions" style="margin-left: 5%; vertical-align: top; text-align: left;">
+                  <h3>Instructions for group image upload: </h3>
+                  <ul>
+                    <li>Image size can maximum be 2MB</li>
+                    <li>Recommended width and height of image is 50 X 50</li>
+                    <li>Size more than 50 X 50 will be reset to this size</li>
+                  </ul>
+                </span>
+              </div>
+              <div>
+                <div style="vertical-align: top; visibility: hidden; margin-top: -45px;">
+                  <paper-input type="file" label="Upload Image" id="eventsImage" on-change="previewImage" style="vertical-align: top;" accept="image/*"></paper-input>
+                </div>
+              </div>
           </fieldset>
         </div>
       </paper-dialog-scrollable>

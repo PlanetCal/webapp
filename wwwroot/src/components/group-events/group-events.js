@@ -219,6 +219,8 @@ Polymer({
         this.postalCode = editedItem.address.postalCode;
         this.location = editedItem.location;
         this.groups = editedItem.groups;
+        //this.icon = editedItem.icon;
+        this.previewSrc = editedItem.icon;
         this.$.eventDialogHeader.textContent = "Update Event";
         this.$.saveevent.textContent = "Save";
     },
@@ -239,6 +241,8 @@ Polymer({
         this.postalCode = null;
         this.location = null;
         this.groups = null;
+        this.icon = null;
+        this.previewSrc = '';
         this.eventObject = {};
         this.closeAddEventDialog();
     },
@@ -259,6 +263,8 @@ Polymer({
         obj.address.postalCode = this.postalCode;
         obj.location = this.location;
         obj.groups = [this.groupId];
+        if (!this.isEventsImageChanged)
+            obj.icon = this.previewSrc;
         return obj;
     },
     makeAjaxCall: function (event = null) {
@@ -272,8 +278,9 @@ Polymer({
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
         var currentDate = moment().format("YYYY-MM-DD");
         var pastDate = moment().subtract(90, 'day').format("YYYY-MM-DD");
-        var fields = '?fields=name|description|startDateTime|endDateTime|address|location|groups'
+        var fields = '?fields=name|description|startDateTime|endDateTime|address|location|groups|icon'
         ajax.url = serviceBaseUrl + '/events/';
+        ajax.contentType = 'application/json';
         ajax.headers['Version'] = '1.0';
         ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
         ajax.body = "";
@@ -305,6 +312,23 @@ Polymer({
                 // this.ajaxUrl += event.id;
                 ajax.url += event.id;
                 ajax.method = 'DELETE';
+                break;
+            case 'eventsImage':
+                var data = new FormData();
+                var file = this.$.eventsImage.$.input.files[0];
+                var fileName = this.eventObject.id + '.jpg';
+                var dataURL = this.resizeImageSelection(file);
+                data.append(fileName, dataURL);
+                ajax.url = serviceBaseUrl + '/blob/';
+                ajax.body = data;
+                ajax.contentType = undefined;
+                ajax.method = 'POST';
+                ajax.headers['Version'] = '1.0';
+                if (loggedInUser) {
+                    ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+                }
+                ajax.headers['eventid'] = this.eventObject.id;
+                this.fire("status-message-update", { severity: 'info', message: 'Image upload in progress...' });
                 break;
         }
         ajax.generateRequest();
@@ -350,17 +374,33 @@ Polymer({
             case 'postEvents':
                 this.eventObject.id = event.detail.response.id;
                 this.items.push(this.eventObject);
-                this.populateGrid();
+                if (this.isEventsImageChanged) {
+                    this.uploadImage();
+                    this.isEventsImageChanged = false;
+                }
+                else {
+                    this.populateGrid();
+                }
                 break;
             case 'putEvents':
                 var index = this.items.findIndex(e => e.id === this.eventObject.id);
                 this.items[index] = this.eventObject;
-                this.populateGrid();
+                if (this.isEventsImageChanged) {
+                    this.uploadImage();
+                    this.isEventsImageChanged = false;
+                }
+                else {
+                    this.fire("status-message-update");
+                    this.populateGrid();
+                }
                 break;
             case 'deleteEvents':
                 var index = this.items.findIndex(e => e.id === this.eventObject.id);
                 this.items.splice(index, 1);
                 this.populateGrid();
+                break;
+            case 'eventsImage':
+                this.updateImageURL(event.detail.response.url);
                 break;
         }
     },
@@ -372,8 +412,11 @@ Polymer({
     populateGrid: function () {
         this.emptyGrid();
         var grid = this.$.grid;
-        grid.size = this.items.length;
-        grid.items = this.items;
+        if (this.items.length) {
+            grid.size = this.items.length;
+            grid.items = this.items;
+        }
+
         this.emptyEventFields();
         this.$.grid.style.display = '';
 
@@ -433,5 +476,84 @@ Polymer({
             returnValue += 'Name: ' + group.Name + '<br>' + 'WebSite: <a href =' + group.WebSite + '>' + group.WebSite + '</a>';
         });
         return returnValue;
-    }
+    },
+    editImage: function () {
+        this.$.eventsImage.$.input.click();
+    },
+    uploadImage: function () {
+        this.ajaxCall = 'eventsImage';
+        this.makeAjaxCall();
+    },
+    updateImageURL: function (imageURL) {
+        this.ajaxCall = 'putEvents';
+        this.eventObject.icon = imageURL;
+        this.fire("status-message-update", { severity: 'info', message: 'Events save in progress...' });
+        this.makeAjaxCall(this.eventObject);
+    },
+    previewImage: function (e) {
+        var inputElement = e.target.inputElement;
+        if (inputElement.files && inputElement.files.length > 0) {
+            if (this.isValidFileType(inputElement.files[0].type)) {
+                var output = inputElement.files[0];
+                this.displayContents(output);
+                this.isEventsImageChanged = true;
+            }
+            else {
+                inputElement.value = '';
+                this.fire("status-message-update", { severity: 'error', message: 'Invalid file type selected. Please select an image to upload.' });
+            }
+        }
+        else if (this.isEventsImageChanged) {
+            this.previewSrc = '';
+        }
+    },
+    displayContents: function (output) {
+        this.previewSrc = window.URL.createObjectURL(output);
+    },
+    resizeImageSelection: function (file) {
+        var myURL = window.URL || window.webkitURL;
+        var img = this.$.previewImage;
+        var imageWidth = 50, imageHeight = 50;
+        img.width = imageWidth;
+        img.height = imageHeight;
+
+        var canvas = document.createElement('canvas');
+        canvas.width = imageWidth;
+        canvas.height = imageHeight;
+
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        var dataUrl = canvas.toDataURL('image/jpeg');
+        return this.dataURLToBlob(dataUrl);
+    },
+    dataURLToBlob: function (dataURL) {
+        var BASE64_MARKER = ';base64,';
+        if (dataURL.indexOf(BASE64_MARKER) == -1) {
+            var parts = dataURL.split(',');
+            var contentType = parts[0].split(':')[1];
+            var raw = parts[1];
+
+            return new Blob([raw], { type: contentType });
+        }
+        var parts = dataURL.split(BASE64_MARKER);
+        var contentType = parts[0].split(':')[1];
+        var raw = window.atob(parts[1]);
+        var rawLength = raw.length;
+
+        var uInt8Array = new Uint8Array(rawLength);
+
+        for (var i = 0; i < rawLength; ++i) {
+            uInt8Array[i] = raw.charCodeAt(i);
+        }
+        return new Blob([uInt8Array], { type: contentType });
+    },
+    isValidFileType: function (fileType) {
+        if (fileType == 'image/jpg' || fileType == 'image/jpeg' || fileType == 'image/bmp' || fileType == 'image/png') {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
 });
