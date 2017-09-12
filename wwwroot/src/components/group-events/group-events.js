@@ -26,6 +26,29 @@ Polymer({
         this.$.groupName.textContent = editedGroup.name;
         this.$.groupDesc.textContent = editedGroup.description;
         this.loadEvents();
+        this.isAddEventsAllowed(editedGroup);
+    },
+    isAddEventsAllowed: function (groupDetail) {
+        var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+        this.isCurrentUserGroupOwnerOrAdmin = this.isUserGroupOwnerOrAdmin(loggedInUser, groupDetail);
+        if (groupDetail && loggedInUser && this.isCurrentUserGroupOwnerOrAdmin) {
+            this.$.btnAddEvent.style.display = '';
+        }
+        else {
+            this.$.btnAddEvent.style.display = 'none';
+        }
+    },
+    isUserGroupOwnerOrAdmin: function (loggedInUser, groupDetail) {
+        if (loggedInUser && groupDetail && groupDetail.createdBy
+            && (loggedInUser.id == groupDetail.createdBy
+                || (groupDetail.administrators
+                    && groupDetail.administrators.indexOf(loggedInUser.email)))) {
+            return true;
+        }
+        return false;
+    },
+    hideEditDeleteButton: function (event) {
+        return this.isCurrentUserGroupOwnerOrAdmin ? 'showEditDeleteButton' : 'displayNone';
     },
     getGroup: function (groupId) {
         this.ajaxCall = 'getGroup';
@@ -287,7 +310,7 @@ Polymer({
         switch (this.ajaxCall) {
             case 'getGroup':
                 ajax.method = 'GET';
-                ajax.url = serviceBaseUrl + '/groups/' + this.groupId + '?fields=name|description';
+                ajax.url = serviceBaseUrl + '/groups/' + this.groupId + '?fields=name|description|owner|administrators';
                 break;
             case 'getEvents':
                 ajax.method = 'GET';
@@ -363,6 +386,7 @@ Polymer({
         switch (this.ajaxCall) {
             case 'getGroup':
                 this.groupObject = event.detail.response;
+                this.groupObject.createdBy = this.groupObject.owner ? this.groupObject.owner : 'Not Owner';
                 this.populateGroupDetails(this.groupObject);
                 break;
             case 'getEvents':

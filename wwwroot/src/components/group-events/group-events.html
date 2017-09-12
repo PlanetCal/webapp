@@ -151,7 +151,7 @@
       <iron-icon icon="icons:delete-sweep" style="visibility: hidden" class="delete-icon" title="Delete selected"></iron-icon>
       <paper-button id="btnUpcoming" class="blue" on-tap="loadEvents">Upcoming</paper-button>
       <paper-button id="btnPast" class="blue" on-tap="pastEvents">past</paper-button>
-      <paper-button raised class="indigo" on-tap="showDialog">Add Event</paper-button>
+      <paper-button id="btnAddEvent" raised class="indigo" on-tap="showDialog">Add Event</paper-button>
     </div>
     <!-- List of Buttons End -->
     <!--template is="dom-if" if="{{isLoading}}">
@@ -208,8 +208,8 @@
         <template class="header">Actions</template>
         <template>
           <div>
-            <iron-icon icon="icons:create" class="grid-icon" title="Edit" on-tap="editEvent"></iron-icon>
-            <iron-icon icon="icons:delete" class="grid-icon" title="Delete" on-tap="deleteEvent"></iron-icon>
+            <iron-icon icon="icons:create" class$="grid-icon [[hideEditDeleteButton(item)]]" title="Edit" on-tap="editEvent"></iron-icon>
+            <iron-icon icon="icons:delete" class$="grid-icon [[hideEditDeleteButton(item)]]" title="Delete" on-tap="deleteEvent"></iron-icon>
           </div>
         </template>
       </vaadin-grid-column>
