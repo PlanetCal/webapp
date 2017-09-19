@@ -14,9 +14,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-    ]
+    "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
     "id": "57C61D01-2A7D-4866-868E-CF877017DCBB",
@@ -33,9 +31,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-    ]
+    "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
     "id": "3C97FD04-8AEE-4A00-8CC2-EEDAEF83B4B5",
@@ -52,9 +48,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-    ]
+    "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
     "id": "11CD2CC4-BC17-4E01-AA8F-A29EF2545DDD",
@@ -71,9 +65,7 @@
       "state": "WA",
       "postalCode": "98021"
     },
-    "groups": [
-      "014E3830-C373-4890-9C84-8362B8F5996B"
-    ]
+    "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
     "id": "51440EAC-1327-45AD-96DA-D1FB7F7E95C3",
@@ -90,9 +82,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-    ]
+    "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
     "id": "15686448-80FE-4BAC-B9C1-53C8C5B7622D",
@@ -109,9 +99,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-    ]
+    "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
     "id": "52069888-215C-48B8-831E-9B5E84B47AB8",
@@ -128,9 +116,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-    ]
+    "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
     "id": "98BB3ED2-BEB7-48FF-90E9-66B7C4FB0C73",
@@ -147,9 +133,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-    ]
+    "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
     "id": "D6949C09-57AE-416B-AF02-A7073881BA05",
@@ -166,9 +150,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-    ]
+    "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
     "id": "E4A12C19-E02F-4EFB-8A7B-1BE1F0CE7E7B",
@@ -185,9 +167,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-    ]
+    "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
     "id": "74CEDC46-12AC-49F0-9E81-B8885EA4A8C2",
@@ -204,9 +184,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-    ]
+    "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
     "id": "B4D1BBA2-F136-417E-8085-6401D5EC17CE",
@@ -223,9 +201,7 @@
       "state": "WA",
       "postalCode": "98021"
     },
-    "groups": [
-      "014E3830-C373-4890-9C84-8362B8F5996B"
-    ]
+    "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
     "id": "5DED024E-2046-49F4-8538-527ED089F1FB",
@@ -242,9 +218,7 @@
       "state": "WA",
       "postalCode": "98021"
     },
-    "groups": [
-      "014E3830-C373-4890-9C84-8362B8F5996B"
-    ]
+    "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
     "id": "A367CDAE-50FF-41B4-8196-439B7826553F",
@@ -261,9 +235,7 @@
       "state": "WA",
       "postalCode": "98021"
     },
-    "groups": [
-      "014E3830-C373-4890-9C84-8362B8F5996B"
-    ]
+    "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
     "id": "FE8D34E5-F423-4816-87BB-54F3A55CFC4C",
@@ -280,9 +252,7 @@
       "state": "WA",
       "postalCode": "98021"
     },
-    "groups": [
-      "014E3830-C373-4890-9C84-8362B8F5996B"
-    ]
+    "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
     "id": "3690565F-B0F2-4E3D-992A-BFA8AE41F64A",
@@ -299,9 +269,7 @@
       "state": "WA",
       "postalCode": "98021"
     },
-    "groups": [
-      "014E3830-C373-4890-9C84-8362B8F5996B"
-    ]
+    "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
     "id": "26209C45-FE26-4EDA-BCE0-ED104F6D8A14",
@@ -318,9 +286,7 @@
       "state": "WA",
       "postalCode": "98021"
     },
-    "groups": [
-      "014E3830-C373-4890-9C84-8362B8F5996B"
-    ]
+    "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
     "id": "2A8DFBE0-CBEC-447F-9D63-2A4623D84256",
@@ -337,9 +303,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-    ]
+    "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
     "id": "247DF22F-D0AE-4014-B953-A291F5BB22C2",
@@ -356,9 +320,7 @@
       "state": "WA",
       "postalCode": "98021"
     },
-    "groups": [
-      "014E3830-C373-4890-9C84-8362B8F5996B"
-    ]
+    "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
     "id": "FFDC7839-18CD-4107-B585-A63205B6218D",
@@ -374,9 +336,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-    ]
+    "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
     "id": "94A5D655-8ADE-4AC8-A0B3-4C45E254365C",
@@ -393,9 +353,7 @@
       "state": "WA",
       "postalCode": "98007"
     },
-    "groups": [
-      "9BCE12F5-0D43-47CD-AB31-E8D0D531A93F"
-    ]
+    "groupId": "9BCE12F5-0D43-47CD-AB31-E8D0D531A93F"
   },
   {
     "id": "CF6138CE-A2F5-45E8-87B0-CC508E28F56C",
@@ -412,9 +370,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-    ]
+    "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
     "id": "81C1F091-980E-48B0-9A9E-B75884F12F09",
@@ -431,9 +387,7 @@
       "state": "WA",
       "postalCode": "98021"
     },
-    "groups": [
-      "014E3830-C373-4890-9C84-8362B8F5996B"
-    ]
+    "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
     "id": "070EC086-8DBB-4184-8C87-46D5F7B7D529",
@@ -450,9 +404,7 @@
       "state": "WA",
       "postalCode": "98027"
     },
-    "groups": [
-      "4FEBD44D-4637-4545-84AD-D12C819C8773"
-    ]
+    "groupId": "4FEBD44D-4637-4545-84AD-D12C819C8773"
   },
   {
     "id": "32331752-333F-423C-9C47-D5E63E08FA8C",
@@ -468,9 +420,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "FCC4B6F4-56AF-429C-9812-38284B4DA429"
-    ]
+    "groupId": "FCC4B6F4-56AF-429C-9812-38284B4DA429"
   },
   {
     "id": "32331752-333F-423C-9C47-D5E63E08FA8D",
@@ -486,9 +436,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "FCC4B6F4-56AF-429C-9812-38284B4DA429"
-    ]
+    "groupId": "FCC4B6F4-56AF-429C-9812-38284B4DA429"
   },
   {
     "id": "8DA4DDF8-0C6F-4736-B500-57802604C3A7",
@@ -504,9 +452,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "FCC4B6F4-56AF-429C-9812-38284B4DA429"
-    ]
+    "groupId": "FCC4B6F4-56AF-429C-9812-38284B4DA429"
   },
   {
     "id": "B90B185C-364E-491F-AB40-0C1A7104BABB",
@@ -523,9 +469,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-    ]
+    "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
     "id": "FA9A1DC3-7DA1-4DA7-BA90-281ED94E22CA",
@@ -542,9 +486,7 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "014E3830-C373-4890-9C84-8362B8F5996B"
-    ]
+    "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
     "id": "54A17A49-84E4-40B8-8636-21443BC3420A",
@@ -561,9 +503,7 @@
       "state": "WA",
       "postalCode": "98027"
     },
-    "groups": [
-      "4FEBD44D-4637-4545-84AD-D12C819C8773"
-    ]
+    "groupId": "4FEBD44D-4637-4545-84AD-D12C819C8773"
   },
   {
     "id": "D2A5F158-3293-436E-8B70-AC8941131B3A",
@@ -579,9 +519,7 @@
       "state": "WA",
       "postalCode": "98007"
     },
-    "groups": [
-      "9BCE12F5-0D43-47CD-AB31-E8D0D531A93F"
-    ]
+    "groupId": "9BCE12F5-0D43-47CD-AB31-E8D0D531A93F"
   },
   {
     "id": "E01C9D32-5A39-471F-8AD0-1A7C8C038CE3",
@@ -598,8 +536,5 @@
       "state": "WA",
       "postalCode": "98052"
     },
-    "groups": [
-      "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-    ]
+    "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   }
-]

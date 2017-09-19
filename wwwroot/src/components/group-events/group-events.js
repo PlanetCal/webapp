@@ -241,7 +241,7 @@ Polymer({
         this.state = editedItem.address.state;
         this.postalCode = editedItem.address.postalCode;
         this.location = editedItem.location;
-        this.groups = editedItem.groups;
+        this.groupId = editedItem.groupId;
         //this.icon = editedItem.icon;
         this.previewSrc = editedItem.icon;
         this.$.eventDialogHeader.textContent = "Update Event";
@@ -263,7 +263,6 @@ Polymer({
         this.state = null;
         this.postalCode = null;
         this.location = null;
-        this.groups = null;
         this.icon = null;
         this.previewSrc = '';
         this.eventObject = {};
@@ -285,7 +284,7 @@ Polymer({
         obj.address.state = this.state;
         obj.address.postalCode = this.postalCode;
         obj.location = this.location;
-        obj.groups = [this.groupId];
+        obj.groupId = this.groupId;
         if (!this.isEventsImageChanged)
             obj.icon = this.previewSrc;
         return obj;
@@ -301,7 +300,7 @@ Polymer({
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
         var currentDate = moment().format("YYYY-MM-DD");
         var pastDate = moment().subtract(90, 'day').format("YYYY-MM-DD");
-        var fields = '?fields=name|description|startDateTime|endDateTime|address|location|groups|icon'
+        var eventFields = '?fields=name|description|startDateTime|endDateTime|address|location|groupId|icon'
         ajax.url = serviceBaseUrl + '/events/';
         ajax.contentType = 'application/json';
         ajax.headers['Version'] = '1.0';
@@ -314,11 +313,11 @@ Polymer({
                 break;
             case 'getEvents':
                 ajax.method = 'GET';
-                ajax.url += fields + '&groupids=' + this.groupId + '&filter=endDateTime>=' + currentDate;
+                ajax.url += eventFields + '&groupids=' + this.groupId + '&filter=endDateTime>=' + currentDate;
                 break;
             case 'getPastEvents':
                 ajax.method = 'GET';
-                ajax.url += fields + '&groupids=' + this.groupId + '&filter=endDateTime<' + currentDate; + '$AND$endDateTime>=' + pastDate;
+                ajax.url += eventFields + '&groupids=' + this.groupId + '&filter=endDateTime<' + currentDate; + '$AND$endDateTime>=' + pastDate;
                 break;
             case 'postEvents':
                 ajax.body = JSON.stringify(event);
