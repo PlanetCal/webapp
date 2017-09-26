@@ -41,7 +41,7 @@ Polymer({
     isUserGroupOwnerOrAdmin: function (loggedInUser, groupDetail) {
         if (loggedInUser && groupDetail && groupDetail.createdBy
             && (loggedInUser.id == groupDetail.createdBy
-                || (groupDetail.administrators
+                || (groupDetail.administrators && groupDetail.administrators.length > 0
                     && groupDetail.administrators.indexOf(loggedInUser.email)))) {
             return true;
         }
@@ -309,7 +309,7 @@ Polymer({
         switch (this.ajaxCall) {
             case 'getGroup':
                 ajax.method = 'GET';
-                ajax.url = serviceBaseUrl + '/groups/' + this.groupId + '?fields=name|description|owner|administrators';
+                ajax.url = serviceBaseUrl + '/groups/' + this.groupId + '?fields=name|description|createdBy|administrators';
                 break;
             case 'getEvents':
                 ajax.method = 'GET';
@@ -385,7 +385,8 @@ Polymer({
         switch (this.ajaxCall) {
             case 'getGroup':
                 this.groupObject = event.detail.response;
-                this.groupObject.createdBy = this.groupObject.owner ? this.groupObject.owner : 'Not Owner';
+                this.groupObject.createdBy = this.groupObject.createdBy ? this.groupObject.owner : 'Not Owner';
+                this.groupObject.administrators = this.groupObject.administrators ? this.groupObject.administrators : ['Not Admin'];
                 this.populateGroupDetails(this.groupObject);
                 break;
             case 'getEvents':
