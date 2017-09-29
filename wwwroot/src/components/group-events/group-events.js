@@ -61,6 +61,7 @@ Polymer({
         elements[0].invalid = false;
     },
     dialogTest: function (element) {
+        this.$.dialogTestHeader.textContent = "Add Event";
         this.$.dialogTest.open();
     },
     addEventToGrid: function () {

@@ -1,17 +1,6 @@
 <link rel="import" href="/src/polymer-refs.html">
 <link rel="import" href="./group-events-styles.html">
 <style>
-  .event-icons {
-    color: #007e9e;
-    margin-left: 5px;
-    margin-top: 30px;
-    cursor: pointer;
-  }
-
-  .event-icons:hover {
-    color: #0FCFFF;
-  }
-
   paper-dialog.size-position {
     top: 0px;
   }
@@ -127,9 +116,8 @@
 
 
     <paper-dialog class='size-position' id="dialogTest">
-      <h2 class='test'>Greetings testers</h2>
+      <h2 class='test' id="dialogTestHeader"></h2>
       <paper-dialog-scrollable>
-        <p>This is where you will test testy stuff</p>
         <div class="dialog-textbox" style="width: 600px;">
           <fieldset>
             <div id="nameFieldDiv">
@@ -154,10 +142,10 @@
                 error-message="required" on-tap="onEndTimeChange" on-change="validateOnChange">
               </paper-input>
               <iron-icon class="event-icons" icon="icons:alarm" title="End Time" on-tap="onEndTimeChange"></iron-icon>
-              <!--paper-input label="EndDateTime" class="addEvent" value="{{endDateTime}}" char-counter maxlength="50" style="width: 250px;"
-                required error-message="required" on-change="validateOnChange">
-              </paper-input-->
             </div>
+
+            <!--this is where the collapsable things start-->
+
             <paper-button class='blue' on-tap="toggle">
               <iron-icon icon="[[expandButtonIcon]]"></iron-icon>[[expandButtonText]]</paper-button>
             <iron-collapse id='collapse'>
