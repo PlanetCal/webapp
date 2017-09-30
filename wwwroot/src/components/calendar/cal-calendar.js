@@ -88,10 +88,11 @@ Polymer({
 
     tomorrowhandler: function () {
         var today = new Date();
-        this._month = today.getMonth(); //January is 0!
-        this._year = today.getFullYear();
+        var tomorrow = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+        this._month = tomorrow.getMonth(); //January is 0!
+        this._year = tomorrow.getFullYear();
 
-        this.selectDateAndDrawCalendar(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+        this.selectDateAndDrawCalendar(this._year, this._month, tomorrow.getDate());
     },
 
     backhandler: function () {
