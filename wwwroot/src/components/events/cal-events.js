@@ -117,28 +117,25 @@ Polymer({
     ajax.headers['Version'] = '1.0';
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
 
+    var queryMonth = Number.parseInt(this.selectedMonth);
+    var queryDay = Number.parseInt(this.selectedDay);
+    var queryMonthString = (queryMonth > 9) ? queryMonth.toString() : '0' + this.selectedMonth.toString();
+    var queryDayString = (queryDay > 9) ? queryDay.toString() : '0' + queryDay.toString();
+    var queryDateTimeFilter = '?filter=endDateTime>=' + this.selectedYear + '-' + queryMonthString + '-' + queryDayString;
+
     if (loggedInUser) {
       ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
       this.ajaxUrl = serviceBaseUrl + '/events';
-      this.ajaxUrl += '?fields=name|description|startDateTime|endDateTime|address|location|groupId|icon';
-
-      //var querydateTime = new Date(this.selectedYear, this.selectedMonth - 1, this.selectedDay);
-      var queryMonth = Number.parseInt(this.selectedMonth);
-      var queryDay = Number.parseInt(this.selectedDay);
-
-      var queryMonthString = (queryMonth > 9) ? queryMonth.toString() : '0' + this.selectedMonth.toString();
-      var queryDayString = (queryDay > 9) ? queryDay.toString() : '0' + queryDay.toString();
-
-      var queryDateTimeString = this.selectedYear + '-' + queryMonthString + '-' + queryDayString;
-
-      this.ajaxUrl += '&filter=endDateTime>=' + queryDateTimeString;
     }
     else {
       this.ajaxUrl = serviceBaseUrl + '/eventsanonymous';
     }
+
+    this.ajaxUrl += queryDateTimeFilter;
+    this.ajaxUrl += '&fields=name|description|startDateTime|endDateTime|address|location|groupId|icon';
+
     this.fire("status-message-update", { severity: 'info', message: 'Loading events from server ...' });
     ajax.generateRequest();
-
   },
 
   handleErrorResponse: function (e) {
