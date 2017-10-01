@@ -78,10 +78,9 @@ Polymer({
       this.selectedMonth = selectedDate.month;
       this.selectedYear = selectedDate.year;
 
-      if (selectedDate !== this._currentSelectedDate) {
-        dateChanged = true;
-      }
+      dateChanged = !this.areDatesEqual(selectedDate, this._currentSelectedDate);
     }
+
     this._currentSelectedDate = selectedDate;
 
     var loggedinUserChanged = false;
@@ -100,16 +99,42 @@ Polymer({
     }
   },
 
+  areDatesEqual(date1, date2) {
+
+    if (!date1 || !date2) {
+      return false;
+    }
+
+    return date1.day == date2.day &&
+      date1.month == date2.month &&
+      date1.year == date2.year;
+  },
+
   makeAjaxCall: function () {
     var ajax = this.$.ajax;
     var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
-    this.ajaxUrl = serviceBaseUrl + '/events';
     ajax.method = 'GET';
     ajax.headers['Version'] = '1.0';
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
 
     if (loggedInUser) {
       ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
+      this.ajaxUrl = serviceBaseUrl + '/events';
+      this.ajaxUrl += '?fields=name|description|startDateTime|endDateTime|address|location|groupId|icon';
+
+      //var querydateTime = new Date(this.selectedYear, this.selectedMonth - 1, this.selectedDay);
+      var queryMonth = Number.parseInt(this.selectedMonth);
+      var queryDay = Number.parseInt(this.selectedDay);
+
+      var queryMonthString = (queryMonth > 9) ? queryMonth.toString() : '0' + this.selectedMonth.toString();
+      var queryDayString = (queryDay > 9) ? queryDay.toString() : '0' + queryDay.toString();
+
+      var queryDateTimeString = this.selectedYear + '-' + queryMonthString + '-' + queryDayString;
+
+      this.ajaxUrl += '&filter=endDateTime>=' + queryDateTimeString;
+    }
+    else {
+      this.ajaxUrl = serviceBaseUrl + '/eventsanonymous';
     }
     this.fire("status-message-update", { severity: 'info', message: 'Loading events from server ...' });
     ajax.generateRequest();
