@@ -173,7 +173,7 @@ Polymer({
         break;
       case 'findPassword':
       case 'createAccount':
-        this.fire("status-message-update", { severity: 'info', message: 'Emailing you the link to validate. Please complete the process, and come back to login.' });
+        this.fire("status-message-update", { severity: 'info', message: 'Emailed you the validation link. Please follow the steps in your email.' });
         break;
     }
   },
