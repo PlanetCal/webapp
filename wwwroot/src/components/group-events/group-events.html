@@ -2,14 +2,24 @@
 <link rel="import" href="./group-events-styles.html">
 <style>
   .event-icons {
-    color: #007e9e;
+    color: #145;
     margin-left: 5px;
     margin-top: 30px;
     cursor: pointer;
   }
   
   .event-icons:hover {
-    color: #0FCFFF;
+    color: #367;
+  }
+  
+  .action-icons {
+    color: #256;
+    width: auto;
+    --paper-button-ink-color: #256;
+  }
+  
+  .action-icons:hover {
+    background-color: #9cd;
   }
   
   paper-dialog.size-position {
@@ -86,7 +96,7 @@
               </div>
               <div style="display: flex;">
                 <img id="previewImage" src="{{previewSrc}}" width="50" height="50" style="vertical-align: top;" />
-                <iron-icon class="icon-edit" icon="icons:file-upload" title="Edit" on-tap="editImage"></iron-icon>
+                <iron-icon class="event-icons" icon="icons:file-upload" title="Upload Event Icon" on-tap="editImage"></iron-icon>
                 <span id="imageUploadInstructions" style="margin-left: 5%; vertical-align: top; text-align: left;">
                   <h3>Instructions for group image upload: </h3>
                   <ul>
@@ -105,8 +115,10 @@
         </div>
       </paper-dialog-scrollable>
       <div class="buttons">
-        <paper-button id="cancelevent" on-tap="cancelEvent">Cancel</paper-button>
-        <paper-button id="saveevent" on-tap="saveEvent">Add to Grid</paper-button>
+        <paper-button class="action-icons" id="cancelevent" on-tap="cancelEvent">
+          <iron-icon icon="icons:delete"></iron-icon>Cancel</paper-button>
+        <paper-button class="action-icons" id="saveevent" on-tap="saveEvent">
+          <iron-icon icon="icons:done"></iron-icon>Save</paper-button>
       </div>
     </paper-dialog>
 
@@ -168,14 +180,14 @@
           <p><b>Description: </b> [[item.description]]</p>
         </div>
       </template>
-      <vaadin-grid-column width="5%" flex-grow="0">
+      <!--vaadin-grid-column width="5%" flex-grow="0">
         <template class="header">
           <input aria-label="Select All" type="checkbox" on-click="invert" checked="[[isChecked(inverted, indeterminate)]]" indeterminate="[[indeterminate]]">
         </template>
         <template>
           <input aria-label="Select Row" type="checkbox" on-change="selectItem" checked="[[isSelected(inverted, selected)]]">
         </template>
-      </vaadin-grid-column>
+      </vaadin-grid-column-->
       <vaadin-grid-column width="27%">
         <template class="header">Name</template>
         <template>

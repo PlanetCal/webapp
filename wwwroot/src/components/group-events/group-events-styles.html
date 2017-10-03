@@ -14,7 +14,7 @@
                 --divider-color: rgb(223, 232, 239);
                 --vaadin-grid-cell: {
                     padding: 0 13px;
-                    background-color: var(--app-color-j);
+                    background-color: var(--app-color-p);
                     background-image: linear-gradient(rgba(108, 160, 218, 0), rgba(108, 160, 218, 0.15));
                 }
                 ;
@@ -24,7 +24,7 @@
                 }
                 ;
                 --vaadin-grid-header-cell: {
-                    background: #373B46;
+                    background: var(--app-color-g);
                     border-bottom: 1px solid rgba(208, 217, 225, 0.9);
                     border-top: 1px solid rgba(248, 250, 252, 0.9);
                     min-height: 35px;
@@ -35,24 +35,23 @@
                     text-transform: uppercase;
                 }
                 ;
+                /*
                 --vaadin-grid-body-row-selected-cell: {
-                    background-color: #4B5363;
-                    color: #8EB2BA;
-                    border-bottom-color: rgb(108, 160, 218);
+                    background-color: var(--app-color-o);
                 }
                 ;
                 --vaadin-grid-header-row-selected-cell: {
                     background-color: #4B5363;
                     color: #8EB2BA;
                     border-bottom-color: rgb(108, 160, 218);
-                }
+                }*/
                 ;
                 --vaadin-grid-body-row-odd-cell: {
                     background-color: var(--app-color-o);
                 }
                 ;
                 --vaadin-grid-body-row-hover-cell: {
-                    background-color: var(--app-color-k);
+                    background-color: var(--app-color-l);
                 }
                 ;
                 --vaadin-grid-body-row-details-cell: {
@@ -88,7 +87,7 @@
             }
             
             vaadin-grid .details-cell {
-                background: #fff;
+                background: var(--app-text-color-light);
                 width: 100%;
             }
             
@@ -120,27 +119,18 @@
             }
             
             paper-button.indigo {
-                background-color: var(--paper-indigo-500);
+                background-color: var(--app-color-h);
                 color: var(--app-text-color-light);
                 width: 200px;
                 --paper-button-raised-keyboard-focus: {
-                    background-color: var(--paper-blue-a200) !important;
+                    background-color: var(--app-color-i) !important;
                     color: var(--app-text-color-light) !important;
                 }
                 ;
             }
             
             paper-button.indigo:hover {
-                background-color: var(--paper-indigo-400);
-            }
-            
-            paper-progress {
-                --paper-progress-active-color: lightblue;
-                --paper-progress-secondary-color: lightblue;
-                --paper-progress-container-color: grey;
-                --paper-progress-height: 20px;
-                width: 50%;
-                padding: 25px 0;
+                background-color: var(--app-color-j);
             }
             
             paper-dialog.size-position {
@@ -155,47 +145,21 @@
             iron-icon.delete-icon {
                 margin-left: 12px;
                 cursor: pointer;
-                color: #007e9e;
+                color: var(--app-color-j);
             }
             
             iron-icon.delete-icon:hover {
-                color: #0FCFFF;
-            }
-            
-            iron-icon.delete-icon:active {
-                color: red;
+                color: var(--app-color-p);
             }
             
             iron-icon.grid-icon {
                 margin-left: 12px;
                 cursor: pointer;
-                color: var(--app-text-color-light);
+                color: var(--app-color-j);
             }
             
             iron-icon.grid-icon:hover {
-                color: var(--app-color-r);
-            }
-            
-            iron-icon.grid-icon:active {
-                color: red;
-            }
-            
-            span.test {
-                display: inline-block;
-                border-bottom: 1px solid black;
-                padding-bottom: 2px;
-            }
-            
-            #divDate.start-time {
-                color: red;
-            }
-            
-            paper-dialog#addEvent.size-position.start-time {
-                color: red;
-            }
-            
-            .blue-text {
-                color: var(--app-color-g);
+                color: var(--app-color-p);
             }
             
             .displayNone {

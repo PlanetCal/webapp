@@ -87,7 +87,7 @@ Polymer({
     },
     showDialog: function (event) {
         this.$.eventDialogHeader.textContent = "Add Event";
-        this.$.saveevent.textContent = "Save";
+        //this.$.saveevent.textContent = "Save";
         this.$.saveevent.disabled = false;
         this.$.cancelevent.disabled = false;
         var body = document.querySelector('body');
@@ -245,7 +245,7 @@ Polymer({
         //this.icon = editedItem.icon;
         this.previewSrc = editedItem.icon;
         this.$.eventDialogHeader.textContent = "Update Event";
-        this.$.saveevent.textContent = "Save";
+        //this.$.saveevent.textContent = "Save";
     },
     emptyEventFields: function () {
         this.id = null;
@@ -385,7 +385,7 @@ Polymer({
         switch (this.ajaxCall) {
             case 'getGroup':
                 this.groupObject = event.detail.response;
-                this.groupObject.createdBy = this.groupObject.createdBy ? this.groupObject.owner : 'Not Owner';
+                this.groupObject.createdBy = this.groupObject.createdBy ? this.groupObject.createdBy : 'Not Owner';
                 this.groupObject.administrators = this.groupObject.administrators ? this.groupObject.administrators : ['Not Admin'];
                 this.populateGroupDetails(this.groupObject);
                 break;
