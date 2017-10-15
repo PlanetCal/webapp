@@ -16,4 +16,7 @@
   <Target Name="PolymerBuild" BeforeTargets="Publish">
     <Exec Command="pb.cmd" />
   </Target>
+  <Target Name="BowerInstall" AfterTargets="Publish">
+    <Exec Command="bowerInstall.cmd" />
+  </Target>
 </Project>
