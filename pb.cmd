@@ -1,3 +1,3 @@
-cd /../wwwroot/wwwroot
+cd ../wwwroot/wwwroot
 bower install
 polymer build
