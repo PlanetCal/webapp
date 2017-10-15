@@ -48,5 +48,8 @@
     "web-component-tester": "^4.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.24"
   },
+  "resolutions": {
+    "webcomponentsjs": "^v1.0.2"
+  },
   "private": true
 }
