@@ -7,21 +7,21 @@
     margin-top: 30px;
     cursor: pointer;
   }
-  
+
   .event-icons:hover {
     color: #367;
   }
-  
+
   .action-icons {
     color: #256;
     width: auto;
     --paper-button-ink-color: #256;
   }
-  
+
   .action-icons:hover {
     background-color: #9cd;
   }
-  
+
   paper-dialog.size-position {
     top: 0px;
   }
@@ -31,30 +31,30 @@
   <template>
     <style include="group-events-styles"></style>
     <!-- Dialog or popup start -->
-    <paper-dialog modal id="addEventDialog" class='size-position'>
+    <paper-dialog modal="" id="addEventDialog" class="size-position">
       <h2 id="eventDialogHeader"></h2>
       <paper-dialog-scrollable>
         <div class="dialog-textbox" style="width: 600px;">
           <fieldset>
             <div id="nameFieldDiv">
-              <paper-input label="Name" class="addEvent" value="{{name}}" char-counter maxlength="50" style="width: 560px;" required error-message="required"
-                on-change="validateOnChange">
+              <paper-input label="Name" class="addEvent" value="{{name}}" char-counter="" maxlength="50" style="width: 560px;" required=""
+                error-message="required" on-change="validateOnChange">
               </paper-input>
             </div>
             <div id="divDate" style="display: flex; width: 570px; margin-top: 10px;">
-              <paper-input label="Start Date" class="addEvent" value="{{startDate}}" style="width: 160px;" readonly required error-message="required"
+              <paper-input label="Start Date" class="addEvent" value="{{startDate}}" style="width: 160px;" readonly="" required="" error-message="required"
                 on-tap="onStartDateChange" on-change="validateOnChange">
               </paper-input>
               <iron-icon class="event-icons" icon="icons:event" title="Start Date" on-tap="onStartDateChange"></iron-icon>
-              <paper-input label="Start Time" class="addEvent" value="{{startTime}}" style="width: 80px; margin-left: 10px;" readonly required
-                error-message="required" on-tap="onStartTimeChange" on-change="validateOnChange">
+              <paper-input label="Start Time" class="addEvent" value="{{startTime}}" style="width: 80px; margin-left: 10px;" readonly=""
+                required="" error-message="required" on-tap="onStartTimeChange" on-change="validateOnChange">
               </paper-input>
               <iron-icon class="event-icons" icon="icons:alarm" title="Start Time" on-tap="onStartTimeChange"></iron-icon>
-              <paper-input label="End Date" class="addEvent" value="{{endDate}}" style="width: 160px;margin-left: 15px;" readonly required
+              <paper-input label="End Date" class="addEvent" value="{{endDate}}" style="width: 160px;margin-left: 15px;" readonly="" required=""
                 error-message="required" on-tap="onEndDateChange" on-change="validateOnChange">
               </paper-input>
               <iron-icon class="event-icons" icon="icons:event" title="End Date" on-tap="onEndDateChange"></iron-icon>
-              <paper-input label="End Time" class="addEvent" value="{{endTime}}" style="width: 80px; margin-left: 10px;" readonly required
+              <paper-input label="End Time" class="addEvent" value="{{endTime}}" style="width: 80px; margin-left: 10px;" readonly="" required=""
                 error-message="required" on-tap="onEndTimeChange" on-change="validateOnChange">
               </paper-input>
               <iron-icon class="event-icons" icon="icons:alarm" title="End Time" on-tap="onEndTimeChange"></iron-icon>
@@ -62,40 +62,24 @@
                 required error-message="required" on-change="validateOnChange">
               </paper-input-->
             </div>
-            <paper-button class='blue' on-tap="toggle">
+            <paper-button class="blue" on-tap="toggle">
               <iron-icon icon="[[expandButtonIcon]]"></iron-icon>[[expandButtonText]]</paper-button>
-            <iron-collapse id='collapse'>
+            <iron-collapse id="collapse">
               <div>
-                <paper-input label="Description" class="addEvent" value="{{description}}" aria-multiline="5" char-counter maxlength="500"
+                <paper-input label="Description" class="addEvent" value="{{description}}" aria-multiline="5" char-counter="" maxlength="500"
                   style="width: 560px;" on-change="validateOnChange">
                 </paper-input>
               </div>
-              <div style="display: flex; width: 570px;">
-                <paper-input label="StreetNumber" class="addEvent" value="{{streetNumber}}" char-counter maxlength="15" style="width: 150px;"
-                  on-change="validateOnChange">
-                </paper-input>
-                <span style="width: 30px;"></span>
-                <paper-input label="StreetName" class="addEvent" value="{{streetName}}" char-counter maxlength="25" style="width: 390px;"
-                  on-change="validateOnChange">
-                </paper-input>
-              </div>
-              <div style="display: flex; width: 570px;">
-                <paper-input label="City" class="addEvent" value="{{city}}" char-counter maxlength="20" style="width: 180px;" on-change="validateOnChange">
-                </paper-input>
-                <span style="width: 30px;"></span>
-                <paper-input label="State" class="addEvent" value="{{state}}" char-counter maxlength="20" style="width: 180px;" on-change="validateOnChange">
-                </paper-input>
-                <span style="width: 30px;"></span>
-                <paper-input label="PostalCode" class="addEvent" value="{{postalCode}}" char-counter maxlength="10" style="width: 150px;"
-                  on-change="validateOnChange">
+              <div>
+                <paper-input label="Address" class="addEvent" value="{{address}}" char-counter="" maxlength="200" style="width: 560px;" on-change="validateOnChange">
                 </paper-input>
               </div>
               <div>
-                <paper-input label="Location" class="addEvent" value="{{location}}" char-counter maxlength="10" on-change="validateOnChange">
+                <paper-input label="Location" class="addEvent" value="{{location}}" char-counter="" maxlength="50" on-change="validateOnChange">
                 </paper-input>
               </div>
               <div style="display: flex;">
-                <img id="previewImage" src="{{previewSrc}}" width="50" height="50" style="vertical-align: top;" />
+                <img id="previewImage" src="{{previewSrc}}" width="50" height="50" style="vertical-align: top;">
                 <iron-icon class="event-icons" icon="icons:file-upload" title="Upload Event Icon" on-tap="editImage"></iron-icon>
                 <span id="imageUploadInstructions" style="margin-left: 5%; vertical-align: top; text-align: left;">
                   <h3>Instructions for group image upload: </h3>
@@ -111,6 +95,7 @@
                   <paper-input type="file" label="Upload Image" id="eventsImage" on-change="previewImage" style="vertical-align: top;" accept="image/*"></paper-input>
                 </div>
               </div>
+            </iron-collapse>
           </fieldset>
         </div>
       </paper-dialog-scrollable>
@@ -123,32 +108,32 @@
     </paper-dialog>
 
     <!-- Dialog for Date time picker - start -->
-    <paper-dialog id="startDatePickerDialog" class="paper-date-picker-dialog" modal>
+    <paper-dialog id="startDatePickerDialog" class="paper-date-picker-dialog" modal="">
       <paper-date-picker id="startDatePicker" date="{{startDateTime}}"></paper-date-picker>
       <div class="buttons">
-        <paper-button dialog-dismiss on-tap="cancelStartDate">Cancel</paper-button>
-        <paper-button dialog-confirm on-tap="setStartDate">OK</paper-button>
+        <paper-button dialog-dismiss="" on-tap="cancelStartDate">Cancel</paper-button>
+        <paper-button dialog-confirm="" on-tap="setStartDate">OK</paper-button>
       </div>
     </paper-dialog>
-    <paper-dialog id="startTimePickerDialog" modal class="paper-time-picker-dialog">
+    <paper-dialog id="startTimePickerDialog" modal="" class="paper-time-picker-dialog">
       <paper-time-picker id="startTimePicker" time="{{startTime}}"></paper-time-picker>
       <div class="buttons">
-        <paper-button dialog-dismiss on-tap="cancelStartTime">Cancel</paper-button>
-        <paper-button dialog-confirm on-tap="setStartTime">OK</paper-button>
+        <paper-button dialog-dismiss="" on-tap="cancelStartTime">Cancel</paper-button>
+        <paper-button dialog-confirm="" on-tap="setStartTime">OK</paper-button>
       </div>
     </paper-dialog>
-    <paper-dialog id="endDatePickerDialog" class="paper-date-picker-dialog" modal>
+    <paper-dialog id="endDatePickerDialog" class="paper-date-picker-dialog" modal="">
       <paper-date-picker id="endDatePicker" date="{{endDateTime}}"></paper-date-picker>
       <div class="buttons">
-        <paper-button dialog-dismiss on-tap="cancelEndDate">Cancel</paper-button>
-        <paper-button dialog-confirm on-tap="setEndDate">OK</paper-button>
+        <paper-button dialog-dismiss="" on-tap="cancelEndDate">Cancel</paper-button>
+        <paper-button dialog-confirm="" on-tap="setEndDate">OK</paper-button>
       </div>
     </paper-dialog>
-    <paper-dialog id="endTimePickerDialog" modal class="paper-time-picker-dialog">
+    <paper-dialog id="endTimePickerDialog" modal="" class="paper-time-picker-dialog">
       <paper-time-picker id="endTimePicker" time="{{endTime}}"></paper-time-picker>
       <div class="buttons">
-        <paper-button dialog-dismiss on-tap="cancelEndTime">Cancel</paper-button>
-        <paper-button dialog-confirm on-tap="setEndTime">OK</paper-button>
+        <paper-button dialog-dismiss="" on-tap="cancelEndTime">Cancel</paper-button>
+        <paper-button dialog-confirm="" on-tap="setEndTime">OK</paper-button>
       </div>
     </paper-dialog>
     <!-- Dialog for Date time picker - end -->
@@ -156,14 +141,22 @@
     <!-- List of Buttons start -->
     <div id="msg">[[messageText]]</div>
     <div class="blueText" style="margin-top: 20px; margin-left: 10px;">
-      <span><b>Group Name: </b></span> <span id="groupName"></span><br>
-      <span><b>Group Description: </b></span> <span id="groupDesc"></span><br>
+      <span>
+        <b>Group Name: </b>
+      </span>
+      <span id="groupName"></span>
+      <br>
+      <span>
+        <b>Group Description: </b>
+      </span>
+      <span id="groupDesc"></span>
+      <br>
     </div>
     <div style="margin-top: 20px;">
       <iron-icon icon="icons:delete-sweep" style="visibility: hidden" class="delete-icon" title="Delete selected"></iron-icon>
       <paper-button id="btnUpcoming" class="blue" on-tap="loadEvents">Upcoming</paper-button>
       <paper-button id="btnPast" class="blue" on-tap="pastEvents">past</paper-button>
-      <paper-button id="btnAddEvent" raised class="indigo" on-tap="showDialog">Add Event</paper-button>
+      <paper-button id="btnAddEvent" raised="" class="indigo" on-tap="showDialog">Add Event</paper-button>
     </div>
     <!-- List of Buttons End -->
     <!--template is="dom-if" if="{{isLoading}}">
@@ -171,13 +164,14 @@
     </template-->
     <!--iron-ajax auto url="../../data/Data.json" handle-as="json" on-response="handleResponse">
     </iron-ajax-->
-    <iron-ajax id='ajax' handle-as='json' loading={{isLoading}} url="[[ajaxUrl]]" content-type='application/json' on-error='handleErrorResponse'
-      on-response='handleAjaxResponse'></iron-ajax>
+    <iron-ajax id="ajax" handle-as="json" loading="{{isLoading}}" url="[[ajaxUrl]]" content-type="application/json" on-error="handleErrorResponse"
+      on-response="handleAjaxResponse"></iron-ajax>
     <!-- Grid start -->
     <vaadin-grid id="grid" inverted$="[[inverted]]" on-active-item-changed="onActiveItemChanged">
       <template class="row-details">
         <div style="margin-left: 20px;">
-          <p><b>Description: </b> [[item.description]]</p>
+          <p>
+            <b>Description: </b> [[item.description]]</p>
         </div>
       </template>
       <!--vaadin-grid-column width="5%" flex-grow="0">
@@ -211,11 +205,10 @@
       <vaadin-grid-column width="20%">
         <template class="header">Address</template>
         <template>
-          [[item.address.streetNumber]] [[item.address.streetName]], [[item.address.city]], <br> [[item.address.state]],
-          [[item.address.postalCode]]
+          [[item.address]]
         </template>
       </vaadin-grid-column>
-      </iron-collapse>
+
       <vaadin-grid-column width="10%">
         <template class="header">Actions</template>
         <template>

@@ -235,11 +235,7 @@ Polymer({
         this.endDateTime = new Date(editedItem.endDateTime);
         this.endDate = this.formatDate(editedItem.endDateTime);
         this.endTime = this.formatTime(editedItem.endDateTime);
-        this.streetNumber = editedItem.address.streetNumber;
-        this.streetName = editedItem.address.streetName;
-        this.city = editedItem.address.city;
-        this.state = editedItem.address.state;
-        this.postalCode = editedItem.address.postalCode;
+        this.address = editedItem.address;
         this.location = editedItem.location;
         this.groupId = editedItem.groupId;
         //this.icon = editedItem.icon;
@@ -257,11 +253,7 @@ Polymer({
         this.endDateTime = new Date();
         this.endDate = this.formatDate(new Date());
         this.endTime = this.formatTime(new Date());
-        this.streetNumber = null;
-        this.streetName = null;
-        this.city = null;
-        this.state = null;
-        this.postalCode = null;
+        this.address = null;
         this.location = null;
         this.icon = null;
         this.previewSrc = '';
@@ -278,11 +270,7 @@ Polymer({
         obj.startDateTime = this.startDateTime;
         obj.endDateTime = this.endDateTime;
         obj.address = {};
-        obj.address.streetNumber = this.streetNumber;
-        obj.address.streetName = this.streetName;
-        obj.address.city = this.city;
-        obj.address.state = this.state;
-        obj.address.postalCode = this.postalCode;
+        obj.address = this.address;
         obj.location = this.location;
         obj.groupId = this.groupId;
         if (!this.isEventsImageChanged)
