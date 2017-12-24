@@ -40,34 +40,21 @@
         <iron-collapse id='collapse'>
           <paper-textarea class="saveGroups" label="Description" value="{{description}}" char-counter maxlength="500" max-rows="4"></paper-textarea>
           <paper-textarea label="Administrators" class="saveGroups" value="{{administrators}}" char-counter maxlength="500" max-rows="2"></paper-textarea>
-          <div style="display: flex; width: 100%">
-            <paper-input label="Street Number" class="saveGroups" value="{{streetNumber}}" char-counter maxlength="15" style="width: 30%;">
-            </paper-input>
-            <span style="width: 5%"></span>
-            <paper-input label="Street Name" class="saveGroups" value="{{streetName}}" char-counter maxlength="50" style="width: 30%;">
-            </paper-input>
-            <span style="width: 5%"></span>
-            <paper-input label="City" class="saveGroups" value="{{city}}" char-counter maxlength="20" style="width: 30%;">
+          <div style="display: flex;">
+            <paper-input label="Address" class="saveGroups" value="{{address}}" char-counter maxlength="200" style="width: 100%;">
             </paper-input>
           </div>
           <div style="display: flex;">
-            <paper-input label="Location" class="saveGroups" value="{{location}}" char-counter maxlength="10" style="width: 30%;">
+            <paper-input label="Location" class="saveGroups" value="{{location}}" char-counter maxlength="50" style="width: 25%;">
             </paper-input>
-            <span style="width: 5%;"></span>
-            <paper-input label="State" class="saveGroups" value="{{state}}" char-counter maxlength="20" style="width: 30%;">
+            <span style="width: 2%;"></span>
+            <paper-input label="Website" class="saveGroups" value="{{website}}" char-counter maxlength="50" style="width: 25%;" on-change="validateOnChange">
             </paper-input>
-            <span style="width: 5%;"></span>
-            <paper-input label="Postal Code" class="saveGroups" value="{{postalCode}}" char-counter maxlength="20" style="width: 30%;">
+            <span style="width: 2%;"></span>
+            <paper-input label="Phone" class="saveGroups" value="{{phone}}" char-counter maxlength="15" style="width: 25%;">
             </paper-input>
-          </div>
-          <div style="display: flex;">
-            <paper-input label="Website" class="saveGroups" value="{{website}}" char-counter maxlength="50" style="width: 30%;" on-change="validateOnChange">
-            </paper-input>
-            <span style="width: 5%;"></span>
-            <paper-input label="Phone" class="saveGroups" value="{{phone}}" char-counter maxlength="15" style="width: 30%;">
-            </paper-input>
-            <span style="width: 5%;"></span>
-            <paper-input label="Email" class="saveGroups" value="{{email}}" char-counter maxlength="25" style="width: 30%;">
+            <span style="width: 2;"></span>
+            <paper-input label="Email" class="saveGroups" value="{{email}}" char-counter maxlength="25" style="width: 25%;">
             </paper-input>
           </div>
           <div style="display: flex;">

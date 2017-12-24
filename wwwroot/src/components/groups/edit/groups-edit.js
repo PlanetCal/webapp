@@ -110,14 +110,7 @@ Polymer({
         this.id = editedGroup.id;
         this.name = editedGroup.name;
         this.description = editedGroup.description;
-        if (!editedGroup.address) {
-            editedGroup.address = {};
-        }
-        this.streetNumber = editedGroup.address.streetNumber;
-        this.streetName = editedGroup.address.streetName;
-        this.city = editedGroup.address.city;
-        this.state = editedGroup.address.state;
-        this.postalCode = editedGroup.address.postalCode;
+        this.address = editedGroup.address;
         this.location = editedGroup.location;
         if (!editedGroup.contact) {
             editedGroup.contact = {};
@@ -136,11 +129,7 @@ Polymer({
         this.id = '';
         this.name = '';
         this.description = '';
-        this.streetNumber = '';
-        this.streetName = '';
-        this.city = '';
-        this.state = '';
-        this.postalCode = '';
+        this.address = '';
         this.location = '';
         this.phone = '';
         this.email = '';
@@ -217,12 +206,7 @@ Polymer({
         }
         obj.name = this.name;
         obj.description = this.description;
-        obj.address = {};
-        obj.address.streetNumber = this.streetNumber;
-        obj.address.streetName = this.streetName;
-        obj.address.city = this.city;
-        obj.address.state = this.state;
-        obj.address.postalCode = this.postalCode;
+        obj.address = this.address;
         obj.location = this.location;
         obj.contact = {};
         obj.contact.phone = this.phone;

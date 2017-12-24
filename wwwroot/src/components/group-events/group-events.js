@@ -269,7 +269,6 @@ Polymer({
         obj.description = this.description;
         obj.startDateTime = this.startDateTime;
         obj.endDateTime = this.endDateTime;
-        obj.address = {};
         obj.address = this.address;
         obj.location = this.location;
         obj.groupId = this.groupId;
