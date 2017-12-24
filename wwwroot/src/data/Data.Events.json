@@ -7,13 +7,7 @@
     "startDateTime": "2016-08-29T24:00Z",
     "endDateTime": "2016-09-02T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
@@ -24,13 +18,7 @@
     "startDateTime": "2016-09-05T24:00Z",
     "endDateTime": "2016-09-09T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
@@ -41,13 +29,7 @@
     "startDateTime": "2016-09-06T24:00Z",
     "endDateTime": "2016-09-06T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
@@ -58,13 +40,7 @@
     "startDateTime": "2016-09-06T24:00Z",
     "endDateTime": "2016-09-06T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 3330,
-      "streetName": "Monte Villa Parkway",
-      "city": "Bothell",
-      "state": "WA",
-      "postalCode": "98021"
-    },
+    "address": "3330 Monte Villa Parkway Bothell WA 98021",
     "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
@@ -75,13 +51,7 @@
     "startDateTime": "2016-09-09T24:00Z",
     "endtDateTime": "2016-09-09T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
@@ -92,13 +62,7 @@
     "startDateTime": "2016-09-14T24:00Z",
     "endDateTime": "2016-09-14T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
@@ -109,13 +73,7 @@
     "startDateTime": "2016-10-17T24:00Z",
     "endDateTime": "2016-10-19T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
@@ -126,13 +84,7 @@
     "startDateTime": "2016-10-21T24:00Z",
     "endDateTime": "2016-10-21T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
@@ -143,13 +95,7 @@
     "startDateTime": "2016-11-08T24:00Z",
     "endDateTime": "2016-11-08T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
@@ -160,13 +106,7 @@
     "startDateTime": "2016-11-11T24:00Z",
     "endDateTime": "2016-11-11T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
@@ -177,13 +117,7 @@
     "startDateTime": "2016-11-15T24:00Z",
     "endDateTime": "2016-11-15T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
@@ -194,13 +128,7 @@
     "startDateTime": "2016-11-11T24:00Z",
     "endDateTime": "2016-11-11T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 3330,
-      "streetName": "Monte Villa Parkway",
-      "city": "Bothell",
-      "state": "WA",
-      "postalCode": "98021"
-    },
+    "address": "3330 Monte Villa Parkway Bothell WA 98021",
     "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
@@ -211,13 +139,7 @@
     "startDateTime": "2016-11-11T24:00Z",
     "endDateTime": "2016-11-17T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 3330,
-      "streetName": "Monte Villa Parkway",
-      "city": "Bothell",
-      "state": "WA",
-      "postalCode": "98021"
-    },
+    "address": "3330 Monte Villa Parkway Bothell WA 98021",
     "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
@@ -228,13 +150,7 @@
     "startDateTime": "2016-11-18T24:00Z",
     "endDateTime": "2016-11-18T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 3330,
-      "streetName": "Monte Villa Parkway",
-      "city": "Bothell",
-      "state": "WA",
-      "postalCode": "98021"
-    },
+    "address": "3330 Monte Villa Parkway Bothell WA 98021",
     "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
@@ -245,13 +161,7 @@
     "startDateTime": "2016-11-21T24:00Z",
     "endDateTime": "2016-11-21T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 3330,
-      "streetName": "Monte Villa Parkway",
-      "city": "Bothell",
-      "state": "WA",
-      "postalCode": "98021"
-    },
+    "address": "3330 Monte Villa Parkway Bothell WA 98021",
     "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
@@ -262,13 +172,7 @@
     "startDateTime": "2016-11-22T24:00Z",
     "endDateTime": "2016-11-22T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 3330,
-      "streetName": "Monte Villa Parkway",
-      "city": "Bothell",
-      "state": "WA",
-      "postalCode": "98021"
-    },
+    "address": "3330 Monte Villa Parkway Bothell WA 98021",
     "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
@@ -279,13 +183,7 @@
     "startDateTime": "2016-11-23T24:00Z",
     "endDateTime": "2016-11-23T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 3330,
-      "streetName": "Monte Villa Parkway",
-      "city": "Bothell",
-      "state": "WA",
-      "postalCode": "98021"
-    },
+    "address": "3330 Monte Villa Parkway Bothell WA 98021",
     "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
@@ -296,13 +194,7 @@
     "startDateTime": "2016-11-23T24:00Z",
     "endDateTime": "2016-11-23T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
@@ -313,13 +205,7 @@
     "startDateTime": "2016-11-23T24:00Z",
     "endDateTime": "2016-11-24T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 3330,
-      "streetName": "Monte Villa Parkway",
-      "city": "Bothell",
-      "state": "WA",
-      "postalCode": "98021"
-    },
+    "address": "3330 Monte Villa Parkway Bothell WA 98021",
     "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
@@ -329,13 +215,7 @@
     "startDateTime": "2016-11-24T24:00Z",
     "endDateTime": "2016-11-25T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
@@ -346,13 +226,7 @@
     "startDateTime": "2017-12-16T24:00Z",
     "endDateTime": "2018-01-02T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 14600,
-      "streetName": "NE 24th St",
-      "city": "Bellevue",
-      "state": "WA",
-      "postalCode": "98007"
-    },
+    "address": "14600 NE 24th St Bellevue WA 98007",
     "groupId": "9BCE12F5-0D43-47CD-AB31-E8D0D531A93F"
   },
   {
@@ -363,13 +237,7 @@
     "startDateTime": "2016-12-16T24:00Z",
     "endDateTime": "2017-01-02T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
@@ -380,13 +248,7 @@
     "startDateTime": "2016-12-19T24:00Z",
     "endDateTime": "2017-01-02T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 3330,
-      "streetName": "Monte Villa Parkway",
-      "city": "Bothell",
-      "state": "WA",
-      "postalCode": "98021"
-    },
+    "address": "3330 Monte Villa Parkway Bothell WA 98021",
     "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
@@ -397,13 +259,7 @@
     "startDateTime": "2016-12-21T24:00Z",
     "endDateTime": "2017-01-02T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 565,
-      "streetName": "NW Holly Street",
-      "city": "Issaquah",
-      "state": "WA",
-      "postalCode": "98027"
-    },
+    "address": "565 NW Holly Street, Issaquah, WA, 98027",
     "groupId": "4FEBD44D-4637-4545-84AD-D12C819C8773"
   },
   {
@@ -414,12 +270,7 @@
     "startDateTime": "2017-08-24T24:00Z",
     "endDateTime": "2017-08-25T24:00Z",
     "location": "USA",
-    "address": {
-      "streetName": "One Microsoft Way",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "One Microsoft Way, Redmond, WA 98052",
     "groupId": "FCC4B6F4-56AF-429C-9812-38284B4DA429"
   },
   {
@@ -430,12 +281,7 @@
     "startDateTime": "2017-01-02T24:00Z",
     "endDateTime": "2017-01-02T24:00Z",
     "location": "USA",
-    "address": {
-      "streetName": "One Microsoft Way",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "One Microsoft Way, Redmond, WA 98052",
     "groupId": "FCC4B6F4-56AF-429C-9812-38284B4DA429"
   },
   {
@@ -446,12 +292,7 @@
     "startDateTime": "2017-01-16T24:00Z",
     "endDateTime": "2017-01-16T24:00Z",
     "location": "USA",
-    "address": {
-      "streetName": "One Microsoft Way",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "One Microsoft Way, Redmond, WA 98052",
     "groupId": "FCC4B6F4-56AF-429C-9812-38284B4DA429"
   },
   {
@@ -462,13 +303,7 @@
     "startDateTime": "2017-01-16T24:00Z",
     "endDateTime": "2017-01-16T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   },
   {
@@ -479,13 +314,7 @@
     "startDateTime": "2017-01-16T24:00Z",
     "endDateTime": "2017-01-16T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "014E3830-C373-4890-9C84-8362B8F5996B"
   },
   {
@@ -496,13 +325,7 @@
     "startDateTime": "2017-01-16T24:00Z",
     "endDateTime": "2017-01-16T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 565,
-      "streetName": "NW Holly Street",
-      "city": "Issaquah",
-      "state": "WA",
-      "postalCode": "98027"
-    },
+    "address": "565 NW Holly Street, Issaquah, WA, 98027",
     "groupId": "4FEBD44D-4637-4545-84AD-D12C819C8773"
   },
   {
@@ -512,13 +335,7 @@
     "type": "Holiday",
     "startDateTime": "2017-01-16T24:00Z",
     "endDateTime": "2017-01-16T24:00Z",
-    "address": {
-      "streetNumber": 14600,
-      "streetName": "NE 24th St",
-      "city": "Bellevue",
-      "state": "WA",
-      "postalCode": "98007"
-    },
+    "address": "14600 NE 24th St Bellevue WA 98007",
     "groupId": "9BCE12F5-0D43-47CD-AB31-E8D0D531A93F"
   },
   {
@@ -529,12 +346,6 @@
     "startDateTime": "2017-01-18T24:00Z",
     "endDateTime": "2017-01-18T24:00Z",
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
   }

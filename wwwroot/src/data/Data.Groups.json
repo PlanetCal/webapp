@@ -9,13 +9,7 @@
     "category": "School",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 16250,
-      "streetName": "NE 74th Street",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "16250 NE 74th Street Redmond WA 98052",
     "contact": {
       "phone": "4259361200",
       "email": "tpierce@lwsd.org"
@@ -32,13 +26,7 @@
     "category": "School",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 3330,
-      "streetName": "Monte Villa Parkway",
-      "city": "Bothell",
-      "state": "WA",
-      "postalCode": "98021"
-    },
+    "address": "3330 Monte Villa Parkway Bothell WA 98021",
     "contact": {
       "phone": "4254086000",
       "email": "info@nsd.org"
@@ -55,13 +43,7 @@
     "category": "School",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 14600,
-      "streetName": "NE 24th St",
-      "city": "Bellevue",
-      "state": "WA",
-      "postalCode": "98007"
-    },
+    "address": "14600 NE 24th St Bellevue WA 98007",
     "contact": {
       "phone": "4256490791",
       "email": "bca1@bcacademy.com"
@@ -78,13 +60,7 @@
     "category": "School",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 565,
-      "streetName": "NW Holly Street",
-      "city": "Issaquah",
-      "state": "WA",
-      "postalCode": "98027"
-    },
+    "address": "565 NW Holly Street, Issaquah, WA, 98027",
     "contact": {
       "phone": "4258377000",
       "email": "michellel@issaquah.wednet.edu"
@@ -101,12 +77,7 @@
     "category": "Work",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetName": "One Microsoft Way",
-      "city": "Redmond",
-      "state": "WA",
-      "postalCode": "98052"
-    },
+    "address": "One Microsoft Way, Redmond, WA 98052",
     "contact": {
       "phone": "4258828080",
       "email": "support@microsoft.com"
@@ -123,13 +94,7 @@
     "category": "Work",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@amazon.com"
@@ -146,13 +111,7 @@
     "category": "Sports",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@Soccer.com"
@@ -169,13 +128,7 @@
     "category": "Sports",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@Football.com"
@@ -192,13 +145,7 @@
     "category": "Sports",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@Hockey.com"
@@ -215,13 +162,7 @@
     "category": "Sports",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@Baseball.com"
@@ -238,13 +179,7 @@
     "category": "Sports",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@Cricket.com"
@@ -264,13 +199,7 @@
     ],
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@Olympics.com"
@@ -292,13 +221,7 @@
     ],
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@2020.com"
@@ -316,13 +239,7 @@
     "parentGroup": "B1069D44-CC47-482E-964C-5D361CD15F80",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@Swimming.com"
@@ -340,13 +257,7 @@
     "parentGroup": "B1069D44-CC47-482E-964C-5D361CD15F80",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@Gymnastics.com"
@@ -368,13 +279,7 @@
     ],
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@Restaurants.com"
@@ -392,13 +297,7 @@
     "parentGroup": "1F225431-F299-4FB9-88B9-E4D2143F6BBC",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@Kanishka.com"
@@ -416,13 +315,7 @@
     "parentGroup": "1F225431-F299-4FB9-88B9-E4D2143F6BBC",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@Qdoba.com"
@@ -440,13 +333,7 @@
     "parentGroup": "1F225431-F299-4FB9-88B9-E4D2143F6BBC",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@Inchin.com"
@@ -463,13 +350,7 @@
     "category": "Local",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@Hospitals.com"
@@ -486,13 +367,7 @@
     "category": "Local",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@hotels.com"
@@ -509,13 +384,7 @@
     "category": "Local",
     "administrators": [],
     "location": "USA",
-    "address": {
-      "streetNumber": 410,
-      "streetName": "Terry Ave N",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98109"
-    },
+    "address": "410 Terry Ave N Seattle WA 98109",
     "contact": {
       "phone": "2062661000",
       "email": "support@Malls.com"
