@@ -177,19 +177,13 @@ Polymer({
   },
 
   getVenue: function (item) {
-    if (item && item[0]) {
-      return item[0].name;
-    } else {
-      return '';
-    }
+    return item.address;
   },
 
   getVenueLink: function (item) {
-    if (item && item[0]) {
-      return item[0].webSite;
-    } else {
-      return '';
-    }
+    var venueLink = 'https://www.google.com/maps/place/';
+    var normalizedAddress = item.address.replace(/ /g, '+');
+    return venueLink + normalizedAddress;
   },
 
   getDuration: function (dateStart, dateEnd) {
