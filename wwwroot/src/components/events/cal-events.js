@@ -172,6 +172,10 @@ Polymer({
     return dateTime.toDateString();
   },
 
+  getImage: function (item) {
+    return (item.icon) ? item.icon : '/src/images/about.jpg';
+  },
+
   getVenue: function (item) {
     if (item && item[0]) {
       return item[0].name;
