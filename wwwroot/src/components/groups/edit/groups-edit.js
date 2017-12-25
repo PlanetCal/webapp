@@ -402,7 +402,7 @@ Polymer({
         this.makeAjaxCall(this.groupObject);
     },
     editImage: function () {
-        this.$$('#groupImage').$.input.click();
+        var test = this.$.groupImage.$.input.click();
     },
     onGroupsEditResize: function () {
         //This function will be called when the window is resized.
