@@ -30,11 +30,7 @@ Polymer({
       this.ajaxUrl = serviceBaseUrl + '/userdetails/' + loggedInUser.id;
       ajax.headers['Version'] = '1.0';
 
-      var followingGroups = Polymer.globalsManager.globals.followingGroups;
-      var groupsToSave = [];
-      for (var i in followingGroups) {
-        groupsToSave.push(followingGroups[i].id);
-      }
+      var groupsToSave = Polymer.globalsManager.globals.followingGroups;
       var userDetails = Polymer.globalsManager.globals.userDetails;
       userDetails.id = loggedInUser.id;
       userDetails.followingGroups = groupsToSave;

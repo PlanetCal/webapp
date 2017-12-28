@@ -90,10 +90,26 @@ Polymer({
         switch (this.ajaxCall) {
             case 'getGroups':
                 this.items = groups.detail.response;
+                if (this.groupType === 'subscribed') {
+                    var followingGroupsToCache = [];
+                    this.items.forEach(element => followingGroupsToCache.push(element.id));
+                    Polymer.globalsManager.set('followingGroups', followingGroupsToCache);
+                }
                 break;
             case 'unsubscribeGroup':
-                var unsubscibedGroup = groups.detail.response;
-                this.items = this.removeGroupAndReturnArray(this.items, unsubscibedGroup);
+                if (this.groupType === 'subscribed') {
+                    var unsubscibedGroup = groups.detail.response;
+                    this.items = this.removeGroupAndReturnArray(this.items, unsubscibedGroup);
+                    var followingGroupsToCache = [];
+                    this.items.forEach(element => followingGroupsToCache.push(element.id));
+                    Polymer.globalsManager.set('followingGroups', followingGroupsToCache);
+                }
+                break;
+            case 'subscribeGroup':
+                var subscibedGroup = groups.detail.response;
+                var followinggroups = Polymer.globalsManager.globals.followingGroups;
+                followinggroups.push(subscibedGroup.id);
+                Polymer.globalsManager.set('followingGroups', followinggroups);
                 break;
             case 'deleteGroup':
                 var deletedGroup = groups.detail.response;
@@ -219,12 +235,8 @@ Polymer({
         if (this.groupType !== 'subscribed') {
             var followinggroups = Polymer.globalsManager.globals.followingGroups;
             var toReturn = '';
-            if (followinggroups) {
-                followinggroups.forEach(function (element, index, array) {
-                    if (element.id === item.id) {
-                        toReturn = 'displayNone';
-                    }
-                });
+            if (followinggroups && followinggroups.indexOf(item.id) >= 0) {
+                toReturn = 'displayNone';
             }
             return toReturn;
         }

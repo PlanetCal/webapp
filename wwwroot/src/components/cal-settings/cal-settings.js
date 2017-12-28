@@ -62,11 +62,7 @@ Polymer({
 
             ajax.method = httpMethod;
 
-            var followingGroups = Polymer.globalsManager.globals.followingGroups;
-            var groupsToSave = [];
-            for (var i in followingGroups) {
-                groupsToSave.push(followingGroups[i].id);
-            }
+            var groupsToSave = Polymer.globalsManager.globals.followingGroups;
 
             this.ajaxBody = JSON.stringify({
                 id: loggedInUser.id,
