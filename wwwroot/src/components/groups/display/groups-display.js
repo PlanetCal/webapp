@@ -108,6 +108,10 @@ Polymer({
             case 'subscribeGroup':
                 var subscibedGroup = groups.detail.response;
                 var followinggroups = Polymer.globalsManager.globals.followingGroups;
+                if (!followinggroups) {
+                    followinggroups = [];
+                }
+
                 followinggroups.push(subscibedGroup.id);
                 Polymer.globalsManager.set('followingGroups', followinggroups);
                 break;
