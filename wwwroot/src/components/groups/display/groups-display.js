@@ -40,40 +40,45 @@ Polymer({
     makeAjaxCall: function (group = null) {
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
-
-        switch (this.groupType) {
-            case ('owned'):
-                ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&filter=createdBy=' + this.loggedInUser.id;
-                break;
-            case ('subscribed'):
-                ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|category|createdBy|members|location|address|contact|webSite|modifiedBy';
-                break;
-            case ('administered'):
-                ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&administeredByMe=true';
-                break;
-            default:
-                //this.fire("status-message-update", { severity: 'error', message: 'GroupType ' + this.groupType + ' is not supported.' });
-                return;
+        ajax.headers['Version'] = '1.0';
+        if (this.loggedInUser) {
+            ajax.headers['Authorization'] = 'Bearer ' + this.loggedInUser.token;
         }
 
         switch (this.ajaxCall) {
+            case 'subscribeGroup':
+                ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followingGroups/' + group.id;
+                ajax.method = 'POST';
+                this.fire("status-message-update", { severity: 'info', message: 'Subscribing group...' });
+                break;
+            case 'unsubscribeGroup':
+                ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followingGroups/' + group.id;
+                ajax.method = 'DELETE';
+                this.fire("status-message-update", { severity: 'info', message: 'Unsubscribing group...' });
+                break;
             case 'getGroups':
-                ajax.method = 'GET';
-                ajax.headers['Version'] = '1.0';
-                ajax.body = '';
-                if (this.loggedInUser) {
-                    ajax.headers['Authorization'] = 'Bearer ' + this.loggedInUser.token;
+                switch (this.groupType) {
+                    case ('owned'):
+                        ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&filter=createdBy=' + this.loggedInUser.id;
+                        break;
+                    case ('subscribed'):
+                        ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|category|createdBy|members|location|address|contact|webSite|modifiedBy';
+                        break;
+                    case ('administered'):
+                        ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&administeredByMe=true';
+                        break;
+                    default:
+                        //this.fire("status-message-update", { severity: 'error', message: 'GroupType ' + this.groupType + ' is not supported.' });
+                        return;
                 }
+                ajax.method = 'GET';
+                ajax.body = '';
                 this.fire("status-message-update", { severity: 'info', message: 'Loading groups...' });
                 break;
             case 'deleteGroup':
                 ajax.method = 'DELETE';
                 ajax.url = serviceBaseUrl + '/groups/' + group.id;
-                ajax.headers['Version'] = '1.0';
                 ajax.body = '';
-                if (this.loggedInUser) {
-                    ajax.headers['Authorization'] = 'Bearer ' + this.loggedInUser.token;
-                }
                 this.fire("status-message-update", { severity: 'info', message: 'Deleting group...' });
                 break;
         }
@@ -85,6 +90,30 @@ Polymer({
         switch (this.ajaxCall) {
             case 'getGroups':
                 this.items = groups.detail.response;
+                if (this.groupType === 'subscribed') {
+                    var followingGroupsToCache = [];
+                    this.items.forEach(element => followingGroupsToCache.push(element.id));
+                    Polymer.globalsManager.set('followingGroups', followingGroupsToCache);
+                }
+                break;
+            case 'unsubscribeGroup':
+                if (this.groupType === 'subscribed') {
+                    var unsubscibedGroup = groups.detail.response;
+                    this.items = this.removeGroupAndReturnArray(this.items, unsubscibedGroup);
+                    var followingGroupsToCache = [];
+                    this.items.forEach(element => followingGroupsToCache.push(element.id));
+                    Polymer.globalsManager.set('followingGroups', followingGroupsToCache);
+                }
+                break;
+            case 'subscribeGroup':
+                var subscibedGroup = groups.detail.response;
+                var followinggroups = Polymer.globalsManager.globals.followingGroups;
+                if (!followinggroups) {
+                    followinggroups = [];
+                }
+
+                followinggroups.push(subscibedGroup.id);
+                Polymer.globalsManager.set('followingGroups', followinggroups);
                 break;
             case 'deleteGroup':
                 var deletedGroup = groups.detail.response;
@@ -154,6 +183,18 @@ Polymer({
         this.makeAjaxCall(group);
     },
 
+    unsubscribe: function (e) {
+        var groupDetails = e.model.item;
+        this.ajaxCall = 'unsubscribeGroup'
+        this.makeAjaxCall(groupDetails);
+    },
+
+    subscribe: function (e) {
+        var groupDetails = e.model.item;
+        this.ajaxCall = 'subscribeGroup'
+        this.makeAjaxCall(groupDetails);
+    },
+
     goToEvents: function (e) {
         var groupDetails = e.model.item;
         Polymer.globalsManager.set('editedGroup', groupDetails);
@@ -190,8 +231,20 @@ Polymer({
         return (!item.icon || item.icon === '') ? '../src/images/noimage.png' : item.icon;
     },
 
-    hideSubscribeButton: function (item) {
+    hideUnsubscribeButton: function (item) {
         return this.groupType !== 'subscribed' ? 'displayNone' : '';
+    },
+
+    hideSubscribeButton: function (item) {
+        if (this.groupType !== 'subscribed') {
+            var followinggroups = Polymer.globalsManager.globals.followingGroups;
+            var toReturn = '';
+            if (followinggroups && followinggroups.indexOf(item.id) >= 0) {
+                toReturn = 'displayNone';
+            }
+            return toReturn;
+        }
+        return 'displayNone';
     },
 
     groupDisplayName: function (item) {

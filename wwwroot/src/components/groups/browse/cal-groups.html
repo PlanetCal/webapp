@@ -85,7 +85,7 @@
       },
 
       checkState: function (groupId) {
-        return this.contains(this.followingGroups, groupId) ? 2 : 1;
+        return (this.followingGroups.indexOf(groupId) > -1) ? 2 : 1;
       },
 
       showExpander: function (childGroups) {
@@ -95,24 +95,15 @@
       stateChangedHandler: function (e) {
         var group = e.detail;
         if (group.checked && !group.disabled) {
-          this.followingGroups.push({ id: group.id, name: group.name });
+          this.followingGroups.push(group.id);
         } else if (!group.checked && !group.disabled) {
           //remove from array
           this.followingGroups = this.followingGroups.filter(function (el) {
-            return el.id !== group.id;
+            return el !== group.id;
           });
         }
         //save it back to the globalManager, so that we can upload it to the server later on.
         Polymer.globalsManager.set('followingGroups', this.followingGroups);
-      },
-
-      contains: function (array, groupId) {
-        for (var i = 0; i < array.length; i++) {
-          if (array[i].id === groupId) {
-            return true;
-          }
-        }
-        return false;
       },
 
       _selectionChanged: function () {

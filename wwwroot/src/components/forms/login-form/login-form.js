@@ -231,12 +231,9 @@ Polymer({
   handleUserDetailsAjaxResponse: function (e) {
     console.log("User details get succeeded");
     var userDetailsJsonResponse = e.detail.response;
-    if (userDetailsJsonResponse.name) {
+    if (userDetailsJsonResponse.id) {
       var userDetails = {
-        name: userDetailsJsonResponse.name,
-        country: userDetailsJsonResponse.country,
-        region: userDetailsJsonResponse.region,
-        city: userDetailsJsonResponse.city
+        id: userDetailsJsonResponse.id
       }
       Polymer.globalsManager.set('userDetails', userDetails);
       this.set('localStorage.userDetails', userDetails);

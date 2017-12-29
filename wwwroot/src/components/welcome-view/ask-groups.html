@@ -6,6 +6,9 @@
 <dom-module id='ask-groups'>
 	<template>
 		<style include='welcome-styles'></style>
+		<div class='header'>
+			<iron-icon src='/src/images/Time-Zones.png' alt="HTML5 Icon" class='iconstyle'></iron-icon>
+		</div>
 		<div class='center-align'>
 			<h1>Select interesting social calendar groups to subscribe events.</h1>
 			<p>Based on your location, [[product]] found these groups. Please select the groups of your interest.</p>
@@ -14,7 +17,7 @@
 			<iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" body='[[ajaxBody]]' content-type='application/json' on-error='handleErrorResponse'
 			 on-response='handleAjaxResponse'></iron-ajax>
 
-			<cal-stepper step-count=3 selected-index=2></cal-stepper>
+			<cal-stepper step-count=2 selected-index=1></cal-stepper>
 		</div>
 	</template>
 	<script type='text/javascript' src='ask-groups.js'></script>
