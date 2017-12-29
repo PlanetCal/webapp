@@ -20,7 +20,6 @@ Polymer({
   },
 
   makeAjaxCall: function () {
-
     var ajax = this.$.ajax;
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
     if (loggedInUser) {
@@ -32,6 +31,9 @@ Polymer({
 
       var groupsToSave = Polymer.globalsManager.globals.followingGroups;
       var userDetails = Polymer.globalsManager.globals.userDetails;
+      if (!userDetails) {
+        userDetails = {};
+      }
       userDetails.id = loggedInUser.id;
       userDetails.followingGroups = groupsToSave;
 
@@ -48,7 +50,7 @@ Polymer({
       this.fire('page-load-requested', { page: '/events' });
     }
     else if (this.navigation === 'previous') {
-      this.fire('page-load-requested', { page: '/ask-location' });
+      this.fire('page-load-requested', { page: '/welcome' });
     }
   },
 

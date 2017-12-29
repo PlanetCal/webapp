@@ -63,7 +63,7 @@ Polymer({
     }
 
     var firstTimeLogon = true;
-    if (userDetails && userDetails.name) {
+    if (userDetails && userDetails.id) {
       firstTimeLogon = false;
     }
 

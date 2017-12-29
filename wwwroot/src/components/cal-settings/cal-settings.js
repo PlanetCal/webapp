@@ -1,75 +1,29 @@
 Polymer({
     is: 'cal-settings',
-    listeners: {
-        '--on-country-changed': 'countryChangedHandler',
-        '--on-region-changed': 'regionChangedHandler',
-        '--on-city-changed': 'cityChangedHandler',
-    },
 
     ready: function () {
-
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
         if (loggedInUser) {
             this.name = loggedInUser.name;
             this.email = loggedInUser.email;
         }
-
-        var userDetails = Polymer.globalsManager.globals.userDetails;
-
-        if (userDetails && userDetails.name) {
-            this.countryValue = userDetails.country;
-            this.city = userDetails.city;
-            this.regionValue = userDetails.region;
-        }
-    },
-
-    countryChangedHandler: function (e) {
-        this.countryValue = e.detail.countryValue;
-    },
-
-    regionChangedHandler: function (e) {
-        this.regionValue = e.detail.regionValue;
-    },
-    cityChangedHandler: function (e) {
-        this.city = e.detail.cityValue;
     },
 
     saveSettingsHandler: function () {
-        var userDetails = Polymer.globalsManager.globals.userDetails;
-
-        var firstTimeLogon = true;
-        if (userDetails && userDetails.name) {
-            firstTimeLogon = false;
-        }
         var ajax = this.$.ajax;
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
-        this.ajaxUrl = serviceBaseUrl + '/userdetails';
         ajax.headers['Version'] = '1.0';
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
 
         if (loggedInUser) {
-            this.name = loggedInUser.name;
-
+            var httpMethod = 'PUT'
             ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
-
-            if (firstTimeLogon == false) {
-                var httpMethod = 'PUT'
-                this.ajaxUrl = this.ajaxUrl + '/' + loggedInUser.id;
-            }
-            else {
-                var httpMethod = 'POST'
-            }
+            this.ajaxUrl = serviceBaseUrl + '/userdetails/' + loggedInUser.id;
 
             ajax.method = httpMethod;
-
             var groupsToSave = Polymer.globalsManager.globals.followingGroups;
-
             this.ajaxBody = JSON.stringify({
                 id: loggedInUser.id,
-                name: loggedInUser.name,
-                country: this.countryValue,
-                region: this.regionValue,
-                city: this.city,
                 followingGroups: groupsToSave
             });
             ajax.generateRequest();
@@ -80,13 +34,11 @@ Polymer({
     },
 
     handleAjaxResponse: function (e) {
-        var jsonResponse = e.detail.response;
+        //var jsonResponse = e.detail.response;
         var userDetails = {
-            name: this.name,
-            country: this.countryValue,
-            region: this.regionValue,
-            city: this.city
+            id: this.id
         }
+
         Polymer.globalsManager.set('userDetails', userDetails);
         this.set('localStorage.userDetails', userDetails);
         this.fire("status-message-update", { severity: 'info', message: 'Settings saved!' });

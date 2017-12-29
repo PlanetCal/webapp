@@ -47,7 +47,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             [[messageText]]
             <div class="right">
               <a class='link' on-tap='onMessageStatusCloseHandler'>
-                close<iron-icon icon="icons:close"></iron-icon>
+                close
+                <iron-icon icon="icons:close"></iron-icon>
               </a>
             </div>
           </div>
@@ -65,7 +66,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <group-events-page group-id=[[queryParams.groupId]] name='group-events'></group-events-page>
           <my-groups-page name='my-groups' group-type=[[queryParams.groupType]]></my-groups-page>
           <groups-edit-page group-id=[[queryParams.groupId]] group-type-to-go-back=[[queryParams.groupTypeToGoTo]] name='groups-edit'></groups-edit-page>
-          <ask-location-page name='ask-location'></ask-location-page>
           <ask-groups-page name='ask-groups'></ask-groups-page>
           <view404-page name='view404'></view404-page>
         </iron-pages>
