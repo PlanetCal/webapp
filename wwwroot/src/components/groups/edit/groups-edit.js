@@ -71,7 +71,7 @@ Polymer({
     resizeImageSelection: function (file) {
         var myURL = window.URL || window.webkitURL;
         var img = this.$.previewImage;
-        var imageWidth = 300, imageHeight = 140;
+        var imageWidth = 300, imageHeight = 200;
         img.width = imageWidth;
         img.height = imageHeight;
 
