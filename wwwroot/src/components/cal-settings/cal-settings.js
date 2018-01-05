@@ -38,9 +38,6 @@ Polymer({
         var userDetails = {
             id: this.id
         }
-
-        Polymer.globalsManager.set('userDetails', userDetails);
-        this.set('localStorage.userDetails', userDetails);
         this.fire("status-message-update", { severity: 'info', message: 'Settings saved!' });
     },
 

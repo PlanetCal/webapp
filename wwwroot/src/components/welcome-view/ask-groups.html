@@ -6,6 +6,7 @@
 <dom-module id='ask-groups'>
 	<template>
 		<style include='welcome-styles'></style>
+		<iron-localstorage name="planetCal-storage" value="{{localStorage}}" on-iron-localstorage-load="_onLocalStorageLoad"></iron-localstorage>
 		<div class='header'>
 			<iron-icon src='/src/images/Time-Zones.png' alt="HTML5 Icon" class='iconstyle'></iron-icon>
 		</div>
