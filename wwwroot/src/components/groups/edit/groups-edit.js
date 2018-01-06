@@ -12,7 +12,7 @@ Polymer({
             type: String,
             observer: '_dataChanged',
         },
-        parentGroupId: {
+        parentGroup: {
             type: String,
             observer: '_dataChanged',
         }
@@ -27,7 +27,7 @@ Polymer({
     },
 
     _dataChanged: function () {
-        if ((this.groupId || this.parentGroupId) && this.groupTypeToGoBack) {
+        if ((this.groupId || this.parentGroup) && this.groupTypeToGoBack) {
             this.regionExpanded = false;
             this.updateExpandButtonTextAndIcon(this.regionExpanded);
             this.pageLoad();
@@ -38,7 +38,7 @@ Polymer({
         this.fire("status-message-update");
         var items = [];
 
-        if (this.groupId === 'null') {
+        if (!this.groupId) {
             this.reset();
         }
         else {
@@ -125,6 +125,7 @@ Polymer({
         this.administrators = editedGroup.administrators ? editedGroup.administrators.join(';') : '';
         //this.members = editedGroup.members;
         this.privacy = editedGroup.privacy;
+        this.parentGroup = editedGroup.parentGroup;
         this.previewSrc = editedGroup.icon;
         this.category = editedGroup.category;
     },
@@ -144,6 +145,7 @@ Polymer({
         this.previewSrc = '';
         this.category = 'Personal';
         this.resetGlobalManagerForEditedGroup();
+        this.parentGroup = this.parentGroup;
     },
 
     updateExpandButtonTextAndIcon: function (expanded) {
@@ -220,6 +222,7 @@ Polymer({
         obj.members = this.members;
         obj.privacy = this.privacy;
         obj.category = this.category;
+        obj.parentGroup = this.parentGroup;
         if (!this.isGroupImageChanged)
             obj.icon = this.previewSrc;
         return obj;
@@ -273,7 +276,7 @@ Polymer({
 
         switch (this.ajaxCall) {
             case 'getGroup':
-                ajax.url += group.id + '?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy';
+                ajax.url += group.id + '?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy|parentGroup|childGroups';
                 ajax.body = '';
                 ajax.method = 'GET';
                 ajax.headers['Version'] = '1.0';
