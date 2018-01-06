@@ -172,7 +172,7 @@ Polymer({
             Polymer.globalsManager.set('editedGroup', null);
         }
         var editedGroup = e.model.item;
-        this.fire('page-load-requested', { page: '/groups-edit', queryParams: { parentGroup: editedGroup.id, groupTypeToGoTo: this.groupType } });
+        this.fire('page-load-requested', { page: '/groups-edit', queryParams: { parentGroup: editedGroup.id, category: editedGroup.category, privacy: editedGroup.privacy, groupTypeToGoTo: this.groupType } });
     },
 
     editGroup: function (e) {

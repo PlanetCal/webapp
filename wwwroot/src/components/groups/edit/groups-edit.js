@@ -15,7 +15,13 @@ Polymer({
         parentGroup: {
             type: String,
             observer: '_dataChanged',
-        }
+        },
+        category: {
+            type: String
+        },
+        privacy: {
+            type: String
+        },
     },
     listeners: {
         'iron-resize': 'onGroupsEditResize',
@@ -27,7 +33,11 @@ Polymer({
     },
 
     _dataChanged: function () {
-        if ((this.groupId || this.parentGroup) && this.groupTypeToGoBack) {
+        if (this.parentGroup && (!this.category || !this.privacy)) {
+            return;
+        }
+
+        if (this.groupTypeToGoBack) {
             this.regionExpanded = false;
             this.updateExpandButtonTextAndIcon(this.regionExpanded);
             this.pageLoad();
@@ -141,11 +151,11 @@ Polymer({
         this.website = '';
         this.administrators = '';
         //this.members = [];
-        this.privacy = 'Closed';
+        this.privacy = this.parentGroup ? this.privacy : 'Closed';
         this.previewSrc = '';
-        this.category = 'Personal';
+        this.category = this.parentGroup ? this.category : 'Personal';
         this.resetGlobalManagerForEditedGroup();
-        this.parentGroup = this.parentGroup;
+        //this.parentGroup = this.parentGroup;
     },
 
     updateExpandButtonTextAndIcon: function (expanded) {
