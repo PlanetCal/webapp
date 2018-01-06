@@ -33,9 +33,14 @@ Polymer({
     },
 
     _dataChanged: function () {
-        if (this.parentGroup && (!this.category || !this.privacy)) {
+        if (this.parentGroup && this.parentGroup !== '' && (!this.category || !this.privacy)) {
             return;
         }
+
+        let disableDropDowns = this.parentGroup !== '';
+        this.$.categoryMenu.disabled = disableDropDowns;
+        this.$.privacyMenu.disabled = disableDropDowns;
+        //this.$.parentGroupDiv.hidden = !disableDropDowns;
 
         if (this.groupTypeToGoBack) {
             this.regionExpanded = false;
@@ -138,6 +143,10 @@ Polymer({
         this.parentGroup = editedGroup.parentGroup;
         this.previewSrc = editedGroup.icon;
         this.category = editedGroup.category;
+
+        this.$.categoryMenu.disabled = (editedGroup.parentGroup && editedGroup.parentGroup != '') || (editedGroup.childGroups && editedGroup.childGroups.length > 0);
+        this.$.privacyMenu.disabled = this.$.categoryMenu.disabled;
+        //this.$.parentGroupDiv.hidden = !editedGroup.parentGroup;
     },
 
     reset: function () {
@@ -353,6 +362,12 @@ Polymer({
                     break;
                 case 'GroupNotExistant':
                     message = 'Group does not exist.';
+                    break;
+                case 'PrivacyChangeNotAllowedDueToChildGroups':
+                    message = 'Group privacy should remain same, since it has child groups';
+                    break;
+                case 'CategoryChangeNotAllowedDueToChildGroups':
+                    message = 'Group category should remain same, since it has child groups';
                     break;
                 case 'InvalidEmail':
                     message = 'Administrator email is invalid.';

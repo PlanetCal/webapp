@@ -18,6 +18,6 @@ Polymer({
         if (Polymer.globalsManager.editedGroup) {
             Polymer.globalsManager.set('editedGroup', null);
         }
-        this.fire('page-load-requested', { page: '/groups-edit', queryParams: { groupTypeToGoTo: this.groupType } });
+        this.fire('page-load-requested', { page: '/groups-edit', queryParams: { groupId: '', parentGroup: '', groupTypeToGoTo: this.groupType } });
     },
 });
