@@ -276,7 +276,7 @@ Polymer({
     groupDisplayName: function (item) {
         var displayName = item.name;
         if (item.privacy === 'Closed') {
-            displayName += ' [Closed]';
+            displayName += ' (Private)';
         }
         return displayName;
     }
