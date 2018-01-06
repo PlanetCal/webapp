@@ -147,6 +147,9 @@ Polymer({
                 case 'UserNotAuthorized':
                     message = 'User is not authorized.';
                     break;
+                case 'GroupHasChildGroups':
+                    message = 'This group has one ore more child groups. First delete its child groups.';
+                    break;
                 default:
                     message = errorResponse.errorcode + ' has not been handled yet.';
                     break;
@@ -217,12 +220,25 @@ Polymer({
         return item.contact && item.contact.phone ? '' : 'displayNone';
     },
 
+    hideForChildGroups: function (item) {
+        return item.childGroups && item.childGroups.length > 0 ? '' : 'displayNone';
+    },
+    hideForParentGroup: function (item) {
+        return item.parentGroup ? '' : 'displayNone';
+    },
+
     hideForEmail: function (item) {
         return item.contact && item.contact.email ? '' : 'displayNone';
     },
 
     hideForWebsite: function (item) {
         return item.webSite ? '' : 'displayNone';
+    },
+
+    hideAddChildGroup: function (item) {
+        var showAdd = this.loggedInUser.id === item.createdBy || this.groupType === 'administered';
+        showAdd = showAdd && (!item.parentGroup);
+        return showAdd ? '' : 'displayNone';
     },
 
     hideForEdit: function (item) {
