@@ -11,6 +11,10 @@ Polymer({
         groupId: {
             type: String,
             observer: '_dataChanged',
+        },
+        parentGroupId: {
+            type: String,
+            observer: '_dataChanged',
         }
     },
     listeners: {
@@ -23,7 +27,7 @@ Polymer({
     },
 
     _dataChanged: function () {
-        if (this.groupId && this.groupTypeToGoBack) {
+        if ((this.groupId || this.parentGroupId) && this.groupTypeToGoBack) {
             this.regionExpanded = false;
             this.updateExpandButtonTextAndIcon(this.regionExpanded);
             this.pageLoad();

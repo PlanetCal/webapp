@@ -27,14 +27,15 @@
                 </div>
                 <div class="card-footer">
                     <span class$="[[hideUnsubscribeButton(item)]]">
-                        <a class="link-events" href='#' on-tap='unsubscribe'>Unsubscribe</a>
+                        <a class="link-events" href='#' title="Unsubscribe" on-tap='unsubscribe'>Unsubscribe</a>
                         |</span>
                     <span class$="[[hideSubscribeButton(item)]]">
-                        <a class="link-events" href='#' on-tap='subscribe'>Subscribe</a>
+                        <a class="link-events" href='#' title="Subscribe" on-tap='subscribe'>Subscribe</a>
                         |</span>
                     <a class="link-events" href='#' on-tap="goToEvents" title="Go to Events">Events</a>
+                    <iron-icon class$="icon-edit [[hideForEdit(item)]]" icon="icons:add" title="createChildGroup" on-tap="createChildGroup"></iron-icon>
                     <iron-icon class$="icon-edit [[hideForEdit(item)]]" icon="icons:create" title="Edit" on-tap="editGroup"></iron-icon>
-                    <iron-icon class$="icon-edit [[hideForDelete(item)]]" icon="icons:delete" title="Delete" on-tap="deleteGroup"></iron-icon>
+                    <iron-icon class$="icon-edit [[hideForEdit(item)]]" icon="icons:delete" title="Delete" on-tap="deleteGroup"></iron-icon>
                 </div>
             </paper-card>
         </template>

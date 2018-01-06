@@ -164,6 +164,14 @@ Polymer({
         }
     },
 
+    createChildGroup: function (e) {
+        if (Polymer.globalsManager.editedGroup) {
+            Polymer.globalsManager.set('editedGroup', null);
+        }
+        var editedGroup = e.model.item;
+        this.fire('page-load-requested', { page: '/groups-edit', queryParams: { parentGroupId: editedGroup.id, groupTypeToGoTo: this.groupType } });
+    },
+
     editGroup: function (e) {
         var editedGroup = e.model.item;
         Polymer.globalsManager.set('editedGroup', editedGroup);
@@ -222,12 +230,12 @@ Polymer({
         return isEdit ? '' : 'displayNone';
     },
 
-    hideForDelete: function (item) {
-        var isDelete = this.loggedInUser.id === item.createdBy ||
-            (item.administrators && item.administrators.indexOf(this.loggedInUser.email.toLowerCase()) >= 0);
+    // hideForDelete: function (item) {
+    //     var isDelete = this.loggedInUser.id === item.createdBy ||
+    //         (item.administrators && item.administrators.indexOf(this.loggedInUser.email.toLowerCase()) >= 0);
 
-        return isDelete ? '' : 'displayNone';
-    },
+    //     return isDelete ? '' : 'displayNone';
+    // },
 
     groupIcon: function (item) {
         return (!item.icon || item.icon === '') ? '../src/images/noimage.png' : item.icon;
