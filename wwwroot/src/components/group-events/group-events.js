@@ -39,14 +39,12 @@ Polymer({
         }
     },
     isUserGroupOwnerOrAdmin: function (loggedInUser, groupDetail) {
-        if (loggedInUser && groupDetail && groupDetail.createdBy
-            && (loggedInUser.id == groupDetail.createdBy
-                || (groupDetail.administrators && groupDetail.administrators.length > 0
-                    && groupDetail.administrators.indexOf(loggedInUser.email)))) {
-            return true;
-        }
-        return false;
+        var result = (loggedInUser && groupDetail && groupDetail.createdBy
+            && (loggedInUser.id == groupDetail.createdBy ||
+                (groupDetail.administrators && groupDetail.administrators.indexOf(loggedInUser.email.toLowerCase()) >= 0)));
+        return result;
     },
+
     hideEditDeleteButton: function (event) {
         return this.isCurrentUserGroupOwnerOrAdmin ? 'showEditDeleteButton' : 'displayNone';
     },

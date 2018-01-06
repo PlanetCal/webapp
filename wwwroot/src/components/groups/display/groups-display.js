@@ -223,7 +223,9 @@ Polymer({
     },
 
     hideForDelete: function (item) {
-        var isDelete = this.loggedInUser.id === item.createdBy;
+        var isDelete = this.loggedInUser.id === item.createdBy ||
+            (item.administrators && item.administrators.indexOf(this.loggedInUser.email.toLowerCase()) >= 0);
+
         return isDelete ? '' : 'displayNone';
     },
 
