@@ -236,6 +236,10 @@ Polymer({
     },
 
     hideAddChildGroup: function (item) {
+        if (!Polymer.globalsManager.globals.enableChildGroups) {
+            return 'displayNone';
+        }
+
         var showAdd = this.loggedInUser.id === item.createdBy || this.groupType === 'administered';
         showAdd = showAdd && (!item.parentGroup);
         return showAdd ? '' : 'displayNone';
