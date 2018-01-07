@@ -65,7 +65,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <welcome-page name='welcome'></welcome-page>
           <group-events-page group-id=[[queryParams.groupId]] name='group-events'></group-events-page>
           <my-groups-page name='my-groups' group-type=[[queryParams.groupType]]></my-groups-page>
-          <groups-edit-page group-id=[[queryParams.groupId]] group-type-to-go-back=[[queryParams.groupTypeToGoTo]] name='groups-edit'></groups-edit-page>
+          <groups-edit-page parent-group=[[queryParams.parentGroup]] category=[[queryParams.category]] privacy=[[queryParams.privacy]]
+            group-id=[[queryParams.groupId]] group-type-to-go-back=[[queryParams.groupTypeToGoTo]] name='groups-edit'></groups-edit-page>
           <ask-groups-page name='ask-groups'></ask-groups-page>
           <view404-page name='view404'></view404-page>
         </iron-pages>

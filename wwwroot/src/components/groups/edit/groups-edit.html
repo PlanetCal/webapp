@@ -17,7 +17,7 @@
           on-change="validateOnChange">
         </paper-input>
         <span style="width: 5%;"></span>
-        <paper-dropdown-menu label="Category" style="width: 30%;" required error-message="required" on-change="validateOnChange">
+        <paper-dropdown-menu id="categoryMenu" label="Category" style="width: 30%;" required error-message="required" on-change="validateOnChange">
           <paper-listbox attr-for-selected="value" slot="dropdown-content" class="dropdown-content" selected="{{category}}">
             <paper-item value="Local">Local</paper-item>
             <paper-item value="Personal">Personal</paper-item>
@@ -27,12 +27,15 @@
           </paper-listbox>
         </paper-dropdown-menu>
         <span style="width: 5%"></span>
-        <paper-dropdown-menu label="Privacy" style="width: 30%;" required error-message="required" on-change="validateOnChange">
+        <paper-dropdown-menu id="privacyMenu" label="Privacy" style="width: 30%;" required error-message="required" on-change="validateOnChange">
           <paper-listbox attr-for-selected="value" slot="dropdown-content" class="dropdown-content" selected="{{privacy}}">
             <paper-item value="Closed">Closed</paper-item>
             <paper-item value="Open">Open</paper-item>
           </paper-listbox>
         </paper-dropdown-menu>
+      </div>
+      <div id=parentGroupDiv>
+        <p> Parent Group: [[parentGroup]]</p>
       </div>
       <div>
         <paper-button class='blue' on-tap="toggle">

@@ -59,13 +59,13 @@ Polymer({
             case 'getGroups':
                 switch (this.groupType) {
                     case ('owned'):
-                        ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&filter=createdBy=' + this.loggedInUser.id;
+                        ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy|parentGroup|childGroups&filter=createdBy=' + this.loggedInUser.id;
                         break;
                     case ('subscribed'):
-                        ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|category|createdBy|members|location|address|contact|webSite|modifiedBy';
+                        ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|category|createdBy|members|location|address|contact|webSite|modifiedBy|parentGroup|childGroups';
                         break;
                     case ('administered'):
-                        ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy&administeredByMe=true';
+                        ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy|parentGroup|childGroups&administeredByMe=true';
                         break;
                     default:
                         //this.fire("status-message-update", { severity: 'error', message: 'GroupType ' + this.groupType + ' is not supported.' });
@@ -147,6 +147,9 @@ Polymer({
                 case 'UserNotAuthorized':
                     message = 'User is not authorized.';
                     break;
+                case 'GroupHasChildGroups':
+                    message = 'This group has one ore more child groups. First delete its child groups.';
+                    break;
                 default:
                     message = errorResponse.errorcode + ' has not been handled yet.';
                     break;
@@ -164,10 +167,18 @@ Polymer({
         }
     },
 
+    createChildGroup: function (e) {
+        if (Polymer.globalsManager.editedGroup) {
+            Polymer.globalsManager.set('editedGroup', null);
+        }
+        var editedGroup = e.model.item;
+        this.fire('page-load-requested', { page: '/groups-edit', queryParams: { groupId: '', parentGroup: editedGroup.id, category: editedGroup.category, privacy: editedGroup.privacy, groupTypeToGoTo: this.groupType } });
+    },
+
     editGroup: function (e) {
         var editedGroup = e.model.item;
         Polymer.globalsManager.set('editedGroup', editedGroup);
-        this.fire('page-load-requested', { page: '/groups-edit', queryParams: { groupId: editedGroup.id, groupTypeToGoTo: this.groupType } });
+        this.fire('page-load-requested', { page: '/groups-edit', queryParams: { groupId: editedGroup.id, parentGroup: '', groupTypeToGoTo: this.groupType } });
     },
 
     deleteGroup: function (e) {
@@ -209,6 +220,13 @@ Polymer({
         return item.contact && item.contact.phone ? '' : 'displayNone';
     },
 
+    hideForChildGroups: function (item) {
+        return item.childGroups && item.childGroups.length > 0 ? '' : 'displayNone';
+    },
+    hideForParentGroup: function (item) {
+        return item.parentGroup ? '' : 'displayNone';
+    },
+
     hideForEmail: function (item) {
         return item.contact && item.contact.email ? '' : 'displayNone';
     },
@@ -217,17 +235,27 @@ Polymer({
         return item.webSite ? '' : 'displayNone';
     },
 
+    hideAddChildGroup: function (item) {
+        if (!Polymer.globalsManager.globals.enableChildGroups) {
+            return 'displayNone';
+        }
+
+        var showAdd = this.loggedInUser.id === item.createdBy || this.groupType === 'administered';
+        showAdd = showAdd && (!item.parentGroup);
+        return showAdd ? '' : 'displayNone';
+    },
+
     hideForEdit: function (item) {
         var isEdit = this.loggedInUser.id === item.createdBy || this.groupType === 'administered';
         return isEdit ? '' : 'displayNone';
     },
 
-    hideForDelete: function (item) {
-        var isDelete = this.loggedInUser.id === item.createdBy ||
-            (item.administrators && item.administrators.indexOf(this.loggedInUser.email.toLowerCase()) >= 0);
+    // hideForDelete: function (item) {
+    //     var isDelete = this.loggedInUser.id === item.createdBy ||
+    //         (item.administrators && item.administrators.indexOf(this.loggedInUser.email.toLowerCase()) >= 0);
 
-        return isDelete ? '' : 'displayNone';
-    },
+    //     return isDelete ? '' : 'displayNone';
+    // },
 
     groupIcon: function (item) {
         return (!item.icon || item.icon === '') ? '../src/images/noimage.png' : item.icon;
@@ -252,7 +280,7 @@ Polymer({
     groupDisplayName: function (item) {
         var displayName = item.name;
         if (item.privacy === 'Closed') {
-            displayName += ' [Closed]';
+            displayName += ' (Private)';
         }
         return displayName;
     }
