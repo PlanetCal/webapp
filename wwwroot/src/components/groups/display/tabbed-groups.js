@@ -20,4 +20,9 @@ Polymer({
         }
         this.fire('page-load-requested', { page: '/groups-edit', queryParams: { groupId: '', parentGroup: '', groupTypeToGoTo: this.groupType } });
     },
+
+    importEvents: function (e) {
+        this.fire('page-load-requested', { page: '/events-import', queryParams: { groupId: '', groupTypeToGoTo: this.groupType } });
+    },
+
 });

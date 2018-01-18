@@ -1,0 +1,26 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/src/shared-styles.html">
+<link rel="import" href="/src/components/group-events/import/events-import.html">
+<dom-module id="events-import-page">
+  <template>
+    <style include="shared-styles"></style>
+    <div>
+      <events-import group-type-to-go-back=[[groupTypeToGoBack]] group-id=[[groupId]]></events-import>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'events-import-page',
+
+      properties: {
+        groupId: {
+          type: String
+        },
+        groupTypeToGoBack: {
+          type: String
+        }
+      },
+    });
+  </script>
+</dom-module>
