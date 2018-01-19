@@ -33,9 +33,11 @@ Polymer({
         this.isCurrentUserGroupOwnerOrAdmin = this.isUserGroupOwnerOrAdmin(loggedInUser, groupDetail);
         if (groupDetail && loggedInUser && this.isCurrentUserGroupOwnerOrAdmin) {
             this.$.btnAddEvent.style.display = '';
+            this.$.btnImportEvent.style.display = '';
         }
         else {
             this.$.btnAddEvent.style.display = 'none';
+            this.$.btnImportEvent.style.display = 'none';
         }
     },
     isUserGroupOwnerOrAdmin: function (loggedInUser, groupDetail) {
@@ -97,6 +99,22 @@ Polymer({
         }
         elements[0].invalid = false;
     },
+
+    importEventsDialog: function (e) {
+        //        this.fire('page-load-requested', { page: '/events-import', queryParams: { groupId: '', groupTypeToGoTo: this.groupType } });
+        this.$.importEventsDialogHeader.textContent = "Import Events";
+        this.$.saveevent.disabled = false;
+        this.$.cancelevent.disabled = false;
+        var body = document.querySelector('body');
+        Polymer.dom(body).appendChild(this.$.importEventsDialog);
+        this.$.importEventsDialog.open();
+        // var elements = document.getElementsByClassName('importEvents');
+        // for (var i = 0; i < elements.length; i++) {
+        //     elements[i].invalid = false;
+        // }
+        // elements[0].invalid = false;
+    },
+
     addEventToGrid: function () {
         this.eventObject = this.constructEventObject();
         if (this.eventObject.id) { // Update Event
@@ -206,9 +224,30 @@ Polymer({
             this.makeAjaxCall(this.eventObject);
         }
     },
+
+    executeImportEvents: function (e) {
+        var isValid = this.validate();
+        if (isValid) {
+            this.$.saveevent.disabled = true;
+            this.$.cancelevent.disabled = true;
+            this.events = this.constructEventsObject();
+            this.ajaxCall = 'importEvents'
+            this.makeAjaxCall(this.eventObject);
+        }
+    },
+
     cancelEvent: function (e) {
         this.emptyEventFields();
     },
+
+    cancelImportEvents: function () {
+        var dialog = this.$.importEventsDialog;
+        if (dialog) {
+            dialog.close();
+        }
+    },
+
+
     deleteEvent: function (e) {
         e.preventDefault();
         this.ajaxCall = 'deleteEvents';

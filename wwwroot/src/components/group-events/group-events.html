@@ -107,6 +107,18 @@
       </div>
     </paper-dialog>
 
+    <paper-dialog modal="" id="importEventsDialog" class="size-position">
+      <h2 id="importEventsDialogHeader"></h2>
+      <paper-dialog-scrollable>
+      </paper-dialog-scrollable>
+      <div class="buttons">
+        <paper-button class="action-icons" id="cancelImportEvents" on-tap="cancelImportEvents">
+          <iron-icon icon="icons:delete"></iron-icon>Cancel</paper-button>
+        <paper-button class="action-icons" id="executeImportEvents" on-tap="executeImportEvents">
+          <iron-icon icon="icons:done"></iron-icon>Import</paper-button>
+      </div>
+    </paper-dialog>
+
     <!-- Dialog for Date time picker - start -->
     <paper-dialog id="startDatePickerDialog" class="paper-date-picker-dialog" modal="">
       <paper-date-picker id="startDatePicker" date="{{startDateTime}}"></paper-date-picker>
@@ -157,6 +169,7 @@
       <paper-button id="btnUpcoming" class="blue" on-tap="loadEvents">Upcoming</paper-button>
       <paper-button id="btnPast" class="blue" on-tap="pastEvents">past</paper-button>
       <paper-button id="btnAddEvent" raised="" class="indigo" on-tap="showDialog">Add Event</paper-button>
+      <paper-button id="btnImportEvent" raised="" class="indigo" on-tap="importEventsDialog">Import Events</paper-button>
     </div>
     <!-- List of Buttons End -->
     <!--template is="dom-if" if="{{isLoading}}">

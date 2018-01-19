@@ -7,8 +7,6 @@
         <style include="groups-display-styles"></style>
         <h2>Groups [
             <a class="link-create" href="#" on-tap="createGroup">CREATE</a> ]</h2>
-        <h2>Events [
-            <a class="link-create" href="#" on-tap="importEvents">IMPORT</a> ]</h2>
         <paper-tabs noink no-bar scrollable fit-container selected='{{groupType}}' attr-for-selected='id'>
             <template is="dom-repeat" items="[[groupTypes]]">
                 <paper-tab id='[[item.id]]'>[[item.displayName]]</paper-tab>
