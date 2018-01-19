@@ -44,6 +44,7 @@ Polymer({
         return fileType === 'text/calendar';
     },
 
+    //https://github.com/thybag/JavaScript-Ical-Parser/blob/master/ical_parser.js
     parseICAL: function (data) {
         //Ensure cal is empty
         this.events = [];
