@@ -101,8 +101,8 @@ Polymer({
     },
 
     importEventsDialog: function (e) {
-        //        this.fire('page-load-requested', { page: '/events-import', queryParams: { groupId: '', groupTypeToGoTo: this.groupType } });
         this.$.importEventsDialogHeader.textContent = "Import Events";
+        this.importEventsOption = 'futureEvents';
         this.$.saveevent.disabled = false;
         this.$.cancelevent.disabled = false;
         var body = document.querySelector('body');
