@@ -112,7 +112,7 @@
       <paper-dialog-scrollable>
         <div class="dialog-textbox" style="width: 600px;">
           <fieldset>
-            <paper-input type="file" label="Upload Image" id="IcsFile" on-change="openFile" accept="*/"></paper-input>
+            <paper-input type="file" label="Upload iCS File" id="IcsFile" on-change="openFile" accept="text/calendar"></paper-input>
             <paper-radio-group selected="{{importEventsOption}}">
               <paper-radio-button name="futureEvents">Import Future Events only</paper-radio-button>
               <paper-radio-button name="allEvents">Import All events</paper-radio-button>
