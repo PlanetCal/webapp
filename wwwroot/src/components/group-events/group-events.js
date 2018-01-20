@@ -219,7 +219,7 @@ Polymer({
         let eventsToImport = this.constructEventsList(this.groupId, this.eventsToImport, this.importEventsOption);
         this.ajaxCall = 'postEvents'
         eventsToImport.forEach(event => {
-            this.makeAjaxCall(event);
+            //this.makeAjaxCall(event);
         });
         this.closeImportEventsDialog();
     },
@@ -231,17 +231,21 @@ Polymer({
         if (eventsList && groupId) {
             eventsList.forEach(function (item) {
                 //If the event starts after the current time, add it to the array to return.
-                if (importEventsOption !== 'futureEvents' || item.DTSTART > current_date) {
-                    let event = {
-                        name: item.SUMMARY,
-                        description: item.DESCRIPTION,
-                        startDateTime: item.DTSTART,
-                        endDateTime: item.DTEND,
-                        address: item.LOCATION,
-                        groupId: groupId
-                    };
+                if (importEventsOption !== 'futureEvents' ||
+                    item.DTSTART > current_date) {
 
-                    eventsToReturn.push(event);
+                    //Does not support recurring events at the moment.
+                    if (!item.RRULE) {
+                        let event = {
+                            name: item.SUMMARY,
+                            description: item.DESCRIPTION,
+                            startDateTime: item.DTSTART,
+                            endDateTime: item.DTEND,
+                            address: item.LOCATION,
+                            groupId: groupId
+                        };
+                        eventsToReturn.push(event);
+                    }
                 }
             });
         }

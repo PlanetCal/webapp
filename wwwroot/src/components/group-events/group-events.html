@@ -22,6 +22,11 @@
     background-color: #9cd;
   }
 
+  .RecurringEventsLabel {
+    color: red;
+    margin-left: 10px;
+  }
+
   paper-dialog.size-position {
     top: 0px;
   }
@@ -110,7 +115,7 @@
     <paper-dialog modal="" id="importEventsDialog" class="size-position">
       <h2 id="importEventsDialogHeader"></h2>
       <paper-dialog-scrollable>
-        <div class="dialog-textbox" style="width: 600px;">
+        <div class="dialog-textbox" style="width: 500px;">
           <fieldset>
             <paper-input type="file" label="Upload iCS File" id="IcsFile" on-change="openFile" accept="text/calendar"></paper-input>
             <br>
@@ -119,6 +124,7 @@
               <paper-radio-button name="allEvents">Import All events</paper-radio-button>
             </paper-radio-group>
           </fieldset>
+          <label class="RecurringEventsLabel">Recurring events will be ignored.</label>
         </div>
       </paper-dialog-scrollable>
       <div class="buttons">
