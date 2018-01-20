@@ -110,8 +110,14 @@
     <paper-dialog modal="" id="importEventsDialog" class="size-position">
       <h2 id="importEventsDialogHeader"></h2>
       <paper-dialog-scrollable>
-        <div>
-          <paper-input type="file" label="Upload Image" id="IcsFile" on-change="openFile" accept="*/"></paper-input>
+        <div class="dialog-textbox" style="width: 600px;">
+          <fieldset>
+            <paper-input type="file" label="Upload Image" id="IcsFile" on-change="openFile" accept="*/"></paper-input>
+            <paper-radio-group selected="futureEvents">
+              <paper-radio-button name="futureEvents">Import Future Events only</paper-radio-button>
+              <paper-radio-button name="allEvents">Import All events</paper-radio-button>
+            </paper-radio-group>
+          </fieldset>
         </div>
       </paper-dialog-scrollable>
       <div class="buttons">
