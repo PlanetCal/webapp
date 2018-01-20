@@ -113,6 +113,7 @@
         <div class="dialog-textbox" style="width: 600px;">
           <fieldset>
             <paper-input type="file" label="Upload iCS File" id="IcsFile" on-change="openFile" accept="text/calendar"></paper-input>
+            <br>
             <paper-radio-group selected="{{importEventsOption}}">
               <paper-radio-button name="futureEvents">Import Future Events only</paper-radio-button>
               <paper-radio-button name="allEvents">Import All events</paper-radio-button>
@@ -123,7 +124,7 @@
       <div class="buttons">
         <paper-button class="action-icons" id="cancelImportEvents" on-tap="cancelImportEvents">
           <iron-icon icon="icons:delete"></iron-icon>Cancel</paper-button>
-        <paper-button class="action-icons" id="executeImportEvents" on-tap="executeImportEvents">
+        <paper-button class="action-icons" id="executeImportEvents" on-tap="importEvents">
           <iron-icon icon="icons:done"></iron-icon>Import</paper-button>
       </div>
     </paper-dialog>

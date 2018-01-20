@@ -109,7 +109,7 @@ Polymer({
         Polymer.dom(body).appendChild(this.$.importEventsDialog);
         this.$.importEventsDialog.open();
         this.$.IcsFile.inputElement.value = '';
-        this.events = [];
+        this.eventsToImport = [];
     },
 
     addEventToGrid: function () {
@@ -222,15 +222,44 @@ Polymer({
         }
     },
 
-    executeImportEvents: function (e) {
-        var isValid = this.validate();
-        if (isValid) {
-            this.$.saveevent.disabled = true;
-            this.$.cancelevent.disabled = true;
-            this.events = this.constructEventsObjectToImport();
-            this.ajaxCall = 'importEvents'
-            this.makeAjaxCall(this.eventObject);
+    importEvents: function (e) {
+        let eventsToImport = this.constructEventsObjectToImport(this.groupId, this.eventsToImport, this.importEventsOption);
+        this.ajaxCall = 'importEvents'
+        this.makeAjaxCall(eventsToImport);
+    },
+
+
+
+    constructEventsObjectToImport: function (groupId, eventsList, importEventsOption) {
+        let eventsToReturn = [], current_date = new Date();
+        if (eventsList && groupId) {
+            eventsList.forEach(function (item) {
+                //If the event starts after the current time, add it to the array to return.
+                if (importEventsOption !== 'futureEvents' || item.DTSTART > current_date) {
+                    let event = {
+                        name: item.SUMMARY,
+                        description: item.DESCRIPTION,
+                        startDateTime: item.DTSTART,
+                        endDateTime: item.DTEND,
+                        address: item.LOCATTION,
+                        groupId: groupId
+                    };
+                    //
+                    // DTSTART:20151218T003000Z
+                    // DTEND: 20151218T010000Z
+                    // "type": "Holiday",
+                    //     "startDateTime": "2018-08-29T24:00Z",
+                    //     "endDateTime": "2018-09-02T24:00Z",
+                    //     "location": "USA",
+                    //     "address": "16250 NE 74th Street Redmond WA 98052",
+                    //     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
+                    // };
+
+                    eventsToReturn.push(event);
+                }
+            });
         }
+        return eventsToReturn;
     },
 
     cancelEvent: function (e) {
@@ -613,10 +642,8 @@ Polymer({
                 reader.onload = function () {
                     var text = reader.result;
                     tmp_this.parseICAL(text);
-                    var result = tmp_this.getFutureEvents();
                 };
                 reader.readAsText(file);
-
             }
             else {
                 inputElement.value = '';
@@ -632,7 +659,7 @@ Polymer({
     //https://github.com/thybag/JavaScript-Ical-Parser/blob/master/ical_parser.js
     parseICAL: function (data) {
         //Ensure cal is empty
-        this.events = [];
+        this.eventsToImport = [];
 
         //Clean string and split the file so we can handle it (line by line)
         cal_array = data.replace(new RegExp("\\r", "g"), "").split("\n");
@@ -653,7 +680,7 @@ Polymer({
 
             if (in_event && ln == 'END:VEVENT') {
                 in_event = false;
-                this.events.push(cur_event);
+                this.eventsToImport.push(cur_event);
                 cur_event = null;
             }
 
@@ -689,47 +716,6 @@ Polymer({
                 cur_event[type] = val;
             }
         }
-
-        //Run this to finish proccessing our Events.
-        this.complete();
-    },
-
-	/**
-	 * complete
-	 * Sort all events in to a sensible order and run the original callback
-	 */
-    complete: function () {
-        //Sort the data so its in date order.
-        this.events.sort(function (a, b) {
-            return a.DTSTART - b.DTSTART;
-        });
-        //Run callback method, if was defined. (return self)
-        if (typeof callback == 'function') callback(this);
-    },
-
-	/**
-	 * getEvents
-	 * return all events found in the ical file.
-	 *
-	 * @return list of events objects
-	 */
-    getEvents: function () {
-        return this.events;
-    },
-
-	/**
-	 * getFutureEvents
-	 * return all events sheduled to take place after the current date.
-	 *
-	 * @return list of events objects
-	 */
-    getFutureEvents: function () {
-        var future_events = [], current_date = new Date();
-        this.events.forEach(function (itm) {
-            //If the event starts after the current time, add it to the array to return.
-            if (itm.DTSTART > current_date) future_events.push(itm);
-        });
-        return future_events;
     },
 
     makeDate: function (ical_date) {
