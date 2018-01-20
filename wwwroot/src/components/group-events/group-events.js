@@ -108,11 +108,8 @@ Polymer({
         var body = document.querySelector('body');
         Polymer.dom(body).appendChild(this.$.importEventsDialog);
         this.$.importEventsDialog.open();
-        // var elements = document.getElementsByClassName('importEvents');
-        // for (var i = 0; i < elements.length; i++) {
-        //     elements[i].invalid = false;
-        // }
-        // elements[0].invalid = false;
+        this.$.IcsFile.inputElement.value = '';
+        this.events = [];
     },
 
     addEventToGrid: function () {
