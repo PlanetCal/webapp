@@ -85,7 +85,7 @@ Polymer({
         this.$.btnUpcoming.disabled = true;
         this.makeAjaxCall();
     },
-    showDialog: function (event) {
+    launchAddEventDialog: function (event) {
         this.$.eventDialogHeader.textContent = "Add Event";
         //this.$.saveevent.textContent = "Save";
         this.$.saveevent.disabled = false;
@@ -100,7 +100,7 @@ Polymer({
         elements[0].invalid = false;
     },
 
-    importEventsDialog: function (e) {
+    launchImportEventsDialog: function (e) {
         this.$.importEventsDialogHeader.textContent = "Import Events";
         this.importEventsOption = 'futureEvents';
         this.$.saveevent.disabled = false;
@@ -112,24 +112,17 @@ Polymer({
         this.eventsToImport = [];
     },
 
-    addEventToGrid: function () {
-        this.eventObject = this.constructEventObject();
-        if (this.eventObject.id) { // Update Event
-            var index = this.items.findIndex(e => e.id === this.eventObject.id);
-            this.items[index] = this.eventObject;
-        } else {
-            this.items.push(this.eventObject);
-        }
-        this.populateGrid();
-        this.closeAddEventDialog();
-    },
-
-    closeAddEventDialog() {
-        var dialog = this.$.addEventDialog;
-        if (dialog) {
-            dialog.close();
-        }
-    },
+    // addEventToGrid: function () {
+    //     this.eventObject = this.constructEventObject();
+    //     if (this.eventObject.id) { // Update Event
+    //         var index = this.items.findIndex(e => e.id === this.eventObject.id);
+    //         this.items[index] = this.eventObject;
+    //     } else {
+    //         this.items.push(this.eventObject);
+    //     }
+    //     this.populateGrid();
+    //     this.closeAddEventDialog();
+    // },
 
     updateExpandButtonTextAndIcon: function (expanded) {
         if (!expanded) {
@@ -223,14 +216,17 @@ Polymer({
     },
 
     importEvents: function (e) {
-        let eventsToImport = this.constructEventsObjectToImport(this.groupId, this.eventsToImport, this.importEventsOption);
-        this.ajaxCall = 'importEvents'
-        this.makeAjaxCall(eventsToImport);
+        let eventsToImport = this.constructEventsList(this.groupId, this.eventsToImport, this.importEventsOption);
+        this.ajaxCall = 'postEvents'
+        eventsToImport.forEach(event => {
+            this.makeAjaxCall(event);
+        });
+        this.closeImportEventsDialog();
     },
 
 
 
-    constructEventsObjectToImport: function (groupId, eventsList, importEventsOption) {
+    constructEventsList: function (groupId, eventsList, importEventsOption) {
         let eventsToReturn = [], current_date = new Date();
         if (eventsList && groupId) {
             eventsList.forEach(function (item) {
@@ -241,19 +237,9 @@ Polymer({
                         description: item.DESCRIPTION,
                         startDateTime: item.DTSTART,
                         endDateTime: item.DTEND,
-                        address: item.LOCATTION,
+                        address: item.LOCATION,
                         groupId: groupId
                     };
-                    //
-                    // DTSTART:20151218T003000Z
-                    // DTEND: 20151218T010000Z
-                    // "type": "Holiday",
-                    //     "startDateTime": "2018-08-29T24:00Z",
-                    //     "endDateTime": "2018-09-02T24:00Z",
-                    //     "location": "USA",
-                    //     "address": "16250 NE 74th Street Redmond WA 98052",
-                    //     "groupId": "F7BAA351-D02E-4FE9-A6B0-781D82FF0F3A"
-                    // };
 
                     eventsToReturn.push(event);
                 }
@@ -262,11 +248,11 @@ Polymer({
         return eventsToReturn;
     },
 
-    cancelEvent: function (e) {
+    closeAddEventDialog: function () {
         this.emptyEventFields();
     },
 
-    cancelImportEvents: function () {
+    closeImportEventsDialog: function () {
         var dialog = this.$.importEventsDialog;
         if (dialog) {
             dialog.close();
@@ -288,7 +274,7 @@ Polymer({
         }
 
         var editedItem = e.model.item;
-        this.showDialog();
+        this.launchAddEventDialog();
         this.id = editedItem.id;
         this.name = editedItem.name;
         this.description = editedItem.description;
@@ -321,8 +307,13 @@ Polymer({
         this.icon = null;
         this.previewSrc = '';
         this.eventObject = {};
-        this.closeAddEventDialog();
+
+        var dialog = this.$.addEventDialog;
+        if (dialog) {
+            dialog.close();
+        }
     },
+
     constructEventObject: function () {
         var obj = {};
         if (this.id && this.id !== 'null') {

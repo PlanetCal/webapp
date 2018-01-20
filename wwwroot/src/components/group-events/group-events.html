@@ -100,7 +100,7 @@
         </div>
       </paper-dialog-scrollable>
       <div class="buttons">
-        <paper-button class="action-icons" id="cancelevent" on-tap="cancelEvent">
+        <paper-button class="action-icons" id="cancelevent" on-tap="closeAddEventDialog">
           <iron-icon icon="icons:delete"></iron-icon>Cancel</paper-button>
         <paper-button class="action-icons" id="saveevent" on-tap="saveEvent">
           <iron-icon icon="icons:done"></iron-icon>Save</paper-button>
@@ -122,7 +122,7 @@
         </div>
       </paper-dialog-scrollable>
       <div class="buttons">
-        <paper-button class="action-icons" id="cancelImportEvents" on-tap="cancelImportEvents">
+        <paper-button class="action-icons" id="cancelImportEvents" on-tap="closeImportEventsDialog">
           <iron-icon icon="icons:delete"></iron-icon>Cancel</paper-button>
         <paper-button class="action-icons" id="executeImportEvents" on-tap="importEvents">
           <iron-icon icon="icons:done"></iron-icon>Import</paper-button>
@@ -178,8 +178,8 @@
       <iron-icon icon="icons:delete-sweep" style="visibility: hidden" class="delete-icon" title="Delete selected"></iron-icon>
       <paper-button id="btnUpcoming" class="blue" on-tap="loadEvents">Upcoming</paper-button>
       <paper-button id="btnPast" class="blue" on-tap="pastEvents">past</paper-button>
-      <paper-button id="btnAddEvent" raised="" class="indigo" on-tap="showDialog">Add Event</paper-button>
-      <paper-button id="btnImportEvent" raised="" class="indigo" on-tap="importEventsDialog">Import Events</paper-button>
+      <paper-button id="btnAddEvent" raised="" class="indigo" on-tap="launchAddEventDialog">Add Event</paper-button>
+      <paper-button id="btnImportEvent" raised="" class="indigo" on-tap="launchImportEventsDialog">Import Events</paper-button>
     </div>
     <!-- List of Buttons End -->
     <!--template is="dom-if" if="{{isLoading}}">
