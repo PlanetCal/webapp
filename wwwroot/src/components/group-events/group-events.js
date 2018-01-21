@@ -106,7 +106,7 @@ Polymer({
         this.importEventsCount = 0;
         this.importSuccessCount = 0;
         this.importFailCount = 0;
-        this.$.saveevent.disabled = false;
+        this.$.executeImportEvents.disabled = true;
         this.$.cancelevent.disabled = false;
         var body = document.querySelector('body');
         Polymer.dom(body).appendChild(this.$.importEventsDialog);
@@ -228,13 +228,11 @@ Polymer({
         this.closeImportEventsDialog();
 
         if (this.importEventsCount == 0) {
-            this.fire("status-message-update", { severity: 'info', message: 'No events found inside .iCS file' });
+            this.fire("status-message-update", { severity: 'info', message: 'No events found inside calendar file' });
         } else {
             this.fire("status-message-update", { severity: 'info', message: 'Import is in progress...' });
         }
     },
-
-
 
     constructEventsList: function (groupId, eventsList, importEventsOption) {
         let eventsToReturn = [], current_date = new Date();
@@ -677,6 +675,7 @@ Polymer({
                     tmp_this.parseICAL(text);
                 };
                 reader.readAsText(file);
+                this.$.executeImportEvents.disabled = false;
             }
             else {
                 inputElement.value = '';
