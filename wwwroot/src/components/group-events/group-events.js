@@ -665,7 +665,7 @@ Polymer({
     openFile: function (e) {
         var inputElement = e.target.inputElement;
         if (inputElement.files && inputElement.files.length > 0) {
-            if (this.isValidFileType(inputElement.files[0].type)) {
+            if (this.isValidCalendarFileType(inputElement.files[0].type)) {
                 var file = inputElement.files[0];
 
                 var reader = new FileReader();
@@ -684,7 +684,7 @@ Polymer({
         }
     },
 
-    isValidFileType: function (fileType) {
+    isValidCalendarFileType: function (fileType) {
         return fileType === 'text/calendar';
     },
 
