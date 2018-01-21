@@ -242,7 +242,7 @@ Polymer({
             eventsList.forEach(function (item) {
                 //If the event starts after the current time, add it to the array to return.
                 if (importEventsOption !== 'futureEvents' ||
-                    item.DTSTART > current_date) {
+                    item.DTEND > current_date) {
 
                     //Does not support recurring events at the moment.
                     if (!item.RRULE) {
@@ -251,7 +251,7 @@ Polymer({
                             description: item.DESCRIPTION,
                             startDateTime: item.DTSTART,
                             endDateTime: item.DTEND,
-                            address: item.LOCATION,
+                            address: item.LOCATION.replace(/\\/g, ''),
                             groupId: groupId
                         };
                         eventsToReturn.push(event);
