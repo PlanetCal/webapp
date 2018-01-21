@@ -33,9 +33,11 @@ Polymer({
         this.isCurrentUserGroupOwnerOrAdmin = this.isUserGroupOwnerOrAdmin(loggedInUser, groupDetail);
         if (groupDetail && loggedInUser && this.isCurrentUserGroupOwnerOrAdmin) {
             this.$.btnAddEvent.style.display = '';
+            this.$.btnImportEvent.style.display = '';
         }
         else {
             this.$.btnAddEvent.style.display = 'none';
+            this.$.btnImportEvent.style.display = 'none';
         }
     },
     isUserGroupOwnerOrAdmin: function (loggedInUser, groupDetail) {
@@ -83,7 +85,7 @@ Polymer({
         this.$.btnUpcoming.disabled = true;
         this.makeAjaxCall();
     },
-    showDialog: function (event) {
+    launchAddEventDialog: function (event) {
         this.$.eventDialogHeader.textContent = "Add Event";
         //this.$.saveevent.textContent = "Save";
         this.$.saveevent.disabled = false;
@@ -97,24 +99,33 @@ Polymer({
         }
         elements[0].invalid = false;
     },
-    addEventToGrid: function () {
-        this.eventObject = this.constructEventObject();
-        if (this.eventObject.id) { // Update Event
-            var index = this.items.findIndex(e => e.id === this.eventObject.id);
-            this.items[index] = this.eventObject;
-        } else {
-            this.items.push(this.eventObject);
-        }
-        this.populateGrid();
-        this.closeAddEventDialog();
+
+    launchImportEventsDialog: function (e) {
+        this.$.importEventsDialogHeader.textContent = "Import Events";
+        this.importEventsOption = 'futureEvents';
+        this.importEventsCount = 0;
+        this.importSuccessCount = 0;
+        this.importFailCount = 0;
+        this.$.executeImportEvents.disabled = true;
+        this.$.cancelevent.disabled = false;
+        var body = document.querySelector('body');
+        Polymer.dom(body).appendChild(this.$.importEventsDialog);
+        this.$.importEventsDialog.open();
+        this.$.IcsFile.inputElement.value = '';
+        this.parsedICalEvents = [];
     },
 
-    closeAddEventDialog() {
-        var dialog = this.$.addEventDialog;
-        if (dialog) {
-            dialog.close();
-        }
-    },
+    // addEventToGrid: function () {
+    //     this.eventObject = this.constructEventObject();
+    //     if (this.eventObject.id) { // Update Event
+    //         var index = this.items.findIndex(e => e.id === this.eventObject.id);
+    //         this.items[index] = this.eventObject;
+    //     } else {
+    //         this.items.push(this.eventObject);
+    //     }
+    //     this.populateGrid();
+    //     this.closeAddEventDialog();
+    // },
 
     updateExpandButtonTextAndIcon: function (expanded) {
         if (!expanded) {
@@ -206,9 +217,61 @@ Polymer({
             this.makeAjaxCall(this.eventObject);
         }
     },
-    cancelEvent: function (e) {
+
+    importEvents: function (e) {
+        let eventsToImport = this.constructEventsList(this.groupId, this.parsedICalEvents, this.importEventsOption);
+        this.importEventsCount = eventsToImport.length;
+        this.ajaxCall = 'importEvents';
+        eventsToImport.forEach(event => {
+            this.makeAjaxCall(event);
+        });
+        this.closeImportEventsDialog();
+
+        if (this.importEventsCount == 0) {
+            this.fire("status-message-update", { severity: 'info', message: 'No events found inside calendar file' });
+        } else {
+            this.fire("status-message-update", { severity: 'info', message: 'Import is in progress...' });
+        }
+    },
+
+    constructEventsList: function (groupId, eventsList, importEventsOption) {
+        let eventsToReturn = [], current_date = new Date();
+        if (eventsList && groupId) {
+            eventsList.forEach(function (item) {
+                //If the event starts after the current time, add it to the array to return.
+                if (importEventsOption !== 'futureEvents' ||
+                    item.DTEND > current_date) {
+
+                    //Does not support recurring events at the moment.
+                    if (!item.RRULE) {
+                        let event = {
+                            name: item.SUMMARY,
+                            description: item.DESCRIPTION,
+                            startDateTime: item.DTSTART,
+                            endDateTime: item.DTEND,
+                            address: item.LOCATION.replace(/\\/g, ''),
+                            groupId: groupId
+                        };
+                        eventsToReturn.push(event);
+                    }
+                }
+            });
+        }
+        return eventsToReturn;
+    },
+
+    closeAddEventDialog: function () {
         this.emptyEventFields();
     },
+
+    closeImportEventsDialog: function () {
+        var dialog = this.$.importEventsDialog;
+        if (dialog) {
+            dialog.close();
+        }
+    },
+
+
     deleteEvent: function (e) {
         e.preventDefault();
         this.ajaxCall = 'deleteEvents';
@@ -223,7 +286,7 @@ Polymer({
         }
 
         var editedItem = e.model.item;
-        this.showDialog();
+        this.launchAddEventDialog();
         this.id = editedItem.id;
         this.name = editedItem.name;
         this.description = editedItem.description;
@@ -256,8 +319,13 @@ Polymer({
         this.icon = null;
         this.previewSrc = '';
         this.eventObject = {};
-        this.closeAddEventDialog();
+
+        var dialog = this.$.addEventDialog;
+        if (dialog) {
+            dialog.close();
+        }
     },
+
     constructEventObject: function () {
         var obj = {};
         if (this.id && this.id !== 'null') {
@@ -305,6 +373,7 @@ Polymer({
                 ajax.url += eventFields + '&groupids=' + this.groupId + '&filter=endDateTime<' + currentDate; + '$AND$endDateTime>=' + pastDate;
                 break;
             case 'postEvents':
+            case 'importEvents':
                 ajax.body = JSON.stringify(event);
                 ajax.method = 'POST';
                 break;
@@ -343,10 +412,9 @@ Polymer({
 
     handleErrorResponse: function (e) {
         this.closeAddEventDialog();
-
-
         var errorResponse = e.detail.request.xhr.response;
         message = 'Server threw error. Check if you are logged in.';
+        let severity = 'error';
         if (errorResponse !== null) {
             switch (errorResponse.errorcode) {
                 case 'GenericHttpRequestException':
@@ -358,12 +426,34 @@ Polymer({
                 case 'UserNotAuthorized':
                     message = 'User is not authorized.';
                     break;
+                case 'importEvents':
+                    this.importFailCount++;
+                    severity = 'info';
+                    message = this.getImportEventsStatusMessage();
+                    break;
                 default:
                     message = errorResponse.errorcode + ' has not been handled yet.';
                     break;
             }
         }
-        this.fire("status-message-update", { severity: 'error', message: message });
+        this.fire("status-message-update", { severity: severity, message: message });
+    },
+
+    getImportEventsStatusMessage: function () {
+        let message = 'Total events:' + this.importEventsCount;
+        if (this.importSuccessCount > 0) {
+            message += ' Succeeded:' + this.importSuccessCount;
+        }
+        if (this.importFailCount > 0) {
+            message += ' Failed:' + this.importFailCount;
+        }
+
+        if (this.importEventsCount === this.importSuccessCount + this.importFailCount) {
+            message += ". Refresh the page..."
+        } else {
+            message += ". Wait..."
+        }
+        return message;
     },
 
     handleAjaxResponse: function (event) {
@@ -390,6 +480,12 @@ Polymer({
                 else {
                     this.populateGrid();
                 }
+                break;
+            case 'importEvents':
+                this.importSuccessCount++;
+                this.fire("status-message-update", { severity: 'info', message: this.getImportEventsStatusMessage() });
+                // this.eventObject.id = event.detail.response.id;
+                // this.items.push(this.eventsToImport);
                 break;
             case 'putEvents':
                 var index = this.items.findIndex(e => e.id === this.eventObject.id);
@@ -565,4 +661,109 @@ Polymer({
             return false;
         }
     },
+
+    openFile: function (e) {
+        var inputElement = e.target.inputElement;
+        if (inputElement.files && inputElement.files.length > 0) {
+            if (this.isValidFileType(inputElement.files[0].type)) {
+                var file = inputElement.files[0];
+
+                var reader = new FileReader();
+                var tmp_this = this;
+                reader.onload = function () {
+                    var text = reader.result;
+                    tmp_this.parseICAL(text);
+                };
+                reader.readAsText(file);
+                this.$.executeImportEvents.disabled = false;
+            }
+            else {
+                inputElement.value = '';
+                this.fire("status-message-update", { severity: 'error', message: 'Invalid file type selected. Please select an image to upload.' });
+            }
+        }
+    },
+
+    isValidFileType: function (fileType) {
+        return fileType === 'text/calendar';
+    },
+
+    //https://github.com/thybag/JavaScript-Ical-Parser/blob/master/ical_parser.js
+    parseICAL: function (data) {
+        //Ensure cal is empty
+        this.parsedICalEvents = [];
+
+        //Clean string and split the file so we can handle it (line by line)
+        cal_array = data.replace(new RegExp("\\r", "g"), "").split("\n");
+
+        //Keep track of when we are activly parsing an event
+        var in_event = false;
+        //Use as a holder for the current event being proccessed.
+        var cur_event = null;
+        for (var i = 0; i < cal_array.length; i++) {
+            ln = cal_array[i];
+            //If we encounted a new Event, create a blank event object + set in event options.
+            if (!in_event && ln == 'BEGIN:VEVENT') {
+                in_event = true;
+                cur_event = {};
+            }
+
+            //If we encounter end event, complete the object and add it to our events array then clear it for reuse.
+
+            if (in_event && ln == 'END:VEVENT') {
+                in_event = false;
+                this.parsedICalEvents.push(cur_event);
+                cur_event = null;
+            }
+
+            //If we are in an event
+            if (in_event) {
+                //Split the item based on the first ":"
+                idx = ln.indexOf(':');
+                //Apply trimming to values to reduce risks of badly formatted ical files.
+                type = ln.substr(0, idx).replace(/^\s\s*/, '').replace(/\s\s*$/, '');//Trim
+                val = ln.substr(idx + 1, ln.length - (idx + 1)).replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+                //If the type is a start date, proccess it and store details
+                if (type == 'DTSTART') {
+                    dt = this.makeDate(val);
+                    val = dt.date;
+                    //These are helpful for display
+                    cur_event.start_time = dt.hour + ':' + dt.minute;
+                    cur_event.start_date = dt.day + '/' + dt.month + '/' + dt.year;
+                    cur_event.day = dt.dayname;
+                }
+                //If the type is an end date, do the same as above
+                if (type == 'DTEND') {
+                    dt = this.makeDate(val);
+                    val = dt.date;
+                    //These are helpful for display
+                    cur_event.end_time = dt.hour + ':' + dt.minute;
+                    cur_event.end_date = dt.day + '/' + dt.month + '/' + dt.year;
+                    cur_event.day = dt.dayname;
+                }
+                //Convert timestamp
+                if (type == 'DTSTAMP') val = this.makeDate(val).date;
+
+                //Add the value to our event object.
+                cur_event[type] = val;
+            }
+        }
+    },
+
+    makeDate: function (ical_date) {
+        //break date apart
+        var dt = {
+            year: ical_date.substr(0, 4),
+            month: ical_date.substr(4, 2),
+            day: ical_date.substr(6, 2),
+            hour: ical_date.substr(9, 2),
+            minute: ical_date.substr(11, 2)
+        }
+
+        //Create JS date (months start at 0 in JS - don't ask)
+        dt.date = new Date(dt.year, (dt.month - 1), dt.day, dt.hour, dt.minute);
+        //Get the full name of the given day
+        dt.dayname = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][dt.date.getDay()];
+        return dt;
+    }
 });
