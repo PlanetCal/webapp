@@ -103,13 +103,16 @@ Polymer({
     launchImportEventsDialog: function (e) {
         this.$.importEventsDialogHeader.textContent = "Import Events";
         this.importEventsOption = 'futureEvents';
+        this.importEventsCount = 0;
+        this.importSuccessCount = 0;
+        this.importFailCount = 0;
         this.$.saveevent.disabled = false;
         this.$.cancelevent.disabled = false;
         var body = document.querySelector('body');
         Polymer.dom(body).appendChild(this.$.importEventsDialog);
         this.$.importEventsDialog.open();
         this.$.IcsFile.inputElement.value = '';
-        this.eventsToImport = [];
+        this.parsedICalEvents = [];
     },
 
     // addEventToGrid: function () {
@@ -216,12 +219,19 @@ Polymer({
     },
 
     importEvents: function (e) {
-        let eventsToImport = this.constructEventsList(this.groupId, this.eventsToImport, this.importEventsOption);
-        this.ajaxCall = 'postEvents'
+        let eventsToImport = this.constructEventsList(this.groupId, this.parsedICalEvents, this.importEventsOption);
+        this.importEventsCount = eventsToImport.length;
+        this.ajaxCall = 'importEvents';
         eventsToImport.forEach(event => {
-            //this.makeAjaxCall(event);
+            this.makeAjaxCall(event);
         });
         this.closeImportEventsDialog();
+
+        if (this.importEventsCount == 0) {
+            this.fire("status-message-update", { severity: 'info', message: 'No events found inside .iCS file' });
+        } else {
+            this.fire("status-message-update", { severity: 'info', message: 'Import is in progress...' });
+        }
     },
 
 
@@ -365,6 +375,7 @@ Polymer({
                 ajax.url += eventFields + '&groupids=' + this.groupId + '&filter=endDateTime<' + currentDate; + '$AND$endDateTime>=' + pastDate;
                 break;
             case 'postEvents':
+            case 'importEvents':
                 ajax.body = JSON.stringify(event);
                 ajax.method = 'POST';
                 break;
@@ -403,10 +414,9 @@ Polymer({
 
     handleErrorResponse: function (e) {
         this.closeAddEventDialog();
-
-
         var errorResponse = e.detail.request.xhr.response;
         message = 'Server threw error. Check if you are logged in.';
+        let severity = 'error';
         if (errorResponse !== null) {
             switch (errorResponse.errorcode) {
                 case 'GenericHttpRequestException':
@@ -418,12 +428,34 @@ Polymer({
                 case 'UserNotAuthorized':
                     message = 'User is not authorized.';
                     break;
+                case 'importEvents':
+                    this.importFailCount++;
+                    severity = 'info';
+                    message = this.getImportEventsStatusMessage();
+                    break;
                 default:
                     message = errorResponse.errorcode + ' has not been handled yet.';
                     break;
             }
         }
-        this.fire("status-message-update", { severity: 'error', message: message });
+        this.fire("status-message-update", { severity: severity, message: message });
+    },
+
+    getImportEventsStatusMessage: function () {
+        let message = 'Total events:' + this.importEventsCount;
+        if (this.importSuccessCount > 0) {
+            message += ' Succeeded:' + this.importSuccessCount;
+        }
+        if (this.importFailCount > 0) {
+            message += ' Failed:' + this.importFailCount;
+        }
+
+        if (this.importEventsCount === this.importSuccessCount + this.importFailCount) {
+            message += ". Refresh the page..."
+        } else {
+            message += ". Wait..."
+        }
+        return message;
     },
 
     handleAjaxResponse: function (event) {
@@ -450,6 +482,12 @@ Polymer({
                 else {
                     this.populateGrid();
                 }
+                break;
+            case 'importEvents':
+                this.importSuccessCount++;
+                this.fire("status-message-update", { severity: 'info', message: this.getImportEventsStatusMessage() });
+                // this.eventObject.id = event.detail.response.id;
+                // this.items.push(this.eventsToImport);
                 break;
             case 'putEvents':
                 var index = this.items.findIndex(e => e.id === this.eventObject.id);
@@ -654,7 +692,7 @@ Polymer({
     //https://github.com/thybag/JavaScript-Ical-Parser/blob/master/ical_parser.js
     parseICAL: function (data) {
         //Ensure cal is empty
-        this.eventsToImport = [];
+        this.parsedICalEvents = [];
 
         //Clean string and split the file so we can handle it (line by line)
         cal_array = data.replace(new RegExp("\\r", "g"), "").split("\n");
@@ -675,7 +713,7 @@ Polymer({
 
             if (in_event && ln == 'END:VEVENT') {
                 in_event = false;
-                this.eventsToImport.push(cur_event);
+                this.parsedICalEvents.push(cur_event);
                 cur_event = null;
             }
 
