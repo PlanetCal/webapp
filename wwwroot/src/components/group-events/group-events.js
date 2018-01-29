@@ -761,7 +761,7 @@ Polymer({
         }
 
         //Create JS date (months start at 0 in JS - don't ask)
-        dt.date = new Date(dt.year, (dt.month - 1), dt.day, dt.hour, dt.minute);
+        dt.date = new Date(Date.UTC(dt.year, (dt.month - 1), dt.day, dt.hour, dt.minute));
         //Get the full name of the given day
         dt.dayname = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][dt.date.getDay()];
         return dt;
