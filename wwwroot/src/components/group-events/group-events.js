@@ -52,8 +52,7 @@ Polymer({
     },
     getGroup: function (groupId) {
         this.ajaxCall = 'getGroup';
-        this.fire("status-message-update", { severity: 'info', message: 'Getting group in progress...' });
-        this.makeAjaxCall();
+        this.makeAjaxCall(null, 'Getting group in progress...');
     },
     validate: function () {
         var elements = document.getElementsByClassName('addEvent');
@@ -70,20 +69,18 @@ Polymer({
         e.target.validate();
     },
     pastEvents: function (e) {
-        this.fire("status-message-update", { severity: 'info', message: 'Loading past events...' });
         this.ajaxCall = 'getPastEvents';
         this.$.grid.style.display = 'none';
         this.$.btnPast.disabled = true;
         this.$.btnUpcoming.disabled = false;
-        this.makeAjaxCall();
+        this.makeAjaxCall(null, 'Loading past events...');
     },
     loadEvents: function () {
-        this.fire("status-message-update", { severity: 'info', message: 'Loading events...' });
         this.ajaxCall = 'getEvents';
         this.$.grid.style.display = 'none';
         this.$.btnPast.disabled = false;
         this.$.btnUpcoming.disabled = true;
-        this.makeAjaxCall();
+        this.makeAjaxCall(null, 'Loading events...');
     },
     launchAddEventDialog: function (event) {
         this.$.eventDialogHeader.textContent = "Add Event";
@@ -214,7 +211,7 @@ Polymer({
             this.$.cancelevent.disabled = true;
             this.eventObject = this.constructEventObject();
             this.ajaxCall = this.eventObject.id ? 'putEvents' : 'postEvents';
-            this.makeAjaxCall(this.eventObject);
+            this.makeAjaxCall(this.eventObject, "Saving event ...");
         }
     },
 
@@ -276,7 +273,7 @@ Polymer({
         e.preventDefault();
         this.ajaxCall = 'deleteEvents';
         this.eventObject = e.model.item;
-        this.makeAjaxCall(e.model.item);
+        this.makeAjaxCall(e.model.item, "Deleting Event ...");
     },
     editEvent: function (e) {
         e.preventDefault();
@@ -342,7 +339,14 @@ Polymer({
             obj.icon = this.previewSrc;
         return obj;
     },
-    makeAjaxCall: function (event = null) {
+    makeAjaxCall: function (event = null, initialMessage = null) {
+        if (initialMessage) {
+            this.fire("status-message-update", { severity: 'info', message: initialMessage });
+        }
+        else {
+            this.fire("status-message-update");
+        }
+
         //this.isLoading = true;
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
         if (!loggedInUser) {
@@ -449,7 +453,8 @@ Polymer({
         }
 
         if (this.importEventsCount === this.importSuccessCount + this.importFailCount) {
-            message += ". Refresh the page..."
+            //this.populateGrid();
+            message += ". Import Completed."
         } else {
             message += ". Wait..."
         }
@@ -457,6 +462,7 @@ Polymer({
     },
 
     handleAjaxResponse: function (event) {
+        this.fire("status-message-update");
         switch (this.ajaxCall) {
             case 'getGroup':
                 this.groupObject = event.detail.response;
@@ -468,11 +474,10 @@ Polymer({
             case 'getPastEvents':
                 this.items = event.detail.response;
                 this.populateGrid();
-                this.fire("status-message-update");
                 break;
             case 'postEvents':
-                this.eventObject.id = event.detail.response.id;
-                this.items.push(this.eventObject);
+                let addedEvent = event.detail.response;
+                this.items.push(addedEvent);
                 if (this.isEventsImageChanged) {
                     this.uploadImage();
                     this.isEventsImageChanged = false;
@@ -486,10 +491,14 @@ Polymer({
                 this.fire("status-message-update", { severity: 'info', message: this.getImportEventsStatusMessage() });
                 // this.eventObject.id = event.detail.response.id;
                 // this.items.push(this.eventsToImport);
+                let importedEvent = event.detail.response;
+                this.items.push(importedEvent);
+                this.populateGrid();
                 break;
             case 'putEvents':
-                var index = this.items.findIndex(e => e.id === this.eventObject.id);
-                this.items[index] = this.eventObject;
+                let updatedEvent = event.detail.response;
+                var index = this.items.findIndex(e => e.id === updatedEvent.id);
+                this.items[index] = updatedEvent;
                 if (this.isEventsImageChanged) {
                     this.uploadImage();
                     this.isEventsImageChanged = false;
@@ -500,7 +509,8 @@ Polymer({
                 }
                 break;
             case 'deleteEvents':
-                var index = this.items.findIndex(e => e.id === this.eventObject.id);
+                let deletedEventId = event.detail.response.id;
+                var index = this.items.findIndex(e => e.id === deletedEventId);
                 this.items.splice(index, 1);
                 this.populateGrid();
                 break;
@@ -587,13 +597,12 @@ Polymer({
     },
     uploadImage: function () {
         this.ajaxCall = 'eventsImage';
-        this.makeAjaxCall();
+        this.makeAjaxCall(null, "Uploading Image ...");
     },
     updateImageURL: function (imageURL) {
         this.ajaxCall = 'putEvents';
         this.eventObject.icon = imageURL;
-        this.fire("status-message-update", { severity: 'info', message: 'Events save in progress...' });
-        this.makeAjaxCall(this.eventObject);
+        this.makeAjaxCall(this.eventObject, 'Events save in progress...');
     },
     previewImage: function (e) {
         var inputElement = e.target.inputElement;
