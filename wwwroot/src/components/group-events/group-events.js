@@ -379,11 +379,19 @@ Polymer({
                 break;
             case 'postEvents':
             case 'importEvents':
+                if (!this.validateEventDates(event)) {
+                    this.closeAddEventDialog();
+                    this.closeImportEventsDialog();
+                    return;
+                }
                 ajax.body = JSON.stringify(event);
                 ajax.method = 'POST';
                 break;
             case 'putEvents':
-                //this.ajaxUrl += event.id;
+                if (!this.validateEventDates(event)) {
+                    this.closeAddEventDialog();
+                    return;
+                }
                 ajax.url += event.id;
                 ajax.body = JSON.stringify(event);
                 ajax.method = 'PUT';
@@ -442,6 +450,14 @@ Polymer({
             }
         }
         this.fire("status-message-update", { severity: severity, message: message });
+    },
+
+    validateEventDates: function (event) {
+        if (event.startDateTime > event.endDateTime) {
+            this.fire("status-message-update", { severity: 'error', message: 'Verify the start date and end date.' });
+            return false;
+        }
+        return true;
     },
 
     getImportEventsStatusMessage: function () {
