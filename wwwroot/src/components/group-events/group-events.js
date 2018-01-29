@@ -306,11 +306,12 @@ Polymer({
         this.name = null;
         this.description = null;
         this.startDateTime = new Date();
-        this.startDate = this.formatDate(new Date());
-        this.startTime = this.formatTime(new Date());
+        this.startDate = this.formatDate(this.startDateTime);
+        this.startTime = this.formatTime(this.startDateTime);
         this.endDateTime = new Date();
-        this.endDate = this.formatDate(new Date());
-        this.endTime = this.formatTime(new Date());
+        this.endDateTime.setHours(this.endDateTime.getHours() + 1);
+        this.endDate = this.formatDate(this.endDateTime);
+        this.endTime = this.formatTime(this.endDateTime);
         this.address = null;
         this.location = null;
         this.icon = null;
@@ -378,11 +379,19 @@ Polymer({
                 break;
             case 'postEvents':
             case 'importEvents':
+                if (!this.validateEventDates(event)) {
+                    this.closeAddEventDialog();
+                    this.closeImportEventsDialog();
+                    return;
+                }
                 ajax.body = JSON.stringify(event);
                 ajax.method = 'POST';
                 break;
             case 'putEvents':
-                //this.ajaxUrl += event.id;
+                if (!this.validateEventDates(event)) {
+                    this.closeAddEventDialog();
+                    return;
+                }
                 ajax.url += event.id;
                 ajax.body = JSON.stringify(event);
                 ajax.method = 'PUT';
@@ -441,6 +450,14 @@ Polymer({
             }
         }
         this.fire("status-message-update", { severity: severity, message: message });
+    },
+
+    validateEventDates: function (event) {
+        if (event.startDateTime > event.endDateTime) {
+            this.fire("status-message-update", { severity: 'error', message: 'Verify the start date and end date.' });
+            return false;
+        }
+        return true;
     },
 
     getImportEventsStatusMessage: function () {
