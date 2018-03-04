@@ -12,7 +12,9 @@
                 animated-shadow="true">
                 <div class="card-content" style="height:150px;">
                     <div>[[DisplayLimitedText(item.description, 120)]]</div>
-                    <div style="height: 20px;"></div>
+                    <div>
+                        <iron-icon icon="image:filter-none" style="padding-right: 5px;"></iron-icon>[[item.category]]
+                    </div>
                     <div class$="text-phone [[hideForPhone(item)]]">
                         <iron-icon icon="icons:perm-phone-msg"></iron-icon> [[item.contact.phone]]
                     </div>
@@ -25,10 +27,10 @@
                         <a href="[[item.webSite]]" target="_blank" title="Website">[[item.webSite]]</a>
                     </div>
                     <div class$="{{hideForChildGroups(item)}}">
-                    It contains [[item.childGroups.length]] sub-group/s.
+                        It contains [[item.childGroups.length]] sub-group/s.
                     </div>
                     <div class$="{{hideForParentGroup(item)}}">
-                    It is a sub-group.
+                        It is a sub-group.
                     </div>
                 </div>
                 <div class="card-footer">
