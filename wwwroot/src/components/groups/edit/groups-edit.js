@@ -141,6 +141,7 @@ Polymer({
         //this.members = editedGroup.members;
         this.privacy = editedGroup.privacy;
         this.parentGroup = editedGroup.parentGroup;
+        this.childGroups = editedGroup.childGroups;
         this.previewSrc = editedGroup.icon;
         this.category = editedGroup.category;
 
@@ -160,11 +161,12 @@ Polymer({
         this.website = '';
         this.administrators = '';
         //this.members = [];
-        this.privacy = this.parentGroup ? this.privacy : 'Closed';
+        this.privacy = this.parentGroup ? this.privacy : 'Private';
         this.previewSrc = '';
-        this.category = this.parentGroup ? this.category : 'Personal';
+        this.category = this.parentGroup ? this.category : 'Local';
         this.resetGlobalManagerForEditedGroup();
         //this.parentGroup = this.parentGroup;
+        this.childGroups = [];
     },
 
     updateExpandButtonTextAndIcon: function (expanded) {
@@ -242,6 +244,7 @@ Polymer({
         obj.privacy = this.privacy;
         obj.category = this.category;
         obj.parentGroup = this.parentGroup;
+        obj.childGroups = this.childGroups;
         if (!this.isGroupImageChanged)
             obj.icon = this.previewSrc;
         return obj;

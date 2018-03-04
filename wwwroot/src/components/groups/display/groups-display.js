@@ -58,13 +58,13 @@ Polymer({
                 break;
             case 'getGroups':
                 switch (this.groupType) {
-                    case ('owned'):
+                    case ('owner'):
                         ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy|parentGroup|childGroups&filter=createdBy=' + this.loggedInUser.id;
                         break;
-                    case ('subscribed'):
+                    case ('follower'):
                         ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followinggroups?fields=name|description|privacy|icon|category|createdBy|members|location|address|contact|webSite|modifiedBy|parentGroup|childGroups';
                         break;
-                    case ('administered'):
+                    case ('contributor'):
                         ajax.url = serviceBaseUrl + '/groups?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy|parentGroup|childGroups&administeredByMe=true';
                         break;
                     default:
@@ -90,14 +90,14 @@ Polymer({
         switch (this.ajaxCall) {
             case 'getGroups':
                 this.items = groups.detail.response;
-                if (this.groupType === 'subscribed') {
+                if (this.groupType === 'follower') {
                     var followingGroupsToCache = [];
                     this.items.forEach(element => followingGroupsToCache.push(element.id));
                     Polymer.globalsManager.set('followingGroups', followingGroupsToCache);
                 }
                 break;
             case 'unsubscribeGroup':
-                if (this.groupType === 'subscribed') {
+                if (this.groupType === 'follower') {
                     var unsubscibedGroup = groups.detail.response;
                     this.items = this.removeGroupAndReturnArray(this.items, unsubscibedGroup);
                     var followingGroupsToCache = [];
@@ -148,7 +148,7 @@ Polymer({
                     message = 'User is not authorized.';
                     break;
                 case 'GroupHasChildGroups':
-                    message = 'This group has one ore more child groups. First delete its child groups.';
+                    message = 'This group has one or more child groups. First delete its child groups.';
                     break;
                 default:
                     message = errorResponse.errorcode + ' has not been handled yet.';
@@ -213,7 +213,7 @@ Polymer({
     },
 
     populateCardClass: function (item) {
-        return item.privacy === 'Closed' ? 'paper-card-private' : '';
+        return item.privacy === 'Private' ? 'paper-card-private' : '';
     },
 
     hideForPhone: function (item) {
@@ -240,13 +240,13 @@ Polymer({
             return 'displayNone';
         }
 
-        var showAdd = this.loggedInUser.id === item.createdBy || this.groupType === 'administered';
+        var showAdd = this.loggedInUser.id === item.createdBy || this.groupType === 'contributor';
         showAdd = showAdd && (!item.parentGroup);
         return showAdd ? '' : 'displayNone';
     },
 
     hideForEdit: function (item) {
-        var isEdit = this.loggedInUser.id === item.createdBy || this.groupType === 'administered';
+        var isEdit = this.loggedInUser.id === item.createdBy || this.groupType === 'contributor';
         return isEdit ? '' : 'displayNone';
     },
 
@@ -262,11 +262,11 @@ Polymer({
     },
 
     hideUnsubscribeButton: function (item) {
-        return this.groupType !== 'subscribed' ? 'displayNone' : '';
+        return this.groupType !== 'follower' ? 'displayNone' : '';
     },
 
     hideSubscribeButton: function (item) {
-        if (this.groupType !== 'subscribed') {
+        if (this.groupType !== 'follower') {
             var followinggroups = Polymer.globalsManager.globals.followingGroups;
             var toReturn = '';
             if (followinggroups && followinggroups.indexOf(item.id) >= 0) {
@@ -279,7 +279,7 @@ Polymer({
 
     groupDisplayName: function (item) {
         var displayName = item.name;
-        if (item.privacy === 'Closed') {
+        if (item.privacy === 'Private') {
             displayName += ' (Private)';
         }
         return displayName;

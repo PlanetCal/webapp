@@ -1,8 +1,8 @@
 [
   {
-    "id": "Local",
-    "name": "Local",
-    "icon": "communication:location-on"
+    "id": "Religious",
+    "name": "Religious",
+    "icon": "icons:add-alert"
   },
   {
     "id": "School",
@@ -10,13 +10,18 @@
     "icon": "social:school"
   },
   {
-    "id": "Work",
-    "name": "Work",
-    "icon": "icons:work"
-  },
-  {
     "id": "Sports",
     "name": "Sports",
     "icon": "av:games"
+  },
+  {
+    "id": "Local",
+    "name": "Local",
+    "icon": "social:location-city"
+  },
+  {
+    "id": "Work",
+    "name": "Work",
+    "icon": "icons:work"
   }
 ]

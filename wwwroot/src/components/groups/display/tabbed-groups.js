@@ -8,9 +8,9 @@ Polymer({
 
     ready: function () {
         this.groupTypes = [
-            { id: 'owned', displayName: 'Owned' },
-            { id: 'subscribed', displayName: 'Subscribed' },
-            { id: 'administered', displayName: 'Administered' }
+            { id: 'follower', displayName: 'Follower' },
+            { id: 'owner', displayName: 'Owner' },
+            { id: 'contributor', displayName: 'Contributor' }
         ];
     },
 
