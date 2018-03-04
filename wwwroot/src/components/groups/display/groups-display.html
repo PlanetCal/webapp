@@ -25,18 +25,18 @@
                         <a href="[[item.webSite]]" target="_blank" title="Website">[[item.webSite]]</a>
                     </div>
                     <div class$="{{hideForChildGroups(item)}}">
-                        <iron-icon icon="places:child-care"></iron-icon>It has [[item.childGroups.length]] Child group/s.
+                    It contains [[item.childGroups.length]] sub-group/s.
                     </div>
                     <div class$="{{hideForParentGroup(item)}}">
-                        <iron-icon icon="notification:wc"></iron-icon>It has a parent group.
+                    It is a sub-group.
                     </div>
                 </div>
                 <div class="card-footer">
                     <span class$="[[hideUnsubscribeButton(item)]]">
-                        <a class="link-events" href='#' title="Unsubscribe" on-tap='unsubscribe'>Unsubscribe</a>
+                        <a class="link-events" href='#' title="Un-follow" on-tap='unsubscribe'>Un-follow</a>
                         |</span>
                     <span class$="[[hideSubscribeButton(item)]]">
-                        <a class="link-events" href='#' title="Subscribe" on-tap='subscribe'>Subscribe</a>
+                        <a class="link-events" href='#' title="Follow" on-tap='subscribe'>Follow</a>
                         |</span>
                     <a class="link-events" href='#' on-tap="goToEvents" title="Go to Events">Events</a>
                     <iron-icon class$="icon-edit [[hideAddChildGroup(item)]]" icon="icons:add" title="Create Child Group" on-tap="createChildGroup"></iron-icon>
