@@ -19,18 +19,18 @@
         <span style="width: 5%;"></span>
         <paper-dropdown-menu id="categoryMenu" label="Category" style="width: 30%;" required error-message="required" on-change="validateOnChange">
           <paper-listbox attr-for-selected="value" slot="dropdown-content" class="dropdown-content" selected="{{category}}">
-            <paper-item value="Local">Local</paper-item>
-            <paper-item value="Personal">Personal</paper-item>
+            <paper-item value="Religious">Religious</paper-item>
             <paper-item value="School">School</paper-item>
             <paper-item value="Sports">Sports</paper-item>
+            <paper-item value="Local">Local</paper-item>
             <paper-item value="Work">Work</paper-item>
           </paper-listbox>
         </paper-dropdown-menu>
         <span style="width: 5%"></span>
         <paper-dropdown-menu id="privacyMenu" label="Privacy" style="width: 30%;" required error-message="required" on-change="validateOnChange">
           <paper-listbox attr-for-selected="value" slot="dropdown-content" class="dropdown-content" selected="{{privacy}}">
-            <paper-item value="Closed">Closed</paper-item>
-            <paper-item value="Open">Open</paper-item>
+            <paper-item value="Private">Private</paper-item>
+            <paper-item value="Public">Public</paper-item>
           </paper-listbox>
         </paper-dropdown-menu>
       </div>
@@ -42,7 +42,7 @@
           <iron-icon icon="[[expandButtonIcon]]"></iron-icon>[[expandButtonText]]</paper-button>
         <iron-collapse id='collapse'>
           <paper-textarea class="saveGroups" label="Description" value="{{description}}" char-counter maxlength="500" max-rows="4"></paper-textarea>
-          <paper-textarea label="Administrators" class="saveGroups" value="{{administrators}}" char-counter maxlength="500" max-rows="2"></paper-textarea>
+          <paper-textarea label="Contributors" class="saveGroups" value="{{administrators}}" char-counter maxlength="500" max-rows="2"></paper-textarea>
           <div style="display: flex;">
             <paper-input label="Address" class="saveGroups" value="{{address}}" char-counter maxlength="200" style="width: 100%;">
             </paper-input>

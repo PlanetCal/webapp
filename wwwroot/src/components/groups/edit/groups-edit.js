@@ -160,9 +160,9 @@ Polymer({
         this.website = '';
         this.administrators = '';
         //this.members = [];
-        this.privacy = this.parentGroup ? this.privacy : 'Closed';
+        this.privacy = this.parentGroup ? this.privacy : 'Private';
         this.previewSrc = '';
-        this.category = this.parentGroup ? this.category : 'Personal';
+        this.category = this.parentGroup ? this.category : 'Local';
         this.resetGlobalManagerForEditedGroup();
         //this.parentGroup = this.parentGroup;
     },
