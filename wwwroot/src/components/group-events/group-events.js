@@ -494,7 +494,7 @@ Polymer({
                 break;
             case 'postEvents':
                 let addedEvent = event.detail.response;
-                this.items.push(addedEvent);
+                this.addNewEventToTheView(event.detail.response);
                 if (this.isEventsImageChanged) {
                     this.uploadImage();
                     this.isEventsImageChanged = false;
@@ -508,14 +508,11 @@ Polymer({
                 this.fire("status-message-update", { severity: 'info', message: this.getImportEventsStatusMessage() });
                 // this.eventObject.id = event.detail.response.id;
                 // this.items.push(this.eventsToImport);
-                let importedEvent = event.detail.response;
-                this.items.push(importedEvent);
+                this.addNewEventToTheView(event.detail.response);
                 this.populateGrid();
                 break;
             case 'putEvents':
-                let updatedEvent = event.detail.response;
-                var index = this.items.findIndex(e => e.id === updatedEvent.id);
-                this.items[index] = updatedEvent;
+                this.addNewEventToTheView(event.detail.response);
                 if (this.isEventsImageChanged) {
                     this.uploadImage();
                     this.isEventsImageChanged = false;
@@ -536,6 +533,17 @@ Polymer({
                 break;
         }
     },
+
+    addNewEventToTheView: function (eventFromServer) {
+        var index = this.items.findIndex(e => e.id === eventFromServer.id);
+        if (index >= 0) {
+            this.items[index] = eventFromServer;
+        }
+        else {
+            this.items.push(eventFromServer);
+        }
+    },
+
     emptyGrid: function () {
         var grid = this.$.grid;
         grid.size = 0;

@@ -1,10 +1,5 @@
 [
   {
-    "id": "Religious",
-    "name": "Religious",
-    "icon": "icons:add-alert"
-  },
-  {
     "id": "School",
     "name": "School",
     "icon": "social:school"
@@ -13,6 +8,11 @@
     "id": "Sports",
     "name": "Sports",
     "icon": "av:games"
+  },
+  {
+    "id": "Religious",
+    "name": "Religious",
+    "icon": "icons:add-alert"
   },
   {
     "id": "Local",

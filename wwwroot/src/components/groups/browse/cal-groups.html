@@ -57,7 +57,7 @@
         this.followingGroups = Polymer.globalsManager.globals.followingGroups;
 
         if (this.id === 'rootRow') {
-          this.url = "/src/components/groups/browse/categories.json";
+          this.url = "/src/components/groups/browse/categories.json?cacheBreak=1";
         } else if (this.parentGroupId !== null && this.parentGroupId !== '' && this.parentGroupId !== undefined) {
           var ajax = this.$.ajax;
           var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
