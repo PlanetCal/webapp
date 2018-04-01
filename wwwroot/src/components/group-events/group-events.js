@@ -749,6 +749,7 @@ Polymer({
         var in_event = false;
         //Use as a holder for the current event being proccessed.
         var cur_event = null;
+        let dateOnlyEvent = false;
         for (var i = 0; i < cal_array.length; i++) {
             ln = cal_array[i];
             //If we encounted a new Event, create a blank event object + set in event options.
@@ -763,35 +764,47 @@ Polymer({
                 in_event = false;
                 this.parsedICalEvents.push(cur_event);
                 cur_event = null;
+                dateOnlyEvent = false;
             }
 
             //If we are in an event
             if (in_event) {
                 //Split the item based on the first ":"
                 idx = ln.indexOf(':');
+
                 //Apply trimming to values to reduce risks of badly formatted ical files.
                 type = ln.substr(0, idx).replace(/^\s\s*/, '').replace(/\s\s*$/, '');//Trim
+                if (type === 'DTSTART;VALUE=DATE') {
+                    type = 'DTSTART';
+                    dateOnlyEvent = true;
+                } else if (type === 'DTEND;VALUE=DATE') {
+                    type = 'DTEND';
+                    dateOnlyEvent = true;
+                }
+
                 val = ln.substr(idx + 1, ln.length - (idx + 1)).replace(/^\s\s*/, '').replace(/\s\s*$/, '');
                 //If the type is a start date, proccess it and store details
                 if (type == 'DTSTART') {
-                    dt = this.makeDate(val);
+                    dt = this.makeDate(val, dateOnlyEvent);
                     val = dt.date;
                     //These are helpful for display
                     cur_event.start_time = dt.hour + ':' + dt.minute;
                     cur_event.start_date = dt.day + '/' + dt.month + '/' + dt.year;
                     cur_event.day = dt.dayname;
+                    cur_event.dateOnlyEvent = dt.dateOnlyEvent;
                 }
                 //If the type is an end date, do the same as above
                 if (type == 'DTEND') {
-                    dt = this.makeDate(val);
+                    dt = this.makeDate(val, dateOnlyEvent);
                     val = dt.date;
                     //These are helpful for display
                     cur_event.end_time = dt.hour + ':' + dt.minute;
                     cur_event.end_date = dt.day + '/' + dt.month + '/' + dt.year;
                     cur_event.day = dt.dayname;
+                    cur_event.dateOnlyEvent = dt.dateOnlyEvent;
                 }
                 //Convert timestamp
-                if (type == 'DTSTAMP') val = this.makeDate(val).date;
+                if (type == 'DTSTAMP') val = this.makeDate(val, false).date;
 
                 //Add the value to our event object.
                 cur_event[type] = val;
@@ -799,18 +812,19 @@ Polymer({
         }
     },
 
-    makeDate: function (ical_date) {
+    makeDate: function (ical_date, dateOnlyEvent) {
         //break date apart
         var dt = {
             year: ical_date.substr(0, 4),
             month: ical_date.substr(4, 2),
             day: ical_date.substr(6, 2),
-            hour: ical_date.substr(9, 2),
-            minute: ical_date.substr(11, 2)
+            hour: dateOnlyEvent ? '00' : ical_date.substr(9, 2),
+            minute: dateOnlyEvent ? '00' : ical_date.substr(11, 2)
         }
 
         //Create JS date (months start at 0 in JS - don't ask)
         dt.date = new Date(Date.UTC(dt.year, (dt.month - 1), dt.day, dt.hour, dt.minute));
+        dt.dateOnly = dateOnlyEvent;
         //Get the full name of the given day
         dt.dayname = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][dt.date.getDay()];
         return dt;
