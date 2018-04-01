@@ -216,19 +216,47 @@ Polymer({
     },
 
     importEvents: function (e) {
-        let eventsToImport = this.constructEventsList(this.groupId, this.parsedICalEvents, this.importEventsOption);
-        this.importEventsCount = eventsToImport.length;
-        this.ajaxCall = 'importEvents';
-        eventsToImport.forEach(event => {
-            this.makeAjaxCall(event);
-        });
+        this.eventsToImport = this.constructEventsList(this.groupId, this.parsedICalEvents, this.importEventsOption);
+        this.importEventsCount = this.eventsToImport.length;
+        this.importEventIndex = 0;
+        this.importEventSync();
         this.closeImportEventsDialog();
+    },
 
-        if (this.importEventsCount == 0) {
-            this.fire("status-message-update", { severity: 'info', message: 'No events found inside calendar file' });
-        } else {
-            this.fire("status-message-update", { severity: 'info', message: 'Import is in progress...' });
+    importEventSync: function (e) {
+        this.ajaxCall = 'importEvents';
+        this.importEventIndex++;
+        if (this.importEventIndex <= this.importEventsCount) {
+            let event = this.eventsToImport[this.importEventIndex - 1];
+            this.makeAjaxCall(event);
         }
+
+        this.UpdateImportEventsStatusMessage();
+    },
+
+    UpdateImportEventsStatusMessage: function () {
+        if (this.importEventsCount == 0) {
+            let message = 'No events found inside calendar file';
+            this.fire("status-message-update", { severity: 'info', message: message });
+            return;
+        }
+
+        let message = 'Total events:' + this.importEventsCount;
+        if (this.importSuccessCount > 0) {
+            message += ' Succeeded:' + this.importSuccessCount;
+        }
+        if (this.importFailCount > 0) {
+            message += ', Failed:' + this.importFailCount;
+        }
+
+        if (this.importEventIndex <= this.importEventsCount) {
+            message += ". Wait..."
+        }
+        else {
+            message += ". Import Completed."
+        }
+
+        this.fire("status-message-update", { severity: 'info', message: message });
     },
 
     constructEventsList: function (groupId, eventsList, importEventsOption) {
@@ -439,17 +467,18 @@ Polymer({
                 case 'UserNotAuthorized':
                     message = 'User is not authorized.';
                     break;
-                case 'importEvents':
-                    this.importFailCount++;
-                    severity = 'info';
-                    message = this.getImportEventsStatusMessage();
-                    break;
                 default:
                     message = errorResponse.errorcode + ' has not been handled yet.';
                     break;
             }
         }
-        this.fire("status-message-update", { severity: severity, message: message });
+
+        if (this.ajaxCall === 'importEvents') {
+            this.importFailCount++;
+            this.importEventSync();
+        } else {
+            this.fire("status-message-update", { severity: severity, message: message });
+        }
     },
 
     validateEventDates: function (event) {
@@ -458,24 +487,6 @@ Polymer({
             return false;
         }
         return true;
-    },
-
-    getImportEventsStatusMessage: function () {
-        let message = 'Total events:' + this.importEventsCount;
-        if (this.importSuccessCount > 0) {
-            message += ' Succeeded:' + this.importSuccessCount;
-        }
-        if (this.importFailCount > 0) {
-            message += ' Failed:' + this.importFailCount;
-        }
-
-        if (this.importEventsCount === this.importSuccessCount + this.importFailCount) {
-            //this.populateGrid();
-            message += ". Import Completed."
-        } else {
-            message += ". Wait..."
-        }
-        return message;
     },
 
     handleAjaxResponse: function (event) {
@@ -494,7 +505,7 @@ Polymer({
                 break;
             case 'postEvents':
                 let addedEvent = event.detail.response;
-                this.addNewEventToTheView(event.detail.response);
+                this.addEventToTheList(event.detail.response, this.items);
                 if (this.isEventsImageChanged) {
                     this.uploadImage();
                     this.isEventsImageChanged = false;
@@ -505,14 +516,14 @@ Polymer({
                 break;
             case 'importEvents':
                 this.importSuccessCount++;
-                this.fire("status-message-update", { severity: 'info', message: this.getImportEventsStatusMessage() });
-                // this.eventObject.id = event.detail.response.id;
-                // this.items.push(this.eventsToImport);
-                this.addNewEventToTheView(event.detail.response);
-                this.populateGrid();
+                this.addEventToTheList(event.detail.response, this.items);
+                this.importEventSync();
+                if (this.importEventsCount <= this.importEventIndex + 1) {
+                    this.populateGrid();
+                }
                 break;
             case 'putEvents':
-                this.addNewEventToTheView(event.detail.response);
+                this.addEventToTheList(event.detail.response, this.items);
                 if (this.isEventsImageChanged) {
                     this.uploadImage();
                     this.isEventsImageChanged = false;
@@ -534,13 +545,17 @@ Polymer({
         }
     },
 
-    addNewEventToTheView: function (eventFromServer) {
-        var index = this.items.findIndex(e => e.id === eventFromServer.id);
+    addEventToTheList: function (event, list) {
+        if (!list) {
+            return;
+        }
+
+        var index = list.findIndex(e => e.id === event.id);
         if (index >= 0) {
-            this.items[index] = eventFromServer;
+            list[index] = event;
         }
         else {
-            this.items.push(eventFromServer);
+            list.push(event);
         }
     },
 
