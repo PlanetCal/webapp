@@ -41,10 +41,13 @@
       <paper-dialog-scrollable>
         <div class="dialog-textbox" style="width: 600px;">
           <fieldset>
-            <div id="nameFieldDiv">
-              <paper-input label="Name" class="addEvent" value="{{name}}" char-counter="" maxlength="50" style="width: 560px;" required=""
+            <div id="nameFieldDiv" style="display: flex; width: 570px; margin-top: 10px;">
+              <paper-input label="Name" class="addEvent" value="{{name}}" char-counter="" maxlength="50" style="width: 400px;" required=""
                 error-message="required" on-change="validateOnChange">
               </paper-input>
+              <paper-checkbox checked='{{dateOnlyEvent}}' on-change='onCheckStateChange' style="width: 170px;margin-top:35px;margin-left:15px;">
+                Date Event (No time)
+              </paper-checkbox>
             </div>
             <div id="divDate" style="display: flex; width: 570px; margin-top: 10px;">
               <paper-input label="Start Date" class="addEvent" value="{{startDate}}" style="width: 160px;" readonly="" required="" error-message="required"
@@ -188,11 +191,6 @@
       <paper-button id="btnImportEvent" raised="" class="indigo" on-tap="launchImportEventsDialog">Import Events</paper-button>
     </div>
     <!-- List of Buttons End -->
-    <!--template is="dom-if" if="{{isLoading}}">
-      <paper-progress indeterminate></paper-progress>
-    </template-->
-    <!--iron-ajax auto url="../../data/Data.json" handle-as="json" on-response="handleResponse">
-    </iron-ajax-->
     <iron-ajax id="ajax" handle-as="json" loading="{{isLoading}}" url="[[ajaxUrl]]" content-type="application/json" on-error="handleErrorResponse"
       on-response="handleAjaxResponse"></iron-ajax>
     <!-- Grid start -->
