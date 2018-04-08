@@ -261,8 +261,8 @@ Polymer({
                         let event = {
                             name: item.SUMMARY,
                             description: item.DESCRIPTION,
-                            startDateTime: this.convertToDateOnlyValue(item.DTSTART, item.dateOnlyEvent),
-                            endDateTime: this.convertToDateOnlyValue(item.DTEND, item.dateOnlyEvent),
+                            startDateTime: item.DTSTART,
+                            endDateTime: item.DTEND,
                             address: item.LOCATION.replace(/\\/g, ''),
                             groupId: groupId,
                             dateOnlyEvent: item.dateOnlyEvent
@@ -280,7 +280,7 @@ Polymer({
             return date;
         }
 
-        return `${date.getUTCFullYear()}-${date.getUTCMonth() + 1}-${date.getUTCDate()}`;
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     },
 
     closeAddEventDialog: function () {
@@ -322,6 +322,7 @@ Polymer({
         this.address = editedItem.address;
         this.location = editedItem.location;
         this.groupId = editedItem.groupId;
+        this.dateOnlyEvent = editedItem.dateOnlyEvent;
         //this.icon = editedItem.icon;
         this.previewSrc = editedItem.icon;
         this.$.eventDialogHeader.textContent = "Update Event";
@@ -341,6 +342,7 @@ Polymer({
         this.address = null;
         this.location = null;
         this.icon = null;
+        this.dateOnlyEvent = false;
         this.previewSrc = '';
         this.eventObject = {};
 
@@ -361,6 +363,7 @@ Polymer({
         obj.endDateTime = this.endDateTime;
         obj.address = this.address;
         obj.location = this.location;
+        obj.dateOnlyEvent = this.dateOnlyEvent;
         obj.groupId = this.groupId;
         if (!this.isEventsImageChanged)
             obj.icon = this.previewSrc;
@@ -384,7 +387,7 @@ Polymer({
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
         var currentDate = moment().format("YYYY-MM-DD");
         var pastDate = moment().subtract(90, 'day').format("YYYY-MM-DD");
-        var eventFields = '?fields=name|description|startDateTime|endDateTime|address|location|groupId|icon'
+        var eventFields = '?fields=name|description|startDateTime|endDateTime|address|location|groupId|icon|dateOnlyEvent'
         ajax.url = serviceBaseUrl + '/events/';
         ajax.contentType = 'application/json';
         ajax.headers['Version'] = '1.0';
@@ -484,6 +487,9 @@ Polymer({
             this.fire("status-message-update", { severity: 'error', message: 'Verify the start date and end date.' });
             return false;
         }
+
+        event.startDateTime = this.convertToDateOnlyValue(event.startDateTime, event.dateOnlyEvent);
+        event.endDateTime = this.convertToDateOnlyValue(event.endDateTime, event.dateOnlyEvent);
         return true;
     },
 
@@ -813,7 +819,9 @@ Polymer({
         }
 
         //Create JS date (months start at 0 in JS - don't ask)
-        dt.date = new Date(Date.UTC(dt.year, (dt.month - 1), dt.day, dt.hour, dt.minute));
+        dt.date = dateOnlyEvent ?
+            new Date(dt.year, (dt.month - 1), dt.day) :
+            new Date(Date.UTC(dt.year, (dt.month - 1), dt.day, dt.hour, dt.minute));
         return dt;
     }
 });
