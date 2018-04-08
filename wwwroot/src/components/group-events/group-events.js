@@ -50,6 +50,12 @@ Polymer({
     hideEditDeleteButton: function (event) {
         return this.isCurrentUserGroupOwnerOrAdmin ? 'showEditDeleteButton' : 'displayNone';
     },
+
+    dateOnlyStateChange: function () {
+        this.$.startTimeDiv.style.display = this.dateOnlyEvent ? 'none' : 'flex';
+        this.$.endTimeDiv.style.display = this.dateOnlyEvent ? 'none' : 'flex';
+    },
+
     getGroup: function (groupId) {
         this.ajaxCall = 'getGroup';
         this.makeAjaxCall(null, 'Getting group in progress...');
@@ -84,7 +90,6 @@ Polymer({
     },
     launchAddEventDialog: function (event) {
         this.$.eventDialogHeader.textContent = "Add Event";
-        //this.$.saveevent.textContent = "Save";
         this.$.saveevent.disabled = false;
         this.$.cancelevent.disabled = false;
         var body = document.querySelector('body');
@@ -323,10 +328,9 @@ Polymer({
         this.location = editedItem.location;
         this.groupId = editedItem.groupId;
         this.dateOnlyEvent = editedItem.dateOnlyEvent;
-        //this.icon = editedItem.icon;
         this.previewSrc = editedItem.icon;
         this.$.eventDialogHeader.textContent = "Update Event";
-        //this.$.saveevent.textContent = "Save";
+        this.dateOnlyStateChange();
     },
     emptyEventFields: function () {
         this.id = null;
@@ -345,6 +349,7 @@ Polymer({
         this.dateOnlyEvent = false;
         this.previewSrc = '';
         this.eventObject = {};
+        this.dateOnlyStateChange();
 
         var dialog = this.$.addEventDialog;
         if (dialog) {

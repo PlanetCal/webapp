@@ -45,7 +45,7 @@
               <paper-input label="Name" class="addEvent" value="{{name}}" char-counter="" maxlength="50" style="width: 400px;" required=""
                 error-message="required" on-change="validateOnChange">
               </paper-input>
-              <paper-checkbox checked='{{dateOnlyEvent}}' style="width: 170px;margin-top:35px;margin-left:15px;">
+              <paper-checkbox checked='{{dateOnlyEvent}}' on-change='dateOnlyStateChange' style="width: 170px;margin-top:35px;margin-left:15px;">
                 Date Event (No time)
               </paper-checkbox>
             </div>
@@ -54,18 +54,22 @@
                 on-tap="onStartDateChange" on-change="validateOnChange">
               </paper-input>
               <iron-icon class="event-icons" icon="icons:event" title="Start Date" on-tap="onStartDateChange"></iron-icon>
-              <paper-input label="Start Time" class="addEvent" value="{{startTime}}" style="width: 80px; margin-left: 10px;" readonly=""
-                required="" error-message="required" on-tap="onStartTimeChange" on-change="validateOnChange">
-              </paper-input>
-              <iron-icon class="event-icons" icon="icons:alarm" title="Start Time" on-tap="onStartTimeChange"></iron-icon>
+              <div id='startTimeDiv'>
+                <paper-input label="Start Time" class="addEvent" value="{{startTime}}" style="width: 80px; margin-left: 10px;" readonly=""
+                  required="" error-message="required" on-tap="onStartTimeChange" on-change="validateOnChange">
+                </paper-input>
+                <iron-icon class="event-icons" icon="icons:alarm" title="Start Time" on-tap="onStartTimeChange"></iron-icon>
+              </div>
               <paper-input label="End Date" class="addEvent" value="{{endDate}}" style="width: 160px;margin-left: 15px;" readonly="" required=""
                 error-message="required" on-tap="onEndDateChange" on-change="validateOnChange">
               </paper-input>
               <iron-icon class="event-icons" icon="icons:event" title="End Date" on-tap="onEndDateChange"></iron-icon>
-              <paper-input label="End Time" class="addEvent" value="{{endTime}}" style="width: 80px; margin-left: 10px;" readonly="" required=""
-                error-message="required" on-tap="onEndTimeChange" on-change="validateOnChange">
-              </paper-input>
-              <iron-icon class="event-icons" icon="icons:alarm" title="End Time" on-tap="onEndTimeChange"></iron-icon>
+              <div id='endTimeDiv'>
+                <paper-input label="End Time" class="addEvent" value="{{endTime}}" style="width: 80px; margin-left: 10px;" readonly="" required=""
+                  error-message="required" on-tap="onEndTimeChange" on-change="validateOnChange">
+                </paper-input>
+                <iron-icon class="event-icons" icon="icons:alarm" title="End Time" on-tap="onEndTimeChange"></iron-icon>
+              </div>
               <!--paper-input label="EndDateTime" class="addEvent" value="{{endDateTime}}" char-counter maxlength="50" style="width: 250px;"
                 required error-message="required" on-change="validateOnChange">
               </paper-input-->
@@ -201,14 +205,6 @@
             <b>Description: </b> [[item.description]]</p>
         </div>
       </template>
-      <!--vaadin-grid-column width="5%" flex-grow="0">
-        <template class="header">
-          <input aria-label="Select All" type="checkbox" on-click="invert" checked="[[isChecked(inverted, indeterminate)]]" indeterminate="[[indeterminate]]">
-        </template>
-        <template>
-          <input aria-label="Select Row" type="checkbox" on-change="selectItem" checked="[[isSelected(inverted, selected)]]">
-        </template>
-      </vaadin-grid-column-->
       <vaadin-grid-column width="27%">
         <template class="header">Name</template>
         <template>
