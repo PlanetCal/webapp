@@ -112,18 +112,6 @@ Polymer({
         this.parsedICalEvents = [];
     },
 
-    // addEventToGrid: function () {
-    //     this.eventObject = this.constructEventObject();
-    //     if (this.eventObject.id) { // Update Event
-    //         var index = this.items.findIndex(e => e.id === this.eventObject.id);
-    //         this.items[index] = this.eventObject;
-    //     } else {
-    //         this.items.push(this.eventObject);
-    //     }
-    //     this.populateGrid();
-    //     this.closeAddEventDialog();
-    // },
-
     updateExpandButtonTextAndIcon: function (expanded) {
         if (!expanded) {
             this.expandButtonText = 'Show advanced (optional) fields';
@@ -262,7 +250,8 @@ Polymer({
     constructEventsList: function (groupId, eventsList, importEventsOption) {
         let eventsToReturn = [], current_date = new Date();
         if (eventsList && groupId) {
-            eventsList.forEach(function (item) {
+            for (let i = 0; i < eventsList.length; i++) {
+                let item = eventsList[i];
                 //If the event starts after the current time, add it to the array to return.
                 if (importEventsOption !== 'futureEvents' ||
                     item.DTEND > current_date) {
@@ -272,17 +261,26 @@ Polymer({
                         let event = {
                             name: item.SUMMARY,
                             description: item.DESCRIPTION,
-                            startDateTime: item.DTSTART,
-                            endDateTime: item.DTEND,
+                            startDateTime: this.convertToDateOnlyValue(item.DTSTART, item.dateOnlyEvent),
+                            endDateTime: this.convertToDateOnlyValue(item.DTEND, item.dateOnlyEvent),
                             address: item.LOCATION.replace(/\\/g, ''),
-                            groupId: groupId
+                            groupId: groupId,
+                            dateOnlyEvent: item.dateOnlyEvent
                         };
                         eventsToReturn.push(event);
                     }
                 }
-            });
+            }
         }
         return eventsToReturn;
+    },
+
+    convertToDateOnlyValue: function (date, dateOnlyEvent) {
+        if (!dateOnlyEvent) {
+            return date;
+        }
+
+        return `${date.getUTCFullYear()}-${date.getUTCMonth() + 1}-${date.getUTCDate()}`;
     },
 
     closeAddEventDialog: function () {
@@ -787,21 +785,13 @@ Polymer({
                 if (type == 'DTSTART') {
                     dt = this.makeDate(val, dateOnlyEvent);
                     val = dt.date;
-                    //These are helpful for display
-                    cur_event.start_time = dt.hour + ':' + dt.minute;
-                    cur_event.start_date = dt.day + '/' + dt.month + '/' + dt.year;
-                    cur_event.day = dt.dayname;
-                    cur_event.dateOnlyEvent = dt.dateOnlyEvent;
+                    cur_event.dateOnlyEvent = dateOnlyEvent;
                 }
                 //If the type is an end date, do the same as above
                 if (type == 'DTEND') {
                     dt = this.makeDate(val, dateOnlyEvent);
                     val = dt.date;
-                    //These are helpful for display
-                    cur_event.end_time = dt.hour + ':' + dt.minute;
-                    cur_event.end_date = dt.day + '/' + dt.month + '/' + dt.year;
-                    cur_event.day = dt.dayname;
-                    cur_event.dateOnlyEvent = dt.dateOnlyEvent;
+                    cur_event.dateOnlyEvent = dateOnlyEvent;
                 }
                 //Convert timestamp
                 if (type == 'DTSTAMP') val = this.makeDate(val, false).date;
@@ -824,9 +814,6 @@ Polymer({
 
         //Create JS date (months start at 0 in JS - don't ask)
         dt.date = new Date(Date.UTC(dt.year, (dt.month - 1), dt.day, dt.hour, dt.minute));
-        dt.dateOnly = dateOnlyEvent;
-        //Get the full name of the given day
-        dt.dayname = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][dt.date.getDay()];
         return dt;
     }
 });
