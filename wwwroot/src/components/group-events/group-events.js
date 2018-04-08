@@ -50,6 +50,12 @@ Polymer({
     hideEditDeleteButton: function (event) {
         return this.isCurrentUserGroupOwnerOrAdmin ? 'showEditDeleteButton' : 'displayNone';
     },
+
+    dateOnlyStateChange: function () {
+        this.$.startTimeDiv.style.display = this.dateOnlyEvent ? 'none' : 'flex';
+        this.$.endTimeDiv.style.display = this.dateOnlyEvent ? 'none' : 'flex';
+    },
+
     getGroup: function (groupId) {
         this.ajaxCall = 'getGroup';
         this.makeAjaxCall(null, 'Getting group in progress...');
@@ -84,7 +90,6 @@ Polymer({
     },
     launchAddEventDialog: function (event) {
         this.$.eventDialogHeader.textContent = "Add Event";
-        //this.$.saveevent.textContent = "Save";
         this.$.saveevent.disabled = false;
         this.$.cancelevent.disabled = false;
         var body = document.querySelector('body');
@@ -111,18 +116,6 @@ Polymer({
         this.$.IcsFile.inputElement.value = '';
         this.parsedICalEvents = [];
     },
-
-    // addEventToGrid: function () {
-    //     this.eventObject = this.constructEventObject();
-    //     if (this.eventObject.id) { // Update Event
-    //         var index = this.items.findIndex(e => e.id === this.eventObject.id);
-    //         this.items[index] = this.eventObject;
-    //     } else {
-    //         this.items.push(this.eventObject);
-    //     }
-    //     this.populateGrid();
-    //     this.closeAddEventDialog();
-    // },
 
     updateExpandButtonTextAndIcon: function (expanded) {
         if (!expanded) {
@@ -262,7 +255,8 @@ Polymer({
     constructEventsList: function (groupId, eventsList, importEventsOption) {
         let eventsToReturn = [], current_date = new Date();
         if (eventsList && groupId) {
-            eventsList.forEach(function (item) {
+            for (let i = 0; i < eventsList.length; i++) {
+                let item = eventsList[i];
                 //If the event starts after the current time, add it to the array to return.
                 if (importEventsOption !== 'futureEvents' ||
                     item.DTEND > current_date) {
@@ -275,14 +269,23 @@ Polymer({
                             startDateTime: item.DTSTART,
                             endDateTime: item.DTEND,
                             address: item.LOCATION.replace(/\\/g, ''),
-                            groupId: groupId
+                            groupId: groupId,
+                            dateOnlyEvent: item.dateOnlyEvent
                         };
                         eventsToReturn.push(event);
                     }
                 }
-            });
+            }
         }
         return eventsToReturn;
+    },
+
+    convertToDateOnlyValue: function (date, dateOnlyEvent) {
+        if (!dateOnlyEvent) {
+            return date;
+        }
+
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     },
 
     closeAddEventDialog: function () {
@@ -324,10 +327,10 @@ Polymer({
         this.address = editedItem.address;
         this.location = editedItem.location;
         this.groupId = editedItem.groupId;
-        //this.icon = editedItem.icon;
+        this.dateOnlyEvent = editedItem.dateOnlyEvent;
         this.previewSrc = editedItem.icon;
         this.$.eventDialogHeader.textContent = "Update Event";
-        //this.$.saveevent.textContent = "Save";
+        this.dateOnlyStateChange();
     },
     emptyEventFields: function () {
         this.id = null;
@@ -343,8 +346,10 @@ Polymer({
         this.address = null;
         this.location = null;
         this.icon = null;
+        this.dateOnlyEvent = false;
         this.previewSrc = '';
         this.eventObject = {};
+        this.dateOnlyStateChange();
 
         var dialog = this.$.addEventDialog;
         if (dialog) {
@@ -363,6 +368,7 @@ Polymer({
         obj.endDateTime = this.endDateTime;
         obj.address = this.address;
         obj.location = this.location;
+        obj.dateOnlyEvent = this.dateOnlyEvent;
         obj.groupId = this.groupId;
         if (!this.isEventsImageChanged)
             obj.icon = this.previewSrc;
@@ -386,7 +392,7 @@ Polymer({
         var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
         var currentDate = moment().format("YYYY-MM-DD");
         var pastDate = moment().subtract(90, 'day').format("YYYY-MM-DD");
-        var eventFields = '?fields=name|description|startDateTime|endDateTime|address|location|groupId|icon'
+        var eventFields = '?fields=name|description|startDateTime|endDateTime|address|location|groupId|icon|dateOnlyEvent'
         ajax.url = serviceBaseUrl + '/events/';
         ajax.contentType = 'application/json';
         ajax.headers['Version'] = '1.0';
@@ -486,6 +492,9 @@ Polymer({
             this.fire("status-message-update", { severity: 'error', message: 'Verify the start date and end date.' });
             return false;
         }
+
+        event.startDateTime = this.convertToDateOnlyValue(event.startDateTime, event.dateOnlyEvent);
+        event.endDateTime = this.convertToDateOnlyValue(event.endDateTime, event.dateOnlyEvent);
         return true;
     },
 
@@ -787,21 +796,13 @@ Polymer({
                 if (type == 'DTSTART') {
                     dt = this.makeDate(val, dateOnlyEvent);
                     val = dt.date;
-                    //These are helpful for display
-                    cur_event.start_time = dt.hour + ':' + dt.minute;
-                    cur_event.start_date = dt.day + '/' + dt.month + '/' + dt.year;
-                    cur_event.day = dt.dayname;
-                    cur_event.dateOnlyEvent = dt.dateOnlyEvent;
+                    cur_event.dateOnlyEvent = dateOnlyEvent;
                 }
                 //If the type is an end date, do the same as above
                 if (type == 'DTEND') {
                     dt = this.makeDate(val, dateOnlyEvent);
                     val = dt.date;
-                    //These are helpful for display
-                    cur_event.end_time = dt.hour + ':' + dt.minute;
-                    cur_event.end_date = dt.day + '/' + dt.month + '/' + dt.year;
-                    cur_event.day = dt.dayname;
-                    cur_event.dateOnlyEvent = dt.dateOnlyEvent;
+                    cur_event.dateOnlyEvent = dateOnlyEvent;
                 }
                 //Convert timestamp
                 if (type == 'DTSTAMP') val = this.makeDate(val, false).date;
@@ -823,10 +824,9 @@ Polymer({
         }
 
         //Create JS date (months start at 0 in JS - don't ask)
-        dt.date = new Date(Date.UTC(dt.year, (dt.month - 1), dt.day, dt.hour, dt.minute));
-        dt.dateOnly = dateOnlyEvent;
-        //Get the full name of the given day
-        dt.dayname = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][dt.date.getDay()];
+        dt.date = dateOnlyEvent ?
+            new Date(dt.year, (dt.month - 1), dt.day) :
+            new Date(Date.UTC(dt.year, (dt.month - 1), dt.day, dt.hour, dt.minute));
         return dt;
     }
 });
