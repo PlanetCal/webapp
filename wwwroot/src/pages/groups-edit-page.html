@@ -5,7 +5,8 @@
   <template>
     <style include="shared-styles"></style>
     <div>
-      <groups-edit group-type-to-go-back=[[groupTypeToGoBack]] group-id=[[groupId]]></groups-edit>
+      <groups-edit parent-group=[[parentGroup]] privacy=[[privacy]] category=[[category]] group-type-to-go-back=[[groupTypeToGoBack]]
+        group-id=[[groupId]]></groups-edit>
     </div>
   </template>
 
@@ -15,6 +16,15 @@
 
       properties: {
         groupId: {
+          type: String
+        },
+        parentGroup: {
+          type: String
+        },
+        category: {
+          type: String
+        },
+        privacy: {
           type: String
         },
         groupTypeToGoBack: {

@@ -17,74 +17,64 @@
           on-change="validateOnChange">
         </paper-input>
         <span style="width: 5%;"></span>
-        <paper-dropdown-menu label="Category" style="width: 30%;" required error-message="required" on-change="validateOnChange">
+        <paper-dropdown-menu id="categoryMenu" label="Category" style="width: 30%;" required error-message="required" on-change="validateOnChange">
           <paper-listbox attr-for-selected="value" slot="dropdown-content" class="dropdown-content" selected="{{category}}">
-            <paper-item value="Local">Local</paper-item>
-            <paper-item value="Personal">Personal</paper-item>
             <paper-item value="School">School</paper-item>
             <paper-item value="Sports">Sports</paper-item>
+            <paper-item value="Religious">Religious</paper-item>
+            <paper-item value="Local">Local</paper-item>
             <paper-item value="Work">Work</paper-item>
           </paper-listbox>
         </paper-dropdown-menu>
         <span style="width: 5%"></span>
-        <paper-dropdown-menu label="Privacy" style="width: 30%;" required error-message="required" on-change="validateOnChange">
+        <paper-dropdown-menu id="privacyMenu" label="Privacy" style="width: 30%;" required error-message="required" on-change="validateOnChange">
           <paper-listbox attr-for-selected="value" slot="dropdown-content" class="dropdown-content" selected="{{privacy}}">
-            <paper-item value="Closed">Closed</paper-item>
-            <paper-item value="Open">Open</paper-item>
+            <paper-item value="Private">Private</paper-item>
+            <paper-item value="Public">Public</paper-item>
           </paper-listbox>
         </paper-dropdown-menu>
+      </div>
+      <div id=parentGroupDiv>
+        <p> Parent Group: [[parentGroup]]</p>
       </div>
       <div>
         <paper-button class='blue' on-tap="toggle">
           <iron-icon icon="[[expandButtonIcon]]"></iron-icon>[[expandButtonText]]</paper-button>
         <iron-collapse id='collapse'>
           <paper-textarea class="saveGroups" label="Description" value="{{description}}" char-counter maxlength="500" max-rows="4"></paper-textarea>
-          <paper-textarea label="Administrators" class="saveGroups" value="{{administrators}}" char-counter maxlength="500" max-rows="2"></paper-textarea>
-          <div style="display: flex; width: 100%">
-            <paper-input label="Street Number" class="saveGroups" value="{{streetNumber}}" char-counter maxlength="15" style="width: 30%;">
-            </paper-input>
-            <span style="width: 5%"></span>
-            <paper-input label="Street Name" class="saveGroups" value="{{streetName}}" char-counter maxlength="50" style="width: 30%;">
-            </paper-input>
-            <span style="width: 5%"></span>
-            <paper-input label="City" class="saveGroups" value="{{city}}" char-counter maxlength="20" style="width: 30%;">
+          <paper-textarea label="Contributors" class="saveGroups" value="{{administrators}}" char-counter maxlength="500" max-rows="2"></paper-textarea>
+          <div style="display: flex;">
+            <paper-input label="Address" class="saveGroups" value="{{address}}" char-counter maxlength="200" style="width: 100%;">
             </paper-input>
           </div>
           <div style="display: flex;">
-            <paper-input label="Location" class="saveGroups" value="{{location}}" char-counter maxlength="10" style="width: 30%;">
+            <paper-input label="Location" class="saveGroups" value="{{location}}" char-counter maxlength="50" style="width: 25%;">
             </paper-input>
-            <span style="width: 5%;"></span>
-            <paper-input label="State" class="saveGroups" value="{{state}}" char-counter maxlength="20" style="width: 30%;">
+            <span style="width: 2%;"></span>
+            <paper-input label="Website" class="saveGroups" value="{{website}}" char-counter maxlength="50" style="width: 25%;" on-change="validateOnChange">
             </paper-input>
-            <span style="width: 5%;"></span>
-            <paper-input label="Postal Code" class="saveGroups" value="{{postalCode}}" char-counter maxlength="20" style="width: 30%;">
+            <span style="width: 2%;"></span>
+            <paper-input label="Phone" class="saveGroups" value="{{phone}}" char-counter maxlength="15" style="width: 25%;">
             </paper-input>
-          </div>
-          <div style="display: flex;">
-            <paper-input label="Website" class="saveGroups" value="{{website}}" char-counter maxlength="50" style="width: 30%;" on-change="validateOnChange">
-            </paper-input>
-            <span style="width: 5%;"></span>
-            <paper-input label="Phone" class="saveGroups" value="{{phone}}" char-counter maxlength="15" style="width: 30%;">
-            </paper-input>
-            <span style="width: 5%;"></span>
-            <paper-input label="Email" class="saveGroups" value="{{email}}" char-counter maxlength="25" style="width: 30%;">
+            <span style="width: 2;"></span>
+            <paper-input label="Email" class="saveGroups" value="{{email}}" char-counter maxlength="25" style="width: 25%;">
             </paper-input>
           </div>
           <div style="display: flex;">
-            <img id="previewImage" src="{{previewSrc}}" width="300" height="140" style="vertical-align: top;" />
+            <img id="previewImage" src="{{previewSrc}}" width="300" height="200" style="vertical-align: top;" />
             <iron-icon class="icon-edit" icon="icons:file-upload" title="Edit" on-tap="editImage"></iron-icon>
             <span id="imageUploadInstructions" style="margin-left: 5%; vertical-align: top; text-align: left;">
               <h3>Instructions for group image upload: </h3>
               <ul>
                 <li>Image size can maximum be 2MB</li>
-                <li>Recommended width and height of image is 300 X 150</li>
-                <li>Size more than 300 X 150 will be reset to this size</li>
+                <li>Recommended width and height of image is 300 X 200</li>
+                <li>Size more than 300 X 200 will be reset to this size</li>
               </ul>
             </span>
           </div>
           <div>
             <div style="vertical-align: top; visibility: hidden; margin-top: -45px;">
-              <paper-input type="file" label="Upload Image" id="eventImage" on-change="previewImage" style="vertical-align: top;" accept="image/*"></paper-input>
+              <paper-input type="file" label="Upload Image" id="groupImage" on-change="previewImage" style="vertical-align: top;" accept="image/*"></paper-input>
             </div>
           </div>
         </iron-collapse>

@@ -51,7 +51,9 @@
 
       handleAjaxResponse: function (e) {
         var followingGroups = e.detail.response;
-        Polymer.globalsManager.set('followingGroups', followingGroups);
+        var followingGroupsToCache = [];
+        followingGroups.forEach(element => followingGroupsToCache.push(element.id));
+        Polymer.globalsManager.set('followingGroups', followingGroupsToCache);
         this.followingGroupsInitialized = 1;
       },
 

@@ -54,26 +54,29 @@ Polymer({
       loggedInUser = this.localStorage.loggedInUser;
     }
 
+    let firstTimeLogin = false;
     if (loggedInUser) {
       this.userId = loggedInUser.id;
-    }
-    var userDetails = Polymer.globalsManager.globals.userDetails;
-    if (this.localStorage && !userDetails) {
-      userDetails = this.localStorage.userDetails;
+      firstTimeLogin = this.checkIfFirstTimeUser(loggedInUser.email);
     }
 
-    var firstTimeLogon = true;
-    if (userDetails && userDetails.name) {
-      firstTimeLogon = false;
-    }
-
-    if (firstTimeLogon) {
+    if (firstTimeLogin) {
       this.set('route.path', '/welcome');
     } else {
       //display events page
       this.setQueryParamsForEventsPage();
       this.set('route.path', '/events');
     }
+  },
+
+  checkIfFirstTimeUser(emailId) {
+    //array of objects, which contains emails
+    let existingUsers = this.localStorage.existingUsers;
+    if (existingUsers) {
+      var index = existingUsers.indexOf(emailId);
+      return (index < 0);
+    }
+    return true;
   },
 
   setQueryParamsForEventsPage: function () {

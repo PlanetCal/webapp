@@ -169,7 +169,7 @@ Polymer({
 
         Polymer.globalsManager.set('loggedInUser', loggedInUser);
         this.set('localStorage.loggedInUser', loggedInUser);
-        this.getUserDetailsAjaxCall();
+        this.fire('on-login-successful');
         break;
       case 'findPassword':
       case 'createAccount':
@@ -203,45 +203,5 @@ Polymer({
       message = 'Something went wrong.';
     }
     this.fire("status-message-update", { severity: 'error', message: message });
-  },
-
-  getUserDetailsAjaxCall: function () {
-    var ajax = this.$.userDetailsAjax;
-    var serviceBaseUrl = Polymer.globalsManager.globals.serviceBaseUrl;
-    ajax.method = 'GET';
-    ajax.headers['Version'] = '1.0';
-    var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
-
-    if (loggedInUser) {
-      ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
-      this.userDetailsAjaxUrl = serviceBaseUrl + '/userdetails/' + loggedInUser.id;
-      ajax.generateRequest();
-    } else {
-      // Impossible to arrive at this point given that it is only called after user has logged in.
-      this.fire("status-message-update", { severity: 'error', message: 'User is not logged in. Can not get User details.' });
-    }
-  },
-
-  handleUserDetailsErrorResponse: function (e) {
-    console.log("User details get failed");
-    var userDetailsJsonResponse = e.detail.request.xhr.response;
-    this.displayErrorMessage(userDetailsJsonResponse);
-  },
-
-  handleUserDetailsAjaxResponse: function (e) {
-    console.log("User details get succeeded");
-    var userDetailsJsonResponse = e.detail.response;
-    if (userDetailsJsonResponse.name) {
-      var userDetails = {
-        name: userDetailsJsonResponse.name,
-        country: userDetailsJsonResponse.country,
-        region: userDetailsJsonResponse.region,
-        city: userDetailsJsonResponse.city
-      }
-      Polymer.globalsManager.set('userDetails', userDetails);
-      this.set('localStorage.userDetails', userDetails);
-    }
-
-    this.fire('on-login-successful');
   }
 });

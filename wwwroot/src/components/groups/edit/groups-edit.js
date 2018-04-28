@@ -11,7 +11,17 @@ Polymer({
         groupId: {
             type: String,
             observer: '_dataChanged',
-        }
+        },
+        parentGroup: {
+            type: String,
+            observer: '_dataChanged',
+        },
+        category: {
+            type: String
+        },
+        privacy: {
+            type: String
+        },
     },
     listeners: {
         'iron-resize': 'onGroupsEditResize',
@@ -23,7 +33,16 @@ Polymer({
     },
 
     _dataChanged: function () {
-        if (this.groupId && this.groupTypeToGoBack) {
+        if (this.parentGroup && this.parentGroup !== '' && (!this.category || !this.privacy)) {
+            return;
+        }
+
+        let disableDropDowns = this.parentGroup !== '';
+        this.$.categoryMenu.disabled = disableDropDowns;
+        this.$.privacyMenu.disabled = disableDropDowns;
+        //this.$.parentGroupDiv.hidden = !disableDropDowns;
+
+        if (this.groupTypeToGoBack) {
             this.regionExpanded = false;
             this.updateExpandButtonTextAndIcon(this.regionExpanded);
             this.pageLoad();
@@ -34,7 +53,7 @@ Polymer({
         this.fire("status-message-update");
         var items = [];
 
-        if (this.groupId === 'null') {
+        if (!this.groupId) {
             this.reset();
         }
         else {
@@ -71,7 +90,7 @@ Polymer({
     resizeImageSelection: function (file) {
         var myURL = window.URL || window.webkitURL;
         var img = this.$.previewImage;
-        var imageWidth = 300, imageHeight = 140;
+        var imageWidth = 300, imageHeight = 200;
         img.width = imageWidth;
         img.height = imageHeight;
 
@@ -110,14 +129,7 @@ Polymer({
         this.id = editedGroup.id;
         this.name = editedGroup.name;
         this.description = editedGroup.description;
-        if (!editedGroup.address) {
-            editedGroup.address = {};
-        }
-        this.streetNumber = editedGroup.address.streetNumber;
-        this.streetName = editedGroup.address.streetName;
-        this.city = editedGroup.address.city;
-        this.state = editedGroup.address.state;
-        this.postalCode = editedGroup.address.postalCode;
+        this.address = editedGroup.address;
         this.location = editedGroup.location;
         if (!editedGroup.contact) {
             editedGroup.contact = {};
@@ -128,29 +140,33 @@ Polymer({
         this.administrators = editedGroup.administrators ? editedGroup.administrators.join(';') : '';
         //this.members = editedGroup.members;
         this.privacy = editedGroup.privacy;
+        this.parentGroup = editedGroup.parentGroup;
+        this.childGroups = editedGroup.childGroups;
         this.previewSrc = editedGroup.icon;
         this.category = editedGroup.category;
+
+        this.$.categoryMenu.disabled = (editedGroup.parentGroup && editedGroup.parentGroup != '') || (editedGroup.childGroups && editedGroup.childGroups.length > 0);
+        this.$.privacyMenu.disabled = this.$.categoryMenu.disabled;
+        //this.$.parentGroupDiv.hidden = !editedGroup.parentGroup;
     },
 
     reset: function () {
         this.id = '';
         this.name = '';
         this.description = '';
-        this.streetNumber = '';
-        this.streetName = '';
-        this.city = '';
-        this.state = '';
-        this.postalCode = '';
+        this.address = '';
         this.location = '';
         this.phone = '';
         this.email = '';
         this.website = '';
         this.administrators = '';
         //this.members = [];
-        this.privacy = 'Closed';
+        this.privacy = this.parentGroup ? this.privacy : 'Private';
         this.previewSrc = '';
-        this.category = 'Personal';
+        this.category = this.parentGroup ? this.category : 'Local';
         this.resetGlobalManagerForEditedGroup();
+        //this.parentGroup = this.parentGroup;
+        this.childGroups = [];
     },
 
     updateExpandButtonTextAndIcon: function (expanded) {
@@ -217,12 +233,7 @@ Polymer({
         }
         obj.name = this.name;
         obj.description = this.description;
-        obj.address = {};
-        obj.address.streetNumber = this.streetNumber;
-        obj.address.streetName = this.streetName;
-        obj.address.city = this.city;
-        obj.address.state = this.state;
-        obj.address.postalCode = this.postalCode;
+        obj.address = this.address;
         obj.location = this.location;
         obj.contact = {};
         obj.contact.phone = this.phone;
@@ -232,6 +243,8 @@ Polymer({
         obj.members = this.members;
         obj.privacy = this.privacy;
         obj.category = this.category;
+        obj.parentGroup = this.parentGroup;
+        obj.childGroups = this.childGroups;
         if (!this.isGroupImageChanged)
             obj.icon = this.previewSrc;
         return obj;
@@ -285,7 +298,7 @@ Polymer({
 
         switch (this.ajaxCall) {
             case 'getGroup':
-                ajax.url += group.id + '?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy';
+                ajax.url += group.id + '?fields=name|description|privacy|icon|category|createdBy|administrators|members|location|address|contact|webSite|modifiedBy|parentGroup|childGroups';
                 ajax.body = '';
                 ajax.method = 'GET';
                 ajax.headers['Version'] = '1.0';
@@ -353,6 +366,12 @@ Polymer({
                 case 'GroupNotExistant':
                     message = 'Group does not exist.';
                     break;
+                case 'PrivacyChangeNotAllowedDueToChildGroups':
+                    message = 'Group privacy should remain same, since it has child groups';
+                    break;
+                case 'CategoryChangeNotAllowedDueToChildGroups':
+                    message = 'Group category should remain same, since it has child groups';
+                    break;
                 case 'InvalidEmail':
                     message = 'Administrator email is invalid.';
                     break;
@@ -418,7 +437,7 @@ Polymer({
         this.makeAjaxCall(this.groupObject);
     },
     editImage: function () {
-        this.$$('#groupImage').$.input.click();
+        var test = this.$.groupImage.$.input.click();
     },
     onGroupsEditResize: function () {
         //This function will be called when the window is resized.

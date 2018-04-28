@@ -12,7 +12,9 @@
                 animated-shadow="true">
                 <div class="card-content" style="height:150px;">
                     <div>[[DisplayLimitedText(item.description, 120)]]</div>
-                    <div style="height: 20px;"></div>
+                    <div>
+                        <iron-icon icon="image:filter-none" style="padding-right: 5px;"></iron-icon>[[item.category]]
+                    </div>
                     <div class$="text-phone [[hideForPhone(item)]]">
                         <iron-icon icon="icons:perm-phone-msg"></iron-icon> [[item.contact.phone]]
                     </div>
@@ -24,15 +26,27 @@
                         <iron-icon class="icon" icon="hardware:laptop"></iron-icon>
                         <a href="[[item.webSite]]" target="_blank" title="Website">[[item.webSite]]</a>
                     </div>
+                    <div class$="{{hideForChildGroups(item)}}">
+                        It contains [[item.childGroups.length]] sub-group/s.
+                    </div>
+                    <div class$="{{hideForParentGroup(item)}}">
+                        It is a sub-group.
+                    </div>
                 </div>
                 <div class="card-footer">
-                    <span class$="[[hideSubscribeButton(item)]]"><a class="link-events" href="../../../../user-profile" title="Unsubscribe">Unsubscribe</a> |</span>
-                    <a class="link-events" href="#" on-tap="goToEvents" title="Go to Events">Events</a>
+                    <span class$="[[hideUnsubscribeButton(item)]]">
+                        <a class="link-events" href='#' title="Un-follow" on-tap='unsubscribe'>Un-follow</a>
+                        |</span>
+                    <span class$="[[hideSubscribeButton(item)]]">
+                        <a class="link-events" href='#' title="Follow" on-tap='subscribe'>Follow</a>
+                        |</span>
+                    <a class="link-events" href='#' on-tap="goToEvents" title="Go to Events">Events</a>
+                    <iron-icon class$="icon-edit [[hideAddChildGroup(item)]]" icon="icons:add" title="Create Child Group" on-tap="createChildGroup"></iron-icon>
                     <iron-icon class$="icon-edit [[hideForEdit(item)]]" icon="icons:create" title="Edit" on-tap="editGroup"></iron-icon>
-                    <iron-icon class$="icon-edit [[hideForDelete(item)]]" icon="icons:delete" title="Delete" on-tap="deleteGroup"></iron-icon>
+                    <iron-icon class$="icon-edit [[hideForEdit(item)]]" icon="icons:delete" title="Delete" on-tap="deleteGroup"></iron-icon>
                 </div>
             </paper-card>
         </template>
     </template>
-    <script type="text/javascript" src="/src/components/groups/display/groups-display.js"></script>
+    <script type="text/javascript " src="/src/components/groups/display/groups-display.js "></script>
 </dom-module>

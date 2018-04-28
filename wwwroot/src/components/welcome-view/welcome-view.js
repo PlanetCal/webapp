@@ -18,6 +18,6 @@ Polymer({
   },
 
   forwardhandler: function () {
-    this.fire('page-load-requested', { page: '/ask-location' });
+    this.fire('page-load-requested', { page: '/ask-groups' });
   },
 });

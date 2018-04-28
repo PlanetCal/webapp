@@ -20,7 +20,6 @@ Polymer({
   },
 
   makeAjaxCall: function () {
-
     var ajax = this.$.ajax;
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
     if (loggedInUser) {
@@ -30,14 +29,12 @@ Polymer({
       this.ajaxUrl = serviceBaseUrl + '/userdetails/' + loggedInUser.id;
       ajax.headers['Version'] = '1.0';
 
-      var followingGroups = Polymer.globalsManager.globals.followingGroups;
-      var groupsToSave = [];
-      for (var i in followingGroups) {
-        groupsToSave.push(followingGroups[i].id);
-      }
-      var userDetails = Polymer.globalsManager.globals.userDetails;
-      userDetails.id = loggedInUser.id;
-      userDetails.followingGroups = groupsToSave;
+      let groupsToSave = Polymer.globalsManager.globals.followingGroups;
+      
+      let userDetails = {
+        id:loggedInUser.id,
+        followingGroups: groupsToSave
+      };
 
       this.ajaxBody = JSON.stringify(userDetails);
       ajax.generateRequest();
@@ -48,11 +45,28 @@ Polymer({
   },
 
   handleAjaxResponse: function (e) {
+    var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
+    if (loggedInUser) {
+      let existingUsers = this.localStorage.existingUsers;
+      if (!existingUsers) {
+        existingUsers = [];
+        existingUsers.push(loggedInUser.email);
+        this.set('localStorage.existingUsers', existingUsers);
+      }
+      else {
+        var index = existingUsers.indexOf(loggedInUser.email);
+        if (index < 0) {
+          existingUsers.push(loggedInUser.email);
+          this.set('localStorage.existingUsers', existingUsers);
+        }
+      }
+    }
+
     if (this.navigation === 'forward') {
       this.fire('page-load-requested', { page: '/events' });
     }
     else if (this.navigation === 'previous') {
-      this.fire('page-load-requested', { page: '/ask-location' });
+      this.fire('page-load-requested', { page: '/welcome' });
     }
   },
 

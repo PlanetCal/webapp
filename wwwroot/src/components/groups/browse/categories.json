@@ -1,22 +1,27 @@
 [
   {
-    "id": "Local",
-    "name": "Local",
-    "icon": "communication:location-on"
-  },
-  {
     "id": "School",
     "name": "School",
     "icon": "social:school"
   },
   {
-    "id": "Work",
-    "name": "Work",
-    "icon": "icons:work"
-  },
-  {
     "id": "Sports",
     "name": "Sports",
     "icon": "av:games"
+  },
+  {
+    "id": "Religious",
+    "name": "Religious",
+    "icon": "icons:add-alert"
+  },
+  {
+    "id": "Local",
+    "name": "Local",
+    "icon": "social:location-city"
+  },
+  {
+    "id": "Work",
+    "name": "Work",
+    "icon": "icons:work"
   }
 ]

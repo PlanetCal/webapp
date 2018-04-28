@@ -169,31 +169,43 @@ Polymer({
 
   getDate: function (date) {
     var dateTime = new Date(date);
-    return dateTime.toDateString();
+    return moment(dateTime).format('ddd MMM Do YYYY, hh:mm a');
+  },
+
+  getImage: function (item) {
+    return (item.icon) ? item.icon : '/src/images/about.jpg';
   },
 
   getVenue: function (item) {
-    if (item && item[0]) {
-      return item[0].name;
-    } else {
-      return '';
-    }
+    return item.address;
   },
 
   getVenueLink: function (item) {
-    if (item && item[0]) {
-      return item[0].webSite;
-    } else {
-      return '';
-    }
+    var venueLink = 'https://www.google.com/maps/place/';
+    var normalizedAddress = item.address.replace(/ /g, '+');
+    return venueLink + normalizedAddress;
   },
 
   getDuration: function (dateStart, dateEnd) {
     var startdateTime = new Date(dateStart);
     var endDateTime = new Date(dateEnd);
-    var timeDiff = Math.abs(endDateTime.getTime() - startdateTime.getTime());
+    let milliSeconds = moment(endDateTime) - moment(startdateTime);
+    let minutes = Math.floor(milliSeconds / (1000 * 60));
 
-    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    return diffDays + " Days";
+    let daysToDisplay = Math.floor(minutes / (24 * 60));
+
+    let remainingMinutes = minutes - daysToDisplay * (24 * 60);
+    let hoursToDisplay = Math.floor(remainingMinutes / 60);
+
+    let minutesToDisplay = remainingMinutes - hoursToDisplay * 60;
+
+    let toDisplay = 'Duration:';
+    let dayPostFix = daysToDisplay > 1 ? 'days' : 'day';
+    toDisplay += daysToDisplay > 0 ? `${daysToDisplay} ${dayPostFix}` : '';
+    let hourPostFix = hoursToDisplay > 1 ? 'hours' : 'hour';
+    toDisplay += hoursToDisplay > 0 ? `${hoursToDisplay} ${hourPostFix}` : '';
+    let minPostFix = minutesToDisplay > 1 ? 'mins' : 'min';
+    toDisplay += minutesToDisplay > 0 ? `${minutesToDisplay} ${minPostFix}` : '';
+    return toDisplay;
   },
 });

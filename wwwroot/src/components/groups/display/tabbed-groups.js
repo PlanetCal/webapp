@@ -8,9 +8,9 @@ Polymer({
 
     ready: function () {
         this.groupTypes = [
-            { id: 'owned', displayName: 'Owned' },
-            { id: 'subscribed', displayName: 'Subscribed' },
-            { id: 'administered', displayName: 'Administered' }
+            { id: 'follower', displayName: 'Follower' },
+            { id: 'owner', displayName: 'Owner' },
+            { id: 'contributor', displayName: 'Contributor' }
         ];
     },
 
@@ -18,6 +18,6 @@ Polymer({
         if (Polymer.globalsManager.editedGroup) {
             Polymer.globalsManager.set('editedGroup', null);
         }
-        this.fire('page-load-requested', { page: '/groups-edit', queryParams: { groupId: 'null', groupTypeToGoTo: this.groupType } });
+        this.fire('page-load-requested', { page: '/groups-edit', queryParams: { groupId: '', parentGroup: '', groupTypeToGoTo: this.groupType } });
     },
 });

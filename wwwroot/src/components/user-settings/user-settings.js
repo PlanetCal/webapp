@@ -44,12 +44,6 @@ Polymer({
       this.userName = '';
       this.loginOrLogout = 'Sign in';
     }
-
-    var userDetails = Polymer.globalsManager.globals.userDetails;
-    if (this.localStorage && !userDetails) {
-      userDetails = this.localStorage.userDetails;
-      Polymer.globalsManager.set('userDetails', userDetails);
-    }
   },
 
   settingsClickHandler: function () {
@@ -66,8 +60,6 @@ Polymer({
     if (this.userId) {
       this.set('localStorage.loggedInUser', null);
       Polymer.globalsManager.set('loggedInUser', null);
-      this.set('localStorage.userDetails', null);
-      Polymer.globalsManager.set('userDetails', null);
 
       this.email = null;
       this.userId = null;
