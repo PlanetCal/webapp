@@ -1,0 +1,27 @@
+<link rel="import" href="/src/polymer-refs.html">
+<link rel="import" href="./group-follow-styles.html">
+<dom-module id="group-follow">
+  <template>
+    <style include="group-follow-styles"></style>
+    <div>
+      <h2>Follow Group</h2>
+      <span>
+        <b>Group Name: </b>
+      </span>
+      <span id="groupName"></span>
+      <br>
+      <span>
+        <b>Group Description: </b>
+      </span>
+      <span id="groupDesc"></span>
+      <br>
+      <p>Click the Follow button to follow the group with id [[groupId]]. Once you follow the group, the events associated with
+        this group will start showing up in your calendar view.</p>
+
+      <paper-button class="followButton" raised on-tap="followGroupHandler">Follow</paper-button>
+    </div>
+    <iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" body='[[ajaxBody]]' content-type='application/json' on-error='handleErrorResponse'
+      on-response='handleAjaxResponse'></iron-ajax>
+  </template>
+  <script type="text/javascript" src="/src/components/group-follow/group-follow.js"></script>
+  </dom - module>

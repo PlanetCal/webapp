@@ -21,12 +21,17 @@ Polymer({
         }
         this.earlierValue = this.groupType;
 
-        this.fire("on-query-param-changed", { groupType: this.groupType });
+        this.fire("on-query-param-changed", {
+            groupType: this.groupType
+        });
 
         this.fire("status-message-update");
         this.loggedInUser = Polymer.globalsManager.globals.loggedInUser;
         if (!this.loggedInUser) {
-            this.fire("status-message-update", { severity: 'error', message: 'Please login to view the groups.' });
+            this.fire("status-message-update", {
+                severity: 'error',
+                message: 'Please login to view the groups.'
+            });
             return;
         }
         this.loadGroups();
@@ -49,12 +54,18 @@ Polymer({
             case 'subscribeGroup':
                 ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followingGroups/' + group.id;
                 ajax.method = 'POST';
-                this.fire("status-message-update", { severity: 'info', message: 'Subscribing group...' });
+                this.fire("status-message-update", {
+                    severity: 'info',
+                    message: 'Subscribing group...'
+                });
                 break;
             case 'unsubscribeGroup':
                 ajax.url = serviceBaseUrl + '/userdetails/' + this.loggedInUser.id + '/followingGroups/' + group.id;
                 ajax.method = 'DELETE';
-                this.fire("status-message-update", { severity: 'info', message: 'Unsubscribing group...' });
+                this.fire("status-message-update", {
+                    severity: 'info',
+                    message: 'Unsubscribing group...'
+                });
                 break;
             case 'getGroups':
                 switch (this.groupType) {
@@ -73,13 +84,19 @@ Polymer({
                 }
                 ajax.method = 'GET';
                 ajax.body = '';
-                this.fire("status-message-update", { severity: 'info', message: 'Loading groups...' });
+                this.fire("status-message-update", {
+                    severity: 'info',
+                    message: 'Loading groups...'
+                });
                 break;
             case 'deleteGroup':
                 ajax.method = 'DELETE';
                 ajax.url = serviceBaseUrl + '/groups/' + group.id;
                 ajax.body = '';
-                this.fire("status-message-update", { severity: 'info', message: 'Deleting group...' });
+                this.fire("status-message-update", {
+                    severity: 'info',
+                    message: 'Deleting group...'
+                });
                 break;
         }
 
@@ -155,14 +172,16 @@ Polymer({
                     break;
             }
         }
-        this.fire("status-message-update", { severity: 'error', message: message });
+        this.fire("status-message-update", {
+            severity: 'error',
+            message: message
+        });
     },
 
     DisplayLimitedText: function (text, count) {
         if (text.length > count) {
             return text.substring(0, count - 3) + '...';
-        }
-        else {
+        } else {
             return text;
         }
     },
@@ -172,13 +191,29 @@ Polymer({
             Polymer.globalsManager.set('editedGroup', null);
         }
         var editedGroup = e.model.item;
-        this.fire('page-load-requested', { page: '/groups-edit', queryParams: { groupId: '', parentGroup: editedGroup.id, category: editedGroup.category, privacy: editedGroup.privacy, groupTypeToGoTo: this.groupType } });
+        this.fire('page-load-requested', {
+            page: '/groups-edit',
+            queryParams: {
+                groupId: '',
+                parentGroup: editedGroup.id,
+                category: editedGroup.category,
+                privacy: editedGroup.privacy,
+                groupTypeToGoTo: this.groupType
+            }
+        });
     },
 
     editGroup: function (e) {
         var editedGroup = e.model.item;
         Polymer.globalsManager.set('editedGroup', editedGroup);
-        this.fire('page-load-requested', { page: '/groups-edit', queryParams: { groupId: editedGroup.id, parentGroup: '', groupTypeToGoTo: this.groupType } });
+        this.fire('page-load-requested', {
+            page: '/groups-edit',
+            queryParams: {
+                groupId: editedGroup.id,
+                parentGroup: '',
+                groupTypeToGoTo: this.groupType
+            }
+        });
     },
 
     deleteGroup: function (e) {
@@ -209,7 +244,12 @@ Polymer({
     goToEvents: function (e) {
         var groupDetails = e.model.item;
         Polymer.globalsManager.set('editedGroup', groupDetails);
-        this.fire('page-load-requested', { page: '/group-events', queryParams: { groupId: groupDetails.id } });
+        this.fire('page-load-requested', {
+            page: '/group-events',
+            queryParams: {
+                groupId: groupDetails.id
+            }
+        });
     },
 
     populateCardClass: function (item) {
