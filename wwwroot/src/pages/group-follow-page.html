@@ -1,0 +1,24 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/src/shared-styles.html">
+<link rel="import" href="/src/components/group-follow/group-follow.html">
+
+<dom-module id="group-follow-page">
+  <template>
+    <style include="shared-styles"></style>
+    <div>
+      <group-follow group-id=[[groupId]]></group-follow>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'group-follow-page',
+
+      properties: {
+        groupId: {
+          type: String
+        }
+      },
+    });
+  </script>
+</dom-module>

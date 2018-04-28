@@ -15,7 +15,7 @@ Polymer({
     this.name_min_length = 2;
     this.mode = this.mode || 'login';
 
-    this.setViewsAsPerMode(this.mode);  //other values: createAccount, findPassword
+    this.setViewsAsPerMode(this.mode); //other values: createAccount, findPassword
     this.$.email_status.style.display = 'none';
     this.$.password_status.style.display = 'none';
 
@@ -84,7 +84,10 @@ Polymer({
         this.$.createAccountLinkDiv.style.display = 'none';
         break;
       default:
-        this.fire("status-message-update", { severity: 'error', message: 'It should not be possible' });
+        this.fire("status-message-update", {
+          severity: 'error',
+          message: 'It should not be possible'
+        });
     }
 
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
@@ -103,17 +106,26 @@ Polymer({
   submitOnclick: function () {
 
     if (this.mode === 'createAccount' && !this.isNameValid(this.name)) {
-      this.fire("status-message-update", { severity: 'error', message: 'Name should be at least ' + this.name_min_length + ' chars long.' });
+      this.fire("status-message-update", {
+        severity: 'error',
+        message: 'Name should be at least ' + this.name_min_length + ' chars long.'
+      });
       return;
     }
 
     if (!this.isEmailValid(this.email)) {
-      this.fire("status-message-update", { severity: 'error', message: 'Email is not valid' });
+      this.fire("status-message-update", {
+        severity: 'error',
+        message: 'Email is not valid'
+      });
       return;
     }
 
     if (!this.isPasswordValid(this.password)) {
-      this.fire("status-message-update", { severity: 'error', message: 'Password should be at least ' + this.password_min_length + ' chars long.' });
+      this.fire("status-message-update", {
+        severity: 'error',
+        message: 'Password should be at least ' + this.password_min_length + ' chars long.'
+      });
       return;
     }
 
@@ -127,19 +139,29 @@ Polymer({
     switch (this.mode) {
       case 'login':
         this.ajaxUrl = serviceBaseUrl + '/login';
-        this.ajaxBody = JSON.stringify({ email: this.email, password: this.password });
+        this.ajaxBody = JSON.stringify({
+          email: this.email,
+          password: this.password
+        });
         ajax.method = 'POST';
         ajax.headers['Version'] = '1.0';
         break;
       case 'findPassword':
         this.ajaxUrl = serviceBaseUrl + '/userauth';
-        this.ajaxBody = JSON.stringify({ email: this.email, password: this.password });
+        this.ajaxBody = JSON.stringify({
+          email: this.email,
+          password: this.password
+        });
         ajax.method = 'PUT';
         ajax.headers['Version'] = '1.0';
         break;
       case 'createAccount':
         this.ajaxUrl = serviceBaseUrl + '/userauth';
-        this.ajaxBody = JSON.stringify({ email: this.email, password: this.password, name: this.name });
+        this.ajaxBody = JSON.stringify({
+          email: this.email,
+          password: this.password,
+          name: this.name
+        });
         ajax.method = 'POST';
         ajax.headers['Version'] = '1.0';
         break;
@@ -173,7 +195,10 @@ Polymer({
         break;
       case 'findPassword':
       case 'createAccount':
-        this.fire("status-message-update", { severity: 'info', message: 'Emailed you the validation link. Please follow the steps in your email.' });
+        this.fire("status-message-update", {
+          severity: 'info',
+          message: 'Emailed you the validation link. Please follow the steps in your email.'
+        });
         break;
     }
   },
@@ -202,6 +227,9 @@ Polymer({
     } else {
       message = 'Something went wrong.';
     }
-    this.fire("status-message-update", { severity: 'error', message: message });
+    this.fire("status-message-update", {
+      severity: 'error',
+      message: message
+    });
   }
 });

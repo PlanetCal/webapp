@@ -1,12 +1,39 @@
 <link rel="import" href="/src/polymer-refs.html">
 <link rel="import" href="groups-display-styles.html">
+<style>
+    .dialogLabel {
+        margin-left: 30px;
+        margin-right: 10px;
+    }
 
+    paper-dialog.size-position {
+        margin-left: 10px;
+        width: 700px;
+    }
+</style>
 
 <dom-module id="groups-display">
+
     <template>
         <style include="groups-display-styles"></style>
 
         <iron-ajax id='ajax' handle-as='json' url="[[ajaxUrl]]" content-type='application/json' on-error='handleErrorResponse' on-response='handleAjaxResponse'></iron-ajax>
+        <paper-dialog modal="" id="shareGroupDialog" class="size-position">
+            <h2>Share this Group with others (For them to follow/subscribe)</h2>
+            <paper-dialog-scrollable>
+                <div>
+                    <label class="dialogLabel">Here is the url of this group. Please copy and share with others.</label>
+                </div>
+                <div>
+                    <paper-input disabled class="dialogLabel" value="[[groupShareLink]]">
+                    </paper-input>
+                </div>
+            </paper-dialog-scrollable>
+            <div class="buttons">
+                <paper-button class="action-icons" id="cancelShareGroupDialog" on-tap="closeShareGroupDialog">
+                    <iron-icon icon="icons:cancel"></iron-icon>Close</paper-button>
+            </div>
+        </paper-dialog>
         <template is="dom-repeat" items="{{items}}">
             <paper-card class$="[[populateCardClass(item)]]" heading="[[groupDisplayName(item)]]" elevation="5" image="[[groupIcon(item)]]"
                 animated-shadow="true">
@@ -44,6 +71,7 @@
                     <iron-icon class$="icon-edit [[hideAddChildGroup(item)]]" icon="icons:add" title="Create Child Group" on-tap="createChildGroup"></iron-icon>
                     <iron-icon class$="icon-edit [[hideForEdit(item)]]" icon="icons:create" title="Edit" on-tap="editGroup"></iron-icon>
                     <iron-icon class$="icon-edit [[hideForEdit(item)]]" icon="icons:delete" title="Delete" on-tap="deleteGroup"></iron-icon>
+                    <iron-icon class$="icon-edit" icon="social:share" title="Share" on-tap="launchShareGroupDialog"></iron-icon>
                 </div>
             </paper-card>
         </template>
