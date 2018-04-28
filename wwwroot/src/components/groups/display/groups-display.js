@@ -229,6 +229,22 @@ Polymer({
         this.makeAjaxCall(group);
     },
 
+    launchShareGroupDialog: function (e) {
+        let group = e.model.item;
+        var body = document.querySelector('body');
+        let productUrl = Polymer.globalsManager.globals.product.url;
+        this.groupShareLink = `${productUrl}/group-follow?groupId=${group.id}`;
+        Polymer.dom(body).appendChild(this.$.shareGroupDialog);
+        this.$.shareGroupDialog.open();
+    },
+
+    closeShareGroupDialog: function () {
+        var dialog = this.$.shareGroupDialog;
+        if (dialog) {
+            dialog.close();
+        }
+    },
+
     unsubscribe: function (e) {
         var groupDetails = e.model.item;
         this.ajaxCall = 'unsubscribeGroup'
