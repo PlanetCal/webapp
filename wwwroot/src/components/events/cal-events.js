@@ -179,7 +179,7 @@ Polymer({
   },
 
   getImage: function (item) {
-    return (item.icon) ? item.icon : '/src/images/about.jpg';
+    return (item.icon) ? item.icon : '/src/images/event.jpg';
   },
 
   getVenue: function (item) {

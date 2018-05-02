@@ -27,6 +27,7 @@ Polymer({
     },
 
     displayCalendar: function (dateChanged) {
+        this.daysCount = Polymer.globalsManager.globals.daysCount;
         var monthLocal, yearLocal;
 
         if ((this.month >= 0 && !(this.year > 0)) ||
@@ -178,7 +179,7 @@ Polymer({
         }
 
         Polymer.globalsManager.set('selectedDate', selectedDate);
-
+        Polymer.globalsManager.set('daysCount', this.daysCount);
         this.fire('on-cal-date-selected');
     }
 });

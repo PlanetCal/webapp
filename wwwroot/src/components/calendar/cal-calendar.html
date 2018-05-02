@@ -31,7 +31,7 @@
 				<template is="dom-repeat" items="{{dayList}}">
 					<div>
 						<calendar-row start-day="[[item.day]]" start-month="[[_month]]" start-year="[[_year]]" selected-day="[[_selectedDay]]" selected-month="[[_selectedMonth]]"
-						 selected-year="[[_selectedYear]]" />
+						    selected-year="[[_selectedYear]]" />
 					</div>
 				</template>
 			</div>
@@ -41,6 +41,13 @@
 				<span class="nav-icon pull-left">
 					<paper-button class="link" on-tap="todayhandler">Today</paper-button>
 					<paper-button class="link" on-tap="tomorrowhandler">Tomorrow</paper-button>
+				</span>
+				<span class="nav-icon pull-left">
+					<paper-radio-group selected="{{daysCount}}">
+						<paper-radio-button name="1">1 Day</paper-radio-button>
+						<paper-radio-button name="7">7 days</paper-radio-button>
+						<paper-radio-button name="30">30 days</paper-radio-button>
+					</paper-radio-group>
 				</span>
 			</div>
 
