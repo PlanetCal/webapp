@@ -43,7 +43,7 @@ Polymer({
   eventMatchesSearch: function (currentEvent, searchWordsArray) {
     var eventVenue = this.getVenue(currentEvent.groups).toLowerCase();
     var eventName = currentEvent.name.toLowerCase();
-    var eventDescription = currentEvent.description.toLowerCase();
+    var eventDescription = currentEvent.description ? currentEvent.description.toLowerCase() : '';
     var eventName = currentEvent.name.toLowerCase();
 
     for (var r = 0; r < searchWordsArray.length; r++) {
@@ -195,7 +195,7 @@ Polymer({
   },
 
   getVenue: function (item) {
-    return item.address;
+    return item && item.address ? item.address : '';
   },
 
   getVenueLink: function (item) {
