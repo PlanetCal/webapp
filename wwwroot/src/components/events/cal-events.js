@@ -121,9 +121,8 @@ Polymer({
 
     var queryMonth = Number.parseInt(this.selectedMonth);
     var queryDay = Number.parseInt(this.selectedDay);
-    var queryMonthString = (queryMonth > 9) ? queryMonth.toString() : '0' + this.selectedMonth.toString();
-    var queryDayString = (queryDay > 9) ? queryDay.toString() : '0' + queryDay.toString();
-    var queryDateTimeFilter = '?filter=endDateTime>=' + this.selectedYear + '-' + queryMonthString + '-' + queryDayString;
+    var queryDateTimeFilter = '?filter=endDateTime>=' + this.getDateStringForQuery(this.selectedYear, queryMonth, queryDay);
+    queryDateTimeFilter += '$AND$startDateTime<=' + this.getDateStringForQuery(this.selectedYear, queryMonth, queryDay, Number.parseInt(this.daysCount));
 
     if (loggedInUser) {
       ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
@@ -140,6 +139,19 @@ Polymer({
       message: 'Loading events from server ...'
     });
     ajax.generateRequest();
+  },
+
+  getDateStringForQuery(year, month, day, daysToAdd) {
+    if (daysToAdd) {
+      var dat = new Date(year, month - 1, day + daysToAdd);
+      year = dat.getFullYear();
+      month = dat.getMonth() + 1;
+      day = dat.getDate();
+    }
+
+    var queryMonthString = (month > 9) ? month.toString() : '0' + month.toString();
+    var queryDayString = (day > 9) ? day.toString() : '0' + day.toString();
+    return year + '-' + queryMonthString + '-' + queryDayString;
   },
 
   handleErrorResponse: function (e) {
