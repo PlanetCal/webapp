@@ -60,13 +60,15 @@ Polymer({
   _dateChanged: function () {
 
     var dateChanged = false;
-    console.log('startDate ' + this.startDate);
-    console.log('daysCount ' + this.daysCount);
     var selectedDate = null;
     if (this.startDate) {
       var array = this.startDate.split('-');
       if (array.length == 3) {
-        selectedDate = { year: array[0], month: array[1], day: array[2] };
+        selectedDate = {
+          year: array[0],
+          month: array[1],
+          day: array[2]
+        };
       }
     }
     if (!selectedDate) {
@@ -126,20 +128,22 @@ Polymer({
     if (loggedInUser) {
       ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
       this.ajaxUrl = serviceBaseUrl + '/events';
-    }
-    else {
+    } else {
       this.ajaxUrl = serviceBaseUrl + '/eventsanonymous';
     }
 
     this.ajaxUrl += queryDateTimeFilter;
     this.ajaxUrl += '&fields=name|description|startDateTime|endDateTime|address|location|groupId|icon';
 
-    this.fire("status-message-update", { severity: 'info', message: 'Loading events from server ...' });
+    this.fire("status-message-update", {
+      severity: 'info',
+      message: 'Loading events from server ...'
+    });
     ajax.generateRequest();
   },
 
   handleErrorResponse: function (e) {
-    console.log('cal-events got error from ajax!');
+    //console.log('cal-events got error from ajax!');
 
     var req = e.detail.request;
     var errorResponse = e.detail.request.xhr.response;
@@ -156,11 +160,13 @@ Polymer({
       }
     }
 
-    this.fire("status-message-update", { severity: 'error', message: message });
+    this.fire("status-message-update", {
+      severity: 'error',
+      message: message
+    });
   },
 
   handleAjaxResponse: function (e) {
-    console.log('cal-events got success from ajax!');
     this.fire("status-message-update");
 
     this.data = e.detail.response;
@@ -182,7 +188,7 @@ Polymer({
 
   getVenueLink: function (item) {
     var venueLink = 'https://www.google.com/maps/place/';
-    var normalizedAddress = item.address.replace(/ /g, '+');
+    var normalizedAddress = item.address ? item.address.replace(/ /g, '+') : '';
     return venueLink + normalizedAddress;
   },
 

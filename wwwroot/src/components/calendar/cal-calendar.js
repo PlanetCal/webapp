@@ -58,7 +58,7 @@ Polymer({
     },
 
     drawCalendar: function (month, year) {
-        console.log('cal-calendar drawCalendar called!:');
+        //console.log('cal-calendar drawCalendar called!:');
 
 
         var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -71,7 +71,9 @@ Polymer({
         var days = [];
         var currentDayPointer = 1 - dayIndexOfTheStartOfThisMonth;
         while (currentDayPointer <= daysInThisMonth) {
-            days.push({ day: currentDayPointer });
+            days.push({
+                day: currentDayPointer
+            });
             currentDayPointer = currentDayPointer + 7;
         }
 

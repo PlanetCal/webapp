@@ -8,7 +8,7 @@ Polymer({
   },
 
   ready: function () {
-    console.log('login-form ready function called!:');
+    //console.log('login-form ready function called!:');
     this.fire("status-message-update");
 
     this.password_min_length = 4;

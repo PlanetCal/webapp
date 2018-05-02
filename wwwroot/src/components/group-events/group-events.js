@@ -17,8 +17,7 @@ Polymer({
         var editedGroup = Polymer.globalsManager.globals.editedGroup;
         if (!editedGroup) {
             this.getGroup(this.groupId);
-        }
-        else {
+        } else {
             this.populateGroupDetails(editedGroup);
         }
     },
@@ -34,15 +33,14 @@ Polymer({
         if (groupDetail && loggedInUser && this.isCurrentUserGroupOwnerOrAdmin) {
             this.$.btnAddEvent.style.display = '';
             this.$.btnImportEvent.style.display = '';
-        }
-        else {
+        } else {
             this.$.btnAddEvent.style.display = 'none';
             this.$.btnImportEvent.style.display = 'none';
         }
     },
     isUserGroupOwnerOrAdmin: function (loggedInUser, groupDetail) {
-        var result = (loggedInUser && groupDetail && groupDetail.createdBy
-            && (loggedInUser.id == groupDetail.createdBy ||
+        var result = (loggedInUser && groupDetail && groupDetail.createdBy &&
+            (loggedInUser.id == groupDetail.createdBy ||
                 (groupDetail.administrators && groupDetail.administrators.indexOf(loggedInUser.email.toLowerCase()) >= 0)));
         return result;
     },
@@ -151,8 +149,7 @@ Polymer({
         if (Object.prototype.toString.call(this.startDateTime) === '[object Date]') {
             this.startDateTime.setHours(this.getHoursIn24HourFormat(this.startTime));
             this.startDateTime.setMinutes(this.getMinutes(this.startTime));
-        }
-        else {
+        } else {
             var tempDate = new Date(this.startDateTime);
             tempDate.setHours(this.getHoursIn24HourFormat(this.startTime));
             tempDate.setMinutes(this.getMinutes(this.startTime));
@@ -177,8 +174,7 @@ Polymer({
         if (Object.prototype.toString.call(this.endDateTime) === '[object Date]') {
             this.endDateTime.setHours(this.getHoursIn24HourFormat(this.endTime));
             this.endDateTime.setMinutes(this.getMinutes(this.endTime));
-        }
-        else {
+        } else {
             var tempDate = new Date(this.endDateTime);
             tempDate.setHours(this.getHoursIn24HourFormat(this.endTime));
             tempDate.setMinutes(this.getMinutes(this.endTime));
@@ -230,7 +226,10 @@ Polymer({
     UpdateImportEventsStatusMessage: function () {
         if (this.importEventsCount == 0) {
             let message = 'No events found inside calendar file';
-            this.fire("status-message-update", { severity: 'info', message: message });
+            this.fire("status-message-update", {
+                severity: 'info',
+                message: message
+            });
             return;
         }
 
@@ -244,16 +243,19 @@ Polymer({
 
         if (this.importEventIndex <= this.importEventsCount) {
             message += ". Wait..."
-        }
-        else {
+        } else {
             message += ". Import Completed."
         }
 
-        this.fire("status-message-update", { severity: 'info', message: message });
+        this.fire("status-message-update", {
+            severity: 'info',
+            message: message
+        });
     },
 
     constructEventsList: function (groupId, eventsList, importEventsOption) {
-        let eventsToReturn = [], current_date = new Date();
+        let eventsToReturn = [],
+            current_date = new Date();
         if (eventsList && groupId) {
             for (let i = 0; i < eventsList.length; i++) {
                 let item = eventsList[i];
@@ -268,7 +270,7 @@ Polymer({
                             description: item.DESCRIPTION,
                             startDateTime: item.DTSTART,
                             endDateTime: item.DTEND,
-                            address: item.LOCATION.replace(/\\/g, ''),
+                            address: item.LOCATION ? item.LOCATION.replace(/\\/g, '') : '',
                             groupId: groupId,
                             dateOnlyEvent: item.dateOnlyEvent
                         };
@@ -309,7 +311,10 @@ Polymer({
     editEvent: function (e) {
         e.preventDefault();
         if (!Polymer.globalsManager.globals.loggedInUser) {
-            this.fire("status-message-update", { severity: 'error', message: "Please log-in first." });
+            this.fire("status-message-update", {
+                severity: 'error',
+                message: "Please log-in first."
+            });
             return;
         }
 
@@ -376,16 +381,21 @@ Polymer({
     },
     makeAjaxCall: function (event = null, initialMessage = null) {
         if (initialMessage) {
-            this.fire("status-message-update", { severity: 'info', message: initialMessage });
-        }
-        else {
+            this.fire("status-message-update", {
+                severity: 'info',
+                message: initialMessage
+            });
+        } else {
             this.fire("status-message-update");
         }
 
         //this.isLoading = true;
         var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
         if (!loggedInUser) {
-            this.fire("status-message-update", { severity: 'error', message: "Please log-in first." });
+            this.fire("status-message-update", {
+                severity: 'error',
+                message: "Please log-in first."
+            });
             return;
         }
         var ajax = this.$.ajax;
@@ -451,7 +461,10 @@ Polymer({
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
                 }
                 ajax.headers['eventid'] = this.eventObject.id;
-                this.fire("status-message-update", { severity: 'info', message: 'Image upload in progress...' });
+                this.fire("status-message-update", {
+                    severity: 'info',
+                    message: 'Image upload in progress...'
+                });
                 break;
         }
         ajax.generateRequest();
@@ -483,13 +496,19 @@ Polymer({
             this.importFailCount++;
             this.importEventSync();
         } else {
-            this.fire("status-message-update", { severity: severity, message: message });
+            this.fire("status-message-update", {
+                severity: severity,
+                message: message
+            });
         }
     },
 
     validateEventDates: function (event) {
         if (event.startDateTime > event.endDateTime) {
-            this.fire("status-message-update", { severity: 'error', message: 'Verify the start date and end date.' });
+            this.fire("status-message-update", {
+                severity: 'error',
+                message: 'Verify the start date and end date.'
+            });
             return false;
         }
 
@@ -518,8 +537,7 @@ Polymer({
                 if (this.isEventsImageChanged) {
                     this.uploadImage();
                     this.isEventsImageChanged = false;
-                }
-                else {
+                } else {
                     this.populateGrid();
                 }
                 break;
@@ -536,8 +554,7 @@ Polymer({
                 if (this.isEventsImageChanged) {
                     this.uploadImage();
                     this.isEventsImageChanged = false;
-                }
-                else {
+                } else {
                     this.fire("status-message-update");
                     this.populateGrid();
                 }
@@ -562,8 +579,7 @@ Polymer({
         var index = list.findIndex(e => e.id === event.id);
         if (index >= 0) {
             list[index] = event;
-        }
-        else {
+        } else {
             list.push(event);
         }
     },
@@ -660,13 +676,14 @@ Polymer({
                 var output = inputElement.files[0];
                 this.displayContents(output);
                 this.isEventsImageChanged = true;
-            }
-            else {
+            } else {
                 inputElement.value = '';
-                this.fire("status-message-update", { severity: 'error', message: 'Invalid file type selected. Please select an image to upload.' });
+                this.fire("status-message-update", {
+                    severity: 'error',
+                    message: 'Invalid file type selected. Please select an image to upload.'
+                });
             }
-        }
-        else if (this.isEventsImageChanged) {
+        } else if (this.isEventsImageChanged) {
             this.previewSrc = '';
         }
     },
@@ -676,7 +693,8 @@ Polymer({
     resizeImageSelection: function (file) {
         var myURL = window.URL || window.webkitURL;
         var img = this.$.previewImage;
-        var imageWidth = 300, imageHeight = 200;
+        var imageWidth = 300,
+            imageHeight = 200;
         img.width = imageWidth;
         img.height = imageHeight;
 
@@ -697,7 +715,9 @@ Polymer({
             var contentType = parts[0].split(':')[1];
             var raw = parts[1];
 
-            return new Blob([raw], { type: contentType });
+            return new Blob([raw], {
+                type: contentType
+            });
         }
         var parts = dataURL.split(BASE64_MARKER);
         var contentType = parts[0].split(':')[1];
@@ -709,13 +729,14 @@ Polymer({
         for (var i = 0; i < rawLength; ++i) {
             uInt8Array[i] = raw.charCodeAt(i);
         }
-        return new Blob([uInt8Array], { type: contentType });
+        return new Blob([uInt8Array], {
+            type: contentType
+        });
     },
     isValidFileType: function (fileType) {
         if (fileType == 'image/jpg' || fileType == 'image/jpeg' || fileType == 'image/bmp' || fileType == 'image/png') {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     },
@@ -734,10 +755,12 @@ Polymer({
                 };
                 reader.readAsText(file);
                 this.$.executeImportEvents.disabled = false;
-            }
-            else {
+            } else {
                 inputElement.value = '';
-                this.fire("status-message-update", { severity: 'error', message: 'Invalid file type selected. Please select an image to upload.' });
+                this.fire("status-message-update", {
+                    severity: 'error',
+                    message: 'Invalid file type selected. Please select an image to upload.'
+                });
             }
         }
     },
@@ -782,7 +805,7 @@ Polymer({
                 idx = ln.indexOf(':');
 
                 //Apply trimming to values to reduce risks of badly formatted ical files.
-                type = ln.substr(0, idx).replace(/^\s\s*/, '').replace(/\s\s*$/, '');//Trim
+                type = ln.substr(0, idx).replace(/^\s\s*/, '').replace(/\s\s*$/, ''); //Trim
                 if (type === 'DTSTART;VALUE=DATE') {
                     type = 'DTSTART';
                     dateOnlyEvent = true;
