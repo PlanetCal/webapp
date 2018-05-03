@@ -84,6 +84,7 @@ Polymer({
     }
 
     this._currentSelectedDate = selectedDate;
+    this._currentDaysCount = this.daysCount;
 
     var loggedinUserChanged = false;
     var loggedInUser = Polymer.globalsManager.globals.loggedInUser;
@@ -107,9 +108,13 @@ Polymer({
       return false;
     }
 
-    return date1.day == date2.day &&
-      date1.month == date2.month &&
-      date1.year == date2.year;
+    if (this._currentDaysCount !== this.daysCount) {
+      return false;
+    }
+
+    return date1.day === date2.day &&
+      date1.month === date2.month &&
+      date1.year === date2.year;
   },
 
   makeAjaxCall: function () {

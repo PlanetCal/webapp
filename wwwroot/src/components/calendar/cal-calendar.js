@@ -137,6 +137,12 @@ Polymer({
         this.selectDateAndDrawCalendar(e.detail.year, e.detail.month, e.detail.day);
     },
 
+    daysCountChanged: function (e) {
+        this.daysCount = e.srcElement.id;
+        Polymer.globalsManager.set('selectedDate', this.daysCount);
+        this.selectDateAndDrawCalendar(this._selectedYear, this._selectedMonth, this._selectedDay);
+    },
+
     selectDateAndDrawCalendar: function (year, month, day) {
         var todaysDateTime = new Date();
         var todayDay = todaysDateTime.getDate();
