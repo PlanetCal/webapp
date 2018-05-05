@@ -238,13 +238,6 @@ Polymer({
         this.$.shareGroupDialog.open();
     },
 
-    closeShareGroupDialog: function () {
-        var dialog = this.$.shareGroupDialog;
-        if (dialog) {
-            dialog.close();
-        }
-    },
-
     unsubscribe: function (e) {
         var groupDetails = e.model.item;
         this.ajaxCall = 'unsubscribeGroup'

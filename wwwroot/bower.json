@@ -34,6 +34,7 @@
     "polymer-global-variables": "ivanrod/polymer-global-variables#^1.1.0",
     "polymer": "Polymer/polymer#^1.8.1",
     "vaadin-grid": "^2.0.2",
+    "granite-clipboard": "LostInBrittany/granite-clipboard#^1.2.3",
     "paper-dialog": "^1.1.0",
     "moment": "^2.18.1",
     "paper-progress": "^2.0.1",
