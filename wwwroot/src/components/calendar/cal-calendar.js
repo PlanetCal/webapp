@@ -12,6 +12,11 @@ Polymer({
             reflectToAttribute: true,
             observer: '_dateChanged'
         },
+        daysCount: {
+            type: String,
+            reflectToAttribute: true,
+            observer: 'daysCountChanged'
+        },
     },
 
     _dateChanged: function () {
@@ -137,8 +142,7 @@ Polymer({
         this.selectDateAndDrawCalendar(e.detail.year, e.detail.month, e.detail.day);
     },
 
-    daysCountChanged: function (e) {
-        this.daysCount = e.srcElement.id;
+    daysCountChanged: function () {
         Polymer.globalsManager.set('selectedDate', this.daysCount);
         this.selectDateAndDrawCalendar(this._selectedYear, this._selectedMonth, this._selectedDay);
     },
