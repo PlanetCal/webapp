@@ -299,15 +299,8 @@ Polymer({
         return isEdit ? '' : 'displayNone';
     },
 
-    // hideForDelete: function (item) {
-    //     var isDelete = this.loggedInUser.id === item.createdBy ||
-    //         (item.administrators && item.administrators.indexOf(this.loggedInUser.email.toLowerCase()) >= 0);
-
-    //     return isDelete ? '' : 'displayNone';
-    // },
-
     groupIcon: function (item) {
-        return (!item.icon || item.icon === '') ? '../src/images/noimage.png' : item.icon;
+        return (!item.icon || item.icon === '') ? '../src/images/Group-rect.png' : item.icon;
     },
 
     hideUnsubscribeButton: function (item) {
