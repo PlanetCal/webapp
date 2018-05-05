@@ -8,7 +8,7 @@
         <img src='[[image]]'>
       </div>
       <div class='horizontal eventNameColumn'>
-        <a href='#'>[[name]] ([[type]])</a>
+        <a href='#'>[[name]]</a>
         <br/>
         <span>[[description]]</span>
       </div>
@@ -30,6 +30,7 @@
   <script>
     Polymer({
       is: 'cal-event',
+
       properties: {
         id: {
           type: String,
@@ -41,9 +42,6 @@
           type: String,
         },
         image: {
-          type: String,
-        },
-        type: {
           type: String,
         },
         venue: {

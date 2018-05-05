@@ -15,8 +15,7 @@
     <iron-list items="[[data]]" as="item">
       <template>
         <cal-event id='[[item.id]]' name="[[item.name]]" description="[[item.description]]" image=[[getImage(item)]] venue='[[getVenue(item)]]'
-          venue-link='[[getVenueLink(item)]]' location="[[item.location]]" type='[[item.type]] ' time="[[getDate(item.startDateTime)]]"
-          duration='[[getDuration(item.startDateTime, item.endDateTime)]] '>
+          venue-link='[[getVenueLink(item)]]' location="[[item.location]]" time="[[getDate(item.startDateTime)]]" duration='[[getDuration(item.startDateTime, item.endDateTime)]] '>
         </cal-event>
       </template>
     </iron-list>
