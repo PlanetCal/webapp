@@ -55,8 +55,7 @@ Polymer({
 
         if (!this.groupId) {
             this.reset();
-        }
-        else {
+        } else {
             var editedGroup = Polymer.globalsManager.globals.editedGroup;
             if (editedGroup && editedGroup.id === this.groupId) {
                 this.populateEditedGroup(editedGroup);
@@ -74,13 +73,14 @@ Polymer({
                 var output = inputElement.files[0];
                 this.displayContents(output);
                 this.isGroupImageChanged = true;
-            }
-            else {
+            } else {
                 inputElement.value = '';
-                this.fire("status-message-update", { severity: 'error', message: 'Invalid file type selected. Please select an image to upload.' });
+                this.fire("status-message-update", {
+                    severity: 'error',
+                    message: 'Invalid file type selected. Please select an image to upload.'
+                });
             }
-        }
-        else if (this.isGroupImageChanged) {
+        } else if (this.isGroupImageChanged) {
             this.previewSrc = '';
         }
     },
@@ -90,7 +90,8 @@ Polymer({
     resizeImageSelection: function (file) {
         var myURL = window.URL || window.webkitURL;
         var img = this.$.previewImage;
-        var imageWidth = 300, imageHeight = 200;
+        var imageWidth = 300,
+            imageHeight = 200;
         img.width = imageWidth;
         img.height = imageHeight;
 
@@ -111,7 +112,9 @@ Polymer({
             var contentType = parts[0].split(':')[1];
             var raw = parts[1];
 
-            return new Blob([raw], { type: contentType });
+            return new Blob([raw], {
+                type: contentType
+            });
         }
         var parts = dataURL.split(BASE64_MARKER);
         var contentType = parts[0].split(':')[1];
@@ -123,7 +126,9 @@ Polymer({
         for (var i = 0; i < rawLength; ++i) {
             uInt8Array[i] = raw.charCodeAt(i);
         }
-        return new Blob([uInt8Array], { type: contentType });
+        return new Blob([uInt8Array], {
+            type: contentType
+        });
     },
     populateEditedGroup: function (editedGroup) {
         this.id = editedGroup.id;
@@ -193,7 +198,12 @@ Polymer({
     backToGroups: function () {
         this.resetGlobalManagerForEditedGroup();
         this.fire("status-message-update");
-        this.fire('page-load-requested', { page: 'my-groups', queryParams: { groupType: this.groupTypeToGoBack } });
+        this.fire('page-load-requested', {
+            page: 'my-groups',
+            queryParams: {
+                groupType: this.groupTypeToGoBack
+            }
+        });
     },
     validate: function () {
         var elements = document.getElementsByClassName('saveGroups');
@@ -221,8 +231,7 @@ Polymer({
     isValidFileType: function (fileType) {
         if (fileType == 'image/jpg' || fileType == 'image/jpeg' || fileType == 'image/bmp' || fileType == 'image/png') {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     },
@@ -252,17 +261,20 @@ Polymer({
 
     getGroup: function (groupId) {
         this.ajaxCall = 'getGroup';
-        this.fire("status-message-update", { severity: 'info', message: 'Getting group in progress...' });
-        this.groupObject = { id: groupId };
+        this.fire("status-message-update", {
+            severity: 'info',
+            message: 'Getting group in progress...'
+        });
+        this.groupObject = {
+            id: groupId
+        };
         this.makeAjaxCall(this.groupObject);
     },
 
-    delete: function (e) {
-        this.groupObject = this.constructGroupObject();
-        this.ajaxCall = 'deleteGroup';
-        this.fire("status-message-update", { severity: 'info', message: 'Delete group in progress...' });
-        this.makeAjaxCall(this.groupObject);
+    cancel: function (e) {
+        this.backToGroups();
     },
+
     saveGroup: function (e) {
         var isValid = this.validate();
         //isValid = isValid && this.validateGroupImage();
@@ -270,7 +282,10 @@ Polymer({
             isValid = this.isValidFileType(this.$.groupImage.inputElement.files[0].type);
         }
         if (isValid) {
-            this.fire("status-message-update", { severity: 'info', message: 'Save group in progress...' });
+            this.fire("status-message-update", {
+                severity: 'info',
+                message: 'Save group in progress...'
+            });
             this.groupObject = this.constructGroupObject();
             this.ajaxCall = this.groupObject.id ? 'putGroup' : 'postGroup';
             this.makeAjaxCall(this.groupObject);
@@ -290,7 +305,10 @@ Polymer({
             }
             for (var i = 0; i < group.administrators.length; i++) {
                 if (group.administrators[i].length > 0 && !this.isEmailValid(group.administrators[i])) {
-                    this.fire("status-message-update", { severity: 'error', message: group.administrators[i] + ' is not a valid administrator email.' });
+                    this.fire("status-message-update", {
+                        severity: 'error',
+                        message: group.administrators[i] + ' is not a valid administrator email.'
+                    });
                     return;
                 }
             }
@@ -313,21 +331,15 @@ Polymer({
                 if (loggedInUser) {
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
                 }
-                this.fire("status-message-update", { severity: 'info', message: 'new group creation in progress...' });
+                this.fire("status-message-update", {
+                    severity: 'info',
+                    message: 'new group creation in progress...'
+                });
                 break;
             case 'putGroup':
                 ajax.url += group.id;
                 ajax.body = JSON.stringify(group);
                 ajax.method = 'PUT';
-                ajax.headers['Version'] = '1.0';
-                if (loggedInUser) {
-                    ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
-                }
-                break;
-            case 'deleteGroup':
-                ajax.url += group.id;
-                ajax.body = '';
-                ajax.method = 'DELETE';
                 ajax.headers['Version'] = '1.0';
                 if (loggedInUser) {
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
@@ -349,7 +361,10 @@ Polymer({
                     ajax.headers['Authorization'] = 'Bearer ' + loggedInUser.token;
                 }
                 ajax.headers['groupid'] = this.groupObject.id;
-                this.fire("status-message-update", { severity: 'info', message: 'Image upload in progress...' });
+                this.fire("status-message-update", {
+                    severity: 'info',
+                    message: 'Image upload in progress...'
+                });
                 break;
         }
         ajax.generateRequest();
@@ -383,7 +398,10 @@ Polymer({
                     break;
             }
         }
-        this.fire("status-message-update", { severity: 'error', message: message });
+        this.fire("status-message-update", {
+            severity: 'error',
+            message: message
+        });
     },
 
     isEmailValid: function (email) {
@@ -403,8 +421,7 @@ Polymer({
                 if (this.isGroupImageChanged) {
                     this.uploadImage();
                     this.isGroupImageChanged = false;
-                }
-                else {
+                } else {
                     this.backToGroups();
                 }
                 break;
@@ -412,14 +429,9 @@ Polymer({
                 if (this.isGroupImageChanged) {
                     this.uploadImage();
                     this.isGroupImageChanged = false;
-                }
-                else {
+                } else {
                     this.backToGroups();
                 }
-                break;
-            case 'deleteGroup':
-                //TODO: do we need to delete the image?
-                this.backToGroups();
                 break;
             case 'groupImage':
                 this.updateImageURL(event.detail.response.url);
@@ -433,7 +445,10 @@ Polymer({
     updateImageURL: function (imageURL) {
         this.ajaxCall = 'putGroup';
         this.groupObject.icon = imageURL;
-        this.fire("status-message-update", { severity: 'info', message: 'Redirecting to Groups page after save...' });
+        this.fire("status-message-update", {
+            severity: 'info',
+            message: 'Redirecting to Groups page after save...'
+        });
         this.makeAjaxCall(this.groupObject);
     },
     editImage: function () {
@@ -441,19 +456,20 @@ Polymer({
     },
     onGroupsEditResize: function () {
         //This function will be called when the window is resized.
-        var width = window.innerWidth
-            || document.documentElement.clientWidth
-            || document.body.clientWidth;
+        var width = window.innerWidth ||
+            document.documentElement.clientWidth ||
+            document.body.clientWidth;
         var instructions = this.$$('#imageUploadInstructions');
 
-        if (this.timeout) { return }
+        if (this.timeout) {
+            return
+        }
         this.timeout = setTimeout(() => {
             if (width < 800) {
                 if (instructions) {
                     instructions.style.display = 'none';
                 }
-            }
-            else {
+            } else {
                 if (instructions) {
                     instructions.style.display = '';
                 }
