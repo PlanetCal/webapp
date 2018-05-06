@@ -139,6 +139,9 @@ Polymer({
     },
     setStartDate: function () {
         this.startDate = this.formatDate(this.startDateTime);
+        //make the end date same as start date.
+        this.endDate = this.startDate;
+        this.endDateTime = this.startDateTime;
     },
     onStartTimeChange: function (e) {
         var body = document.querySelector('body');
@@ -155,6 +158,11 @@ Polymer({
             tempDate.setMinutes(this.getMinutes(this.startTime));
             this.startDateTime = tempDate;
         }
+
+        //make the end time same as start time.
+        this.endTime = this.startTime;
+        this.endDateTime.setHours(this.getHoursIn24HourFormat(this.startTime));
+        this.endDateTime.setMinutes(this.getMinutes(this.startTime));
     },
     onEndDateChange: function (e) {
         var body = document.querySelector('body');
